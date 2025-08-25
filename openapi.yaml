@@ -3067,13 +3067,19 @@ paths:
                     omit_header: false
                     payment_terms_in_days: 30
       responses:
-        "200":
-          description: "Success"
+        "201":
+          description: "Created"
           content:
             application/json:
               schema:
                 type: object
                 additionalProperties: true
+        "422":
+          description: "Unprocessable Entity - Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /v2/invoices/{id}:
     get:
       tags:
@@ -3120,6 +3126,12 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        "422":
+          description: "Unprocessable Entity - Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
     delete:
       tags:
         - Invoices
@@ -3319,13 +3331,19 @@ paths:
                     price: 35
                     quantity: 6
       responses:
-        "200":
-          description: "Success"
+        "201":
+          description: "Created"
           content:
             application/json:
               schema:
                 type: object
                 additionalProperties: true
+        "422":
+          description: "Unprocessable Entity - Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /v2/journal_sets:
     get:
       tags:
@@ -5234,6 +5252,21 @@ components:
         - reminder_emails
         - last_N_months
       example: all
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Error message describing what went wrong
+            required:
+              - message
+      required:
+        - errors
   securitySchemes:
     oauth2:
       type: oauth2

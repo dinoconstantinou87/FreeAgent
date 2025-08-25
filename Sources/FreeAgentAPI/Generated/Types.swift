@@ -3385,6 +3385,40 @@ public enum Components {
     public enum Schemas {
         /// - Remark: Generated from `#/components/schemas/InvoiceView`.
         public typealias InvoiceView = CustomInvoiceView
+        /// - Remark: Generated from `#/components/schemas/ErrorResponse`.
+        public struct ErrorResponse: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/ErrorResponse/ErrorsPayload`.
+            public struct ErrorsPayloadPayload: Codable, Hashable, Sendable {
+                /// Error message describing what went wrong
+                ///
+                /// - Remark: Generated from `#/components/schemas/ErrorResponse/ErrorsPayload/message`.
+                public var message: Swift.String
+                /// Creates a new `ErrorsPayloadPayload`.
+                ///
+                /// - Parameters:
+                ///   - message: Error message describing what went wrong
+                public init(message: Swift.String) {
+                    self.message = message
+                }
+                public enum CodingKeys: String, CodingKey {
+                    case message
+                }
+            }
+            /// - Remark: Generated from `#/components/schemas/ErrorResponse/errors`.
+            public typealias ErrorsPayload = [Components.Schemas.ErrorResponse.ErrorsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/ErrorResponse/errors`.
+            public var errors: Components.Schemas.ErrorResponse.ErrorsPayload
+            /// Creates a new `ErrorResponse`.
+            ///
+            /// - Parameters:
+            ///   - errors:
+            public init(errors: Components.Schemas.ErrorResponse.ErrorsPayload) {
+                self.errors = errors
+            }
+            public enum CodingKeys: String, CodingKey {
+                case errors
+            }
+        }
     }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
     public enum Parameters {}
@@ -18455,10 +18489,10 @@ public enum Operations {
             }
         }
         @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/invoices/POST/responses/200/content`.
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/invoices/POST/responses/201/content`.
                 @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/invoices/POST/responses/200/content/json`.
+                    /// - Remark: Generated from `#/paths/v2/invoices/POST/responses/201/content/json`.
                     public struct JsonPayload: Codable, Hashable, Sendable {
                         /// A container of undocumented properties.
                         public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
@@ -18476,13 +18510,13 @@ public enum Operations {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }
-                    /// - Remark: Generated from `#/paths/v2/invoices/POST/responses/200/content/application\/json`.
-                    case json(Operations.CreateInvoice.Output.Ok.Body.JsonPayload)
+                    /// - Remark: Generated from `#/paths/v2/invoices/POST/responses/201/content/application\/json`.
+                    case json(Operations.CreateInvoice.Output.Created.Body.JsonPayload)
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: Operations.CreateInvoice.Output.Ok.Body.JsonPayload {
+                    public var json: Operations.CreateInvoice.Output.Created.Body.JsonPayload {
                         get throws {
                             switch self {
                             case let .json(body):
@@ -18492,33 +18526,84 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.CreateInvoice.Output.Ok.Body
-                /// Creates a new `Ok`.
+                public var body: Operations.CreateInvoice.Output.Created.Body
+                /// Creates a new `Created`.
                 ///
                 /// - Parameters:
                 ///   - body: Received HTTP response body
-                public init(body: Operations.CreateInvoice.Output.Ok.Body) {
+                public init(body: Operations.CreateInvoice.Output.Created.Body) {
                     self.body = body
                 }
             }
-            /// Success
+            /// Created
             ///
-            /// - Remark: Generated from `#/paths//v2/invoices/post(createInvoice)/responses/200`.
+            /// - Remark: Generated from `#/paths//v2/invoices/post(createInvoice)/responses/201`.
             ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.CreateInvoice.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
+            /// HTTP response code: `201 created`.
+            case created(Operations.CreateInvoice.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
             ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.CreateInvoice.Output.Ok {
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.CreateInvoice.Output.Created {
                 get throws {
                     switch self {
-                    case let .ok(response):
+                    case let .created(response):
                         return response
                     default:
                         try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct UnprocessableContent: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/invoices/POST/responses/422/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/v2/invoices/POST/responses/422/content/application\/json`.
+                    case json(Components.Schemas.ErrorResponse)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ErrorResponse {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CreateInvoice.Output.UnprocessableContent.Body
+                /// Creates a new `UnprocessableContent`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CreateInvoice.Output.UnprocessableContent.Body) {
+                    self.body = body
+                }
+            }
+            /// Unprocessable Entity - Validation Error
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/post(createInvoice)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Operations.CreateInvoice.Output.UnprocessableContent)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Operations.CreateInvoice.Output.UnprocessableContent {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
                             response: self
                         )
                     }
@@ -18854,6 +18939,57 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct UnprocessableContent: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/invoices/{id}/PUT/responses/422/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/v2/invoices/{id}/PUT/responses/422/content/application\/json`.
+                    case json(Components.Schemas.ErrorResponse)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ErrorResponse {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.UpdateInvoice.Output.UnprocessableContent.Body
+                /// Creates a new `UnprocessableContent`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.UpdateInvoice.Output.UnprocessableContent.Body) {
+                    self.body = body
+                }
+            }
+            /// Unprocessable Entity - Validation Error
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/put(updateInvoice)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Operations.UpdateInvoice.Output.UnprocessableContent)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Operations.UpdateInvoice.Output.UnprocessableContent {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
                             response: self
                         )
                     }
@@ -19811,10 +19947,10 @@ public enum Operations {
             }
         }
         @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/invoice_items/POST/responses/200/content`.
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/invoice_items/POST/responses/201/content`.
                 @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/invoice_items/POST/responses/200/content/json`.
+                    /// - Remark: Generated from `#/paths/v2/invoice_items/POST/responses/201/content/json`.
                     public struct JsonPayload: Codable, Hashable, Sendable {
                         /// A container of undocumented properties.
                         public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
@@ -19832,13 +19968,13 @@ public enum Operations {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }
-                    /// - Remark: Generated from `#/paths/v2/invoice_items/POST/responses/200/content/application\/json`.
-                    case json(Operations.CreateInvoiceItem.Output.Ok.Body.JsonPayload)
+                    /// - Remark: Generated from `#/paths/v2/invoice_items/POST/responses/201/content/application\/json`.
+                    case json(Operations.CreateInvoiceItem.Output.Created.Body.JsonPayload)
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: Operations.CreateInvoiceItem.Output.Ok.Body.JsonPayload {
+                    public var json: Operations.CreateInvoiceItem.Output.Created.Body.JsonPayload {
                         get throws {
                             switch self {
                             case let .json(body):
@@ -19848,33 +19984,84 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.CreateInvoiceItem.Output.Ok.Body
-                /// Creates a new `Ok`.
+                public var body: Operations.CreateInvoiceItem.Output.Created.Body
+                /// Creates a new `Created`.
                 ///
                 /// - Parameters:
                 ///   - body: Received HTTP response body
-                public init(body: Operations.CreateInvoiceItem.Output.Ok.Body) {
+                public init(body: Operations.CreateInvoiceItem.Output.Created.Body) {
                     self.body = body
                 }
             }
-            /// Success
+            /// Created
             ///
-            /// - Remark: Generated from `#/paths//v2/invoice_items/post(createInvoiceItem)/responses/200`.
+            /// - Remark: Generated from `#/paths//v2/invoice_items/post(createInvoiceItem)/responses/201`.
             ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.CreateInvoiceItem.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
+            /// HTTP response code: `201 created`.
+            case created(Operations.CreateInvoiceItem.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
             ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.CreateInvoiceItem.Output.Ok {
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.CreateInvoiceItem.Output.Created {
                 get throws {
                     switch self {
-                    case let .ok(response):
+                    case let .created(response):
                         return response
                     default:
                         try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
+                            expectedStatus: "created",
+                            response: self
+                        )
+                    }
+                }
+            }
+            public struct UnprocessableContent: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/invoice_items/POST/responses/422/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/v2/invoice_items/POST/responses/422/content/application\/json`.
+                    case json(Components.Schemas.ErrorResponse)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Components.Schemas.ErrorResponse {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.CreateInvoiceItem.Output.UnprocessableContent.Body
+                /// Creates a new `UnprocessableContent`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.CreateInvoiceItem.Output.UnprocessableContent.Body) {
+                    self.body = body
+                }
+            }
+            /// Unprocessable Entity - Validation Error
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoice_items/post(createInvoiceItem)/responses/422`.
+            ///
+            /// HTTP response code: `422 unprocessableContent`.
+            case unprocessableContent(Operations.CreateInvoiceItem.Output.UnprocessableContent)
+            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            ///
+            /// - Throws: An error if `self` is not `.unprocessableContent`.
+            /// - SeeAlso: `.unprocessableContent`.
+            public var unprocessableContent: Operations.CreateInvoiceItem.Output.UnprocessableContent {
+                get throws {
+                    switch self {
+                    case let .unprocessableContent(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unprocessableContent",
                             response: self
                         )
                     }

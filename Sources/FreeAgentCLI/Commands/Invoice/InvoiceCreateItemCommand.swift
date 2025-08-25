@@ -33,12 +33,7 @@ struct InvoiceCreateItemCommand: ClientCommand {
         )
         
         let response = try await client.createInvoiceItem(input)
-        
-        switch response {
-        case .ok(let okResponse):
-            return try okResponse.body.json.additionalProperties
-        default:
-            return nil
-        }
+        let createdResponse = try response.created
+        return try createdResponse.body.json.additionalProperties
     }
 }

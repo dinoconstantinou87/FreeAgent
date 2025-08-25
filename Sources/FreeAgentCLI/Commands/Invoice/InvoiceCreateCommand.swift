@@ -9,7 +9,7 @@ struct InvoiceCreateCommand: ClientCommand {
         abstract: "Create a new invoice"
     )
     
-    @Argument(help: "Contact ID for the invoice")
+    @Option(name: .long, help: "Contact url for the invoice")
     var contact: String
     
     @Option(name: .long, help: "Invoice dated on (YYYY-MM-DD)")
@@ -38,12 +38,7 @@ struct InvoiceCreateCommand: ClientCommand {
         )
         
         let response = try await client.createInvoice(input)
-        
-        switch response {
-        case .ok(let okResponse):
-            return try okResponse.body.json.additionalProperties
-        default:
-            return nil
-        }
+        let createdResponse = try response.created
+        return try createdResponse.body.json.additionalProperties
     }
 }

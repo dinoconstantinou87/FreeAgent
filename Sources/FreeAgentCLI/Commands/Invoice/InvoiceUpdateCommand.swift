@@ -26,12 +26,7 @@ struct InvoiceUpdateCommand: ClientCommand {
         )
         
         let response = try await client.updateInvoice(input)
-        
-        switch response {
-        case .ok(let okResponse):
-            return try okResponse.body.json.additionalProperties
-        default:
-            return nil
-        }
+        let okResponse = try response.ok
+        return try okResponse.body.json.additionalProperties
     }
 }

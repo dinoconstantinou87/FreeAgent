@@ -13,12 +13,7 @@ struct CompanyCommand: ClientCommand {
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
         let input = Operations.CompanyDetails.Input()
         let response = try await client.companyDetails(input)
-        
-        switch response {
-        case .ok(let okResponse):
-            return try okResponse.body.json.additionalProperties
-        default:
-            return nil
-        }
+        let okResponse = try response.ok
+        return try okResponse.body.json.additionalProperties
     }
 }
