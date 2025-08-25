@@ -9,15 +9,20 @@ struct LogoutCommand: AsyncParsableCommand {
     )
     
     mutating func run() async throws {
-        let config: OAuthConfig
+        let config: CLIConfig
         do {
-            config = try OAuthConfig.load()
+            config = try CLIConfig.load()
         } catch {
             print("No credentials configured")
             return
         }
         
-        let client = OAuthClient(config: config)
+        guard let token = try OAuthTokenStorage().load() else {
+            print("Not currently authenticated")
+            return
+        }
+        
+        let client = OAuthClient(config: config.oauthConfig, environment: token.environment)
         
         let status = try client.authenticationStatus()
         

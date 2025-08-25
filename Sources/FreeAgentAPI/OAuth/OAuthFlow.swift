@@ -1,19 +1,6 @@
 import Foundation
 
 public struct OAuthFlow: Sendable {
-    public enum Environment: String, Sendable {
-        case production = "https://api.freeagent.com"
-        case sandbox = "https://api.sandbox.freeagent.com"
-        
-        public var authorizationURL: URL {
-            URL(string: "\(rawValue)/v2/approve_app")!
-        }
-        
-        public var tokenURL: URL {
-            URL(string: "\(rawValue)/v2/token_endpoint")!
-        }
-    }
-    
     private let environment: Environment
     private let urlSession: URLSession
     
@@ -22,8 +9,16 @@ public struct OAuthFlow: Sendable {
         self.urlSession = urlSession
     }
     
+    public var authorizationURL: URL {
+        environment.baseURL.appendingPathComponent("/v2/approve_app")
+    }
+    
+    public var tokenURL: URL {
+        environment.baseURL.appendingPathComponent("/v2/token_endpoint")
+    }
+    
     public func authorizationURL(config: OAuthConfig, state: String? = nil) -> URL {
-        var components = URLComponents(url: environment.authorizationURL, resolvingAgainstBaseURL: false)!
+        var components = URLComponents(url: authorizationURL, resolvingAgainstBaseURL: false)!
         
         var queryItems = [
             URLQueryItem(name: "response_type", value: "code"),
@@ -40,7 +35,7 @@ public struct OAuthFlow: Sendable {
     }
     
     public func exchangeCodeForToken(code: String, config: OAuthConfig) async throws -> OAuthToken {
-        var request = URLRequest(url: environment.tokenURL)
+        var request = URLRequest(url: tokenURL)
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         
@@ -76,7 +71,7 @@ public struct OAuthFlow: Sendable {
         let decoder = JSONDecoder()
         do {
             let token = try decoder.decode(OAuthToken.self, from: data)
-            return token
+            return token.withEnvironment(environment)
         } catch {
             let responseString = String(data: data, encoding: .utf8) ?? "Unable to decode response"
             throw OAuthError.tokenExchangeFailed(statusCode: httpResponse.statusCode, message: "JSON decode error: \(error.localizedDescription). Response: \(responseString)")
@@ -84,7 +79,7 @@ public struct OAuthFlow: Sendable {
     }
     
     public func refreshToken(_ refreshToken: String, config: OAuthConfig) async throws -> OAuthToken {
-        var request = URLRequest(url: environment.tokenURL)
+        var request = URLRequest(url: tokenURL)
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         
@@ -113,7 +108,8 @@ public struct OAuthFlow: Sendable {
         }
         
         let decoder = JSONDecoder()
-        return try decoder.decode(OAuthToken.self, from: data)
+        let token = try decoder.decode(OAuthToken.self, from: data)
+        return token.withEnvironment(environment)
     }
 }
 
@@ -133,3 +129,4 @@ public enum OAuthError: LocalizedError {
         }
     }
 }
+

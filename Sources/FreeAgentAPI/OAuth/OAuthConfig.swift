@@ -16,34 +16,4 @@ public struct OAuthConfig: Codable, Sendable {
         self.clientSecret = clientSecret
         self.redirectUri = redirectUri
     }
-    
-    public static func load() throws -> OAuthConfig {
-        if let clientId = ProcessInfo.processInfo.environment["FREEAGENT_CLIENT_ID"],
-           let clientSecret = ProcessInfo.processInfo.environment["FREEAGENT_CLIENT_SECRET"] {
-            let redirectUri = ProcessInfo.processInfo.environment["FREEAGENT_REDIRECT_URI"] ?? "http://localhost:8080/callback"
-            return OAuthConfig(clientId: clientId, clientSecret: clientSecret, redirectUri: redirectUri)
-        }
-        
-        let configURL = FileManager.default.homeDirectoryForCurrentUser
-            .appendingPathComponent(".freeagent")
-            .appendingPathComponent("config.json")
-        
-        if FileManager.default.fileExists(atPath: configURL.path) {
-            let data = try Data(contentsOf: configURL)
-            return try JSONDecoder().decode(OAuthConfig.self, from: data)
-        }
-        
-        throw OAuthConfigError.notFound
-    }
-}
-
-public enum OAuthConfigError: LocalizedError {
-    case notFound
-    
-    public var errorDescription: String? {
-        switch self {
-        case .notFound:
-            return "No credentials found. Set FREEAGENT_CLIENT_ID and FREEAGENT_CLIENT_SECRET environment variables or create ~/.freeagent/config.json"
-        }
-    }
 }

@@ -12,18 +12,15 @@ struct LoginCommand: AsyncParsableCommand {
     )
     
     @Option(name: .shortAndLong, help: "API environment to use")
-    var environment: OAuthFlow.Environment = .sandbox
-    
-    @Option(name: .shortAndLong, help: "Port for OAuth callback server")
-    var port: Int = 8080
+    var environment: Environment = .production
     
     @Flag(name: .long, help: "Manual mode - paste the callback URL instead of automatic capture")
     var manual: Bool = false
     
     mutating func run() async throws {
-        let config: OAuthConfig
+        let config: CLIConfig
         do {
-            config = try OAuthConfig.load()
+            config = try CLIConfig.load()
         } catch {
             print("Error: \(error.localizedDescription)")
             print("\nTo set up credentials, either:")
@@ -34,16 +31,24 @@ struct LoginCommand: AsyncParsableCommand {
             print("   {")
             print("     \"client_id\": \"your_client_id\",")
             print("     \"client_secret\": \"your_client_secret\",")
-            print("     \"redirect_uri\": \"http://localhost:\(port)/callback\"")
+            print("     \"redirect_uri\": \"http://localhost:8080/callback\"")
             print("   }")
             throw ExitCode.failure
         }
         
-        let client = OAuthClient(config: config, environment: environment)
+        let client = OAuthClient(config: config.oauthConfig, environment: environment)
         
         if try client.isAuthenticated() {
             print("Already authenticated. Use 'freeagent auth status' to check token status.")
             return
+        }
+        
+        // Extract port from redirect URI
+        guard let redirectURL = URL(string: config.redirectUri),
+              let port = redirectURL.port else {
+            print("❌ Invalid redirect URI: \(config.redirectUri)")
+            print("Redirect URI must include a port (e.g., http://localhost:8080/callback)")
+            throw ExitCode.failure
         }
         
         let state = UUID().uuidString
@@ -65,7 +70,7 @@ struct LoginCommand: AsyncParsableCommand {
         
         if manual {
             print("After authorizing, copy the entire callback URL and paste it here:")
-            print("(It should look like: http://localhost:\(port)/callback?code=...)")
+            print("(It should look like: \(config.redirectUri)?code=...)")
             print("")
             
             guard let callbackURL = readLine() else {
@@ -110,8 +115,10 @@ struct LoginCommand: AsyncParsableCommand {
         print("Exchanging authorization code for tokens...")
         do {
             let token = try await client.authenticate(code: code)
+            
             print("✅ Authentication successful!")
             print("Token expires in \(Int(token.timeUntilExpiration / 60)) minutes")
+            print("Environment: \(token.environment)")
         } catch {
             print("❌ Authentication failed: \(error.localizedDescription)")
             throw ExitCode.failure
@@ -124,15 +131,5 @@ struct LoginCommand: AsyncParsableCommand {
     }
 }
 
-extension OAuthFlow.Environment: ExpressibleByArgument {
-    public init?(argument: String) {
-        switch argument.lowercased() {
-        case "production", "prod":
-            self = .production
-        case "sandbox", "sand":
-            self = .sandbox
-        default:
-            return nil
-        }
-    }
-}
+extension Environment: ExpressibleByArgument {}
+

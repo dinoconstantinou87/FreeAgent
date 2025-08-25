@@ -5,7 +5,7 @@ public struct OAuthClient: Sendable {
     private let storage: OAuthTokenStorage
     private let config: OAuthConfig
     
-    public init(config: OAuthConfig, environment: OAuthFlow.Environment = .sandbox) {
+    public init(config: OAuthConfig, environment: Environment = .sandbox) {
         self.config = config
         self.flow = OAuthFlow(environment: environment)
         self.storage = OAuthTokenStorage()

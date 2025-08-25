@@ -9,16 +9,22 @@ struct StatusCommand: AsyncParsableCommand {
     )
     
     mutating func run() async throws {
-        let config: OAuthConfig
+        let config: CLIConfig
         do {
-            config = try OAuthConfig.load()
+            config = try CLIConfig.load()
         } catch {
             print("❌ No credentials configured")
             print("Run 'freeagent auth login' to authenticate")
             throw ExitCode.failure
         }
         
-        let client = OAuthClient(config: config)
+        guard let token = try OAuthTokenStorage().load() else {
+            print("❌ Not authenticated")
+            print("Run 'freeagent auth login' to authenticate")
+            return
+        }
+        
+        let client = OAuthClient(config: config.oauthConfig, environment: token.environment)
         
         let status = try client.authenticationStatus()
         
@@ -29,6 +35,7 @@ struct StatusCommand: AsyncParsableCommand {
             
         case .authenticated(let expiresIn):
             print("✅ Authenticated")
+            print("Environment: \(token.environment)")
             
             let minutes = Int(expiresIn / 60)
             let hours = minutes / 60
