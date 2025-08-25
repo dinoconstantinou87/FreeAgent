@@ -2969,38 +2969,47 @@ paths:
       parameters:
         - name: nested_invoice_items
           in: query
+          description: Include nested invoice items in response
           schema:
-            type: string
-            example: "true"
+            type: boolean
+            example: true
         - name: contact
           in: query
+          description: Filter invoices by contact URL
           schema:
             type: string
             example: "https://api.freeagent.com/v2/contacts/:id"
         - name: project
           in: query
+          description: Filter invoices by project URL
           schema:
             type: string
             example: "https://api.freeagent.com/v2/projects/:id"
         - name: currency
           in: query
+          description: Filter invoices by currency code
           schema:
             type: string
             example: USD
         - name: view
           in: query
+          description: Filter invoices by view type
           schema:
-            type: string
-            example: all
+            $ref: '#/components/schemas/InvoiceView'
         - name: updated_since
           in: query
+          description: Show invoices updated since this date (YYYY-MM-DD)
           schema:
             type: string
             example: 2018-01-01
         - name: sort
           in: query
+          description: Sort invoices by specified field
           schema:
             type: string
+            enum:
+              - updated_at
+              - created_at
             example: updated_at
       responses:
         "200":
@@ -4176,11 +4185,17 @@ paths:
       parameters:
         - name: view
           in: query
+          description: Filter recurring invoices by view type
           schema:
             type: string
+            enum:
+              - draft
+              - active
+              - inactive
             example: draft
         - name: contact
           in: query
+          description: Filter by contact URL
           schema:
             type: string
             example: "https://api.freeagent.com/v2/contacts/:id"
@@ -5204,6 +5219,21 @@ paths:
                 type: object
                 additionalProperties: true
 components:
+  schemas:
+    InvoiceView:
+      type: string
+      enum:
+        - all
+        - recent_open_or_overdue
+        - open
+        - overdue
+        - open_or_overdue
+        - draft
+        - scheduled_to_email
+        - thank_you_emails
+        - reminder_emails
+        - last_N_months
+      example: all
   securitySchemes:
     oauth2:
       type: oauth2
@@ -5252,4 +5282,3 @@ tags:
   - name: Timers
   - name: Trial Balance
   - name: Users
-

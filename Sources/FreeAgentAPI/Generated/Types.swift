@@ -3382,7 +3382,10 @@ public enum Servers {
 /// Types generated from the components section of the OpenAPI document.
 public enum Components {
     /// Types generated from the `#/components/schemas` section of the OpenAPI document.
-    public enum Schemas {}
+    public enum Schemas {
+        /// - Remark: Generated from `#/components/schemas/InvoiceView`.
+        public typealias InvoiceView = CustomInvoiceView
+    }
     /// Types generated from the `#/components/parameters` section of the OpenAPI document.
     public enum Parameters {}
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
@@ -18155,38 +18158,57 @@ public enum Operations {
         public struct Input: Sendable, Hashable {
             /// - Remark: Generated from `#/paths/v2/invoices/GET/query`.
             public struct Query: Sendable, Hashable {
+                /// Include nested invoice items in response
+                ///
                 /// - Remark: Generated from `#/paths/v2/invoices/GET/query/nested_invoice_items`.
-                public var nestedInvoiceItems: Swift.String?
+                public var nestedInvoiceItems: Swift.Bool?
+                /// Filter invoices by contact URL
+                ///
                 /// - Remark: Generated from `#/paths/v2/invoices/GET/query/contact`.
                 public var contact: Swift.String?
+                /// Filter invoices by project URL
+                ///
                 /// - Remark: Generated from `#/paths/v2/invoices/GET/query/project`.
                 public var project: Swift.String?
+                /// Filter invoices by currency code
+                ///
                 /// - Remark: Generated from `#/paths/v2/invoices/GET/query/currency`.
                 public var currency: Swift.String?
+                /// Filter invoices by view type
+                ///
                 /// - Remark: Generated from `#/paths/v2/invoices/GET/query/view`.
-                public var view: Swift.String?
+                public var view: Components.Schemas.InvoiceView?
+                /// Show invoices updated since this date (YYYY-MM-DD)
+                ///
                 /// - Remark: Generated from `#/paths/v2/invoices/GET/query/updated_since`.
                 public var updatedSince: Swift.String?
                 /// - Remark: Generated from `#/paths/v2/invoices/GET/query/sort`.
-                public var sort: Swift.String?
+                @frozen public enum SortPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case updatedAt = "updated_at"
+                    case createdAt = "created_at"
+                }
+                /// Sort invoices by specified field
+                ///
+                /// - Remark: Generated from `#/paths/v2/invoices/GET/query/sort`.
+                public var sort: Operations.ListInvoices.Input.Query.SortPayload?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
-                ///   - nestedInvoiceItems:
-                ///   - contact:
-                ///   - project:
-                ///   - currency:
-                ///   - view:
-                ///   - updatedSince:
-                ///   - sort:
+                ///   - nestedInvoiceItems: Include nested invoice items in response
+                ///   - contact: Filter invoices by contact URL
+                ///   - project: Filter invoices by project URL
+                ///   - currency: Filter invoices by currency code
+                ///   - view: Filter invoices by view type
+                ///   - updatedSince: Show invoices updated since this date (YYYY-MM-DD)
+                ///   - sort: Sort invoices by specified field
                 public init(
-                    nestedInvoiceItems: Swift.String? = nil,
+                    nestedInvoiceItems: Swift.Bool? = nil,
                     contact: Swift.String? = nil,
                     project: Swift.String? = nil,
                     currency: Swift.String? = nil,
-                    view: Swift.String? = nil,
+                    view: Components.Schemas.InvoiceView? = nil,
                     updatedSince: Swift.String? = nil,
-                    sort: Swift.String? = nil
+                    sort: Operations.ListInvoices.Input.Query.SortPayload? = nil
                 ) {
                     self.nestedInvoiceItems = nestedInvoiceItems
                     self.contact = contact
@@ -24450,16 +24472,26 @@ public enum Operations {
             /// - Remark: Generated from `#/paths/v2/recurring_invoices/GET/query`.
             public struct Query: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/v2/recurring_invoices/GET/query/view`.
-                public var view: Swift.String?
+                @frozen public enum ViewPayload: String, Codable, Hashable, Sendable, CaseIterable {
+                    case draft = "draft"
+                    case active = "active"
+                    case inactive = "inactive"
+                }
+                /// Filter recurring invoices by view type
+                ///
+                /// - Remark: Generated from `#/paths/v2/recurring_invoices/GET/query/view`.
+                public var view: Operations.ListAllRecurringInvoices.Input.Query.ViewPayload?
+                /// Filter by contact URL
+                ///
                 /// - Remark: Generated from `#/paths/v2/recurring_invoices/GET/query/contact`.
                 public var contact: Swift.String?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
-                ///   - view:
-                ///   - contact:
+                ///   - view: Filter recurring invoices by view type
+                ///   - contact: Filter by contact URL
                 public init(
-                    view: Swift.String? = nil,
+                    view: Operations.ListAllRecurringInvoices.Input.Query.ViewPayload? = nil,
                     contact: Swift.String? = nil
                 ) {
                     self.view = view
