@@ -36,7 +36,7 @@ struct InvoiceCreateCommand: ClientCommand {
         let input = Operations.CreateInvoice.Input(
             body: .json(.init(invoice: invoicePayload))
         )
-        
+
         let response = try await client.createInvoice(input)
         let createdResponse = try response.created
         return try createdResponse.body.json.additionalProperties

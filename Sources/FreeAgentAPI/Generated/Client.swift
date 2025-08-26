@@ -5950,12 +5950,29 @@ public struct Client: APIProtocol {
                     }
                     return .ok(.init(body: body))
                 default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ErrorResponse.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.Errors.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
                         )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .`default`(
+                        statusCode: response.status.code,
+                        .init(body: body)
                     )
                 }
             }
@@ -6014,12 +6031,29 @@ public struct Client: APIProtocol {
                     }
                     return .ok(.init(body: body))
                 default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ErrorResponse.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.Errors.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
                         )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .`default`(
+                        statusCode: response.status.code,
+                        .init(body: body)
                     )
                 }
             }
@@ -6078,12 +6112,29 @@ public struct Client: APIProtocol {
                     }
                     return .ok(.init(body: body))
                 default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ErrorResponse.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.Errors.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
                         )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .`default`(
+                        statusCode: response.status.code,
+                        .init(body: body)
                     )
                 }
             }
@@ -6142,12 +6193,29 @@ public struct Client: APIProtocol {
                     }
                     return .ok(.init(body: body))
                 default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ErrorResponse.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.Errors.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
                         )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .`default`(
+                        statusCode: response.status.code,
+                        .init(body: body)
                     )
                 }
             }
@@ -6253,12 +6321,29 @@ public struct Client: APIProtocol {
                     }
                     return .ok(.init(body: body))
                 default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ErrorResponse.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.Errors.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
                         )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .`default`(
+                        statusCode: response.status.code,
+                        .init(body: body)
                     )
                 }
             }
@@ -6325,9 +6410,9 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .created(.init(body: body))
-                case 422:
+                default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.CreateInvoice.Output.UnprocessableContent.Body
+                    let body: Components.Responses.ErrorResponse.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -6337,7 +6422,7 @@ public struct Client: APIProtocol {
                     switch chosenContentType {
                     case "application/json":
                         body = try await converter.getResponseBodyAsJSON(
-                            Components.Schemas.ErrorResponse.self,
+                            Components.Schemas.Errors.self,
                             from: responseBody,
                             transforming: { value in
                                 .json(value)
@@ -6346,14 +6431,9 @@ public struct Client: APIProtocol {
                     default:
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
-                    return .unprocessableContent(.init(body: body))
-                default:
-                    return .undocumented(
+                    return .`default`(
                         statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
-                        )
+                        .init(body: body)
                     )
                 }
             }
@@ -6412,12 +6492,29 @@ public struct Client: APIProtocol {
                     }
                     return .ok(.init(body: body))
                 default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ErrorResponse.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.Errors.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
                         )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .`default`(
+                        statusCode: response.status.code,
+                        .init(body: body)
                     )
                 }
             }
@@ -6486,9 +6583,9 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
-                case 422:
+                default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.UpdateInvoice.Output.UnprocessableContent.Body
+                    let body: Components.Responses.ErrorResponse.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -6498,7 +6595,7 @@ public struct Client: APIProtocol {
                     switch chosenContentType {
                     case "application/json":
                         body = try await converter.getResponseBodyAsJSON(
-                            Components.Schemas.ErrorResponse.self,
+                            Components.Schemas.Errors.self,
                             from: responseBody,
                             transforming: { value in
                                 .json(value)
@@ -6507,14 +6604,9 @@ public struct Client: APIProtocol {
                     default:
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
-                    return .unprocessableContent(.init(body: body))
-                default:
-                    return .undocumented(
+                    return .`default`(
                         statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
-                        )
+                        .init(body: body)
                     )
                 }
             }
@@ -6546,33 +6638,15 @@ public struct Client: APIProtocol {
                     in: &request.headerFields,
                     contentTypes: input.headers.accept
                 )
-                let body: OpenAPIRuntime.HTTPBody?
-                switch input.body {
-                case let .multipartForm(value):
-                    body = try converter.setRequiredRequestBodyAsMultipart(
-                        value,
-                        headerFields: &request.headerFields,
-                        contentType: "multipart/form-data",
-                        allowsUnknownParts: true,
-                        requiredExactlyOncePartNames: [],
-                        requiredAtLeastOncePartNames: [],
-                        atMostOncePartNames: [],
-                        zeroOrMoreTimesPartNames: [],
-                        encoding: { part in
-                            switch part {
-                            case let .undocumented(value):
-                                return value
-                            }
-                        }
-                    )
-                }
-                return (request, body)
+                return (request, nil)
             },
             deserializer: { response, responseBody in
                 switch response.status.code {
                 case 200:
+                    return .ok(.init())
+                default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.DeleteInvoice.Output.Ok.Body
+                    let body: Components.Responses.ErrorResponse.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -6582,7 +6656,7 @@ public struct Client: APIProtocol {
                     switch chosenContentType {
                     case "application/json":
                         body = try await converter.getResponseBodyAsJSON(
-                            Operations.DeleteInvoice.Output.Ok.Body.JsonPayload.self,
+                            Components.Schemas.Errors.self,
                             from: responseBody,
                             transforming: { value in
                                 .json(value)
@@ -6591,14 +6665,9 @@ public struct Client: APIProtocol {
                     default:
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
-                    return .ok(.init(body: body))
-                default:
-                    return .undocumented(
+                    return .`default`(
                         statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
-                        )
+                        .init(body: body)
                     )
                 }
             }
@@ -6655,12 +6724,29 @@ public struct Client: APIProtocol {
                     }
                     return .ok(.init(body: body))
                 default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ErrorResponse.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.Errors.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
                         )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .`default`(
+                        statusCode: response.status.code,
+                        .init(body: body)
                     )
                 }
             }
@@ -6719,12 +6805,29 @@ public struct Client: APIProtocol {
                     }
                     return .ok(.init(body: body))
                 default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ErrorResponse.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.Errors.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
                         )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .`default`(
+                        statusCode: response.status.code,
+                        .init(body: body)
                     )
                 }
             }
@@ -6794,12 +6897,29 @@ public struct Client: APIProtocol {
                     }
                     return .ok(.init(body: body))
                 default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ErrorResponse.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.Errors.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
                         )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .`default`(
+                        statusCode: response.status.code,
+                        .init(body: body)
                     )
                 }
             }
@@ -6873,12 +6993,29 @@ public struct Client: APIProtocol {
                     }
                     return .ok(.init(body: body))
                 default:
-                    return .undocumented(
-                        statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Components.Responses.ErrorResponse.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Components.Schemas.Errors.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
                         )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .`default`(
+                        statusCode: response.status.code,
+                        .init(body: body)
                     )
                 }
             }
@@ -6945,9 +7082,9 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .created(.init(body: body))
-                case 422:
+                default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
-                    let body: Operations.CreateInvoiceItem.Output.UnprocessableContent.Body
+                    let body: Components.Responses.ErrorResponse.Body
                     let chosenContentType = try converter.bestContentType(
                         received: contentType,
                         options: [
@@ -6957,7 +7094,7 @@ public struct Client: APIProtocol {
                     switch chosenContentType {
                     case "application/json":
                         body = try await converter.getResponseBodyAsJSON(
-                            Components.Schemas.ErrorResponse.self,
+                            Components.Schemas.Errors.self,
                             from: responseBody,
                             transforming: { value in
                                 .json(value)
@@ -6966,14 +7103,9 @@ public struct Client: APIProtocol {
                     default:
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
-                    return .unprocessableContent(.init(body: body))
-                default:
-                    return .undocumented(
+                    return .`default`(
                         statusCode: response.status.code,
-                        .init(
-                            headerFields: response.headerFields,
-                            body: responseBody
-                        )
+                        .init(body: body)
                     )
                 }
             }

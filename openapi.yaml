@@ -2883,6 +2883,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        default:
+          $ref: "#/components/responses/ErrorResponse"
     parameters:
       - name: id
         in: path
@@ -2906,6 +2908,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        default:
+          $ref: "#/components/responses/ErrorResponse"
     parameters:
       - name: id
         in: path
@@ -2929,6 +2933,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        default:
+          $ref: "#/components/responses/ErrorResponse"
     parameters:
       - name: id
         in: path
@@ -2952,6 +2958,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        default:
+          $ref: "#/components/responses/ErrorResponse"
     parameters:
       - name: id
         in: path
@@ -3019,6 +3027,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        default:
+          $ref: "#/components/responses/ErrorResponse"
     post:
       tags:
         - Invoices
@@ -3074,12 +3084,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
-        "422":
-          description: "Unprocessable Entity - Validation Error"
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+        default:
+          $ref: "#/components/responses/ErrorResponse"
   /v2/invoices/{id}:
     get:
       tags:
@@ -3095,6 +3101,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        default:
+          $ref: "#/components/responses/ErrorResponse"
     put:
       tags:
         - Invoices
@@ -3126,34 +3134,19 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
-        "422":
-          description: "Unprocessable Entity - Validation Error"
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+        default:
+          $ref: "#/components/responses/ErrorResponse"
     delete:
       tags:
         - Invoices
       summary: Delete Invoice
       description: Delete Invoice
       operationId: deleteInvoice
-      requestBody:
-
-        required: true
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties: {}
       responses:
         "200":
           description: "Success"
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
+        default:
+          $ref: "#/components/responses/ErrorResponse"
     parameters:
       - name: id
         in: path
@@ -3176,6 +3169,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        default:
+          $ref: "#/components/responses/ErrorResponse"
   /v2/invoices/{id}/pdf:
     get:
       tags:
@@ -3191,6 +3186,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        default:
+          $ref: "#/components/responses/ErrorResponse"
     parameters:
       - name: id
         in: path
@@ -3246,6 +3243,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        default:
+          $ref: "#/components/responses/ErrorResponse"
     parameters:
       - name: id
         in: path
@@ -3283,6 +3282,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
+        default:
+          $ref: "#/components/responses/ErrorResponse"
     parameters:
       - name: id
         in: path
@@ -3338,12 +3339,8 @@ paths:
               schema:
                 type: object
                 additionalProperties: true
-        "422":
-          description: "Unprocessable Entity - Validation Error"
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
+        default:
+          $ref: "#/components/responses/ErrorResponse"
   /v2/journal_sets:
     get:
       tags:
@@ -5252,7 +5249,7 @@ components:
         - reminder_emails
         - last_N_months
       example: all
-    ErrorResponse:
+    Errors:
       type: object
       properties:
         errors:
@@ -5267,6 +5264,13 @@ components:
               - message
       required:
         - errors
+  responses:
+    ErrorResponse:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
   securitySchemes:
     oauth2:
       type: oauth2

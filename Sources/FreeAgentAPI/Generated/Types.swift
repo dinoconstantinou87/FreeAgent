@@ -2415,13 +2415,11 @@ extension APIProtocol {
     /// - Remark: Generated from `#/paths//v2/invoices/{id}/delete(deleteInvoice)`.
     public func deleteInvoice(
         path: Operations.DeleteInvoice.Input.Path,
-        headers: Operations.DeleteInvoice.Input.Headers = .init(),
-        body: Operations.DeleteInvoice.Input.Body
+        headers: Operations.DeleteInvoice.Input.Headers = .init()
     ) async throws -> Operations.DeleteInvoice.Output {
         try await deleteInvoice(Operations.DeleteInvoice.Input(
             path: path,
-            headers: headers,
-            body: body
+            headers: headers
         ))
     }
     /// Get invoice timeline
@@ -3385,13 +3383,13 @@ public enum Components {
     public enum Schemas {
         /// - Remark: Generated from `#/components/schemas/InvoiceView`.
         public typealias InvoiceView = CustomInvoiceView
-        /// - Remark: Generated from `#/components/schemas/ErrorResponse`.
-        public struct ErrorResponse: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/ErrorResponse/ErrorsPayload`.
+        /// - Remark: Generated from `#/components/schemas/Errors`.
+        public struct Errors: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/Errors/ErrorsPayload`.
             public struct ErrorsPayloadPayload: Codable, Hashable, Sendable {
                 /// Error message describing what went wrong
                 ///
-                /// - Remark: Generated from `#/components/schemas/ErrorResponse/ErrorsPayload/message`.
+                /// - Remark: Generated from `#/components/schemas/Errors/ErrorsPayload/message`.
                 public var message: Swift.String
                 /// Creates a new `ErrorsPayloadPayload`.
                 ///
@@ -3404,15 +3402,15 @@ public enum Components {
                     case message
                 }
             }
-            /// - Remark: Generated from `#/components/schemas/ErrorResponse/errors`.
-            public typealias ErrorsPayload = [Components.Schemas.ErrorResponse.ErrorsPayloadPayload]
-            /// - Remark: Generated from `#/components/schemas/ErrorResponse/errors`.
-            public var errors: Components.Schemas.ErrorResponse.ErrorsPayload
-            /// Creates a new `ErrorResponse`.
+            /// - Remark: Generated from `#/components/schemas/Errors/errors`.
+            public typealias ErrorsPayload = [Components.Schemas.Errors.ErrorsPayloadPayload]
+            /// - Remark: Generated from `#/components/schemas/Errors/errors`.
+            public var errors: Components.Schemas.Errors.ErrorsPayload
+            /// Creates a new `Errors`.
             ///
             /// - Parameters:
             ///   - errors:
-            public init(errors: Components.Schemas.ErrorResponse.ErrorsPayload) {
+            public init(errors: Components.Schemas.Errors.ErrorsPayload) {
                 self.errors = errors
             }
             public enum CodingKeys: String, CodingKey {
@@ -3425,7 +3423,36 @@ public enum Components {
     /// Types generated from the `#/components/requestBodies` section of the OpenAPI document.
     public enum RequestBodies {}
     /// Types generated from the `#/components/responses` section of the OpenAPI document.
-    public enum Responses {}
+    public enum Responses {
+        public struct ErrorResponse: Sendable, Hashable {
+            /// - Remark: Generated from `#/components/responses/ErrorResponse/content`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/components/responses/ErrorResponse/content/application\/json`.
+                case json(Components.Schemas.Errors)
+                /// The associated value of the enum case if `self` is `.json`.
+                ///
+                /// - Throws: An error if `self` is not `.json`.
+                /// - SeeAlso: `.json`.
+                public var json: Components.Schemas.Errors {
+                    get throws {
+                        switch self {
+                        case let .json(body):
+                            return body
+                        }
+                    }
+                }
+            }
+            /// Received HTTP response body
+            public var body: Components.Responses.ErrorResponse.Body
+            /// Creates a new `ErrorResponse`.
+            ///
+            /// - Parameters:
+            ///   - body: Received HTTP response body
+            public init(body: Components.Responses.ErrorResponse.Body) {
+                self.body = body
+            }
+        }
+    }
     /// Types generated from the `#/components/headers` section of the OpenAPI document.
     public enum Headers {}
 }
@@ -17706,10 +17733,29 @@ public enum Operations {
                     }
                 }
             }
-            /// Undocumented response.
+            /// Error response
             ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_sent/put(markInvoiceAsSent)/responses/default`.
+            ///
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
+            ///
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
+                get throws {
+                    switch self {
+                    case let .`default`(_, response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "default",
+                            response: self
+                        )
+                    }
+                }
+            }
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -17854,10 +17900,29 @@ public enum Operations {
                     }
                 }
             }
-            /// Undocumented response.
+            /// Error response
             ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_cancelled/put(markInvoiceAsCancelled)/responses/default`.
+            ///
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
+            ///
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
+                get throws {
+                    switch self {
+                    case let .`default`(_, response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "default",
+                            response: self
+                        )
+                    }
+                }
+            }
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -18002,10 +18067,29 @@ public enum Operations {
                     }
                 }
             }
-            /// Undocumented response.
+            /// Error response
             ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_scheduled/put(markInvoiceAsScheduled)/responses/default`.
+            ///
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
+            ///
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
+                get throws {
+                    switch self {
+                    case let .`default`(_, response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "default",
+                            response: self
+                        )
+                    }
+                }
+            }
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -18150,10 +18234,29 @@ public enum Operations {
                     }
                 }
             }
-            /// Undocumented response.
+            /// Error response
             ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_draft/put(markInvoiceAsDraft)/responses/default`.
+            ///
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
+            ///
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
+                get throws {
+                    switch self {
+                    case let .`default`(_, response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "default",
+                            response: self
+                        )
+                    }
+                }
+            }
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -18349,10 +18452,29 @@ public enum Operations {
                     }
                 }
             }
-            /// Undocumented response.
+            /// Error response
             ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+            /// - Remark: Generated from `#/paths//v2/invoices/get(listInvoices)/responses/default`.
+            ///
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
+            ///
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
+                get throws {
+                    switch self {
+                    case let .`default`(_, response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "default",
+                            response: self
+                        )
+                    }
+                }
+            }
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -18558,61 +18680,29 @@ public enum Operations {
                     }
                 }
             }
-            public struct UnprocessableContent: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/invoices/POST/responses/422/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/invoices/POST/responses/422/content/application\/json`.
-                    case json(Components.Schemas.ErrorResponse)
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: Components.Schemas.ErrorResponse {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.CreateInvoice.Output.UnprocessableContent.Body
-                /// Creates a new `UnprocessableContent`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.CreateInvoice.Output.UnprocessableContent.Body) {
-                    self.body = body
-                }
-            }
-            /// Unprocessable Entity - Validation Error
+            /// Error response
             ///
-            /// - Remark: Generated from `#/paths//v2/invoices/post(createInvoice)/responses/422`.
+            /// - Remark: Generated from `#/paths//v2/invoices/post(createInvoice)/responses/default`.
             ///
-            /// HTTP response code: `422 unprocessableContent`.
-            case unprocessableContent(Operations.CreateInvoice.Output.UnprocessableContent)
-            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
             ///
-            /// - Throws: An error if `self` is not `.unprocessableContent`.
-            /// - SeeAlso: `.unprocessableContent`.
-            public var unprocessableContent: Operations.CreateInvoice.Output.UnprocessableContent {
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
                 get throws {
                     switch self {
-                    case let .unprocessableContent(response):
+                    case let .`default`(_, response):
                         return response
                     default:
                         try throwUnexpectedResponseStatus(
-                            expectedStatus: "unprocessableContent",
+                            expectedStatus: "default",
                             response: self
                         )
                     }
                 }
             }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -18757,10 +18847,29 @@ public enum Operations {
                     }
                 }
             }
-            /// Undocumented response.
+            /// Error response
             ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/get(showInvoice)/responses/default`.
+            ///
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
+            ///
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
+                get throws {
+                    switch self {
+                    case let .`default`(_, response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "default",
+                            response: self
+                        )
+                    }
+                }
+            }
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -18944,61 +19053,29 @@ public enum Operations {
                     }
                 }
             }
-            public struct UnprocessableContent: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/invoices/{id}/PUT/responses/422/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/invoices/{id}/PUT/responses/422/content/application\/json`.
-                    case json(Components.Schemas.ErrorResponse)
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: Components.Schemas.ErrorResponse {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.UpdateInvoice.Output.UnprocessableContent.Body
-                /// Creates a new `UnprocessableContent`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.UpdateInvoice.Output.UnprocessableContent.Body) {
-                    self.body = body
-                }
-            }
-            /// Unprocessable Entity - Validation Error
+            /// Error response
             ///
-            /// - Remark: Generated from `#/paths//v2/invoices/{id}/put(updateInvoice)/responses/422`.
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/put(updateInvoice)/responses/default`.
             ///
-            /// HTTP response code: `422 unprocessableContent`.
-            case unprocessableContent(Operations.UpdateInvoice.Output.UnprocessableContent)
-            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
             ///
-            /// - Throws: An error if `self` is not `.unprocessableContent`.
-            /// - SeeAlso: `.unprocessableContent`.
-            public var unprocessableContent: Operations.UpdateInvoice.Output.UnprocessableContent {
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
                 get throws {
                     switch self {
-                    case let .unprocessableContent(response):
+                    case let .`default`(_, response):
                         return response
                     default:
                         try throwUnexpectedResponseStatus(
-                            expectedStatus: "unprocessableContent",
+                            expectedStatus: "default",
                             response: self
                         )
                     }
                 }
             }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -19060,78 +19137,23 @@ public enum Operations {
                 }
             }
             public var headers: Operations.DeleteInvoice.Input.Headers
-            /// - Remark: Generated from `#/paths/v2/invoices/{id}/DELETE/requestBody`.
-            @frozen public enum Body: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/invoices/{id}/DELETE/requestBody/multipartForm`.
-                @frozen public enum MultipartFormPayload: Sendable, Hashable {
-                    case undocumented(OpenAPIRuntime.MultipartRawPart)
-                }
-                /// - Remark: Generated from `#/paths/v2/invoices/{id}/DELETE/requestBody/content/multipart\/form-data`.
-                case multipartForm(OpenAPIRuntime.MultipartBody<Operations.DeleteInvoice.Input.Body.MultipartFormPayload>)
-            }
-            public var body: Operations.DeleteInvoice.Input.Body
             /// Creates a new `Input`.
             ///
             /// - Parameters:
             ///   - path:
             ///   - headers:
-            ///   - body:
             public init(
                 path: Operations.DeleteInvoice.Input.Path,
-                headers: Operations.DeleteInvoice.Input.Headers = .init(),
-                body: Operations.DeleteInvoice.Input.Body
+                headers: Operations.DeleteInvoice.Input.Headers = .init()
             ) {
                 self.path = path
                 self.headers = headers
-                self.body = body
             }
         }
         @frozen public enum Output: Sendable, Hashable {
             public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/invoices/{id}/DELETE/responses/200/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/invoices/{id}/DELETE/responses/200/content/json`.
-                    public struct JsonPayload: Codable, Hashable, Sendable {
-                        /// A container of undocumented properties.
-                        public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
-                        /// Creates a new `JsonPayload`.
-                        ///
-                        /// - Parameters:
-                        ///   - additionalProperties: A container of undocumented properties.
-                        public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
-                            self.additionalProperties = additionalProperties
-                        }
-                        public init(from decoder: any Decoder) throws {
-                            additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
-                        }
-                        public func encode(to encoder: any Encoder) throws {
-                            try encoder.encodeAdditionalProperties(additionalProperties)
-                        }
-                    }
-                    /// - Remark: Generated from `#/paths/v2/invoices/{id}/DELETE/responses/200/content/application\/json`.
-                    case json(Operations.DeleteInvoice.Output.Ok.Body.JsonPayload)
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: Operations.DeleteInvoice.Output.Ok.Body.JsonPayload {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.DeleteInvoice.Output.Ok.Body
                 /// Creates a new `Ok`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.DeleteInvoice.Output.Ok.Body) {
-                    self.body = body
-                }
+                public init() {}
             }
             /// Success
             ///
@@ -19139,6 +19161,14 @@ public enum Operations {
             ///
             /// HTTP response code: `200 ok`.
             case ok(Operations.DeleteInvoice.Output.Ok)
+            /// Success
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/delete(deleteInvoice)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            public static var ok: Self {
+                .ok(.init())
+            }
             /// The associated value of the enum case if `self` is `.ok`.
             ///
             /// - Throws: An error if `self` is not `.ok`.
@@ -19156,10 +19186,29 @@ public enum Operations {
                     }
                 }
             }
-            /// Undocumented response.
+            /// Error response
             ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/delete(deleteInvoice)/responses/default`.
+            ///
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
+            ///
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
+                get throws {
+                    switch self {
+                    case let .`default`(_, response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "default",
+                            response: self
+                        )
+                    }
+                }
+            }
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -19286,10 +19335,29 @@ public enum Operations {
                     }
                 }
             }
-            /// Undocumented response.
+            /// Error response
             ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+            /// - Remark: Generated from `#/paths//v2/invoices/timeline/get(getInvoiceTimeline)/responses/default`.
+            ///
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
+            ///
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
+                get throws {
+                    switch self {
+                    case let .`default`(_, response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "default",
+                            response: self
+                        )
+                    }
+                }
+            }
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -19434,10 +19502,29 @@ public enum Operations {
                     }
                 }
             }
-            /// Undocumented response.
+            /// Error response
             ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/pdf/get(showInvoiceAsPdf)/responses/default`.
+            ///
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
+            ///
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
+                get throws {
+                    switch self {
+                    case let .`default`(_, response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "default",
+                            response: self
+                        )
+                    }
+                }
+            }
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -19656,10 +19743,29 @@ public enum Operations {
                     }
                 }
             }
-            /// Undocumented response.
+            /// Error response
             ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/send_email/post(sendInvoiceEmail)/responses/default`.
+            ///
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
+            ///
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
+                get throws {
+                    switch self {
+                    case let .`default`(_, response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "default",
+                            response: self
+                        )
+                    }
+                }
+            }
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -19817,10 +19923,29 @@ public enum Operations {
                     }
                 }
             }
-            /// Undocumented response.
+            /// Error response
             ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/direct_debit/post(takePaymentUsingGocardlessDirectDebitMandate)/responses/default`.
+            ///
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
+            ///
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
+                get throws {
+                    switch self {
+                    case let .`default`(_, response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "default",
+                            response: self
+                        )
+                    }
+                }
+            }
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
@@ -20016,61 +20141,29 @@ public enum Operations {
                     }
                 }
             }
-            public struct UnprocessableContent: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/invoice_items/POST/responses/422/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/invoice_items/POST/responses/422/content/application\/json`.
-                    case json(Components.Schemas.ErrorResponse)
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: Components.Schemas.ErrorResponse {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.CreateInvoiceItem.Output.UnprocessableContent.Body
-                /// Creates a new `UnprocessableContent`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.CreateInvoiceItem.Output.UnprocessableContent.Body) {
-                    self.body = body
-                }
-            }
-            /// Unprocessable Entity - Validation Error
+            /// Error response
             ///
-            /// - Remark: Generated from `#/paths//v2/invoice_items/post(createInvoiceItem)/responses/422`.
+            /// - Remark: Generated from `#/paths//v2/invoice_items/post(createInvoiceItem)/responses/default`.
             ///
-            /// HTTP response code: `422 unprocessableContent`.
-            case unprocessableContent(Operations.CreateInvoiceItem.Output.UnprocessableContent)
-            /// The associated value of the enum case if `self` is `.unprocessableContent`.
+            /// HTTP response code: `default`.
+            case `default`(statusCode: Swift.Int, Components.Responses.ErrorResponse)
+            /// The associated value of the enum case if `self` is `.`default``.
             ///
-            /// - Throws: An error if `self` is not `.unprocessableContent`.
-            /// - SeeAlso: `.unprocessableContent`.
-            public var unprocessableContent: Operations.CreateInvoiceItem.Output.UnprocessableContent {
+            /// - Throws: An error if `self` is not `.`default``.
+            /// - SeeAlso: `.`default``.
+            public var `default`: Components.Responses.ErrorResponse {
                 get throws {
                     switch self {
-                    case let .unprocessableContent(response):
+                    case let .`default`(_, response):
                         return response
                     default:
                         try throwUnexpectedResponseStatus(
-                            expectedStatus: "unprocessableContent",
+                            expectedStatus: "default",
                             response: self
                         )
                     }
                 }
             }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json

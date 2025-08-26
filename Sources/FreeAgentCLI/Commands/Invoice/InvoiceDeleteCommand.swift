@@ -11,24 +11,15 @@ struct InvoiceDeleteCommand: ClientCommand {
     
     @Argument(help: "Invoice ID")
     var id: String
-    
-    @Flag(help: "Confirm deletion without prompting")
-    var force: Bool = false
-    
-    func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
-        if !force {
-            print("Are you sure you want to delete invoice \(id)? This action cannot be undone.")
-            print("Use --force to skip this confirmation.")
-            return nil
-        }
-        
+
+    func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIValueContainer? {
         let input = Operations.DeleteInvoice.Input(
-            path: .init(id: id),
-            body: .multipartForm(.init([]))
+            path: .init(id: id)
         )
-        
+
         let response = try await client.deleteInvoice(input)
-        let okResponse = try response.ok
-        return try okResponse.body.json.additionalProperties
+        let _ = try response.ok
+
+        return nil
     }
 }

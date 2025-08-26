@@ -5,7 +5,8 @@ import OpenAPIURLSession
 import FreeAgentAPI
 
 public protocol ClientCommand: AsyncParsableCommand {
-    func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer?
+    associatedtype Response: Codable
+    func run(client: Client) async throws -> Response?
 }
 
 extension ClientCommand {
