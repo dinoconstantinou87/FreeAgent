@@ -9,7 +9,7 @@ struct InvoiceCreateCommand: ClientCommand {
         abstract: "Create a new invoice"
     )
     
-    @Option(name: .long, help: "Contact url for the invoice")
+    @Option(name: .long, help: "Contact ID for the invoice")
     var contact: String
     
     @Option(name: .long, help: "Invoice dated on (YYYY-MM-DD)")

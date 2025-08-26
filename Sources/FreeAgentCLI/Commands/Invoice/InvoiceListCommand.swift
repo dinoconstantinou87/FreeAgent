@@ -12,10 +12,10 @@ struct InvoiceListCommand: ClientCommand {
     @Option(name: .long, help: "Filter by view")
     var view: CustomInvoiceView?
     
-    @Option(name: .long, help: "Filter invoices by contact URL")
+    @Option(name: .long, help: "Filter invoices by contact ID")
     var contact: String?
     
-    @Option(name: .long, help: "Filter invoices by project URL")
+    @Option(name: .long, help: "Filter invoices by project ID")
     var project: String?
     
     @Option(name: .long, help: "Include invoice items nested within each invoice")

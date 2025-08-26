@@ -12,7 +12,7 @@ struct InvoiceListRecurringCommand: ClientCommand {
     @Option(name: .long, help: "Filter by view")
     var view: Operations.ListAllRecurringInvoices.Input.Query.ViewPayload?
     
-    @Option(name: .long, help: "Filter by contact URL")
+    @Option(name: .long, help: "Filter by contact ID")
     var contact: String?
     
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
