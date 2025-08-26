@@ -3385,36 +3385,20 @@ public enum Components {
         public typealias InvoiceView = CustomInvoiceView
         /// - Remark: Generated from `#/components/schemas/Errors`.
         public struct Errors: Codable, Hashable, Sendable {
-            /// - Remark: Generated from `#/components/schemas/Errors/ErrorsPayload`.
-            public struct ErrorsPayloadPayload: Codable, Hashable, Sendable {
-                /// Error message describing what went wrong
-                ///
-                /// - Remark: Generated from `#/components/schemas/Errors/ErrorsPayload/message`.
-                public var message: Swift.String
-                /// Creates a new `ErrorsPayloadPayload`.
-                ///
-                /// - Parameters:
-                ///   - message: Error message describing what went wrong
-                public init(message: Swift.String) {
-                    self.message = message
-                }
-                public enum CodingKeys: String, CodingKey {
-                    case message
-                }
-            }
-            /// - Remark: Generated from `#/components/schemas/Errors/errors`.
-            public typealias ErrorsPayload = [Components.Schemas.Errors.ErrorsPayloadPayload]
-            /// - Remark: Generated from `#/components/schemas/Errors/errors`.
-            public var errors: Components.Schemas.Errors.ErrorsPayload
+            /// A container of undocumented properties.
+            public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
             /// Creates a new `Errors`.
             ///
             /// - Parameters:
-            ///   - errors:
-            public init(errors: Components.Schemas.Errors.ErrorsPayload) {
-                self.errors = errors
+            ///   - additionalProperties: A container of undocumented properties.
+            public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                self.additionalProperties = additionalProperties
             }
-            public enum CodingKeys: String, CodingKey {
-                case errors
+            public init(from decoder: any Decoder) throws {
+                additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+            }
+            public func encode(to encoder: any Encoder) throws {
+                try encoder.encodeAdditionalProperties(additionalProperties)
             }
         }
     }
@@ -3424,6 +3408,10 @@ public enum Components {
     public enum RequestBodies {}
     /// Types generated from the `#/components/responses` section of the OpenAPI document.
     public enum Responses {
+        public struct EmptyResponse: Sendable, Hashable {
+            /// Creates a new `EmptyResponse`.
+            public init() {}
+        }
         public struct ErrorResponse: Sendable, Hashable {
             /// - Remark: Generated from `#/components/responses/ErrorResponse/content`.
             @frozen public enum Body: Sendable, Hashable {
@@ -19181,6 +19169,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Error response
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/delete(deleteInvoice)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            case conflict(Components.Responses.EmptyResponse)
+            /// Error response
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/delete(deleteInvoice)/responses/409`.
+            ///
+            /// HTTP response code: `409 conflict`.
+            public static var conflict: Self {
+                .conflict(.init())
+            }
+            /// The associated value of the enum case if `self` is `.conflict`.
+            ///
+            /// - Throws: An error if `self` is not `.conflict`.
+            /// - SeeAlso: `.conflict`.
+            public var conflict: Components.Responses.EmptyResponse {
+                get throws {
+                    switch self {
+                    case let .conflict(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "conflict",
                             response: self
                         )
                     }

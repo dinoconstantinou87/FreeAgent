@@ -3145,6 +3145,8 @@ paths:
       responses:
         "200":
           description: "Success"
+        "409":
+          $ref: "#/components/responses/EmptyResponse"
         default:
           $ref: "#/components/responses/ErrorResponse"
     parameters:
@@ -5251,22 +5253,12 @@ components:
       example: all
     Errors:
       type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              message:
-                type: string
-                description: Error message describing what went wrong
-            required:
-              - message
-      required:
-        - errors
+      additionalProperties: true
   responses:
+    EmptyResponse:
+      description: "Error response"
     ErrorResponse:
-      description: Error response
+      description: "Error response"
       content:
         application/json:
           schema:

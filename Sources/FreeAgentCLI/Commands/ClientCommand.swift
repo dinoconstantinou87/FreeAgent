@@ -54,32 +54,7 @@ extension ClientCommand {
             let jsonData = try encoder.encode(result)
             let jsonString = String(data: jsonData, encoding: .utf8) ?? "{}"
             print(jsonString)
-            
         } catch {
-            // Check if error contains validation messages
-            let errorString = String(describing: error)
-            if errorString.contains("unprocessableContent") && errorString.contains("ErrorResponse") {
-                // Extract error messages from the error description
-                if let match = errorString.range(of: "errors: [") {
-                    let remaining = errorString[match.upperBound...]
-                    let messages = remaining.components(separatedBy: "message: \"")
-                        .dropFirst()
-                        .compactMap { component -> String? in
-                            if let endQuote = component.firstIndex(of: "\"") {
-                                return String(component[..<endQuote])
-                            }
-                            return nil
-                        }
-                    
-                    for message in messages {
-                        print("❌ \(message)")
-                    }
-                } else {
-                    print("❌ Validation error occurred")
-                }
-                throw ExitCode.failure
-            }
-            
             print("❌ Failed to execute command: \(error)")
             throw ExitCode.failure
         }

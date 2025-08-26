@@ -6644,6 +6644,8 @@ public struct Client: APIProtocol {
                 switch response.status.code {
                 case 200:
                     return .ok(.init())
+                case 409:
+                    return .conflict(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body

@@ -13,7 +13,7 @@ struct InvoiceCreateCommand: ClientCommand {
     var contact: String
     
     @Option(name: .long, help: "Invoice dated on (YYYY-MM-DD)")
-    var datedOn: String?
+    var datedOn: String
     
     @Option(name: .long, help: "Due date (YYYY-MM-DD)")
     var dueOn: String?
@@ -22,7 +22,7 @@ struct InvoiceCreateCommand: ClientCommand {
     var currency: String?
     
     @Option(name: .long, help: "Payment terms in days")
-    var paymentTermsInDays: Double?
+    var paymentTermsInDays: Double
     
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
         let invoicePayload = Operations.CreateInvoice.Input.Body.JsonPayload.InvoicePayload(
