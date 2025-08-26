@@ -3311,12 +3311,30 @@ paths:
                   example: https://api.freeagent.com/v2/invoices/1
                 invoice_item:
                   type: object
+                  required:
+                    - description
                   properties:
                     description:
                       type: string
                       example: Fishing trip
                     item_type:
                       type: string
+                      enum:
+                        - Hours
+                        - Days
+                        - Weeks
+                        - Months
+                        - Years
+                        - Products
+                        - Services
+                        - Training
+                        - Expenses
+                        - Comment
+                        - Bills
+                        - Discount
+                        - Credit
+                        - VAT
+                        - Stock
                       example: Hours
                     price:
                       type: number

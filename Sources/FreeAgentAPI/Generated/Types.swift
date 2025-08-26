@@ -20022,9 +20022,27 @@ public enum Operations {
                     /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item`.
                     public struct InvoiceItemPayload: Codable, Hashable, Sendable {
                         /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item/description`.
-                        public var description: Swift.String?
+                        public var description: Swift.String
                         /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item/item_type`.
-                        public var itemType: Swift.String?
+                        @frozen public enum ItemTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                            case hours = "Hours"
+                            case days = "Days"
+                            case weeks = "Weeks"
+                            case months = "Months"
+                            case years = "Years"
+                            case products = "Products"
+                            case services = "Services"
+                            case training = "Training"
+                            case expenses = "Expenses"
+                            case comment = "Comment"
+                            case bills = "Bills"
+                            case discount = "Discount"
+                            case credit = "Credit"
+                            case vat = "VAT"
+                            case stock = "Stock"
+                        }
+                        /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item/item_type`.
+                        public var itemType: Operations.CreateInvoiceItem.Input.Body.JsonPayload.InvoiceItemPayload.ItemTypePayload?
                         /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item/price`.
                         public var price: Swift.Double?
                         /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item/quantity`.
@@ -20037,8 +20055,8 @@ public enum Operations {
                         ///   - price:
                         ///   - quantity:
                         public init(
-                            description: Swift.String? = nil,
-                            itemType: Swift.String? = nil,
+                            description: Swift.String,
+                            itemType: Operations.CreateInvoiceItem.Input.Body.JsonPayload.InvoiceItemPayload.ItemTypePayload? = nil,
                             price: Swift.Double? = nil,
                             quantity: Swift.Double? = nil
                         ) {

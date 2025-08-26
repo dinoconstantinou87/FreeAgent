@@ -13,7 +13,10 @@ struct InvoiceCreateItemCommand: ClientCommand {
     var invoice: String
     
     @Option(name: .long, help: "Item description")
-    var description: String?
+    var description: String
+    
+    @Option(name: .long, help: "Item type")
+    var itemType: Operations.CreateInvoiceItem.Input.Body.JsonPayload.InvoiceItemPayload.ItemTypePayload?
     
     @Option(name: .long, help: "Item quantity")
     var quantity: Double?
@@ -24,6 +27,7 @@ struct InvoiceCreateItemCommand: ClientCommand {
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
         let invoiceItemPayload = Operations.CreateInvoiceItem.Input.Body.JsonPayload.InvoiceItemPayload(
             description: description,
+            itemType: itemType,
             price: price,
             quantity: quantity
         )
