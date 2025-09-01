@@ -3,7 +3,7 @@ import ArgumentParser
 struct InvoiceCommand: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "invoice",
-        abstract: "Manage invoices in FreeAgent",
+        abstract: "Manage invoices",
         subcommands: [
             InvoiceListCommand.self,
             InvoiceCreateCommand.self,

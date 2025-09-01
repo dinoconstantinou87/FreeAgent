@@ -3,6 +3,7 @@ import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
 import FreeAgentAPI
+import Noora
 
 public protocol ClientCommand: AsyncParsableCommand {
     associatedtype Response: Codable
@@ -11,51 +12,28 @@ public protocol ClientCommand: AsyncParsableCommand {
 
 extension ClientCommand {
     public func run() async throws {
-        let config: CLIConfig
-        do {
-            config = try CLIConfig.load()
-        } catch {
-            print("❌ No credentials configured")
-            print("Run 'freeagent auth login' to authenticate")
+        guard let credential = try AuthStorage().get() else {
+            Noora().error(.alert("Not logged in", takeaways: ["Run \(.command("freeagent auth login"))"]))
             throw ExitCode.failure
         }
-        
-        guard let token = try OAuthTokenStorage().load() else {
-            print("❌ Not authenticated")
-            print("Run 'freeagent auth login' to authenticate")
-            throw ExitCode.failure
-        }
-        
-        let environment = token.environment
-        let oauthClient = OAuthClient(config: config.oauthConfig, environment: environment)
-        
-        guard try oauthClient.isAuthenticated() else {
-            print("❌ Not authenticated")
-            print("Run 'freeagent auth login' to authenticate")
-            throw ExitCode.failure
-        }
-        
-        let serverURL = environment.baseURL
+
+        let serverURL = credential.environment.baseURL
         let transport = URLSessionTransport()
         let client = Client(
             serverURL: serverURL,
             transport: transport,
-            middlewares: [.oauth(client: oauthClient, config: config.oauthConfig, environment: environment)]
+            middlewares: [.auth(credential.token)]
         )
         
         do {
             guard let result = try await run(client: client) else {
-                print("❌ Unexpected response from API")
+                Noora().error(.alert("Unexpected response from API"))
                 throw ExitCode.failure
             }
-            
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = .prettyPrinted
-            let jsonData = try encoder.encode(result)
-            let jsonString = String(data: jsonData, encoding: .utf8) ?? "{}"
-            print(jsonString)
+
+            try Noora().json(result)
         } catch {
-            print("❌ Failed to execute command: \(error)")
+            Noora().error(.alert("Failed to execute command: \(error)"))
             throw ExitCode.failure
         }
     }

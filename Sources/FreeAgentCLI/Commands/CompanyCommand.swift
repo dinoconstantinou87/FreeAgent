@@ -7,7 +7,7 @@ import OpenAPIURLSession
 struct CompanyCommand: ClientCommand {
     static let configuration = CommandConfiguration(
         commandName: "company",
-        abstract: "Get company details from FreeAgent"
+        abstract: "Get company details"
     )
     
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {

@@ -49,10 +49,6 @@ public struct CLIConfig: Codable, Sendable {
         try data.write(to: configURL)
     }
     
-    public var oauthConfig: OAuthConfig {
-        OAuthConfig(clientId: clientId, clientSecret: clientSecret, redirectUri: redirectUri)
-    }
-    
     private static func configFileURL() -> URL {
         FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent(".freeagent")
@@ -70,4 +66,3 @@ public enum CLIConfigError: LocalizedError {
         }
     }
 }
-

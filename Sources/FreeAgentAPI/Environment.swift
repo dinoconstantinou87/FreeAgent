@@ -12,4 +12,8 @@ public enum Environment: String, Codable, Sendable {
             return try! Servers.Server2.url()
         }
     }
+
+    func url(_ path: String) -> URL {
+        baseURL.appending(path: path)
+    }
 }

@@ -4,10 +4,9 @@ import FreeAgentAPI
 struct AuthCommand: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "auth",
-        abstract: "Manage FreeAgent API authentication",
+        abstract: "Authentication",
         subcommands: [
             LoginCommand.self,
-            StatusCommand.self,
             LogoutCommand.self
         ]
     )
