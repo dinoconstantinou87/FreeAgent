@@ -100,6 +100,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -162,6 +164,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -224,6 +228,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -288,6 +294,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -352,6 +360,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -416,6 +426,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -485,6 +497,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -558,6 +572,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -622,6 +638,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -697,6 +715,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -761,6 +781,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -851,6 +873,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -924,6 +948,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -997,6 +1023,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1061,6 +1089,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1136,6 +1166,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1240,6 +1272,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1304,6 +1338,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1384,6 +1420,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1488,6 +1526,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1561,6 +1601,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1625,6 +1667,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1700,6 +1744,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1775,6 +1821,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1844,6 +1892,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1908,6 +1958,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -1977,6 +2029,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2048,6 +2102,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2110,6 +2166,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2183,6 +2241,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2247,6 +2307,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2322,6 +2384,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2386,6 +2450,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2462,6 +2528,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2524,6 +2592,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2597,6 +2667,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2661,6 +2733,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2736,6 +2810,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2800,6 +2876,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2862,6 +2940,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2924,6 +3004,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -2986,6 +3068,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3048,6 +3132,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3110,6 +3196,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3183,6 +3271,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3247,6 +3337,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3322,6 +3414,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3397,6 +3491,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3461,6 +3557,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3525,6 +3623,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3589,6 +3689,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3700,6 +3802,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3773,6 +3877,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3837,6 +3943,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3912,6 +4020,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -3996,6 +4106,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4060,6 +4172,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4135,6 +4249,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4218,6 +4334,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4291,6 +4409,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4355,6 +4475,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4430,6 +4552,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4530,6 +4654,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4592,6 +4718,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4656,6 +4784,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4720,6 +4850,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4784,6 +4916,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4848,6 +4982,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4921,6 +5057,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -4996,6 +5134,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5071,6 +5211,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5189,6 +5331,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5262,6 +5406,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5326,6 +5472,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5401,6 +5549,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5476,6 +5626,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5540,6 +5692,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5602,6 +5756,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5675,6 +5831,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5739,6 +5897,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5823,6 +5983,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5885,6 +6047,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -5949,6 +6113,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6030,6 +6196,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6111,6 +6279,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6192,6 +6362,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6320,6 +6492,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6410,6 +6584,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .created(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6491,6 +6667,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6583,6 +6761,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6646,6 +6826,8 @@ public struct Client: APIProtocol {
                     return .ok(.init())
                 case 409:
                     return .conflict(.init())
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6725,6 +6907,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6806,6 +6990,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6898,6 +7084,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -6994,6 +7182,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -7084,6 +7274,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .created(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
                     let body: Components.Responses.ErrorResponse.Body
@@ -7184,6 +7376,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -7257,6 +7451,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -7330,6 +7526,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -7394,6 +7592,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -7458,6 +7658,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -7520,6 +7722,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -7596,6 +7800,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -7660,6 +7866,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -7749,6 +7957,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -7824,6 +8034,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -7888,6 +8100,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -7952,6 +8166,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8017,6 +8233,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8088,6 +8306,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8150,6 +8370,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8214,6 +8436,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8276,6 +8500,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8338,6 +8564,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8411,6 +8639,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8475,6 +8705,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8550,6 +8782,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8614,6 +8848,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8690,6 +8926,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8763,6 +9001,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8834,6 +9074,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8909,6 +9151,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -8993,6 +9237,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9069,6 +9315,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9133,6 +9381,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9195,6 +9445,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9268,6 +9520,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9332,6 +9586,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9407,6 +9663,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9471,6 +9729,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9540,6 +9800,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9604,6 +9866,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9687,6 +9951,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9767,6 +10033,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9831,6 +10099,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9906,6 +10176,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -9990,6 +10262,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10072,6 +10346,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10163,6 +10439,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10281,6 +10559,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10361,6 +10641,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10432,6 +10714,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10514,6 +10798,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10598,6 +10884,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10674,6 +10962,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10736,6 +11026,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10798,6 +11090,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10871,6 +11165,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -10935,6 +11231,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -11010,6 +11308,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -11074,6 +11374,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,
@@ -11136,6 +11438,8 @@ public struct Client: APIProtocol {
                         preconditionFailure("bestContentType chose an invalid content type.")
                     }
                     return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
                 default:
                     return .undocumented(
                         statusCode: response.status.code,

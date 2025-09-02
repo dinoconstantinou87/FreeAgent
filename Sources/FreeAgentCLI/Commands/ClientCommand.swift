@@ -17,12 +17,21 @@ extension ClientCommand {
             throw ExitCode.failure
         }
 
+        let config = try CLIConfig.load()
         let serverURL = credential.environment.baseURL
         let transport = URLSessionTransport()
         let client = Client(
             serverURL: serverURL,
             transport: transport,
-            middlewares: [.auth(credential.token)]
+            middlewares: [
+                .auth(
+                    .init(
+                        key: config.clientId,
+                        secret: config.clientSecret,
+                        environment: credential.environment
+                    )
+                )
+            ]
         )
         
         do {

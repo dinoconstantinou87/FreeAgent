@@ -1,18 +1,19 @@
 import Foundation
 import FreeAgentAPI
 
+// todo: rewrite
 public struct CLIConfig: Codable, Sendable {
     public let clientId: String
     public let clientSecret: String
-    public let redirectUri: String
-    
+    public let redirectUri: URL
+
     private enum CodingKeys: String, CodingKey {
         case clientId = "client_id"
         case clientSecret = "client_secret"
         case redirectUri = "redirect_uri"
     }
     
-    public init(clientId: String, clientSecret: String, redirectUri: String = "http://localhost:8080/callback") {
+    public init(clientId: String, clientSecret: String, redirectUri: URL) {
         self.clientId = clientId
         self.clientSecret = clientSecret
         self.redirectUri = redirectUri
@@ -22,7 +23,7 @@ public struct CLIConfig: Codable, Sendable {
         if let clientId = ProcessInfo.processInfo.environment["FREEAGENT_CLIENT_ID"],
            let clientSecret = ProcessInfo.processInfo.environment["FREEAGENT_CLIENT_SECRET"] {
             let redirectUri = ProcessInfo.processInfo.environment["FREEAGENT_REDIRECT_URI"] ?? "http://localhost:8080/callback"
-            return CLIConfig(clientId: clientId, clientSecret: clientSecret, redirectUri: redirectUri)
+            return CLIConfig(clientId: clientId, clientSecret: clientSecret, redirectUri: URL(string: redirectUri)!)
         }
         
         let configURL = configFileURL()

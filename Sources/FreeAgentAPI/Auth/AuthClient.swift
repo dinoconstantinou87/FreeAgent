@@ -2,17 +2,17 @@ import Foundation
 @preconcurrency import OAuthSwift
 
 public struct AuthClient: Sendable {
+    private let config: AuthConfig
     private let client: OAuth2Swift
-    private let environment: Environment
     private let storage = AuthStorage()
 
-    public init(key: String, secret: String, environment: Environment) {
-        self.environment = environment
+    public init(config: AuthConfig) {
+        self.config = config
         client = OAuth2Swift(
-            consumerKey: key,
-            consumerSecret: secret,
-            authorizeUrl: environment.url("v2/approve_app"),
-            accessTokenUrl: environment.url("v2/token_endpoint"),
+            consumerKey: config.key,
+            consumerSecret: config.secret,
+            authorizeUrl: config.environment.url("v2/approve_app"),
+            accessTokenUrl: config.environment.url("v2/token_endpoint"),
             responseType: "code"
         )
     }
@@ -30,7 +30,7 @@ public struct AuthClient: Sendable {
         }
     }
 
-    public func refresh() async throws {
+    func refresh() async throws -> AuthCredential {
         guard let credential = try storage.get() else {
             throw AuthClientError.noCredentialFound
         }
@@ -38,8 +38,7 @@ public struct AuthClient: Sendable {
         return try await withCheckedThrowingContinuation { continuation in
             client.renewAccessToken(withRefreshToken: credential.refreshToken) { result in
                 do {
-                    try handle(result)
-                    continuation.resume()
+                    continuation.resume(returning: try handle(result))
                 } catch {
                     continuation.resume(throwing: error)
                 }
@@ -47,17 +46,20 @@ public struct AuthClient: Sendable {
         }
     }
 
-    private func handle(_ result: Result<OAuthSwift.TokenSuccess, OAuthSwiftError>) throws {
+    @discardableResult
+    private func handle(_ result: Result<OAuthSwift.TokenSuccess, OAuthSwiftError>) throws -> AuthCredential {
         switch result {
         case .success(let (result, _, _)):
             let credential = AuthCredential(
                 token: result.oauthToken,
                 refreshToken: result.oauthRefreshToken,
                 expiresAt: result.oauthTokenExpiresAt,
-                environment: environment
+                environment: config.environment
             )
 
             try storage.set(credential)
+
+            return credential
         case .failure(let error):
             throw error
         }

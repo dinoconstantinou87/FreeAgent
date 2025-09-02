@@ -30,7 +30,7 @@ struct InvoiceListCommand: ClientCommand {
     @Option(name: .long, help: "Sort order")
     var sort: Operations.ListInvoices.Input.Query.SortPayload?
     
-    func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
+    func run(client: Client) async throws -> OpenAPIObjectContainer? {
         let input = Operations.ListInvoices.Input(
             query: .init(
                 nestedInvoiceItems: nestedInvoiceItems,
@@ -43,8 +43,7 @@ struct InvoiceListCommand: ClientCommand {
             )
         )
         
-        let response = try await client.listInvoices(input)
-        let okResponse = try response.ok
-        return try okResponse.body.json.additionalProperties
+        return try await client.listInvoices(input)
+            .ok.body.json.additionalProperties
     }
 }

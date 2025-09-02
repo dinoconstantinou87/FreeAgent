@@ -3440,6 +3440,10 @@ public enum Components {
                 self.body = body
             }
         }
+        public struct UnauthorizedResponse: Sendable, Hashable {
+            /// Creates a new `UnauthorizedResponse`.
+            public init() {}
+        }
     }
     /// Types generated from the `#/components/headers` section of the OpenAPI document.
     public enum Headers {}
@@ -3594,6 +3598,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/token_endpoint/post(refreshAccessToken)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/token_endpoint/post(refreshAccessToken)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -3724,6 +3759,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/clients/get(listAllClients)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/clients/get(listAllClients)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -3849,6 +3915,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/account_managers/get(listAllAccountManagers)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/account_managers/get(listAllAccountManagers)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -4002,6 +4099,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/account_managers/{id}/get(getASingleAccountManager)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/account_managers/{id}/get(getASingleAccountManager)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -4145,6 +4273,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/attachments/{id}/get(showAttachment)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/attachments/{id}/get(showAttachment)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -4298,6 +4457,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/attachments/{id}/delete(deleteAttachment)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/attachments/{id}/delete(deleteAttachment)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -4441,6 +4631,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_accounts/get(listBankAccounts)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_accounts/get(listBankAccounts)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -4655,6 +4876,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_accounts/post(createBankAccount)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_accounts/post(createBankAccount)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -4798,6 +5050,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_accounts/{id}/get(showBankAccount)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_accounts/{id}/get(showBankAccount)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -5028,6 +5311,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_accounts/{id}/put(updateBankAccount)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_accounts/{id}/put(updateBankAccount)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -5171,6 +5485,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_accounts/{id}/delete(deleteBankAccount)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_accounts/{id}/delete(deleteBankAccount)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -5336,6 +5681,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/get(listAllBankTransactionExplanations)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/get(listAllBankTransactionExplanations)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -5609,6 +5985,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/post(createABankTransactionExplanation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/post(createABankTransactionExplanation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -5877,6 +6284,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/put(updateABankTransactionExplanation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/put(updateABankTransactionExplanation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -6020,6 +6458,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/get(getASingleBankTransactionExplanation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/get(getASingleBankTransactionExplanation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -6309,6 +6778,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/delete(deleteABankTransactionExplanation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/delete(deleteABankTransactionExplanation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -6484,6 +6984,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transactions/get(listAllBankTransactionsUnderACertainBankAccount)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transactions/get(listAllBankTransactionsUnderACertainBankAccount)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -6627,6 +7158,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transactions/{id}/get(getASingleBankTransaction)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transactions/{id}/get(getASingleBankTransaction)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -6835,6 +7397,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transactions/statement/post(uploadABankStatement)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transactions/statement/post(uploadABankStatement)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -7005,6 +7598,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bills/get(listBills)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bills/get(listBills)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -7260,6 +7884,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bills/post(createBill)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bills/post(createBill)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -7403,6 +8058,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bills/{id}/get(showBill)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bills/{id}/get(showBill)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -7633,6 +8319,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bills/{id}/put(updateBill)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bills/{id}/put(updateBill)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -7858,6 +8575,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bills/{id}/delete(deleteBill)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bills/{id}/delete(deleteBill)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -8001,6 +8749,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bill_items/get(listBillItems)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bill_items/get(listBillItems)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -8154,6 +8933,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bill_items/{bill_item_id}/get(showBillItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bill_items/{bill_item_id}/get(showBillItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -8299,6 +9109,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_assets/get(listAllCapitalAssets)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_assets/get(listAllCapitalAssets)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -8470,6 +9311,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_assets/{id}//get(getASingleCapitalAsset)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_assets/{id}//get(getASingleCapitalAsset)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -8595,6 +9467,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_asset_types/get(listAllCapitalAssetTypes)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_asset_types/get(listAllCapitalAssetTypes)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -8771,6 +9674,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_asset_types/post(createCapitalAssetType)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_asset_types/post(createCapitalAssetType)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -8914,6 +9848,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_asset_types/{id}/get(getASingleCapitalAssetType)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_asset_types/{id}/get(getASingleCapitalAssetType)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -9106,6 +10071,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_asset_types/{id}/put(updateCapitalAssetType)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_asset_types/{id}/put(updateCapitalAssetType)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -9249,6 +10245,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_asset_types/{id}/delete(deleteCapitalAssetType)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/capital_asset_types/{id}/delete(deleteCapitalAssetType)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -9409,6 +10436,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/cashflow/get(cashflowSummaryForAGivenDateRange)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/cashflow/get(cashflowSummaryForAGivenDateRange)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -9534,6 +10592,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/categories/get(listCategories)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/categories/get(listCategories)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -9742,6 +10831,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/categories/post(createCategory)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/categories/post(createCategory)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -9885,6 +11005,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/categories/{nominal_code}/get(getASingleCategory)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/categories/{nominal_code}/get(getASingleCategory)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -10103,6 +11254,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/categories/{nominal_code}/put(updateCategory)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/categories/{nominal_code}/put(updateCategory)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -10251,6 +11433,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/categories/{nominal_code}/delete(deleteCategory)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/categories/{nominal_code}/delete(deleteCategory)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -10376,6 +11589,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/cis_bands/get(listAllCisBandsForACompany)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/cis_bands/get(listAllCisBandsForACompany)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -10511,6 +11755,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/company/get(companyDetails)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/company/get(companyDetails)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -10636,6 +11911,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/company/business_categories/get(listBusinessCategories)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/company/business_categories/get(listBusinessCategories)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -10771,6 +12077,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/company/tax_timeline/get(showTaxTimeline)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/company/tax_timeline/get(showTaxTimeline)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -10896,6 +12233,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/contacts/get(listContacts)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/contacts/get(listContacts)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -11086,6 +12454,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/contacts/post(createContact)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/contacts/post(createContact)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -11229,6 +12628,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/contacts/{id}/get(showContact)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/contacts/{id}/get(showContact)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -11416,6 +12846,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/contacts/{id}/put(updateContact)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/contacts/{id}/put(updateContact)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -11622,6 +13083,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/contacts/{id}/delete(deleteContact)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/contacts/{id}/delete(deleteContact)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -11765,6 +13257,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/transitions/mark_as_sent/put(markCreditNoteAsSent)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/transitions/mark_as_sent/put(markCreditNoteAsSent)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -11918,6 +13441,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/transitions/mark_as_cancelled/put(markCreditNoteAsCancelled)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/transitions/mark_as_cancelled/put(markCreditNoteAsCancelled)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -12061,6 +13615,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/transitions/mark_as_draft/put(markCreditNotesAsDraft)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/transitions/mark_as_draft/put(markCreditNotesAsDraft)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -12241,6 +13826,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/get(listCreditNotes)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/get(listCreditNotes)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -12492,6 +14108,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/post(createCreditNote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/post(createCreditNote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -12635,6 +14282,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/get(showCreditNote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/get(showCreditNote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -12852,6 +14530,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/put(updateCreditNote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/put(updateCreditNote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -13013,6 +14722,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/delete(deleteCreditNotes)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/delete(deleteCreditNotes)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -13156,6 +14896,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/pdf/get(showCreditNoteAsPdf)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/pdf/get(showCreditNoteAsPdf)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -13383,6 +15154,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/send_email/post(sendCreditNoteEmail)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_notes/{id}/send_email/post(sendCreditNoteEmail)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -13538,6 +15340,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_note_reconciliations/get(listCreditNoteReconciliations)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_note_reconciliations/get(listCreditNoteReconciliations)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -13746,6 +15579,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_note_reconciliations/post(createCreditNoteReconciliation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_note_reconciliations/post(createCreditNoteReconciliation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -13889,6 +15753,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_note_reconciliations/{id}/get(showCreditNoteReconciliation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_note_reconciliations/{id}/get(showCreditNoteReconciliation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -14081,6 +15976,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_note_reconciliations/{id}/put(updateCreditNoteReconciliation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_note_reconciliations/{id}/put(updateCreditNoteReconciliation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -14254,6 +16180,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_note_reconciliations/{id}/delete(deleteCreditNoteReconciliation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/credit_note_reconciliations/{id}/delete(deleteCreditNoteReconciliation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -14379,6 +16336,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/email_addresses/get(getAListOfVerifiedSenderEmailAddresses)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/email_addresses/get(getAListOfVerifiedSenderEmailAddresses)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -14532,6 +16520,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/transitions/mark_as_sent/put(markEstimateAsSent)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/transitions/mark_as_sent/put(markEstimateAsSent)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -14675,6 +16694,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/transitions/mark_as_draft/put(markEstimateAsDraft)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/transitions/mark_as_draft/put(markEstimateAsDraft)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -14828,6 +16878,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/transitions/mark_as_approved/put(markEstimateAsApproved)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/transitions/mark_as_approved/put(markEstimateAsApproved)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -14971,6 +17052,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/transitions/mark_as_rejected/put(markEstimateAsRejected)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/transitions/mark_as_rejected/put(markEstimateAsRejected)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -15200,6 +17312,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimate_items/post(createEstimateItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimate_items/post(createEstimateItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -15448,6 +17591,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimate_items/{id}/put(updateEstimateItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimate_items/{id}/put(updateEstimateItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -15679,6 +17853,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimate_items/{id}/delete(deleteEstimateItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimate_items/{id}/delete(deleteEstimateItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -15859,6 +18064,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/get(listEstimates)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/get(listEstimates)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -16067,6 +18303,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/post(createEstimate)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/post(createEstimate)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -16210,6 +18477,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/get(showEstimate)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/get(showEstimate)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -16397,6 +18695,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/put(updateEstimate)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/put(updateEstimate)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -16633,6 +18962,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/delete(deleteEstimate)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/delete(deleteEstimate)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -16781,6 +19141,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/pdf/get(showEstimateAsPdf)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/estimates/{id}/pdf/get(showEstimateAsPdf)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -16906,6 +19297,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/expenses/get(listAllExpenses)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/expenses/get(listAllExpenses)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -17134,6 +19556,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/expenses/post(createExpense)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/expenses/post(createExpense)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -17277,6 +19730,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/expenses/{id}/get(getASingleExpense)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/expenses/{id}/get(getASingleExpense)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -17443,6 +19927,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/expenses/{id}/delete(deleteExpense)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/expenses/{id}/delete(deleteExpense)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -17568,6 +20083,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/expenses/mileage_settings/get(getMileageSettings)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/expenses/mileage_settings/get(getMileageSettings)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -17716,6 +20262,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_sent/put(markInvoiceAsSent)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_sent/put(markInvoiceAsSent)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -17888,6 +20465,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_cancelled/put(markInvoiceAsCancelled)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_cancelled/put(markInvoiceAsCancelled)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Error response
             ///
             /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_cancelled/put(markInvoiceAsCancelled)/responses/default`.
@@ -18055,6 +20663,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_scheduled/put(markInvoiceAsScheduled)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_scheduled/put(markInvoiceAsScheduled)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Error response
             ///
             /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_scheduled/put(markInvoiceAsScheduled)/responses/default`.
@@ -18217,6 +20856,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_draft/put(markInvoiceAsDraft)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/transitions/mark_as_draft/put(markInvoiceAsDraft)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -18435,6 +21105,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/get(listInvoices)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/get(listInvoices)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -18668,6 +21369,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/post(createInvoice)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/post(createInvoice)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Error response
             ///
             /// - Remark: Generated from `#/paths//v2/invoices/post(createInvoice)/responses/default`.
@@ -18830,6 +21562,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/get(showInvoice)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/get(showInvoice)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -19041,6 +21804,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/put(updateInvoice)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/put(updateInvoice)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Error response
             ///
             /// - Remark: Generated from `#/paths//v2/invoices/{id}/put(updateInvoice)/responses/default`.
@@ -19205,6 +21999,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/delete(deleteInvoice)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/delete(deleteInvoice)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Error response
             ///
             /// - Remark: Generated from `#/paths//v2/invoices/{id}/delete(deleteInvoice)/responses/default`.
@@ -19349,6 +22174,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/timeline/get(getInvoiceTimeline)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/timeline/get(getInvoiceTimeline)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -19516,6 +22372,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/pdf/get(showInvoiceAsPdf)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/pdf/get(showInvoiceAsPdf)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -19762,6 +22649,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/send_email/post(sendInvoiceEmail)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/send_email/post(sendInvoiceEmail)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Error response
             ///
             /// - Remark: Generated from `#/paths//v2/invoices/{id}/send_email/post(sendInvoiceEmail)/responses/default`.
@@ -19937,6 +22855,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/direct_debit/post(takePaymentUsingGocardlessDirectDebitMandate)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoices/{id}/direct_debit/post(takePaymentUsingGocardlessDirectDebitMandate)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -20178,6 +23127,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoice_items/post(createInvoiceItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoice_items/post(createInvoiceItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Error response
             ///
             /// - Remark: Generated from `#/paths//v2/invoice_items/post(createInvoiceItem)/responses/default`.
@@ -20352,6 +23332,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/get(listAllJournalSets)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/get(listAllJournalSets)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -20580,6 +23591,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/post(createAJournalSet)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/post(createAJournalSet)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -20825,6 +23867,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/put(updateAJournalSet)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/put(updateAJournalSet)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -20968,6 +24041,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/{id}/get(getASingleJournalSet)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/{id}/get(getASingleJournalSet)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -21121,6 +24225,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/{id}/delete(deleteAJournalSet)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/{id}/delete(deleteAJournalSet)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -21246,6 +24381,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/opening_balances/get(getTheOpeningBalances)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/journal_sets/opening_balances/get(getTheOpeningBalances)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -21406,6 +24572,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/notes/get(listNotes)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/notes/get(listNotes)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -21549,6 +24746,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/notes/{id}/get(getASingleNote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/notes/{id}/get(getASingleNote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -21790,6 +25018,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/notes/{id}/post(createANote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/notes/{id}/post(createANote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -22003,6 +25262,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/notes/{id}/put(updateANote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/notes/{id}/put(updateANote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -22151,6 +25441,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/notes/{id}/delete(deleteANote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/notes/{id}/delete(deleteANote)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -22294,6 +25615,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/payroll/{year}/get(listAllPeriodsForAGivenTaxYear)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/payroll/{year}/get(listAllPeriodsForAGivenTaxYear)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -22449,6 +25801,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/payroll/{year}/{period}/get(listAllPayslipsForAGivenPeriod)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/payroll/{year}/{period}/get(listAllPayslipsForAGivenPeriod)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -22618,6 +26001,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/payroll_profiles/{year}/get(listAllProfilesForAGivenTaxYear)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/payroll_profiles/{year}/get(listAllProfilesForAGivenTaxYear)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -22743,6 +26157,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/price_list_items/get(listAllPriceListItems)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/price_list_items/get(listAllPriceListItems)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -22896,6 +26341,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/price_list_items/{id}/get(getASinglePriceListItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/price_list_items/{id}/get(getASinglePriceListItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -23026,6 +26502,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/accounting/profit_and_loss/summary/get(getThePLSummary)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/accounting/profit_and_loss/summary/get(getThePLSummary)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -23151,6 +26658,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/properties/get(listAllProperties)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/properties/get(listAllProperties)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -23347,6 +26885,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/properties/post(createANewProperty)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/properties/post(createANewProperty)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -23490,6 +27059,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/properties/{id}/get(getASingleProperty)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/properties/{id}/get(getASingleProperty)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -23682,6 +27282,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/properties/{id}/put(updateAProperty)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/properties/{id}/put(updateAProperty)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -23825,6 +27456,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/properties/{id}/delete(deleteAProperty)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/properties/{id}/delete(deleteAProperty)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -23982,6 +27644,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/projects/get(listProjects)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/projects/get(listProjects)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -24232,6 +27925,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/projects/post(createProject)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/projects/post(createProject)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -24393,6 +28117,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/projects/{id}/get(showProject)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/projects/{id}/get(showProject)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -24585,6 +28340,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/projects/{id}/put(updateProject)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/projects/{id}/put(updateProject)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -24741,6 +28527,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/projects/{id}/delete(deleteProject)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/projects/{id}/delete(deleteProject)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -24911,6 +28728,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/recurring_invoices/get(listAllRecurringInvoices)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/recurring_invoices/get(listAllRecurringInvoices)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -25059,6 +28907,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/recurring_invoices/{id}/get(showRecurringInvoice)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/recurring_invoices/{id}/get(showRecurringInvoice)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -25184,6 +29063,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/sales_tax_periods/get(listAllSalesTaxPeriodsForACompany)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/sales_tax_periods/get(listAllSalesTaxPeriodsForACompany)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -25434,6 +29344,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/sales_tax_periods/post(createASalesTaxPeriod)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/sales_tax_periods/post(createASalesTaxPeriod)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -25577,6 +29518,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/sales_tax_periods/{id}/get(getASingleSalesTaxPeriod)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/sales_tax_periods/{id}/get(getASingleSalesTaxPeriod)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -25843,6 +29815,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/sales_tax_periods/{id}/put(updateASalesTaxPeriod)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/sales_tax_periods/{id}/put(updateASalesTaxPeriod)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -25986,6 +29989,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/sales_tax_periods/{id}/delete(deleteASalesTaxPeriod)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/sales_tax_periods/{id}/delete(deleteASalesTaxPeriod)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -26139,6 +30173,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/stock_items/get(listAllStockItems)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/stock_items/get(listAllStockItems)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -26282,6 +30347,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/stock_items/{id}/get(getASingleStockItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/stock_items/{id}/get(getASingleStockItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -26442,6 +30538,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/tasks/get(listAllTasks)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/tasks/get(listAllTasks)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -26660,6 +30787,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/tasks/post(createATaskUnderACertainProject)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/tasks/post(createATaskUnderACertainProject)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -26803,6 +30961,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/tasks/{id}/get(getASingleTask)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/tasks/{id}/get(getASingleTask)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -27021,6 +31210,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/tasks/{id}/put(updateATask)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/tasks/{id}/put(updateATask)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -27177,6 +31397,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/tasks/{id}/delete(deleteTask)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/tasks/{id}/delete(deleteTask)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -27425,6 +31676,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/{id}/timer/post(startATimer)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/{id}/timer/post(startATimer)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -27599,6 +31881,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/{id}/timer/delete(stopATimer)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/{id}/timer/delete(stopATimer)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -27786,6 +32099,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/get(listAllTimeslips)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/get(listAllTimeslips)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -28018,6 +32362,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/post(createATimeslip)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/post(createATimeslip)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -28179,6 +32554,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/{id}/get(getASingleTimeslip)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/{id}/get(getASingleTimeslip)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -28415,6 +32821,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/{id}/put(updateATimeslip)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/{id}/put(updateATimeslip)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -28576,6 +33013,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/{id}/delete(deleteATimeslip)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/timeslips/{id}/delete(deleteATimeslip)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -28731,6 +33199,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/accounting/trial_balance/summary/get(getTheTrialBalanceSummary)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/accounting/trial_balance/summary/get(getTheTrialBalanceSummary)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -28861,6 +33360,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/accounting/trial_balance/summary/opening_balances/get(getTheOpeningBalances1)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/accounting/trial_balance/summary/opening_balances/get(getTheOpeningBalances1)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -28986,6 +33516,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/get(listAllUsers)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/get(listAllUsers)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -29206,6 +33767,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/post(createAUser)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/post(createAUser)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -29349,6 +33941,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/{id}/get(getASingleUser)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/{id}/get(getASingleUser)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }
@@ -29585,6 +34208,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/{id}/put(updateAUser)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/{id}/put(updateAUser)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -29733,6 +34387,37 @@ public enum Operations {
                     }
                 }
             }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/{id}/delete(deleteAUser)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/{id}/delete(deleteAUser)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
             /// Undocumented response.
             ///
             /// A response with a code that is not documented in the OpenAPI document.
@@ -29858,6 +34543,37 @@ public enum Operations {
                     default:
                         try throwUnexpectedResponseStatus(
                             expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/me/get(getPersonalProfile)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/users/me/get(getPersonalProfile)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
                             response: self
                         )
                     }

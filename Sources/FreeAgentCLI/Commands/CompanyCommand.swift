@@ -10,10 +10,7 @@ struct CompanyCommand: ClientCommand {
         abstract: "Get company details"
     )
     
-    func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
-        let input = Operations.CompanyDetails.Input()
-        let response = try await client.companyDetails(input)
-        let okResponse = try response.ok
-        return try okResponse.body.json.additionalProperties
+    func run(client: Client) async throws -> OpenAPIObjectContainer? {
+        try await client.companyDetails().ok.body.json.additionalProperties
     }
 }
