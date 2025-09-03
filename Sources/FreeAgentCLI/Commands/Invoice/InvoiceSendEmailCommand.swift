@@ -33,8 +33,7 @@ struct InvoiceSendEmailCommand: ClientCommand {
             body: .json(.init(invoice: invoicePayload))
         )
         
-        let response = try await client.sendInvoiceEmail(input)
-        let okResponse = try response.ok
-        return try okResponse.body.json.additionalProperties
+        return try await client.sendInvoiceEmail(input)
+            .ok.body.json.additionalProperties
     }
 }

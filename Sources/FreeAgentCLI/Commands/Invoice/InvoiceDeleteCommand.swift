@@ -17,9 +17,7 @@ struct InvoiceDeleteCommand: ClientCommand {
             path: .init(id: id)
         )
 
-        let response = try await client.deleteInvoice(input)
-        let _ = try response.ok
-
+        _ = try await client.deleteInvoice(input).ok
         return nil
     }
 }

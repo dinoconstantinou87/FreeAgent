@@ -17,8 +17,7 @@ struct InvoiceShowCommand: ClientCommand {
             path: .init(id: id)
         )
         
-        let response = try await client.showInvoice(input)
-        let okResponse = try response.ok
-        return try okResponse.body.json.additionalProperties
+        return try await client.showInvoice(input)
+            .ok.body.json.additionalProperties
     }
 }

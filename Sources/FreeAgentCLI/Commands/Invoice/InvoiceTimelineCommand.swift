@@ -12,8 +12,7 @@ struct InvoiceTimelineCommand: ClientCommand {
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
         let input = Operations.GetInvoiceTimeline.Input()
         
-        let response = try await client.getInvoiceTimeline(input)
-        let okResponse = try response.ok
-        return try okResponse.body.json.additionalProperties
+        return try await client.getInvoiceTimeline(input)
+            .ok.body.json.additionalProperties
     }
 }

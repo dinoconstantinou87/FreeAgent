@@ -23,8 +23,7 @@ struct InvoiceListRecurringCommand: ClientCommand {
             )
         )
         
-        let response = try await client.listAllRecurringInvoices(input)
-        let okResponse = try response.ok
-        return try okResponse.body.json.additionalProperties
+        return try await client.listAllRecurringInvoices(input)
+            .ok.body.json.additionalProperties
     }
 }

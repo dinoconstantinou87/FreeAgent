@@ -17,8 +17,7 @@ struct InvoiceMarkDraftCommand: ClientCommand {
             path: .init(id: id)
         )
         
-        let response = try await client.markInvoiceAsDraft(input)
-        let okResponse = try response.ok
-        return try okResponse.body.json.additionalProperties
+        return try await client.markInvoiceAsDraft(input)
+            .ok.body.json.additionalProperties
     }
 }
