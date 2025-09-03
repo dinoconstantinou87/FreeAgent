@@ -17,7 +17,7 @@ extension ClientCommand {
             throw ExitCode.failure
         }
 
-        let config = try CLIConfig.load()
+        let config = try Config.load()
         let serverURL = credential.environment.baseURL
         let transport = URLSessionTransport()
         let client = Client(
@@ -26,8 +26,8 @@ extension ClientCommand {
             middlewares: [
                 .auth(
                     .init(
-                        key: config.clientId,
-                        secret: config.clientSecret,
+                        key: config.auth.key,
+                        secret: config.auth.secret,
                         environment: credential.environment
                     )
                 )

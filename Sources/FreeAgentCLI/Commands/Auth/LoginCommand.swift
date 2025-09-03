@@ -15,12 +15,12 @@ struct LoginCommand: AsyncParsableCommand {
     var environment: Environment = .production
 
     mutating func run() async throws {
-        let config = try CLIConfig.load()
-        let client = AuthClient(config: .init(key: config.clientId, secret: config.clientSecret, environment: environment))
+        let config = try Config.load()
+        let client = AuthClient(config: .init(key: config.auth.key, secret: config.auth.secret, environment: environment))
         let services = ServiceGroup(
             configuration: ServiceGroupConfiguration(
                 services: [
-                    AuthCallbackService(url: config.redirectUri, client: client)
+                    AuthCallbackService(url: config.auth.callbackUrl, client: client)
                 ],
                 gracefulShutdownSignals: [.sigterm],
                 logger: Logger(label: "oauth-callback")
@@ -29,7 +29,7 @@ struct LoginCommand: AsyncParsableCommand {
 
         try await withThrowingTaskGroup { group in
             group.addTask {
-                try await client.authorize(callbackUrl: config.redirectUri)
+                try await client.authorize(callbackUrl: config.auth.callbackUrl)
                 Noora().success(.alert("Logged in"))
             }
 
