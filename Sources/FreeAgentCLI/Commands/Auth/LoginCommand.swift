@@ -15,7 +15,7 @@ struct LoginCommand: AsyncParsableCommand {
     var environment: Environment = .production
 
     mutating func run() async throws {
-        let config = try Config.load()
+        let config = try await Config.load()
         let client = AuthClient(config: .init(key: config.auth.key, secret: config.auth.secret, environment: environment))
         let services = ServiceGroup(
             configuration: ServiceGroupConfiguration(

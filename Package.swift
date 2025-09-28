@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "FreeAgent",
     platforms: [
-        .macOS(.v13)
+        .macOS(.v15)
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
@@ -19,6 +19,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.5.0"),
+        .package(url: "https://github.com/apple/swift-configuration.git", from: "0.1.1"),
         .package(url: "https://github.com/swift-server/swift-service-lifecycle.git", from: "2.6.1"),
         .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.8.2"),
@@ -48,6 +49,7 @@ let package = Package(
             dependencies: [
                 "FreeAgentAPI",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "ServiceLifecycle", package: "swift-service-lifecycle"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "Noora", package: "Noora"),

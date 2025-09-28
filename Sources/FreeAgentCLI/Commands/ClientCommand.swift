@@ -17,7 +17,7 @@ extension ClientCommand {
             throw ExitCode.failure
         }
 
-        let config = try Config.load()
+        let config = try await Config.load()
         let serverURL = credential.environment.baseURL
         let transport = URLSessionTransport()
         let client = Client(
