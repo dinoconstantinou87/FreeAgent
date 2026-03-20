@@ -8,6 +8,7 @@ struct ExplanationCommand: AsyncParsableCommand {
             ExplanationListCommand.self,
             ExplanationCreateCommand.self,
             ExplanationShowCommand.self,
+            ExplanationUpdateCommand.self,
             ExplanationDeleteCommand.self
         ]
     )

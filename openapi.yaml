@@ -370,95 +370,6 @@ paths:
                 additionalProperties: true
         '401':
           $ref: '#/components/responses/UnauthorizedResponse'
-    put:
-      tags:
-      - Bank Transaction Explanations
-      summary: Update a bank transaction explanation
-      description: Update a bank transaction explanation
-      operationId: updateABankTransactionExplanation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                bank_transaction_explanation:
-                  type: object
-                  properties:
-                    attachment:
-                      type: object
-                      properties:
-                        content_src:
-                          type: string
-                          example: https://s3.amazonaws.com/freeagent-dev/attachments/1/original.png?AWSAccessKeyId=1K3MW21E6T8KWBY84B02&Expires=1314281186&Signature=GFAKDo%2Bi%2FsUMTYEgg6ZWGysB4k4%3D
-                        content_type:
-                          type: string
-                          example: image/png
-                        file_name:
-                          type: string
-                          example: barcode.png
-                        file_size:
-                          type: number
-                          example: 7673
-                        url:
-                          type: string
-                          example: https://api.freeagent.com/v2/attachments/3
-                    bank_account:
-                      type: string
-                      example: https://api.freeagent.com/v2/bank_accounts/1
-                    bank_transaction:
-                      type: string
-                      example: https://api.freeagent.com/v2/bank_transactions/8
-                    category:
-                      type: string
-                      example: https://api.freeagent.com/v2/categories/285
-                    dated_on:
-                      type: string
-                      example: 2010-05-01
-                    description:
-                      type: string
-                      example: harness end-to-end e-business
-                    gross_value:
-                      type: string
-                      example: '-730.0'
-                    project:
-                      type: string
-                      example: https://api.freeagent.com/v2/projects/1
-                    rebill_factor:
-                      type: string
-                      example: '800'
-                    rebill_type:
-                      type: string
-                      example: price
-            examples:
-              Update a bank transaction explanation:
-                value:
-                  bank_transaction_explanation:
-                    attachment:
-                      content_src: https://s3.amazonaws.com/freeagent-dev/attachments/1/original.png?AWSAccessKeyId=1K3MW21E6T8KWBY84B02&Expires=1314281186&Signature=GFAKDo%2Bi%2FsUMTYEgg6ZWGysB4k4%3D
-                      content_type: image/png
-                      file_name: barcode.png
-                      file_size: 7673
-                      url: https://api.freeagent.com/v2/attachments/3
-                    bank_account: https://api.freeagent.com/v2/bank_accounts/1
-                    bank_transaction: https://api.freeagent.com/v2/bank_transactions/8
-                    category: https://api.freeagent.com/v2/categories/285
-                    dated_on: 2010-05-01
-                    description: harness end-to-end e-business
-                    gross_value: '-730.0'
-                    project: https://api.freeagent.com/v2/projects/1
-                    rebill_factor: '800'
-                    rebill_type: price
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
-        '401':
-          $ref: '#/components/responses/UnauthorizedResponse'
     post:
       tags:
       - Bank Transaction Explanations
@@ -475,23 +386,7 @@ paths:
                   type: object
                   properties:
                     attachment:
-                      type: object
-                      properties:
-                        content_src:
-                          type: string
-                          example: https://s3.amazonaws.com/freeagent-dev/attachments/1/original.png?AWSAccessKeyId=1K3MW21E6T8KWBY84B02&Expires=1314281186&Signature=GFAKDo%2Bi%2FsUMTYEgg6ZWGysB4k4%3D
-                        content_type:
-                          type: string
-                          example: image/png
-                        file_name:
-                          type: string
-                          example: barcode.png
-                        file_size:
-                          type: number
-                          example: 7673
-                        url:
-                          type: string
-                          example: https://api.freeagent.com/v2/attachments/3
+                      $ref: '#/components/schemas/AttachmentPayload'
                     bank_account:
                       type: string
                       example: https://api.freeagent.com/v2/bank_accounts/1
@@ -527,11 +422,9 @@ paths:
                 value:
                   bank_transaction_explanation:
                     attachment:
-                      content_src: https://s3.amazonaws.com/freeagent-dev/attachments/1/original.png?AWSAccessKeyId=1K3MW21E6T8KWBY84B02&Expires=1314281186&Signature=GFAKDo%2Bi%2FsUMTYEgg6ZWGysB4k4%3D
-                      content_type: image/png
-                      file_name: barcode.png
-                      file_size: 7673
-                      url: https://api.freeagent.com/v2/attachments/3
+                      data: iVBORw0KGgo...
+                      file_name: receipt.pdf
+                      content_type: application/x-pdf
                     bank_account: https://api.freeagent.com/v2/bank_accounts/1
                     bank_transaction: https://api.freeagent.com/v2/bank_transactions/8
                     category: https://api.freeagent.com/v2/categories/285
@@ -558,6 +451,42 @@ paths:
       summary: Get a single bank transaction explanation
       description: Get a single bank transaction explanation
       operationId: getASingleBankTransactionExplanation
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+    put:
+      tags:
+      - Bank Transaction Explanations
+      summary: Update a bank transaction explanation
+      description: Update a bank transaction explanation
+      operationId: updateABankTransactionExplanation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bank_transaction_explanation:
+                  type: object
+                  properties:
+                    attachment:
+                      $ref: '#/components/schemas/AttachmentPayload'
+                    category:
+                      type: string
+                      example: https://api.freeagent.com/v2/categories/285
+                    description:
+                      type: string
+                      example: Updated description
+                    gross_value:
+                      type: string
+                      example: '-730.0'
       responses:
         '200':
           description: Success
@@ -5495,6 +5424,29 @@ components:
         user:
           type: string
           example: https://api.freeagent.com/v2/users/1
+    AttachmentPayload:
+      type: object
+      properties:
+        data:
+          type: string
+          description: Binary data of the file encoded as base64
+          example: iVBORw0KGgo...
+        file_name:
+          type: string
+          example: receipt.pdf
+        content_type:
+          type: string
+          enum:
+          - image/png
+          - image/x-png
+          - image/jpeg
+          - image/jpg
+          - image/gif
+          - application/x-pdf
+          example: application/x-pdf
+        description:
+          type: string
+          example: Invoice receipt
     InvoiceItemPayload:
       type: object
       properties:

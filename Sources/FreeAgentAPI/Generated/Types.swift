@@ -104,13 +104,6 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `POST /v2/bank_transaction_explanations`.
     /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/post(createABankTransactionExplanation)`.
     func createABankTransactionExplanation(_ input: Operations.CreateABankTransactionExplanation.Input) async throws -> Operations.CreateABankTransactionExplanation.Output
-    /// Update a bank transaction explanation
-    ///
-    /// Update a bank transaction explanation
-    ///
-    /// - Remark: HTTP `PUT /v2/bank_transaction_explanations`.
-    /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/put(updateABankTransactionExplanation)`.
-    func updateABankTransactionExplanation(_ input: Operations.UpdateABankTransactionExplanation.Input) async throws -> Operations.UpdateABankTransactionExplanation.Output
     /// Get a single bank transaction explanation
     ///
     /// Get a single bank transaction explanation
@@ -118,6 +111,13 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `GET /v2/bank_transaction_explanations/{id}`.
     /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/get(getASingleBankTransactionExplanation)`.
     func getASingleBankTransactionExplanation(_ input: Operations.GetASingleBankTransactionExplanation.Input) async throws -> Operations.GetASingleBankTransactionExplanation.Output
+    /// Update a bank transaction explanation
+    ///
+    /// Update a bank transaction explanation
+    ///
+    /// - Remark: HTTP `PUT /v2/bank_transaction_explanations/{id}`.
+    /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/put(updateABankTransactionExplanation)`.
+    func updateABankTransactionExplanation(_ input: Operations.UpdateABankTransactionExplanation.Input) async throws -> Operations.UpdateABankTransactionExplanation.Output
     /// Delete a bank transaction explanation
     ///
     /// Delete a bank transaction explanation
@@ -1279,21 +1279,6 @@ extension APIProtocol {
             body: body
         ))
     }
-    /// Update a bank transaction explanation
-    ///
-    /// Update a bank transaction explanation
-    ///
-    /// - Remark: HTTP `PUT /v2/bank_transaction_explanations`.
-    /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/put(updateABankTransactionExplanation)`.
-    public func updateABankTransactionExplanation(
-        headers: Operations.UpdateABankTransactionExplanation.Input.Headers = .init(),
-        body: Operations.UpdateABankTransactionExplanation.Input.Body? = nil
-    ) async throws -> Operations.UpdateABankTransactionExplanation.Output {
-        try await updateABankTransactionExplanation(Operations.UpdateABankTransactionExplanation.Input(
-            headers: headers,
-            body: body
-        ))
-    }
     /// Get a single bank transaction explanation
     ///
     /// Get a single bank transaction explanation
@@ -1307,6 +1292,23 @@ extension APIProtocol {
         try await getASingleBankTransactionExplanation(Operations.GetASingleBankTransactionExplanation.Input(
             path: path,
             headers: headers
+        ))
+    }
+    /// Update a bank transaction explanation
+    ///
+    /// Update a bank transaction explanation
+    ///
+    /// - Remark: HTTP `PUT /v2/bank_transaction_explanations/{id}`.
+    /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/put(updateABankTransactionExplanation)`.
+    public func updateABankTransactionExplanation(
+        path: Operations.UpdateABankTransactionExplanation.Input.Path,
+        headers: Operations.UpdateABankTransactionExplanation.Input.Headers = .init(),
+        body: Operations.UpdateABankTransactionExplanation.Input.Body? = nil
+    ) async throws -> Operations.UpdateABankTransactionExplanation.Output {
+        try await updateABankTransactionExplanation(Operations.UpdateABankTransactionExplanation.Input(
+            path: path,
+            headers: headers,
+            body: body
         ))
     }
     /// Delete a bank transaction explanation
@@ -3468,6 +3470,52 @@ public enum Components {
                 case salesTaxRate = "sales_tax_rate"
                 case updatedAt = "updated_at"
                 case user
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/AttachmentPayload`.
+        public struct AttachmentPayload: Codable, Hashable, Sendable {
+            /// Binary data of the file encoded as base64
+            ///
+            /// - Remark: Generated from `#/components/schemas/AttachmentPayload/data`.
+            public var data: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/AttachmentPayload/file_name`.
+            public var fileName: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/AttachmentPayload/content_type`.
+            @frozen public enum ContentTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case imagePng = "image/png"
+                case imageXPng = "image/x-png"
+                case imageJpeg = "image/jpeg"
+                case imageJpg = "image/jpg"
+                case imageGif = "image/gif"
+                case applicationXPdf = "application/x-pdf"
+            }
+            /// - Remark: Generated from `#/components/schemas/AttachmentPayload/content_type`.
+            public var contentType: Components.Schemas.AttachmentPayload.ContentTypePayload?
+            /// - Remark: Generated from `#/components/schemas/AttachmentPayload/description`.
+            public var description: Swift.String?
+            /// Creates a new `AttachmentPayload`.
+            ///
+            /// - Parameters:
+            ///   - data: Binary data of the file encoded as base64
+            ///   - fileName:
+            ///   - contentType:
+            ///   - description:
+            public init(
+                data: Swift.String? = nil,
+                fileName: Swift.String? = nil,
+                contentType: Components.Schemas.AttachmentPayload.ContentTypePayload? = nil,
+                description: Swift.String? = nil
+            ) {
+                self.data = data
+                self.fileName = fileName
+                self.contentType = contentType
+                self.description = description
+            }
+            public enum CodingKeys: String, CodingKey {
+                case data
+                case fileName = "file_name"
+                case contentType = "content_type"
+                case description
             }
         }
         /// - Remark: Generated from `#/components/schemas/InvoiceItemPayload`.
@@ -5916,48 +5964,7 @@ public enum Operations {
                     /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation`.
                     public struct BankTransactionExplanationPayload: Codable, Hashable, Sendable {
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/attachment`.
-                        public struct AttachmentPayload: Codable, Hashable, Sendable {
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/attachment/content_src`.
-                            public var contentSrc: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/attachment/content_type`.
-                            public var contentType: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/attachment/file_name`.
-                            public var fileName: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/attachment/file_size`.
-                            public var fileSize: Swift.Double?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/attachment/url`.
-                            public var url: Swift.String?
-                            /// Creates a new `AttachmentPayload`.
-                            ///
-                            /// - Parameters:
-                            ///   - contentSrc:
-                            ///   - contentType:
-                            ///   - fileName:
-                            ///   - fileSize:
-                            ///   - url:
-                            public init(
-                                contentSrc: Swift.String? = nil,
-                                contentType: Swift.String? = nil,
-                                fileName: Swift.String? = nil,
-                                fileSize: Swift.Double? = nil,
-                                url: Swift.String? = nil
-                            ) {
-                                self.contentSrc = contentSrc
-                                self.contentType = contentType
-                                self.fileName = fileName
-                                self.fileSize = fileSize
-                                self.url = url
-                            }
-                            public enum CodingKeys: String, CodingKey {
-                                case contentSrc = "content_src"
-                                case contentType = "content_type"
-                                case fileName = "file_name"
-                                case fileSize = "file_size"
-                                case url
-                            }
-                        }
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/attachment`.
-                        public var attachment: Operations.CreateABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload.AttachmentPayload?
+                        public var attachment: Components.Schemas.AttachmentPayload?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/bank_account`.
                         public var bankAccount: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/bank_transaction`.
@@ -5993,7 +6000,7 @@ public enum Operations {
                         ///   - rebillFactor:
                         ///   - rebillType:
                         public init(
-                            attachment: Operations.CreateABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload.AttachmentPayload? = nil,
+                            attachment: Components.Schemas.AttachmentPayload? = nil,
                             bankAccount: Swift.String? = nil,
                             bankTransaction: Swift.String? = nil,
                             category: Swift.String? = nil,
@@ -6193,305 +6200,6 @@ public enum Operations {
             }
         }
     }
-    /// Update a bank transaction explanation
-    ///
-    /// Update a bank transaction explanation
-    ///
-    /// - Remark: HTTP `PUT /v2/bank_transaction_explanations`.
-    /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/put(updateABankTransactionExplanation)`.
-    public enum UpdateABankTransactionExplanation {
-        public static let id: Swift.String = "updateABankTransactionExplanation"
-        public struct Input: Sendable, Hashable {
-            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UpdateABankTransactionExplanation.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UpdateABankTransactionExplanation.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.UpdateABankTransactionExplanation.Input.Headers
-            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody`.
-            @frozen public enum Body: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json`.
-                public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation`.
-                    public struct BankTransactionExplanationPayload: Codable, Hashable, Sendable {
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/attachment`.
-                        public struct AttachmentPayload: Codable, Hashable, Sendable {
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/attachment/content_src`.
-                            public var contentSrc: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/attachment/content_type`.
-                            public var contentType: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/attachment/file_name`.
-                            public var fileName: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/attachment/file_size`.
-                            public var fileSize: Swift.Double?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/attachment/url`.
-                            public var url: Swift.String?
-                            /// Creates a new `AttachmentPayload`.
-                            ///
-                            /// - Parameters:
-                            ///   - contentSrc:
-                            ///   - contentType:
-                            ///   - fileName:
-                            ///   - fileSize:
-                            ///   - url:
-                            public init(
-                                contentSrc: Swift.String? = nil,
-                                contentType: Swift.String? = nil,
-                                fileName: Swift.String? = nil,
-                                fileSize: Swift.Double? = nil,
-                                url: Swift.String? = nil
-                            ) {
-                                self.contentSrc = contentSrc
-                                self.contentType = contentType
-                                self.fileName = fileName
-                                self.fileSize = fileSize
-                                self.url = url
-                            }
-                            public enum CodingKeys: String, CodingKey {
-                                case contentSrc = "content_src"
-                                case contentType = "content_type"
-                                case fileName = "file_name"
-                                case fileSize = "file_size"
-                                case url
-                            }
-                        }
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/attachment`.
-                        public var attachment: Operations.UpdateABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload.AttachmentPayload?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/bank_account`.
-                        public var bankAccount: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/bank_transaction`.
-                        public var bankTransaction: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/category`.
-                        public var category: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/dated_on`.
-                        public var datedOn: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/description`.
-                        public var description: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/gross_value`.
-                        public var grossValue: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/project`.
-                        public var project: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/rebill_factor`.
-                        public var rebillFactor: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation/rebill_type`.
-                        public var rebillType: Swift.String?
-                        /// Creates a new `BankTransactionExplanationPayload`.
-                        ///
-                        /// - Parameters:
-                        ///   - attachment:
-                        ///   - bankAccount:
-                        ///   - bankTransaction:
-                        ///   - category:
-                        ///   - datedOn:
-                        ///   - description:
-                        ///   - grossValue:
-                        ///   - project:
-                        ///   - rebillFactor:
-                        ///   - rebillType:
-                        public init(
-                            attachment: Operations.UpdateABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload.AttachmentPayload? = nil,
-                            bankAccount: Swift.String? = nil,
-                            bankTransaction: Swift.String? = nil,
-                            category: Swift.String? = nil,
-                            datedOn: Swift.String? = nil,
-                            description: Swift.String? = nil,
-                            grossValue: Swift.String? = nil,
-                            project: Swift.String? = nil,
-                            rebillFactor: Swift.String? = nil,
-                            rebillType: Swift.String? = nil
-                        ) {
-                            self.attachment = attachment
-                            self.bankAccount = bankAccount
-                            self.bankTransaction = bankTransaction
-                            self.category = category
-                            self.datedOn = datedOn
-                            self.description = description
-                            self.grossValue = grossValue
-                            self.project = project
-                            self.rebillFactor = rebillFactor
-                            self.rebillType = rebillType
-                        }
-                        public enum CodingKeys: String, CodingKey {
-                            case attachment
-                            case bankAccount = "bank_account"
-                            case bankTransaction = "bank_transaction"
-                            case category
-                            case datedOn = "dated_on"
-                            case description
-                            case grossValue = "gross_value"
-                            case project
-                            case rebillFactor = "rebill_factor"
-                            case rebillType = "rebill_type"
-                        }
-                    }
-                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/json/bank_transaction_explanation`.
-                    public var bankTransactionExplanation: Operations.UpdateABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload?
-                    /// Creates a new `JsonPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - bankTransactionExplanation:
-                    public init(bankTransactionExplanation: Operations.UpdateABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload? = nil) {
-                        self.bankTransactionExplanation = bankTransactionExplanation
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case bankTransactionExplanation = "bank_transaction_explanation"
-                    }
-                }
-                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/requestBody/content/application\/json`.
-                case json(Operations.UpdateABankTransactionExplanation.Input.Body.JsonPayload)
-            }
-            public var body: Operations.UpdateABankTransactionExplanation.Input.Body?
-            /// Creates a new `Input`.
-            ///
-            /// - Parameters:
-            ///   - headers:
-            ///   - body:
-            public init(
-                headers: Operations.UpdateABankTransactionExplanation.Input.Headers = .init(),
-                body: Operations.UpdateABankTransactionExplanation.Input.Body? = nil
-            ) {
-                self.headers = headers
-                self.body = body
-            }
-        }
-        @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/responses/200/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/responses/200/content/json`.
-                    public struct JsonPayload: Codable, Hashable, Sendable {
-                        /// A container of undocumented properties.
-                        public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
-                        /// Creates a new `JsonPayload`.
-                        ///
-                        /// - Parameters:
-                        ///   - additionalProperties: A container of undocumented properties.
-                        public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
-                            self.additionalProperties = additionalProperties
-                        }
-                        public init(from decoder: any Decoder) throws {
-                            additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
-                        }
-                        public func encode(to encoder: any Encoder) throws {
-                            try encoder.encodeAdditionalProperties(additionalProperties)
-                        }
-                    }
-                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/PUT/responses/200/content/application\/json`.
-                    case json(Operations.UpdateABankTransactionExplanation.Output.Ok.Body.JsonPayload)
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: Operations.UpdateABankTransactionExplanation.Output.Ok.Body.JsonPayload {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.UpdateABankTransactionExplanation.Output.Ok.Body
-                /// Creates a new `Ok`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.UpdateABankTransactionExplanation.Output.Ok.Body) {
-                    self.body = body
-                }
-            }
-            /// Success
-            ///
-            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/put(updateABankTransactionExplanation)/responses/200`.
-            ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.UpdateABankTransactionExplanation.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
-            ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.UpdateABankTransactionExplanation.Output.Ok {
-                get throws {
-                    switch self {
-                    case let .ok(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Unauthorized - Authentication required or invalid credentials
-            ///
-            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/put(updateABankTransactionExplanation)/responses/401`.
-            ///
-            /// HTTP response code: `401 unauthorized`.
-            case unauthorized(Components.Responses.UnauthorizedResponse)
-            /// Unauthorized - Authentication required or invalid credentials
-            ///
-            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/put(updateABankTransactionExplanation)/responses/401`.
-            ///
-            /// HTTP response code: `401 unauthorized`.
-            public static var unauthorized: Self {
-                .unauthorized(.init())
-            }
-            /// The associated value of the enum case if `self` is `.unauthorized`.
-            ///
-            /// - Throws: An error if `self` is not `.unauthorized`.
-            /// - SeeAlso: `.unauthorized`.
-            public var unauthorized: Components.Responses.UnauthorizedResponse {
-                get throws {
-                    switch self {
-                    case let .unauthorized(response):
-                        return response
-                    default:
-                        try throwUnexpectedResponseStatus(
-                            expectedStatus: "unauthorized",
-                            response: self
-                        )
-                    }
-                }
-            }
-            /// Undocumented response.
-            ///
-            /// A response with a code that is not documented in the OpenAPI document.
-            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
-        }
-    }
     /// Get a single bank transaction explanation
     ///
     /// Get a single bank transaction explanation
@@ -6618,6 +6326,244 @@ public enum Operations {
             /// Unauthorized - Authentication required or invalid credentials
             ///
             /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/get(getASingleBankTransactionExplanation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Update a bank transaction explanation
+    ///
+    /// Update a bank transaction explanation
+    ///
+    /// - Remark: HTTP `PUT /v2/bank_transaction_explanations/{id}`.
+    /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/put(updateABankTransactionExplanation)`.
+    public enum UpdateABankTransactionExplanation {
+        public static let id: Swift.String = "updateABankTransactionExplanation"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/path/id`.
+                public var id: Swift.String
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - id:
+                public init(id: Swift.String) {
+                    self.id = id
+                }
+            }
+            public var path: Operations.UpdateABankTransactionExplanation.Input.Path
+            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UpdateABankTransactionExplanation.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UpdateABankTransactionExplanation.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.UpdateABankTransactionExplanation.Input.Headers
+            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation`.
+                    public struct BankTransactionExplanationPayload: Codable, Hashable, Sendable {
+                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation/attachment`.
+                        public var attachment: Components.Schemas.AttachmentPayload?
+                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation/category`.
+                        public var category: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation/description`.
+                        public var description: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation/gross_value`.
+                        public var grossValue: Swift.String?
+                        /// Creates a new `BankTransactionExplanationPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - attachment:
+                        ///   - category:
+                        ///   - description:
+                        ///   - grossValue:
+                        public init(
+                            attachment: Components.Schemas.AttachmentPayload? = nil,
+                            category: Swift.String? = nil,
+                            description: Swift.String? = nil,
+                            grossValue: Swift.String? = nil
+                        ) {
+                            self.attachment = attachment
+                            self.category = category
+                            self.description = description
+                            self.grossValue = grossValue
+                        }
+                        public enum CodingKeys: String, CodingKey {
+                            case attachment
+                            case category
+                            case description
+                            case grossValue = "gross_value"
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation`.
+                    public var bankTransactionExplanation: Operations.UpdateABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - bankTransactionExplanation:
+                    public init(bankTransactionExplanation: Operations.UpdateABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload? = nil) {
+                        self.bankTransactionExplanation = bankTransactionExplanation
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case bankTransactionExplanation = "bank_transaction_explanation"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/content/application\/json`.
+                case json(Operations.UpdateABankTransactionExplanation.Input.Body.JsonPayload)
+            }
+            public var body: Operations.UpdateABankTransactionExplanation.Input.Body?
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.UpdateABankTransactionExplanation.Input.Path,
+                headers: Operations.UpdateABankTransactionExplanation.Input.Headers = .init(),
+                body: Operations.UpdateABankTransactionExplanation.Input.Body? = nil
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// A container of undocumented properties.
+                        public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - additionalProperties: A container of undocumented properties.
+                        public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                            self.additionalProperties = additionalProperties
+                        }
+                        public init(from decoder: any Decoder) throws {
+                            additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                        }
+                        public func encode(to encoder: any Encoder) throws {
+                            try encoder.encodeAdditionalProperties(additionalProperties)
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/responses/200/content/application\/json`.
+                    case json(Operations.UpdateABankTransactionExplanation.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.UpdateABankTransactionExplanation.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.UpdateABankTransactionExplanation.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.UpdateABankTransactionExplanation.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Success
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/put(updateABankTransactionExplanation)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.UpdateABankTransactionExplanation.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.UpdateABankTransactionExplanation.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/put(updateABankTransactionExplanation)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/put(updateABankTransactionExplanation)/responses/401`.
             ///
             /// HTTP response code: `401 unauthorized`.
             public static var unauthorized: Self {
