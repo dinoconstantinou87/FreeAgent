@@ -559,6 +559,16 @@ paths:
         schema:
           type: string
           example: 'true'
+      - name: page
+        in: query
+        schema:
+          type: integer
+          example: 1
+      - name: per_page
+        in: query
+        schema:
+          type: integer
+          example: 100
       responses:
         '200':
           description: Success

@@ -27,6 +27,12 @@ struct BankTransactionListCommand: ClientCommand {
     @Option(name: .long, help: "Show only last uploaded transactions (true/false)")
     var lastUploaded: String?
 
+    @Option(name: .long, help: "Page number")
+    var page: Int?
+
+    @Option(name: .long, help: "Results per page (max 100)")
+    var perPage: Int?
+
     func run(client: Client) async throws -> OpenAPIObjectContainer? {
         let input = Operations.ListAllBankTransactionsUnderACertainBankAccount.Input(
             query: .init(
@@ -35,7 +41,9 @@ struct BankTransactionListCommand: ClientCommand {
                 toDate: toDate,
                 updatedSince: updatedSince,
                 view: view,
-                lastUploaded: lastUploaded
+                lastUploaded: lastUploaded,
+                page: page,
+                perPage: perPage
             )
         )
 

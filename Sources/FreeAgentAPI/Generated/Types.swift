@@ -6755,6 +6755,10 @@ public enum Operations {
                 public var view: Swift.String?
                 /// - Remark: Generated from `#/paths/v2/bank_transactions/GET/query/last_uploaded`.
                 public var lastUploaded: Swift.String?
+                /// - Remark: Generated from `#/paths/v2/bank_transactions/GET/query/page`.
+                public var page: Swift.Int?
+                /// - Remark: Generated from `#/paths/v2/bank_transactions/GET/query/per_page`.
+                public var perPage: Swift.Int?
                 /// Creates a new `Query`.
                 ///
                 /// - Parameters:
@@ -6764,13 +6768,17 @@ public enum Operations {
                 ///   - updatedSince:
                 ///   - view:
                 ///   - lastUploaded:
+                ///   - page:
+                ///   - perPage:
                 public init(
                     bankAccount: Swift.String? = nil,
                     fromDate: Swift.String? = nil,
                     toDate: Swift.String? = nil,
                     updatedSince: Swift.String? = nil,
                     view: Swift.String? = nil,
-                    lastUploaded: Swift.String? = nil
+                    lastUploaded: Swift.String? = nil,
+                    page: Swift.Int? = nil,
+                    perPage: Swift.Int? = nil
                 ) {
                     self.bankAccount = bankAccount
                     self.fromDate = fromDate
@@ -6778,6 +6786,8 @@ public enum Operations {
                     self.updatedSince = updatedSince
                     self.view = view
                     self.lastUploaded = lastUploaded
+                    self.page = page
+                    self.perPage = perPage
                 }
             }
             public var query: Operations.ListAllBankTransactionsUnderACertainBankAccount.Input.Query
