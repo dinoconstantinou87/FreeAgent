@@ -16,7 +16,7 @@ struct ExplanationCreateCommand: ClientCommand {
     var bankAccount: String
 
     @Option(name: .long, help: "Category URL (e.g. https://api.freeagent.com/v2/categories/285)")
-    var category: String
+    var category: String?
 
     @Option(name: .long, help: "Date of the explanation (YYYY-MM-DD)")
     var datedOn: String
@@ -26,6 +26,9 @@ struct ExplanationCreateCommand: ClientCommand {
 
     @Option(name: .long, help: "Gross value (e.g. -730.0)")
     var grossValue: String
+
+    @Option(name: .long, help: "Invoice URL to mark as paid (e.g. https://api.freeagent.com/v2/invoices/123)")
+    var paidInvoice: String?
 
     @Option(name: .long, help: "Project URL (optional)")
     var project: String?
@@ -44,6 +47,7 @@ struct ExplanationCreateCommand: ClientCommand {
             datedOn: datedOn,
             description: description,
             grossValue: grossValue,
+            paidInvoice: paidInvoice,
             project: project,
             rebillFactor: rebillFactor,
             rebillType: rebillType

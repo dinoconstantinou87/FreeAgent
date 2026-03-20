@@ -7270,6 +7270,83 @@ public struct Client: APIProtocol {
             }
         )
     }
+    /// Update Invoice Item
+    ///
+    /// Update Invoice Item
+    ///
+    /// - Remark: HTTP `PUT /v2/invoice_items/{id}`.
+    /// - Remark: Generated from `#/paths//v2/invoice_items/{id}/put(updateInvoiceItem)`.
+    public func updateInvoiceItem(_ input: Operations.UpdateInvoiceItem.Input) async throws -> Operations.UpdateInvoiceItem.Output {
+        try await client.send(
+            input: input,
+            forOperation: Operations.UpdateInvoiceItem.id,
+            serializer: { input in
+                let path = try converter.renderedPath(
+                    template: "/v2/invoice_items/{}",
+                    parameters: [
+                        input.path.id
+                    ]
+                )
+                var request: HTTPTypes.HTTPRequest = .init(
+                    soar_path: path,
+                    method: .put
+                )
+                suppressMutabilityWarning(&request)
+                converter.setAcceptHeader(
+                    in: &request.headerFields,
+                    contentTypes: input.headers.accept
+                )
+                let body: OpenAPIRuntime.HTTPBody?
+                switch input.body {
+                case .none:
+                    body = nil
+                case let .json(value):
+                    body = try converter.setOptionalRequestBodyAsJSON(
+                        value,
+                        headerFields: &request.headerFields,
+                        contentType: "application/json; charset=utf-8"
+                    )
+                }
+                return (request, body)
+            },
+            deserializer: { response, responseBody in
+                switch response.status.code {
+                case 200:
+                    let contentType = converter.extractContentTypeIfPresent(in: response.headerFields)
+                    let body: Operations.UpdateInvoiceItem.Output.Ok.Body
+                    let chosenContentType = try converter.bestContentType(
+                        received: contentType,
+                        options: [
+                            "application/json"
+                        ]
+                    )
+                    switch chosenContentType {
+                    case "application/json":
+                        body = try await converter.getResponseBodyAsJSON(
+                            Operations.UpdateInvoiceItem.Output.Ok.Body.JsonPayload.self,
+                            from: responseBody,
+                            transforming: { value in
+                                .json(value)
+                            }
+                        )
+                    default:
+                        preconditionFailure("bestContentType chose an invalid content type.")
+                    }
+                    return .ok(.init(body: body))
+                case 401:
+                    return .unauthorized(.init())
+                default:
+                    return .undocumented(
+                        statusCode: response.status.code,
+                        .init(
+                            headerFields: response.headerFields,
+                            body: responseBody
+                        )
+                    )
+                }
+            }
+        )
+    }
     /// List all journal sets
     ///
     /// List all journal sets

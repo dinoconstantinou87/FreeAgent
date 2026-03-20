@@ -510,6 +510,9 @@ paths:
                     gross_value:
                       type: string
                       example: '-730.0'
+                    paid_invoice:
+                      type: string
+                      example: https://api.freeagent.com/v2/invoices/123
                     project:
                       type: string
                       example: https://api.freeagent.com/v2/projects/1
@@ -3390,38 +3393,7 @@ paths:
                   type: string
                   example: https://api.freeagent.com/v2/invoices/1
                 invoice_item:
-                  type: object
-                  required:
-                  - description
-                  properties:
-                    description:
-                      type: string
-                      example: Fishing trip
-                    item_type:
-                      type: string
-                      enum:
-                      - Hours
-                      - Days
-                      - Weeks
-                      - Months
-                      - Years
-                      - Products
-                      - Services
-                      - Training
-                      - Expenses
-                      - Comment
-                      - Bills
-                      - Discount
-                      - Credit
-                      - VAT
-                      - Stock
-                      example: Hours
-                    price:
-                      type: number
-                      example: 35
-                    quantity:
-                      type: number
-                      example: 6
+                  $ref: '#/components/schemas/InvoiceItemPayload'
             examples:
               Create Invoice Item:
                 value:
@@ -3443,6 +3415,43 @@ paths:
           $ref: '#/components/responses/ErrorResponse'
         '401':
           $ref: '#/components/responses/UnauthorizedResponse'
+  /v2/invoice_items/{id}:
+    put:
+      tags:
+      - Invoices
+      summary: Update Invoice Item
+      description: Update Invoice Item
+      operationId: updateInvoiceItem
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                invoice_item:
+                  $ref: '#/components/schemas/InvoiceItemPayload'
+            examples:
+              Update Invoice Item:
+                value:
+                  invoice_item:
+                    quantity: 3
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/UnauthorizedResponse'
+    parameters:
+    - name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        example: ''
   /v2/journal_sets:
     get:
       tags:
@@ -5486,6 +5495,37 @@ components:
         user:
           type: string
           example: https://api.freeagent.com/v2/users/1
+    InvoiceItemPayload:
+      type: object
+      properties:
+        description:
+          type: string
+          example: Fishing trip
+        item_type:
+          type: string
+          enum:
+          - Hours
+          - Days
+          - Weeks
+          - Months
+          - Years
+          - Products
+          - Services
+          - Training
+          - Expenses
+          - Comment
+          - Bills
+          - Discount
+          - Credit
+          - VAT
+          - Stock
+          example: Hours
+        price:
+          type: number
+          example: 35
+        quantity:
+          type: number
+          example: 6
     Errors:
       type: object
       additionalProperties: true

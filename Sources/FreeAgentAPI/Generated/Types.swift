@@ -689,6 +689,13 @@ public protocol APIProtocol: Sendable {
     /// - Remark: HTTP `POST /v2/invoice_items`.
     /// - Remark: Generated from `#/paths//v2/invoice_items/post(createInvoiceItem)`.
     func createInvoiceItem(_ input: Operations.CreateInvoiceItem.Input) async throws -> Operations.CreateInvoiceItem.Output
+    /// Update Invoice Item
+    ///
+    /// Update Invoice Item
+    ///
+    /// - Remark: HTTP `PUT /v2/invoice_items/{id}`.
+    /// - Remark: Generated from `#/paths//v2/invoice_items/{id}/put(updateInvoiceItem)`.
+    func updateInvoiceItem(_ input: Operations.UpdateInvoiceItem.Input) async throws -> Operations.UpdateInvoiceItem.Output
     /// List all journal sets
     ///
     /// List all journal sets
@@ -2491,6 +2498,23 @@ extension APIProtocol {
             body: body
         ))
     }
+    /// Update Invoice Item
+    ///
+    /// Update Invoice Item
+    ///
+    /// - Remark: HTTP `PUT /v2/invoice_items/{id}`.
+    /// - Remark: Generated from `#/paths//v2/invoice_items/{id}/put(updateInvoiceItem)`.
+    public func updateInvoiceItem(
+        path: Operations.UpdateInvoiceItem.Input.Path,
+        headers: Operations.UpdateInvoiceItem.Input.Headers = .init(),
+        body: Operations.UpdateInvoiceItem.Input.Body? = nil
+    ) async throws -> Operations.UpdateInvoiceItem.Output {
+        try await updateInvoiceItem(Operations.UpdateInvoiceItem.Input(
+            path: path,
+            headers: headers,
+            body: body
+        ))
+    }
     /// List all journal sets
     ///
     /// List all journal sets
@@ -3444,6 +3468,59 @@ public enum Components {
                 case salesTaxRate = "sales_tax_rate"
                 case updatedAt = "updated_at"
                 case user
+            }
+        }
+        /// - Remark: Generated from `#/components/schemas/InvoiceItemPayload`.
+        public struct InvoiceItemPayload: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/InvoiceItemPayload/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/InvoiceItemPayload/item_type`.
+            @frozen public enum ItemTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
+                case hours = "Hours"
+                case days = "Days"
+                case weeks = "Weeks"
+                case months = "Months"
+                case years = "Years"
+                case products = "Products"
+                case services = "Services"
+                case training = "Training"
+                case expenses = "Expenses"
+                case comment = "Comment"
+                case bills = "Bills"
+                case discount = "Discount"
+                case credit = "Credit"
+                case vat = "VAT"
+                case stock = "Stock"
+            }
+            /// - Remark: Generated from `#/components/schemas/InvoiceItemPayload/item_type`.
+            public var itemType: Components.Schemas.InvoiceItemPayload.ItemTypePayload?
+            /// - Remark: Generated from `#/components/schemas/InvoiceItemPayload/price`.
+            public var price: Swift.Double?
+            /// - Remark: Generated from `#/components/schemas/InvoiceItemPayload/quantity`.
+            public var quantity: Swift.Double?
+            /// Creates a new `InvoiceItemPayload`.
+            ///
+            /// - Parameters:
+            ///   - description:
+            ///   - itemType:
+            ///   - price:
+            ///   - quantity:
+            public init(
+                description: Swift.String? = nil,
+                itemType: Components.Schemas.InvoiceItemPayload.ItemTypePayload? = nil,
+                price: Swift.Double? = nil,
+                quantity: Swift.Double? = nil
+            ) {
+                self.description = description
+                self.itemType = itemType
+                self.price = price
+                self.quantity = quantity
+            }
+            public enum CodingKeys: String, CodingKey {
+                case description
+                case itemType = "item_type"
+                case price
+                case quantity
             }
         }
         /// - Remark: Generated from `#/components/schemas/Errors`.
@@ -5893,6 +5970,8 @@ public enum Operations {
                         public var description: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/gross_value`.
                         public var grossValue: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/paid_invoice`.
+                        public var paidInvoice: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/project`.
                         public var project: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/rebill_factor`.
@@ -5909,6 +5988,7 @@ public enum Operations {
                         ///   - datedOn:
                         ///   - description:
                         ///   - grossValue:
+                        ///   - paidInvoice:
                         ///   - project:
                         ///   - rebillFactor:
                         ///   - rebillType:
@@ -5920,6 +6000,7 @@ public enum Operations {
                             datedOn: Swift.String? = nil,
                             description: Swift.String? = nil,
                             grossValue: Swift.String? = nil,
+                            paidInvoice: Swift.String? = nil,
                             project: Swift.String? = nil,
                             rebillFactor: Swift.String? = nil,
                             rebillType: Swift.String? = nil
@@ -5931,6 +6012,7 @@ public enum Operations {
                             self.datedOn = datedOn
                             self.description = description
                             self.grossValue = grossValue
+                            self.paidInvoice = paidInvoice
                             self.project = project
                             self.rebillFactor = rebillFactor
                             self.rebillType = rebillType
@@ -5943,6 +6025,7 @@ public enum Operations {
                             case datedOn = "dated_on"
                             case description
                             case grossValue = "gross_value"
+                            case paidInvoice = "paid_invoice"
                             case project
                             case rebillFactor = "rebill_factor"
                             case rebillType = "rebill_type"
@@ -22761,60 +22844,7 @@ public enum Operations {
                     /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice`.
                     public var invoice: Swift.String?
                     /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item`.
-                    public struct InvoiceItemPayload: Codable, Hashable, Sendable {
-                        /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item/description`.
-                        public var description: Swift.String
-                        /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item/item_type`.
-                        @frozen public enum ItemTypePayload: String, Codable, Hashable, Sendable, CaseIterable {
-                            case hours = "Hours"
-                            case days = "Days"
-                            case weeks = "Weeks"
-                            case months = "Months"
-                            case years = "Years"
-                            case products = "Products"
-                            case services = "Services"
-                            case training = "Training"
-                            case expenses = "Expenses"
-                            case comment = "Comment"
-                            case bills = "Bills"
-                            case discount = "Discount"
-                            case credit = "Credit"
-                            case vat = "VAT"
-                            case stock = "Stock"
-                        }
-                        /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item/item_type`.
-                        public var itemType: Operations.CreateInvoiceItem.Input.Body.JsonPayload.InvoiceItemPayload.ItemTypePayload?
-                        /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item/price`.
-                        public var price: Swift.Double?
-                        /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item/quantity`.
-                        public var quantity: Swift.Double?
-                        /// Creates a new `InvoiceItemPayload`.
-                        ///
-                        /// - Parameters:
-                        ///   - description:
-                        ///   - itemType:
-                        ///   - price:
-                        ///   - quantity:
-                        public init(
-                            description: Swift.String,
-                            itemType: Operations.CreateInvoiceItem.Input.Body.JsonPayload.InvoiceItemPayload.ItemTypePayload? = nil,
-                            price: Swift.Double? = nil,
-                            quantity: Swift.Double? = nil
-                        ) {
-                            self.description = description
-                            self.itemType = itemType
-                            self.price = price
-                            self.quantity = quantity
-                        }
-                        public enum CodingKeys: String, CodingKey {
-                            case description
-                            case itemType = "item_type"
-                            case price
-                            case quantity
-                        }
-                    }
-                    /// - Remark: Generated from `#/paths/v2/invoice_items/POST/requestBody/json/invoice_item`.
-                    public var invoiceItem: Operations.CreateInvoiceItem.Input.Body.JsonPayload.InvoiceItemPayload?
+                    public var invoiceItem: Components.Schemas.InvoiceItemPayload?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
@@ -22822,7 +22852,7 @@ public enum Operations {
                     ///   - invoiceItem:
                     public init(
                         invoice: Swift.String? = nil,
-                        invoiceItem: Operations.CreateInvoiceItem.Input.Body.JsonPayload.InvoiceItemPayload? = nil
+                        invoiceItem: Components.Schemas.InvoiceItemPayload? = nil
                     ) {
                         self.invoice = invoice
                         self.invoiceItem = invoiceItem
@@ -22973,6 +23003,209 @@ public enum Operations {
                     }
                 }
             }
+        }
+        @frozen public enum AcceptableContentType: AcceptableProtocol {
+            case json
+            case other(Swift.String)
+            public init?(rawValue: Swift.String) {
+                switch rawValue.lowercased() {
+                case "application/json":
+                    self = .json
+                default:
+                    self = .other(rawValue)
+                }
+            }
+            public var rawValue: Swift.String {
+                switch self {
+                case let .other(string):
+                    return string
+                case .json:
+                    return "application/json"
+                }
+            }
+            public static var allCases: [Self] {
+                [
+                    .json
+                ]
+            }
+        }
+    }
+    /// Update Invoice Item
+    ///
+    /// Update Invoice Item
+    ///
+    /// - Remark: HTTP `PUT /v2/invoice_items/{id}`.
+    /// - Remark: Generated from `#/paths//v2/invoice_items/{id}/put(updateInvoiceItem)`.
+    public enum UpdateInvoiceItem {
+        public static let id: Swift.String = "updateInvoiceItem"
+        public struct Input: Sendable, Hashable {
+            /// - Remark: Generated from `#/paths/v2/invoice_items/{id}/PUT/path`.
+            public struct Path: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/invoice_items/{id}/PUT/path/id`.
+                public var id: Swift.String
+                /// Creates a new `Path`.
+                ///
+                /// - Parameters:
+                ///   - id:
+                public init(id: Swift.String) {
+                    self.id = id
+                }
+            }
+            public var path: Operations.UpdateInvoiceItem.Input.Path
+            /// - Remark: Generated from `#/paths/v2/invoice_items/{id}/PUT/header`.
+            public struct Headers: Sendable, Hashable {
+                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UpdateInvoiceItem.AcceptableContentType>]
+                /// Creates a new `Headers`.
+                ///
+                /// - Parameters:
+                ///   - accept:
+                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.UpdateInvoiceItem.AcceptableContentType>] = .defaultValues()) {
+                    self.accept = accept
+                }
+            }
+            public var headers: Operations.UpdateInvoiceItem.Input.Headers
+            /// - Remark: Generated from `#/paths/v2/invoice_items/{id}/PUT/requestBody`.
+            @frozen public enum Body: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/invoice_items/{id}/PUT/requestBody/json`.
+                public struct JsonPayload: Codable, Hashable, Sendable {
+                    /// - Remark: Generated from `#/paths/v2/invoice_items/{id}/PUT/requestBody/json/invoice_item`.
+                    public var invoiceItem: Components.Schemas.InvoiceItemPayload?
+                    /// Creates a new `JsonPayload`.
+                    ///
+                    /// - Parameters:
+                    ///   - invoiceItem:
+                    public init(invoiceItem: Components.Schemas.InvoiceItemPayload? = nil) {
+                        self.invoiceItem = invoiceItem
+                    }
+                    public enum CodingKeys: String, CodingKey {
+                        case invoiceItem = "invoice_item"
+                    }
+                }
+                /// - Remark: Generated from `#/paths/v2/invoice_items/{id}/PUT/requestBody/content/application\/json`.
+                case json(Operations.UpdateInvoiceItem.Input.Body.JsonPayload)
+            }
+            public var body: Operations.UpdateInvoiceItem.Input.Body?
+            /// Creates a new `Input`.
+            ///
+            /// - Parameters:
+            ///   - path:
+            ///   - headers:
+            ///   - body:
+            public init(
+                path: Operations.UpdateInvoiceItem.Input.Path,
+                headers: Operations.UpdateInvoiceItem.Input.Headers = .init(),
+                body: Operations.UpdateInvoiceItem.Input.Body? = nil
+            ) {
+                self.path = path
+                self.headers = headers
+                self.body = body
+            }
+        }
+        @frozen public enum Output: Sendable, Hashable {
+            public struct Ok: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/invoice_items/{id}/PUT/responses/200/content`.
+                @frozen public enum Body: Sendable, Hashable {
+                    /// - Remark: Generated from `#/paths/v2/invoice_items/{id}/PUT/responses/200/content/json`.
+                    public struct JsonPayload: Codable, Hashable, Sendable {
+                        /// A container of undocumented properties.
+                        public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
+                        /// Creates a new `JsonPayload`.
+                        ///
+                        /// - Parameters:
+                        ///   - additionalProperties: A container of undocumented properties.
+                        public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
+                            self.additionalProperties = additionalProperties
+                        }
+                        public init(from decoder: any Decoder) throws {
+                            additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
+                        }
+                        public func encode(to encoder: any Encoder) throws {
+                            try encoder.encodeAdditionalProperties(additionalProperties)
+                        }
+                    }
+                    /// - Remark: Generated from `#/paths/v2/invoice_items/{id}/PUT/responses/200/content/application\/json`.
+                    case json(Operations.UpdateInvoiceItem.Output.Ok.Body.JsonPayload)
+                    /// The associated value of the enum case if `self` is `.json`.
+                    ///
+                    /// - Throws: An error if `self` is not `.json`.
+                    /// - SeeAlso: `.json`.
+                    public var json: Operations.UpdateInvoiceItem.Output.Ok.Body.JsonPayload {
+                        get throws {
+                            switch self {
+                            case let .json(body):
+                                return body
+                            }
+                        }
+                    }
+                }
+                /// Received HTTP response body
+                public var body: Operations.UpdateInvoiceItem.Output.Ok.Body
+                /// Creates a new `Ok`.
+                ///
+                /// - Parameters:
+                ///   - body: Received HTTP response body
+                public init(body: Operations.UpdateInvoiceItem.Output.Ok.Body) {
+                    self.body = body
+                }
+            }
+            /// Success
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoice_items/{id}/put(updateInvoiceItem)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            case ok(Operations.UpdateInvoiceItem.Output.Ok)
+            /// The associated value of the enum case if `self` is `.ok`.
+            ///
+            /// - Throws: An error if `self` is not `.ok`.
+            /// - SeeAlso: `.ok`.
+            public var ok: Operations.UpdateInvoiceItem.Output.Ok {
+                get throws {
+                    switch self {
+                    case let .ok(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "ok",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoice_items/{id}/put(updateInvoiceItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            case unauthorized(Components.Responses.UnauthorizedResponse)
+            /// Unauthorized - Authentication required or invalid credentials
+            ///
+            /// - Remark: Generated from `#/paths//v2/invoice_items/{id}/put(updateInvoiceItem)/responses/401`.
+            ///
+            /// HTTP response code: `401 unauthorized`.
+            public static var unauthorized: Self {
+                .unauthorized(.init())
+            }
+            /// The associated value of the enum case if `self` is `.unauthorized`.
+            ///
+            /// - Throws: An error if `self` is not `.unauthorized`.
+            /// - SeeAlso: `.unauthorized`.
+            public var unauthorized: Components.Responses.UnauthorizedResponse {
+                get throws {
+                    switch self {
+                    case let .unauthorized(response):
+                        return response
+                    default:
+                        try throwUnexpectedResponseStatus(
+                            expectedStatus: "unauthorized",
+                            response: self
+                        )
+                    }
+                }
+            }
+            /// Undocumented response.
+            ///
+            /// A response with a code that is not documented in the OpenAPI document.
+            case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
         }
         @frozen public enum AcceptableContentType: AcceptableProtocol {
             case json
