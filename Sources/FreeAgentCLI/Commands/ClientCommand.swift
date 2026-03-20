@@ -35,12 +35,9 @@ extension ClientCommand {
         )
         
         do {
-            guard let result = try await run(client: client) else {
-                Noora().error(.alert("Unexpected response from API"))
-                throw ExitCode.failure
+            if let result = try await run(client: client) {
+                try Noora().json(result)
             }
-
-            try Noora().json(result)
         } catch {
             Noora().error(.alert("Failed to execute command: \(error)"))
             throw ExitCode.failure

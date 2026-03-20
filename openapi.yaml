@@ -539,8 +539,8 @@ paths:
                     rebill_factor: '0.25'
                     rebill_type: markup
       responses:
-        '200':
-          description: Success
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -571,87 +571,9 @@ paths:
       summary: Delete a bank transaction explanation
       description: Delete a bank transaction explanation
       operationId: deleteABankTransactionExplanation
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                bank_transaction_explanation:
-                  type: object
-                  properties:
-                    attachment:
-                      type: object
-                      properties:
-                        content_src:
-                          type: string
-                          example: https://s3.amazonaws.com/freeagent-dev/attachments/1/original.png?AWSAccessKeyId=1K3MW21E6T8KWBY84B02&Expires=1314281186&Signature=GFAKDo%2Bi%2FsUMTYEgg6ZWGysB4k4%3D
-                        content_type:
-                          type: string
-                          example: image/png
-                        file_name:
-                          type: string
-                          example: barcode.png
-                        file_size:
-                          type: number
-                          example: 7673
-                        url:
-                          type: string
-                          example: https://api.freeagent.com/v2/attachments/3
-                    bank_account:
-                      type: string
-                      example: https://api.freeagent.com/v2/bank_accounts/1
-                    bank_transaction:
-                      type: string
-                      example: https://api.freeagent.com/v2/bank_transactions/8
-                    category:
-                      type: string
-                      example: https://api.freeagent.com/v2/categories/285
-                    dated_on:
-                      type: string
-                      example: 2010-05-01
-                    description:
-                      type: string
-                      example: harness end-to-end e-business
-                    gross_value:
-                      type: string
-                      example: '-730.0'
-                    project:
-                      type: string
-                      example: https://api.freeagent.com/v2/projects/1
-                    rebill_factor:
-                      type: string
-                      example: '800'
-                    rebill_type:
-                      type: string
-                      example: price
-            examples:
-              Delete a bank transaction explanation:
-                value:
-                  bank_transaction_explanation:
-                    attachment:
-                      content_src: https://s3.amazonaws.com/freeagent-dev/attachments/1/original.png?AWSAccessKeyId=1K3MW21E6T8KWBY84B02&Expires=1314281186&Signature=GFAKDo%2Bi%2FsUMTYEgg6ZWGysB4k4%3D
-                      content_type: image/png
-                      file_name: barcode.png
-                      file_size: 7673
-                      url: https://api.freeagent.com/v2/attachments/3
-                    bank_account: https://api.freeagent.com/v2/bank_accounts/1
-                    bank_transaction: https://api.freeagent.com/v2/bank_transactions/8
-                    category: https://api.freeagent.com/v2/categories/285
-                    dated_on: 2010-05-01
-                    description: harness end-to-end e-business
-                    gross_value: '-730.0'
-                    project: https://api.freeagent.com/v2/projects/1
-                    rebill_factor: '800'
-                    rebill_type: price
       responses:
         '200':
           description: Success
-          content:
-            application/json:
-              schema:
-                type: object
-                additionalProperties: true
         '401':
           $ref: '#/components/responses/UnauthorizedResponse'
     parameters:
@@ -2863,38 +2785,12 @@ paths:
             schema:
               type: object
               properties:
+                expense:
+                  $ref: '#/components/schemas/ExpensePayload'
                 expenses:
                   type: array
                   items:
-                    type: object
-                    properties:
-                      category:
-                        type: string
-                        example: https://api.freeagent.com/v2/categories/285
-                      created_at:
-                        type: string
-                        example: 2011-08-24 08:10:40+00:00
-                      dated_on:
-                        type: string
-                        example: 2011-08-24
-                      description:
-                        type: string
-                        example: Some description
-                      gross_value:
-                        type: string
-                        example: '-12.0'
-                      manual_sales_tax_amount:
-                        type: string
-                        example: '0.12'
-                      sales_tax_rate:
-                        type: string
-                        example: '20.0'
-                      updated_at:
-                        type: string
-                        example: 2011-08-24 08:10:40+00:00
-                      user:
-                        type: string
-                        example: https://api.freeagent.com/v2/users/1
+                    $ref: '#/components/schemas/ExpensePayload'
                   example:
                   - category: https://api.freeagent.com/v2/categories/285
                     created_at: 2011-08-24 08:10:40+00:00
@@ -2953,8 +2849,8 @@ paths:
                     updated_at: 2011-08-24 08:10:40+00:00
                     user: https://api.freeagent.com/v2/users/:id
       responses:
-        '200':
-          description: Success
+        '201':
+          description: Created
           content:
             application/json:
               schema:
@@ -5557,6 +5453,39 @@ components:
       - reminder_emails
       - last_N_months
       example: all
+    ExpensePayload:
+      type: object
+      properties:
+        category:
+          type: string
+          example: https://api.freeagent.com/v2/categories/285
+        created_at:
+          type: string
+          example: 2011-08-24 08:10:40+00:00
+        currency:
+          type: string
+          example: USD
+        dated_on:
+          type: string
+          example: 2011-08-24
+        description:
+          type: string
+          example: Some description
+        gross_value:
+          type: string
+          example: '-12.0'
+        manual_sales_tax_amount:
+          type: string
+          example: '0.12'
+        sales_tax_rate:
+          type: string
+          example: '20.0'
+        updated_at:
+          type: string
+          example: 2011-08-24 08:10:40+00:00
+        user:
+          type: string
+          example: https://api.freeagent.com/v2/users/1
     Errors:
       type: object
       additionalProperties: true

@@ -1308,16 +1308,8 @@ extension APIProtocol {
     ///
     /// - Remark: HTTP `DELETE /v2/bank_transaction_explanations/{id}`.
     /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/delete(deleteABankTransactionExplanation)`.
-    public func deleteABankTransactionExplanation(
-        path: Operations.DeleteABankTransactionExplanation.Input.Path,
-        headers: Operations.DeleteABankTransactionExplanation.Input.Headers = .init(),
-        body: Operations.DeleteABankTransactionExplanation.Input.Body? = nil
-    ) async throws -> Operations.DeleteABankTransactionExplanation.Output {
-        try await deleteABankTransactionExplanation(Operations.DeleteABankTransactionExplanation.Input(
-            path: path,
-            headers: headers,
-            body: body
-        ))
+    public func deleteABankTransactionExplanation(path: Operations.DeleteABankTransactionExplanation.Input.Path) async throws -> Operations.DeleteABankTransactionExplanation.Output {
+        try await deleteABankTransactionExplanation(Operations.DeleteABankTransactionExplanation.Input(path: path))
     }
     /// List all bank transactions under a certain bank account
     ///
@@ -3383,6 +3375,77 @@ public enum Components {
     public enum Schemas {
         /// - Remark: Generated from `#/components/schemas/InvoiceView`.
         public typealias InvoiceView = CustomInvoiceView
+        /// - Remark: Generated from `#/components/schemas/ExpensePayload`.
+        public struct ExpensePayload: Codable, Hashable, Sendable {
+            /// - Remark: Generated from `#/components/schemas/ExpensePayload/category`.
+            public var category: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/ExpensePayload/created_at`.
+            public var createdAt: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/ExpensePayload/currency`.
+            public var currency: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/ExpensePayload/dated_on`.
+            public var datedOn: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/ExpensePayload/description`.
+            public var description: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/ExpensePayload/gross_value`.
+            public var grossValue: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/ExpensePayload/manual_sales_tax_amount`.
+            public var manualSalesTaxAmount: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/ExpensePayload/sales_tax_rate`.
+            public var salesTaxRate: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/ExpensePayload/updated_at`.
+            public var updatedAt: Swift.String?
+            /// - Remark: Generated from `#/components/schemas/ExpensePayload/user`.
+            public var user: Swift.String?
+            /// Creates a new `ExpensePayload`.
+            ///
+            /// - Parameters:
+            ///   - category:
+            ///   - createdAt:
+            ///   - currency:
+            ///   - datedOn:
+            ///   - description:
+            ///   - grossValue:
+            ///   - manualSalesTaxAmount:
+            ///   - salesTaxRate:
+            ///   - updatedAt:
+            ///   - user:
+            public init(
+                category: Swift.String? = nil,
+                createdAt: Swift.String? = nil,
+                currency: Swift.String? = nil,
+                datedOn: Swift.String? = nil,
+                description: Swift.String? = nil,
+                grossValue: Swift.String? = nil,
+                manualSalesTaxAmount: Swift.String? = nil,
+                salesTaxRate: Swift.String? = nil,
+                updatedAt: Swift.String? = nil,
+                user: Swift.String? = nil
+            ) {
+                self.category = category
+                self.createdAt = createdAt
+                self.currency = currency
+                self.datedOn = datedOn
+                self.description = description
+                self.grossValue = grossValue
+                self.manualSalesTaxAmount = manualSalesTaxAmount
+                self.salesTaxRate = salesTaxRate
+                self.updatedAt = updatedAt
+                self.user = user
+            }
+            public enum CodingKeys: String, CodingKey {
+                case category
+                case createdAt = "created_at"
+                case currency
+                case datedOn = "dated_on"
+                case description
+                case grossValue = "gross_value"
+                case manualSalesTaxAmount = "manual_sales_tax_amount"
+                case salesTaxRate = "sales_tax_rate"
+                case updatedAt = "updated_at"
+                case user
+            }
+        }
         /// - Remark: Generated from `#/components/schemas/Errors`.
         public struct Errors: Codable, Hashable, Sendable {
             /// A container of undocumented properties.
@@ -5916,10 +5979,10 @@ public enum Operations {
             }
         }
         @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/responses/200/content`.
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/responses/201/content`.
                 @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/responses/200/content/json`.
+                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/responses/201/content/json`.
                     public struct JsonPayload: Codable, Hashable, Sendable {
                         /// A container of undocumented properties.
                         public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
@@ -5937,13 +6000,13 @@ public enum Operations {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }
-                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/responses/200/content/application\/json`.
-                    case json(Operations.CreateABankTransactionExplanation.Output.Ok.Body.JsonPayload)
+                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/responses/201/content/application\/json`.
+                    case json(Operations.CreateABankTransactionExplanation.Output.Created.Body.JsonPayload)
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: Operations.CreateABankTransactionExplanation.Output.Ok.Body.JsonPayload {
+                    public var json: Operations.CreateABankTransactionExplanation.Output.Created.Body.JsonPayload {
                         get throws {
                             switch self {
                             case let .json(body):
@@ -5953,33 +6016,33 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.CreateABankTransactionExplanation.Output.Ok.Body
-                /// Creates a new `Ok`.
+                public var body: Operations.CreateABankTransactionExplanation.Output.Created.Body
+                /// Creates a new `Created`.
                 ///
                 /// - Parameters:
                 ///   - body: Received HTTP response body
-                public init(body: Operations.CreateABankTransactionExplanation.Output.Ok.Body) {
+                public init(body: Operations.CreateABankTransactionExplanation.Output.Created.Body) {
                     self.body = body
                 }
             }
-            /// Success
+            /// Created
             ///
-            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/post(createABankTransactionExplanation)/responses/200`.
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/post(createABankTransactionExplanation)/responses/201`.
             ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.CreateABankTransactionExplanation.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
+            /// HTTP response code: `201 created`.
+            case created(Operations.CreateABankTransactionExplanation.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
             ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.CreateABankTransactionExplanation.Output.Ok {
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.CreateABankTransactionExplanation.Output.Created {
                 get throws {
                     switch self {
-                    case let .ok(response):
+                    case let .created(response):
                         return response
                     default:
                         try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
+                            expectedStatus: "created",
                             response: self
                         )
                     }
@@ -6547,213 +6610,18 @@ public enum Operations {
                 }
             }
             public var path: Operations.DeleteABankTransactionExplanation.Input.Path
-            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/header`.
-            public struct Headers: Sendable, Hashable {
-                public var accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DeleteABankTransactionExplanation.AcceptableContentType>]
-                /// Creates a new `Headers`.
-                ///
-                /// - Parameters:
-                ///   - accept:
-                public init(accept: [OpenAPIRuntime.AcceptHeaderContentType<Operations.DeleteABankTransactionExplanation.AcceptableContentType>] = .defaultValues()) {
-                    self.accept = accept
-                }
-            }
-            public var headers: Operations.DeleteABankTransactionExplanation.Input.Headers
-            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody`.
-            @frozen public enum Body: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json`.
-                public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation`.
-                    public struct BankTransactionExplanationPayload: Codable, Hashable, Sendable {
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/attachment`.
-                        public struct AttachmentPayload: Codable, Hashable, Sendable {
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/attachment/content_src`.
-                            public var contentSrc: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/attachment/content_type`.
-                            public var contentType: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/attachment/file_name`.
-                            public var fileName: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/attachment/file_size`.
-                            public var fileSize: Swift.Double?
-                            /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/attachment/url`.
-                            public var url: Swift.String?
-                            /// Creates a new `AttachmentPayload`.
-                            ///
-                            /// - Parameters:
-                            ///   - contentSrc:
-                            ///   - contentType:
-                            ///   - fileName:
-                            ///   - fileSize:
-                            ///   - url:
-                            public init(
-                                contentSrc: Swift.String? = nil,
-                                contentType: Swift.String? = nil,
-                                fileName: Swift.String? = nil,
-                                fileSize: Swift.Double? = nil,
-                                url: Swift.String? = nil
-                            ) {
-                                self.contentSrc = contentSrc
-                                self.contentType = contentType
-                                self.fileName = fileName
-                                self.fileSize = fileSize
-                                self.url = url
-                            }
-                            public enum CodingKeys: String, CodingKey {
-                                case contentSrc = "content_src"
-                                case contentType = "content_type"
-                                case fileName = "file_name"
-                                case fileSize = "file_size"
-                                case url
-                            }
-                        }
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/attachment`.
-                        public var attachment: Operations.DeleteABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload.AttachmentPayload?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/bank_account`.
-                        public var bankAccount: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/bank_transaction`.
-                        public var bankTransaction: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/category`.
-                        public var category: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/dated_on`.
-                        public var datedOn: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/description`.
-                        public var description: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/gross_value`.
-                        public var grossValue: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/project`.
-                        public var project: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/rebill_factor`.
-                        public var rebillFactor: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation/rebill_type`.
-                        public var rebillType: Swift.String?
-                        /// Creates a new `BankTransactionExplanationPayload`.
-                        ///
-                        /// - Parameters:
-                        ///   - attachment:
-                        ///   - bankAccount:
-                        ///   - bankTransaction:
-                        ///   - category:
-                        ///   - datedOn:
-                        ///   - description:
-                        ///   - grossValue:
-                        ///   - project:
-                        ///   - rebillFactor:
-                        ///   - rebillType:
-                        public init(
-                            attachment: Operations.DeleteABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload.AttachmentPayload? = nil,
-                            bankAccount: Swift.String? = nil,
-                            bankTransaction: Swift.String? = nil,
-                            category: Swift.String? = nil,
-                            datedOn: Swift.String? = nil,
-                            description: Swift.String? = nil,
-                            grossValue: Swift.String? = nil,
-                            project: Swift.String? = nil,
-                            rebillFactor: Swift.String? = nil,
-                            rebillType: Swift.String? = nil
-                        ) {
-                            self.attachment = attachment
-                            self.bankAccount = bankAccount
-                            self.bankTransaction = bankTransaction
-                            self.category = category
-                            self.datedOn = datedOn
-                            self.description = description
-                            self.grossValue = grossValue
-                            self.project = project
-                            self.rebillFactor = rebillFactor
-                            self.rebillType = rebillType
-                        }
-                        public enum CodingKeys: String, CodingKey {
-                            case attachment
-                            case bankAccount = "bank_account"
-                            case bankTransaction = "bank_transaction"
-                            case category
-                            case datedOn = "dated_on"
-                            case description
-                            case grossValue = "gross_value"
-                            case project
-                            case rebillFactor = "rebill_factor"
-                            case rebillType = "rebill_type"
-                        }
-                    }
-                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/json/bank_transaction_explanation`.
-                    public var bankTransactionExplanation: Operations.DeleteABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload?
-                    /// Creates a new `JsonPayload`.
-                    ///
-                    /// - Parameters:
-                    ///   - bankTransactionExplanation:
-                    public init(bankTransactionExplanation: Operations.DeleteABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload? = nil) {
-                        self.bankTransactionExplanation = bankTransactionExplanation
-                    }
-                    public enum CodingKeys: String, CodingKey {
-                        case bankTransactionExplanation = "bank_transaction_explanation"
-                    }
-                }
-                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/requestBody/content/application\/json`.
-                case json(Operations.DeleteABankTransactionExplanation.Input.Body.JsonPayload)
-            }
-            public var body: Operations.DeleteABankTransactionExplanation.Input.Body?
             /// Creates a new `Input`.
             ///
             /// - Parameters:
             ///   - path:
-            ///   - headers:
-            ///   - body:
-            public init(
-                path: Operations.DeleteABankTransactionExplanation.Input.Path,
-                headers: Operations.DeleteABankTransactionExplanation.Input.Headers = .init(),
-                body: Operations.DeleteABankTransactionExplanation.Input.Body? = nil
-            ) {
+            public init(path: Operations.DeleteABankTransactionExplanation.Input.Path) {
                 self.path = path
-                self.headers = headers
-                self.body = body
             }
         }
         @frozen public enum Output: Sendable, Hashable {
             public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/responses/200/content`.
-                @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/responses/200/content/json`.
-                    public struct JsonPayload: Codable, Hashable, Sendable {
-                        /// A container of undocumented properties.
-                        public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
-                        /// Creates a new `JsonPayload`.
-                        ///
-                        /// - Parameters:
-                        ///   - additionalProperties: A container of undocumented properties.
-                        public init(additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer = .init()) {
-                            self.additionalProperties = additionalProperties
-                        }
-                        public init(from decoder: any Decoder) throws {
-                            additionalProperties = try decoder.decodeAdditionalProperties(knownKeys: [])
-                        }
-                        public func encode(to encoder: any Encoder) throws {
-                            try encoder.encodeAdditionalProperties(additionalProperties)
-                        }
-                    }
-                    /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/DELETE/responses/200/content/application\/json`.
-                    case json(Operations.DeleteABankTransactionExplanation.Output.Ok.Body.JsonPayload)
-                    /// The associated value of the enum case if `self` is `.json`.
-                    ///
-                    /// - Throws: An error if `self` is not `.json`.
-                    /// - SeeAlso: `.json`.
-                    public var json: Operations.DeleteABankTransactionExplanation.Output.Ok.Body.JsonPayload {
-                        get throws {
-                            switch self {
-                            case let .json(body):
-                                return body
-                            }
-                        }
-                    }
-                }
-                /// Received HTTP response body
-                public var body: Operations.DeleteABankTransactionExplanation.Output.Ok.Body
                 /// Creates a new `Ok`.
-                ///
-                /// - Parameters:
-                ///   - body: Received HTTP response body
-                public init(body: Operations.DeleteABankTransactionExplanation.Output.Ok.Body) {
-                    self.body = body
-                }
+                public init() {}
             }
             /// Success
             ///
@@ -6761,6 +6629,14 @@ public enum Operations {
             ///
             /// HTTP response code: `200 ok`.
             case ok(Operations.DeleteABankTransactionExplanation.Output.Ok)
+            /// Success
+            ///
+            /// - Remark: Generated from `#/paths//v2/bank_transaction_explanations/{id}/delete(deleteABankTransactionExplanation)/responses/200`.
+            ///
+            /// HTTP response code: `200 ok`.
+            public static var ok: Self {
+                .ok(.init())
+            }
             /// The associated value of the enum case if `self` is `.ok`.
             ///
             /// - Throws: An error if `self` is not `.ok`.
@@ -6813,31 +6689,6 @@ public enum Operations {
             ///
             /// A response with a code that is not documented in the OpenAPI document.
             case undocumented(statusCode: Swift.Int, OpenAPIRuntime.UndocumentedPayload)
-        }
-        @frozen public enum AcceptableContentType: AcceptableProtocol {
-            case json
-            case other(Swift.String)
-            public init?(rawValue: Swift.String) {
-                switch rawValue.lowercased() {
-                case "application/json":
-                    self = .json
-                default:
-                    self = .other(rawValue)
-                }
-            }
-            public var rawValue: Swift.String {
-                switch self {
-                case let .other(string):
-                    return string
-                case .json:
-                    return "application/json"
-                }
-            }
-            public static var allCases: [Self] {
-                [
-                    .json
-                ]
-            }
         }
     }
     /// List all bank transactions under a certain bank account
@@ -19389,83 +19240,24 @@ public enum Operations {
             @frozen public enum Body: Sendable, Hashable {
                 /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json`.
                 public struct JsonPayload: Codable, Hashable, Sendable {
-                    /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/ExpensesPayload`.
-                    public struct ExpensesPayloadPayload: Codable, Hashable, Sendable {
-                        /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/ExpensesPayload/category`.
-                        public var category: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/ExpensesPayload/created_at`.
-                        public var createdAt: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/ExpensesPayload/dated_on`.
-                        public var datedOn: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/ExpensesPayload/description`.
-                        public var description: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/ExpensesPayload/gross_value`.
-                        public var grossValue: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/ExpensesPayload/manual_sales_tax_amount`.
-                        public var manualSalesTaxAmount: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/ExpensesPayload/sales_tax_rate`.
-                        public var salesTaxRate: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/ExpensesPayload/updated_at`.
-                        public var updatedAt: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/ExpensesPayload/user`.
-                        public var user: Swift.String?
-                        /// Creates a new `ExpensesPayloadPayload`.
-                        ///
-                        /// - Parameters:
-                        ///   - category:
-                        ///   - createdAt:
-                        ///   - datedOn:
-                        ///   - description:
-                        ///   - grossValue:
-                        ///   - manualSalesTaxAmount:
-                        ///   - salesTaxRate:
-                        ///   - updatedAt:
-                        ///   - user:
-                        public init(
-                            category: Swift.String? = nil,
-                            createdAt: Swift.String? = nil,
-                            datedOn: Swift.String? = nil,
-                            description: Swift.String? = nil,
-                            grossValue: Swift.String? = nil,
-                            manualSalesTaxAmount: Swift.String? = nil,
-                            salesTaxRate: Swift.String? = nil,
-                            updatedAt: Swift.String? = nil,
-                            user: Swift.String? = nil
-                        ) {
-                            self.category = category
-                            self.createdAt = createdAt
-                            self.datedOn = datedOn
-                            self.description = description
-                            self.grossValue = grossValue
-                            self.manualSalesTaxAmount = manualSalesTaxAmount
-                            self.salesTaxRate = salesTaxRate
-                            self.updatedAt = updatedAt
-                            self.user = user
-                        }
-                        public enum CodingKeys: String, CodingKey {
-                            case category
-                            case createdAt = "created_at"
-                            case datedOn = "dated_on"
-                            case description
-                            case grossValue = "gross_value"
-                            case manualSalesTaxAmount = "manual_sales_tax_amount"
-                            case salesTaxRate = "sales_tax_rate"
-                            case updatedAt = "updated_at"
-                            case user
-                        }
-                    }
+                    /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/expense`.
+                    public var expense: Components.Schemas.ExpensePayload?
                     /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/expenses`.
-                    public typealias ExpensesPayload = [Operations.CreateExpense.Input.Body.JsonPayload.ExpensesPayloadPayload]
-                    /// - Remark: Generated from `#/paths/v2/expenses/POST/requestBody/json/expenses`.
-                    public var expenses: Operations.CreateExpense.Input.Body.JsonPayload.ExpensesPayload?
+                    public var expenses: [Components.Schemas.ExpensePayload]?
                     /// Creates a new `JsonPayload`.
                     ///
                     /// - Parameters:
+                    ///   - expense:
                     ///   - expenses:
-                    public init(expenses: Operations.CreateExpense.Input.Body.JsonPayload.ExpensesPayload? = nil) {
+                    public init(
+                        expense: Components.Schemas.ExpensePayload? = nil,
+                        expenses: [Components.Schemas.ExpensePayload]? = nil
+                    ) {
+                        self.expense = expense
                         self.expenses = expenses
                     }
                     public enum CodingKeys: String, CodingKey {
+                        case expense
                         case expenses
                     }
                 }
@@ -19487,10 +19279,10 @@ public enum Operations {
             }
         }
         @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/expenses/POST/responses/200/content`.
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/expenses/POST/responses/201/content`.
                 @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/expenses/POST/responses/200/content/json`.
+                    /// - Remark: Generated from `#/paths/v2/expenses/POST/responses/201/content/json`.
                     public struct JsonPayload: Codable, Hashable, Sendable {
                         /// A container of undocumented properties.
                         public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
@@ -19508,13 +19300,13 @@ public enum Operations {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }
-                    /// - Remark: Generated from `#/paths/v2/expenses/POST/responses/200/content/application\/json`.
-                    case json(Operations.CreateExpense.Output.Ok.Body.JsonPayload)
+                    /// - Remark: Generated from `#/paths/v2/expenses/POST/responses/201/content/application\/json`.
+                    case json(Operations.CreateExpense.Output.Created.Body.JsonPayload)
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: Operations.CreateExpense.Output.Ok.Body.JsonPayload {
+                    public var json: Operations.CreateExpense.Output.Created.Body.JsonPayload {
                         get throws {
                             switch self {
                             case let .json(body):
@@ -19524,33 +19316,33 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.CreateExpense.Output.Ok.Body
-                /// Creates a new `Ok`.
+                public var body: Operations.CreateExpense.Output.Created.Body
+                /// Creates a new `Created`.
                 ///
                 /// - Parameters:
                 ///   - body: Received HTTP response body
-                public init(body: Operations.CreateExpense.Output.Ok.Body) {
+                public init(body: Operations.CreateExpense.Output.Created.Body) {
                     self.body = body
                 }
             }
-            /// Success
+            /// Created
             ///
-            /// - Remark: Generated from `#/paths//v2/expenses/post(createExpense)/responses/200`.
+            /// - Remark: Generated from `#/paths//v2/expenses/post(createExpense)/responses/201`.
             ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.CreateExpense.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
+            /// HTTP response code: `201 created`.
+            case created(Operations.CreateExpense.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
             ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.CreateExpense.Output.Ok {
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.CreateExpense.Output.Created {
                 get throws {
                     switch self {
-                    case let .ok(response):
+                    case let .created(response):
                         return response
                     default:
                         try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
+                            expectedStatus: "created",
                             response: self
                         )
                     }
