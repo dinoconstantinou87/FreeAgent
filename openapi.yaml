@@ -408,6 +408,9 @@ paths:
                     paid_invoice:
                       type: string
                       example: https://api.freeagent.com/v2/invoices/123
+                    paid_user:
+                      type: string
+                      example: https://api.freeagent.com/v2/users/1
                     project:
                       type: string
                       example: https://api.freeagent.com/v2/projects/1
@@ -487,6 +490,9 @@ paths:
                     gross_value:
                       type: string
                       example: '-730.0'
+                    paid_user:
+                      type: string
+                      example: https://api.freeagent.com/v2/users/1
       responses:
         '200':
           description: Success

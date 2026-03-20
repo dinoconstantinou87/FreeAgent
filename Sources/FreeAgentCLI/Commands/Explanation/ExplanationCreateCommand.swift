@@ -30,6 +30,9 @@ struct ExplanationCreateCommand: ClientCommand {
     @Option(name: .long, help: "Invoice URL to mark as paid (e.g. https://api.freeagent.com/v2/invoices/123)")
     var paidInvoice: String?
 
+    @Option(name: .long, help: "User URL for DLA/salary payment (e.g. https://api.freeagent.com/v2/users/1)")
+    var paidUser: String?
+
     @Option(name: .long, help: "Project URL (optional)")
     var project: String?
 
@@ -48,6 +51,7 @@ struct ExplanationCreateCommand: ClientCommand {
             description: description,
             grossValue: grossValue,
             paidInvoice: paidInvoice,
+            paidUser: paidUser,
             project: project,
             rebillFactor: rebillFactor,
             rebillType: rebillType

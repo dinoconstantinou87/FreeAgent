@@ -5979,6 +5979,8 @@ public enum Operations {
                         public var grossValue: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/paid_invoice`.
                         public var paidInvoice: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/paid_user`.
+                        public var paidUser: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/project`.
                         public var project: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/rebill_factor`.
@@ -5996,6 +5998,7 @@ public enum Operations {
                         ///   - description:
                         ///   - grossValue:
                         ///   - paidInvoice:
+                        ///   - paidUser:
                         ///   - project:
                         ///   - rebillFactor:
                         ///   - rebillType:
@@ -6008,6 +6011,7 @@ public enum Operations {
                             description: Swift.String? = nil,
                             grossValue: Swift.String? = nil,
                             paidInvoice: Swift.String? = nil,
+                            paidUser: Swift.String? = nil,
                             project: Swift.String? = nil,
                             rebillFactor: Swift.String? = nil,
                             rebillType: Swift.String? = nil
@@ -6020,6 +6024,7 @@ public enum Operations {
                             self.description = description
                             self.grossValue = grossValue
                             self.paidInvoice = paidInvoice
+                            self.paidUser = paidUser
                             self.project = project
                             self.rebillFactor = rebillFactor
                             self.rebillType = rebillType
@@ -6033,6 +6038,7 @@ public enum Operations {
                             case description
                             case grossValue = "gross_value"
                             case paidInvoice = "paid_invoice"
+                            case paidUser = "paid_user"
                             case project
                             case rebillFactor = "rebill_factor"
                             case rebillType = "rebill_type"
@@ -6427,6 +6433,8 @@ public enum Operations {
                         public var description: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation/gross_value`.
                         public var grossValue: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation/paid_user`.
+                        public var paidUser: Swift.String?
                         /// Creates a new `BankTransactionExplanationPayload`.
                         ///
                         /// - Parameters:
@@ -6434,22 +6442,26 @@ public enum Operations {
                         ///   - category:
                         ///   - description:
                         ///   - grossValue:
+                        ///   - paidUser:
                         public init(
                             attachment: Components.Schemas.AttachmentPayload? = nil,
                             category: Swift.String? = nil,
                             description: Swift.String? = nil,
-                            grossValue: Swift.String? = nil
+                            grossValue: Swift.String? = nil,
+                            paidUser: Swift.String? = nil
                         ) {
                             self.attachment = attachment
                             self.category = category
                             self.description = description
                             self.grossValue = grossValue
+                            self.paidUser = paidUser
                         }
                         public enum CodingKeys: String, CodingKey {
                             case attachment
                             case category
                             case description
                             case grossValue = "gross_value"
+                            case paidUser = "paid_user"
                         }
                     }
                     /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation`.

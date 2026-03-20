@@ -21,6 +21,9 @@ struct ExplanationUpdateCommand: ClientCommand {
     @Option(name: .long, help: "Gross value")
     var grossValue: String?
 
+    @Option(name: .long, help: "User URL for DLA/salary payment")
+    var paidUser: String?
+
     @Option(name: .long, help: "Path to file to attach (PDF or image)")
     var attachment: String?
 
@@ -52,7 +55,8 @@ struct ExplanationUpdateCommand: ClientCommand {
             attachment: attachmentPayload,
             category: category,
             description: description,
-            grossValue: grossValue
+            grossValue: grossValue,
+            paidUser: paidUser
         )
 
         let input = Operations.UpdateABankTransactionExplanation.Input(
