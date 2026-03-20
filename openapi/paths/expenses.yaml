@@ -1,0 +1,126 @@
+list:
+  get:
+    tags:
+    - Expenses
+    summary: List all expenses
+    description: List all expenses
+    operationId: listAllExpenses
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  post:
+    tags:
+    - Expenses
+    summary: Create expense
+    description: Create expense
+    operationId: createExpense
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              expense:
+                $ref: '#/components/schemas/ExpensePayload'
+              expenses:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ExpensePayload'
+                example:
+                - category: https://api.freeagent.com/v2/categories/285
+                  created_at: 2011-08-24 08:10:40+00:00
+                  dated_on: 2011-08-24
+                  description: Some description
+                  gross_value: '-12.0'
+                  manual_sales_tax_amount: '0.12'
+                  sales_tax_rate: '20.0'
+                  updated_at: 2011-08-24 08:10:40+00:00
+                  user: https://api.freeagent.com/v2/users/1
+                - category: https://api.freeagent.com/v2/categories/285
+                  created_at: 2011-08-25 08:10:40+00:00
+                  dated_on: 2011-08-24
+                  description: Some description
+                  gross_value: '-5.0'
+                  manual_sales_tax_amount: '0.12'
+                  sales_tax_rate: '20.0'
+                  updated_at: 2011-08-25 08:10:40+00:00
+                  user: https://api.freeagent.com/v2/users/1
+          examples:
+            Batch create expenses:
+              value:
+                expenses:
+                - category: https://api.freeagent.com/v2/categories/285
+                  created_at: 2011-08-24 08:10:40+00:00
+                  dated_on: 2011-08-24
+                  description: Some description
+                  gross_value: '-12.0'
+                  manual_sales_tax_amount: '0.12'
+                  sales_tax_rate: '20.0'
+                  updated_at: 2011-08-24 08:10:40+00:00
+                  user: https://api.freeagent.com/v2/users/1
+                - category: https://api.freeagent.com/v2/categories/285
+                  created_at: 2011-08-25 08:10:40+00:00
+                  dated_on: 2011-08-24
+                  description: Some description
+                  gross_value: '-5.0'
+                  manual_sales_tax_amount: '0.12'
+                  sales_tax_rate: '20.0'
+                  updated_at: 2011-08-25 08:10:40+00:00
+                  user: https://api.freeagent.com/v2/users/1
+            Create expense:
+              value:
+                expense:
+                  category: https://api.freeagent.com/v2/categories/285
+                  created_at: 2011-08-24 08:10:40+00:00
+                  currency: USD
+                  dated_on: 2011-08-24
+                  description: Some description
+                  gross_value: '-20.0'
+                  manual_sales_tax_amount: '0.12'
+                  native_gross_value: '-12.0'
+                  native_sales_tax_value: '-0.12'
+                  sales_tax_rate: '1.0'
+                  sales_tax_value: '-0.2'
+                  updated_at: 2011-08-24 08:10:40+00:00
+                  user: https://api.freeagent.com/v2/users/:id
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+show:
+  get:
+    tags:
+    - Expenses
+    summary: Get a single expense
+    description: Get a single expense
+    operationId: getASingleExpense
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

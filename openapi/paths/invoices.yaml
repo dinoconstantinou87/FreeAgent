@@ -1,0 +1,448 @@
+mark_as_sent:
+  put:
+    tags:
+    - Invoices
+    - Invoice Transitions
+    summary: Mark invoice as sent
+    description: Mark invoice as sent
+    operationId: markInvoiceAsSent
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+mark_as_cancelled:
+  put:
+    tags:
+    - Invoices
+    - Invoice Transitions
+    summary: Mark invoice as cancelled
+    description: Mark invoice as cancelled
+    operationId: markInvoiceAsCancelled
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+mark_as_scheduled:
+  put:
+    tags:
+    - Invoices
+    - Invoice Transitions
+    summary: Mark invoice as scheduled
+    description: Mark invoice as scheduled
+    operationId: markInvoiceAsScheduled
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+mark_as_draft:
+  put:
+    tags:
+    - Invoices
+    - Invoice Transitions
+    summary: Mark invoice as draft
+    description: Mark invoice as draft
+    operationId: markInvoiceAsDraft
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+list:
+  get:
+    tags:
+    - Invoices
+    summary: List Invoices
+    description: List Invoices
+    operationId: listInvoices
+    parameters:
+    - name: nested_invoice_items
+      in: query
+      description: Include nested invoice items in response
+      schema:
+        type: boolean
+        example: true
+    - name: contact
+      in: query
+      description: Filter invoices by contact URL
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/contacts/:id
+    - name: project
+      in: query
+      description: Filter invoices by project URL
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/projects/:id
+    - name: currency
+      in: query
+      description: Filter invoices by currency code
+      schema:
+        type: string
+        example: USD
+    - name: view
+      in: query
+      description: Filter invoices by view type
+      schema:
+        $ref: '#/components/schemas/InvoiceView'
+    - name: updated_since
+      in: query
+      description: Show invoices updated since this date (YYYY-MM-DD)
+      schema:
+        type: string
+        example: 2018-01-01
+    - name: sort
+      in: query
+      description: Sort invoices by specified field
+      schema:
+        type: string
+        enum:
+        - updated_at
+        - created_at
+        example: updated_at
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  post:
+    tags:
+    - Invoices
+    summary: Create Invoice
+    description: Create Invoice
+    operationId: createInvoice
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              invoice:
+                $ref: '#/components/schemas/InvoiceCreatePayload'
+          examples:
+            Create Invoice:
+              value:
+                invoice:
+                  always_show_bic_and_iban: false
+                  contact: https://api.freeagent.com/v2/contacts/:id
+                  currency: GBP
+                  dated_on: 2019-08-18
+                  due_on: 2019-09-18
+                  omit_header: false
+                  payment_terms_in_days: 30
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+show:
+  get:
+    tags:
+    - Invoices
+    summary: Show Invoice
+    description: Show Invoice
+    operationId: showInvoice
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  put:
+    tags:
+    - Invoices
+    summary: Update Invoice
+    description: Update Invoice
+    operationId: updateInvoice
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              invoice:
+                $ref: '#/components/schemas/InvoiceUpdatePayload'
+          examples:
+            Update Invoice:
+              value:
+                invoice:
+                  notes: An example of some additional text.
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  delete:
+    tags:
+    - Invoices
+    summary: Delete Invoice
+    description: Delete Invoice
+    operationId: deleteInvoice
+    responses:
+      '200':
+        description: Success
+      '409':
+        $ref: '#/components/responses/EmptyResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+timeline:
+  get:
+    tags:
+    - Invoices
+    summary: Get invoice timeline
+    description: Get invoice timeline
+    operationId: getInvoiceTimeline
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+pdf:
+  get:
+    tags:
+    - Invoices
+    summary: Show Invoice as PDF
+    description: Show Invoice as PDF
+    operationId: showInvoiceAsPdf
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+send_email:
+  post:
+    tags:
+    - Invoices
+    summary: Send Invoice Email
+    description: Send Invoice Email
+    operationId: sendInvoiceEmail
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              invoice:
+                type: object
+                properties:
+                  email:
+                    $ref: '#/components/schemas/EmailPayload'
+          examples:
+            Send Invoice Email:
+              value:
+                invoice:
+                  email:
+                    body: Bison bison bison bison bison Bison bison
+                    from: Our Company <us@company.com>
+                    subject: Testing
+                    to: Test Contact <test_contact@example.com>
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+create_item:
+  post:
+    tags:
+    - Invoices
+    summary: Create Invoice Item
+    description: Create Invoice Item
+    operationId: createInvoiceItem
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              invoice:
+                type: string
+                example: https://api.freeagent.com/v2/invoices/1
+              invoice_item:
+                $ref: '#/components/schemas/InvoiceItemPayload'
+          examples:
+            Create Invoice Item:
+              value:
+                invoice: https://api.freeagent.com/v2/invoices/1
+                invoice_item:
+                  description: Fishing trip
+                  item_type: Hours
+                  price: 35
+                  quantity: 6
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+update_item:
+  put:
+    tags:
+    - Invoices
+    summary: Update Invoice Item
+    description: Update Invoice Item
+    operationId: updateInvoiceItem
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              invoice_item:
+                $ref: '#/components/schemas/InvoiceItemPayload'
+          examples:
+            Update Invoice Item:
+              value:
+                invoice_item:
+                  quantity: 3
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

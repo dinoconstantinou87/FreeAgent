@@ -1,0 +1,14 @@
+type: object
+properties:
+  body:
+    type: string
+    example: Bison bison bison bison bison Bison bison
+  from:
+    type: string
+    example: Our Company <us@company.com>
+  subject:
+    type: string
+    example: Testing
+  to:
+    type: string
+    example: Test Contact <test_contact@example.com>

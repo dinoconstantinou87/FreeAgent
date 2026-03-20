@@ -1,0 +1,17 @@
+show:
+  get:
+    tags:
+    - Company
+    summary: Company Details
+    description: Company Details
+    operationId: companyDetails
+    responses:
+      '200':
+        description: Company details
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'

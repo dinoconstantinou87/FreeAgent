@@ -1,0 +1,32 @@
+type: object
+properties:
+  category:
+    type: string
+    example: https://api.freeagent.com/v2/categories/285
+  created_at:
+    type: string
+    example: 2011-08-24 08:10:40+00:00
+  currency:
+    type: string
+    example: USD
+  dated_on:
+    type: string
+    example: 2011-08-24
+  description:
+    type: string
+    example: Some description
+  gross_value:
+    type: string
+    example: '-12.0'
+  manual_sales_tax_amount:
+    type: string
+    example: '0.12'
+  sales_tax_rate:
+    type: string
+    example: '20.0'
+  updated_at:
+    type: string
+    example: 2011-08-24 08:10:40+00:00
+  user:
+    type: string
+    example: https://api.freeagent.com/v2/users/1

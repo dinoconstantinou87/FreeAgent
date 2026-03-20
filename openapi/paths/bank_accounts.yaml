@@ -1,0 +1,47 @@
+list:
+  get:
+    tags:
+    - Bank Accounts
+    summary: List Bank Accounts
+    description: List Bank Accounts
+    operationId: listBankAccounts
+    parameters:
+    - name: view
+      in: query
+      schema:
+        type: string
+        example: standard_bank_accounts
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+show:
+  get:
+    tags:
+    - Bank Accounts
+    summary: Show Bank Account
+    description: Show Bank Account
+    operationId: showBankAccount
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

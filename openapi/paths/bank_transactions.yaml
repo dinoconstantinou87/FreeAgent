@@ -1,0 +1,82 @@
+list:
+  get:
+    tags:
+    - Bank Transactions
+    summary: List all bank transactions under a certain bank account
+    description: List all bank transactions under a certain bank account
+    operationId: listAllBankTransactionsUnderACertainBankAccount
+    parameters:
+    - name: bank_account
+      in: query
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/bank_accounts/1
+    - name: from_date
+      in: query
+      schema:
+        type: string
+        example: 2018-01-01
+    - name: to_date
+      in: query
+      schema:
+        type: string
+        example: 2018-01-01
+    - name: updated_since
+      in: query
+      schema:
+        type: string
+        example: 2018-01-01
+    - name: view
+      in: query
+      schema:
+        type: string
+        example: all
+    - name: last_uploaded
+      in: query
+      schema:
+        type: string
+        example: 'true'
+    - name: page
+      in: query
+      schema:
+        type: integer
+        example: 1
+    - name: per_page
+      in: query
+      schema:
+        type: integer
+        example: 100
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+show:
+  get:
+    tags:
+    - Bank Transactions
+    summary: Get a single bank transaction
+    description: Get a single bank transaction
+    operationId: getASingleBankTransaction
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

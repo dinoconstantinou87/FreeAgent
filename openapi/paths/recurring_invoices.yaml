@@ -1,0 +1,58 @@
+list:
+  get:
+    tags:
+    - Recurring Invoices
+    summary: List all recurring invoices
+    description: List all recurring invoices
+    operationId: listAllRecurringInvoices
+    parameters:
+    - name: view
+      in: query
+      description: Filter recurring invoices by view type
+      schema:
+        type: string
+        enum:
+        - draft
+        - active
+        - inactive
+        example: draft
+    - name: contact
+      in: query
+      description: Filter by contact URL
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/contacts/:id
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+show:
+  get:
+    tags:
+    - Recurring Invoices
+    summary: Show Recurring Invoice
+    description: Show Recurring Invoice
+    operationId: showRecurringInvoice
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

@@ -1,0 +1,26 @@
+type: object
+properties:
+  contact:
+    type: string
+    example: https://api.freeagent.com/v2/contacts/1
+  reference:
+    type: string
+    example: REF100
+  dated_on:
+    type: string
+    example: 2020-09-14
+  due_on:
+    type: string
+    example: 2020-10-14
+  comments:
+    type: string
+    example: Vehicle purchase
+  ec_status:
+    type: string
+    example: UK
+  attachment:
+    $ref: '#/components/schemas/AttachmentPayload'
+  bill_items:
+    type: array
+    items:
+      $ref: '#/components/schemas/BillItemPayload'

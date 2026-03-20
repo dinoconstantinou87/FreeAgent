@@ -1,0 +1,46 @@
+list:
+  get:
+    tags:
+    - Contacts
+    summary: List Contacts
+    description: List Contacts
+    operationId: listContacts
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  post:
+    tags:
+    - Contacts
+    summary: Create Contact
+    description: Create Contact
+    operationId: createContact
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              contact:
+                $ref: '#/components/schemas/ContactCreatePayload'
+          examples:
+            Create Contact:
+              value:
+                contact:
+                  organisation_name: Testington & Sons Ltd
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'

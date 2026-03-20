@@ -1,0 +1,5 @@
+type: object
+properties:
+  notes:
+    type: string
+    example: An example of some additional text.

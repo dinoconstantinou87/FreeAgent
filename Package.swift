@@ -27,7 +27,8 @@ let package = Package(
         .package(url: "https://github.com/tuist/Noora", from: "0.49.1"),
         .package(url: "https://github.com/OAuthSwift/OAuthSwift", from: "2.2.0"),
         .package(url: "https://github.com/httpswift/swifter.git", from: "1.5.0"),
-        .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", from: "4.2.2")
+        .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", from: "4.2.2"),
+        .package(url: "https://github.com/jpsim/Yams", from: "5.0.0")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -58,6 +59,12 @@ let package = Package(
             swiftSettings: [
                 .swiftLanguageMode(.v6),
                 .enableExperimentalFeature("StrictConcurrency")
+            ]),
+        .executableTarget(
+            name: "OpenAPIBundler",
+            dependencies: [
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "Yams", package: "Yams")
             ]),
     ]
 )

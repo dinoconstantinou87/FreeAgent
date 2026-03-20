@@ -1,0 +1,22 @@
+type: object
+properties:
+  data:
+    type: string
+    description: Binary data of the file encoded as base64
+    example: iVBORw0KGgo...
+  file_name:
+    type: string
+    example: receipt.pdf
+  content_type:
+    type: string
+    enum:
+    - image/png
+    - image/x-png
+    - image/jpeg
+    - image/jpg
+    - image/gif
+    - application/x-pdf
+    example: application/x-pdf
+  description:
+    type: string
+    example: Invoice receipt

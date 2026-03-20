@@ -1,0 +1,40 @@
+type: object
+properties:
+  attachment:
+    $ref: '#/components/schemas/AttachmentPayload'
+  bank_account:
+    type: string
+    example: https://api.freeagent.com/v2/bank_accounts/1
+  bank_transaction:
+    type: string
+    example: https://api.freeagent.com/v2/bank_transactions/8
+  category:
+    type: string
+    example: https://api.freeagent.com/v2/categories/285
+  dated_on:
+    type: string
+    example: 2010-05-01
+  description:
+    type: string
+    example: harness end-to-end e-business
+  gross_value:
+    type: string
+    example: '-730.0'
+  paid_bill:
+    type: string
+    example: https://api.freeagent.com/v2/bills/123
+  paid_invoice:
+    type: string
+    example: https://api.freeagent.com/v2/invoices/123
+  paid_user:
+    type: string
+    example: https://api.freeagent.com/v2/users/1
+  project:
+    type: string
+    example: https://api.freeagent.com/v2/projects/1
+  rebill_factor:
+    type: string
+    example: '0.25'
+  rebill_type:
+    type: string
+    example: markup

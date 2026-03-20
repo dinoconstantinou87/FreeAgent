@@ -1,0 +1,14 @@
+type: object
+properties:
+  email:
+    type: string
+    example: fred@testingtonandsons.example.com
+  first_name:
+    type: string
+    example: Frederick
+  last_name:
+    type: string
+    example: Testington
+  organisation_name:
+    type: string
+    example: Testington & Sons Ltd

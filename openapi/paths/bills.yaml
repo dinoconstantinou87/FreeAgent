@@ -1,0 +1,25 @@
+create:
+  post:
+    tags:
+    - Bills
+    summary: Create Bill
+    description: Create Bill
+    operationId: createBill
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              bill:
+                $ref: '#/components/schemas/BillCreatePayload'
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'

@@ -1,0 +1,19 @@
+type: object
+properties:
+  attachment:
+    $ref: '#/components/schemas/AttachmentPayload'
+  category:
+    type: string
+    example: https://api.freeagent.com/v2/categories/285
+  description:
+    type: string
+    example: Updated description
+  gross_value:
+    type: string
+    example: '-730.0'
+  paid_bill:
+    type: string
+    example: https://api.freeagent.com/v2/bills/123
+  paid_user:
+    type: string
+    example: https://api.freeagent.com/v2/users/1

@@ -1,0 +1,30 @@
+type: object
+properties:
+  description:
+    type: string
+    example: Fishing trip
+  item_type:
+    type: string
+    enum:
+    - Hours
+    - Days
+    - Weeks
+    - Months
+    - Years
+    - Products
+    - Services
+    - Training
+    - Expenses
+    - Comment
+    - Bills
+    - Discount
+    - Credit
+    - VAT
+    - Stock
+    example: Hours
+  price:
+    type: number
+    example: 35
+  quantity:
+    type: number
+    example: 6

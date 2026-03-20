@@ -1,0 +1,23 @@
+type: object
+properties:
+  always_show_bic_and_iban:
+    type: boolean
+    example: false
+  contact:
+    type: string
+    example: https://api.freeagent.com/v2/contacts/:id
+  currency:
+    type: string
+    example: GBP
+  dated_on:
+    type: string
+    example: 2019-08-18
+  due_on:
+    type: string
+    example: 2019-09-18
+  omit_header:
+    type: boolean
+    example: false
+  payment_terms_in_days:
+    type: number
+    example: 30

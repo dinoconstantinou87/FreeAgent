@@ -1,0 +1,14 @@
+type: object
+properties:
+  category:
+    type: string
+    example: https://api.freeagent.com/v2/categories/285
+  description:
+    type: string
+    example: Item description
+  total_value:
+    type: string
+    example: '300.0'
+  sales_tax_rate:
+    type: string
+    example: '20.0'

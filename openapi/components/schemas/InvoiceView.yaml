@@ -1,0 +1,13 @@
+type: string
+enum:
+- all
+- recent_open_or_overdue
+- open
+- overdue
+- open_or_overdue
+- draft
+- scheduled_to_email
+- thank_you_emails
+- reminder_emails
+- last_N_months
+example: all
