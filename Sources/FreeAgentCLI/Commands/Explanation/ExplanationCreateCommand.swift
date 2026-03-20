@@ -27,6 +27,9 @@ struct ExplanationCreateCommand: ClientCommand {
     @Option(name: .long, help: "Gross value (e.g. -730.0)")
     var grossValue: String
 
+    @Option(name: .long, help: "Bill URL to mark as paid (e.g. https://api.freeagent.com/v2/bills/123)")
+    var paidBill: String?
+
     @Option(name: .long, help: "Invoice URL to mark as paid (e.g. https://api.freeagent.com/v2/invoices/123)")
     var paidInvoice: String?
 
@@ -50,6 +53,7 @@ struct ExplanationCreateCommand: ClientCommand {
             datedOn: datedOn,
             description: description,
             grossValue: grossValue,
+            paidBill: paidBill,
             paidInvoice: paidInvoice,
             paidUser: paidUser,
             project: project,

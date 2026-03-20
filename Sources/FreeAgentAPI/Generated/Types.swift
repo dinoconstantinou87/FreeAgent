@@ -5977,6 +5977,8 @@ public enum Operations {
                         public var description: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/gross_value`.
                         public var grossValue: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/paid_bill`.
+                        public var paidBill: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/paid_invoice`.
                         public var paidInvoice: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/POST/requestBody/json/bank_transaction_explanation/paid_user`.
@@ -5997,6 +5999,7 @@ public enum Operations {
                         ///   - datedOn:
                         ///   - description:
                         ///   - grossValue:
+                        ///   - paidBill:
                         ///   - paidInvoice:
                         ///   - paidUser:
                         ///   - project:
@@ -6010,6 +6013,7 @@ public enum Operations {
                             datedOn: Swift.String? = nil,
                             description: Swift.String? = nil,
                             grossValue: Swift.String? = nil,
+                            paidBill: Swift.String? = nil,
                             paidInvoice: Swift.String? = nil,
                             paidUser: Swift.String? = nil,
                             project: Swift.String? = nil,
@@ -6023,6 +6027,7 @@ public enum Operations {
                             self.datedOn = datedOn
                             self.description = description
                             self.grossValue = grossValue
+                            self.paidBill = paidBill
                             self.paidInvoice = paidInvoice
                             self.paidUser = paidUser
                             self.project = project
@@ -6037,6 +6042,7 @@ public enum Operations {
                             case datedOn = "dated_on"
                             case description
                             case grossValue = "gross_value"
+                            case paidBill = "paid_bill"
                             case paidInvoice = "paid_invoice"
                             case paidUser = "paid_user"
                             case project
@@ -6433,6 +6439,8 @@ public enum Operations {
                         public var description: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation/gross_value`.
                         public var grossValue: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation/paid_bill`.
+                        public var paidBill: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bank_transaction_explanations/{id}/PUT/requestBody/json/bank_transaction_explanation/paid_user`.
                         public var paidUser: Swift.String?
                         /// Creates a new `BankTransactionExplanationPayload`.
@@ -6442,18 +6450,21 @@ public enum Operations {
                         ///   - category:
                         ///   - description:
                         ///   - grossValue:
+                        ///   - paidBill:
                         ///   - paidUser:
                         public init(
                             attachment: Components.Schemas.AttachmentPayload? = nil,
                             category: Swift.String? = nil,
                             description: Swift.String? = nil,
                             grossValue: Swift.String? = nil,
+                            paidBill: Swift.String? = nil,
                             paidUser: Swift.String? = nil
                         ) {
                             self.attachment = attachment
                             self.category = category
                             self.description = description
                             self.grossValue = grossValue
+                            self.paidBill = paidBill
                             self.paidUser = paidUser
                         }
                         public enum CodingKeys: String, CodingKey {
@@ -6461,6 +6472,7 @@ public enum Operations {
                             case category
                             case description
                             case grossValue = "gross_value"
+                            case paidBill = "paid_bill"
                             case paidUser = "paid_user"
                         }
                     }
@@ -7594,96 +7606,98 @@ public enum Operations {
                 public struct JsonPayload: Codable, Hashable, Sendable {
                     /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill`.
                     public struct BillPayload: Codable, Hashable, Sendable {
-                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/attachment`.
-                        public struct AttachmentPayload: Codable, Hashable, Sendable {
-                            /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/attachment/content_type`.
-                            public var contentType: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/attachment/data`.
-                            public var data: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/attachment/description`.
-                            public var description: Swift.String?
-                            /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/attachment/file_name`.
-                            public var fileName: Swift.String?
-                            /// Creates a new `AttachmentPayload`.
-                            ///
-                            /// - Parameters:
-                            ///   - contentType:
-                            ///   - data:
-                            ///   - description:
-                            ///   - fileName:
-                            public init(
-                                contentType: Swift.String? = nil,
-                                data: Swift.String? = nil,
-                                description: Swift.String? = nil,
-                                fileName: Swift.String? = nil
-                            ) {
-                                self.contentType = contentType
-                                self.data = data
-                                self.description = description
-                                self.fileName = fileName
-                            }
-                            public enum CodingKeys: String, CodingKey {
-                                case contentType = "content_type"
-                                case data
-                                case description
-                                case fileName = "file_name"
-                            }
-                        }
-                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/attachment`.
-                        public var attachment: Operations.CreateBill.Input.Body.JsonPayload.BillPayload.AttachmentPayload?
-                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/category`.
-                        public var category: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/contact`.
                         public var contact: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/reference`.
+                        public var reference: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/dated_on`.
                         public var datedOn: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/due_on`.
                         public var dueOn: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/reference`.
-                        public var reference: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/sale_tax_rate`.
-                        public var saleTaxRate: Swift.String?
-                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/total_value`.
-                        public var totalValue: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/comments`.
+                        public var comments: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/ec_status`.
+                        public var ecStatus: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/attachment`.
+                        public var attachment: Components.Schemas.AttachmentPayload?
+                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/BillItemsPayload`.
+                        public struct BillItemsPayloadPayload: Codable, Hashable, Sendable {
+                            /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/BillItemsPayload/category`.
+                            public var category: Swift.String?
+                            /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/BillItemsPayload/description`.
+                            public var description: Swift.String?
+                            /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/BillItemsPayload/total_value`.
+                            public var totalValue: Swift.String?
+                            /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/BillItemsPayload/sales_tax_rate`.
+                            public var salesTaxRate: Swift.String?
+                            /// Creates a new `BillItemsPayloadPayload`.
+                            ///
+                            /// - Parameters:
+                            ///   - category:
+                            ///   - description:
+                            ///   - totalValue:
+                            ///   - salesTaxRate:
+                            public init(
+                                category: Swift.String? = nil,
+                                description: Swift.String? = nil,
+                                totalValue: Swift.String? = nil,
+                                salesTaxRate: Swift.String? = nil
+                            ) {
+                                self.category = category
+                                self.description = description
+                                self.totalValue = totalValue
+                                self.salesTaxRate = salesTaxRate
+                            }
+                            public enum CodingKeys: String, CodingKey {
+                                case category
+                                case description
+                                case totalValue = "total_value"
+                                case salesTaxRate = "sales_tax_rate"
+                            }
+                        }
+                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/bill_items`.
+                        public typealias BillItemsPayload = [Operations.CreateBill.Input.Body.JsonPayload.BillPayload.BillItemsPayloadPayload]
+                        /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill/bill_items`.
+                        public var billItems: Operations.CreateBill.Input.Body.JsonPayload.BillPayload.BillItemsPayload?
                         /// Creates a new `BillPayload`.
                         ///
                         /// - Parameters:
-                        ///   - attachment:
-                        ///   - category:
                         ///   - contact:
+                        ///   - reference:
                         ///   - datedOn:
                         ///   - dueOn:
-                        ///   - reference:
-                        ///   - saleTaxRate:
-                        ///   - totalValue:
+                        ///   - comments:
+                        ///   - ecStatus:
+                        ///   - attachment:
+                        ///   - billItems:
                         public init(
-                            attachment: Operations.CreateBill.Input.Body.JsonPayload.BillPayload.AttachmentPayload? = nil,
-                            category: Swift.String? = nil,
                             contact: Swift.String? = nil,
+                            reference: Swift.String? = nil,
                             datedOn: Swift.String? = nil,
                             dueOn: Swift.String? = nil,
-                            reference: Swift.String? = nil,
-                            saleTaxRate: Swift.String? = nil,
-                            totalValue: Swift.String? = nil
+                            comments: Swift.String? = nil,
+                            ecStatus: Swift.String? = nil,
+                            attachment: Components.Schemas.AttachmentPayload? = nil,
+                            billItems: Operations.CreateBill.Input.Body.JsonPayload.BillPayload.BillItemsPayload? = nil
                         ) {
-                            self.attachment = attachment
-                            self.category = category
                             self.contact = contact
+                            self.reference = reference
                             self.datedOn = datedOn
                             self.dueOn = dueOn
-                            self.reference = reference
-                            self.saleTaxRate = saleTaxRate
-                            self.totalValue = totalValue
+                            self.comments = comments
+                            self.ecStatus = ecStatus
+                            self.attachment = attachment
+                            self.billItems = billItems
                         }
                         public enum CodingKeys: String, CodingKey {
-                            case attachment
-                            case category
                             case contact
+                            case reference
                             case datedOn = "dated_on"
                             case dueOn = "due_on"
-                            case reference
-                            case saleTaxRate = "sale_tax_rate"
-                            case totalValue = "total_value"
+                            case comments
+                            case ecStatus = "ec_status"
+                            case attachment
+                            case billItems = "bill_items"
                         }
                     }
                     /// - Remark: Generated from `#/paths/v2/bills/POST/requestBody/json/bill`.
@@ -7717,10 +7731,10 @@ public enum Operations {
             }
         }
         @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/bills/POST/responses/200/content`.
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/bills/POST/responses/201/content`.
                 @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/bills/POST/responses/200/content/json`.
+                    /// - Remark: Generated from `#/paths/v2/bills/POST/responses/201/content/json`.
                     public struct JsonPayload: Codable, Hashable, Sendable {
                         /// A container of undocumented properties.
                         public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
@@ -7738,13 +7752,13 @@ public enum Operations {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }
-                    /// - Remark: Generated from `#/paths/v2/bills/POST/responses/200/content/application\/json`.
-                    case json(Operations.CreateBill.Output.Ok.Body.JsonPayload)
+                    /// - Remark: Generated from `#/paths/v2/bills/POST/responses/201/content/application\/json`.
+                    case json(Operations.CreateBill.Output.Created.Body.JsonPayload)
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: Operations.CreateBill.Output.Ok.Body.JsonPayload {
+                    public var json: Operations.CreateBill.Output.Created.Body.JsonPayload {
                         get throws {
                             switch self {
                             case let .json(body):
@@ -7754,33 +7768,33 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.CreateBill.Output.Ok.Body
-                /// Creates a new `Ok`.
+                public var body: Operations.CreateBill.Output.Created.Body
+                /// Creates a new `Created`.
                 ///
                 /// - Parameters:
                 ///   - body: Received HTTP response body
-                public init(body: Operations.CreateBill.Output.Ok.Body) {
+                public init(body: Operations.CreateBill.Output.Created.Body) {
                     self.body = body
                 }
             }
-            /// Success
+            /// Created
             ///
-            /// - Remark: Generated from `#/paths//v2/bills/post(createBill)/responses/200`.
+            /// - Remark: Generated from `#/paths//v2/bills/post(createBill)/responses/201`.
             ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.CreateBill.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
+            /// HTTP response code: `201 created`.
+            case created(Operations.CreateBill.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
             ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.CreateBill.Output.Ok {
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.CreateBill.Output.Created {
                 get throws {
                     switch self {
-                    case let .ok(response):
+                    case let .created(response):
                         return response
                     default:
                         try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
+                            expectedStatus: "created",
                             response: self
                         )
                     }
@@ -12235,25 +12249,31 @@ public enum Operations {
                         public var firstName: Swift.String?
                         /// - Remark: Generated from `#/paths/v2/contacts/POST/requestBody/json/contact/last_name`.
                         public var lastName: Swift.String?
+                        /// - Remark: Generated from `#/paths/v2/contacts/POST/requestBody/json/contact/organisation_name`.
+                        public var organisationName: Swift.String?
                         /// Creates a new `ContactPayload`.
                         ///
                         /// - Parameters:
                         ///   - email:
                         ///   - firstName:
                         ///   - lastName:
+                        ///   - organisationName:
                         public init(
                             email: Swift.String? = nil,
                             firstName: Swift.String? = nil,
-                            lastName: Swift.String? = nil
+                            lastName: Swift.String? = nil,
+                            organisationName: Swift.String? = nil
                         ) {
                             self.email = email
                             self.firstName = firstName
                             self.lastName = lastName
+                            self.organisationName = organisationName
                         }
                         public enum CodingKeys: String, CodingKey {
                             case email
                             case firstName = "first_name"
                             case lastName = "last_name"
+                            case organisationName = "organisation_name"
                         }
                     }
                     /// - Remark: Generated from `#/paths/v2/contacts/POST/requestBody/json/contact`.
@@ -12287,10 +12307,10 @@ public enum Operations {
             }
         }
         @frozen public enum Output: Sendable, Hashable {
-            public struct Ok: Sendable, Hashable {
-                /// - Remark: Generated from `#/paths/v2/contacts/POST/responses/200/content`.
+            public struct Created: Sendable, Hashable {
+                /// - Remark: Generated from `#/paths/v2/contacts/POST/responses/201/content`.
                 @frozen public enum Body: Sendable, Hashable {
-                    /// - Remark: Generated from `#/paths/v2/contacts/POST/responses/200/content/json`.
+                    /// - Remark: Generated from `#/paths/v2/contacts/POST/responses/201/content/json`.
                     public struct JsonPayload: Codable, Hashable, Sendable {
                         /// A container of undocumented properties.
                         public var additionalProperties: OpenAPIRuntime.OpenAPIObjectContainer
@@ -12308,13 +12328,13 @@ public enum Operations {
                             try encoder.encodeAdditionalProperties(additionalProperties)
                         }
                     }
-                    /// - Remark: Generated from `#/paths/v2/contacts/POST/responses/200/content/application\/json`.
-                    case json(Operations.CreateContact.Output.Ok.Body.JsonPayload)
+                    /// - Remark: Generated from `#/paths/v2/contacts/POST/responses/201/content/application\/json`.
+                    case json(Operations.CreateContact.Output.Created.Body.JsonPayload)
                     /// The associated value of the enum case if `self` is `.json`.
                     ///
                     /// - Throws: An error if `self` is not `.json`.
                     /// - SeeAlso: `.json`.
-                    public var json: Operations.CreateContact.Output.Ok.Body.JsonPayload {
+                    public var json: Operations.CreateContact.Output.Created.Body.JsonPayload {
                         get throws {
                             switch self {
                             case let .json(body):
@@ -12324,33 +12344,33 @@ public enum Operations {
                     }
                 }
                 /// Received HTTP response body
-                public var body: Operations.CreateContact.Output.Ok.Body
-                /// Creates a new `Ok`.
+                public var body: Operations.CreateContact.Output.Created.Body
+                /// Creates a new `Created`.
                 ///
                 /// - Parameters:
                 ///   - body: Received HTTP response body
-                public init(body: Operations.CreateContact.Output.Ok.Body) {
+                public init(body: Operations.CreateContact.Output.Created.Body) {
                     self.body = body
                 }
             }
-            /// Success
+            /// Created
             ///
-            /// - Remark: Generated from `#/paths//v2/contacts/post(createContact)/responses/200`.
+            /// - Remark: Generated from `#/paths//v2/contacts/post(createContact)/responses/201`.
             ///
-            /// HTTP response code: `200 ok`.
-            case ok(Operations.CreateContact.Output.Ok)
-            /// The associated value of the enum case if `self` is `.ok`.
+            /// HTTP response code: `201 created`.
+            case created(Operations.CreateContact.Output.Created)
+            /// The associated value of the enum case if `self` is `.created`.
             ///
-            /// - Throws: An error if `self` is not `.ok`.
-            /// - SeeAlso: `.ok`.
-            public var ok: Operations.CreateContact.Output.Ok {
+            /// - Throws: An error if `self` is not `.created`.
+            /// - SeeAlso: `.created`.
+            public var created: Operations.CreateContact.Output.Created {
                 get throws {
                     switch self {
-                    case let .ok(response):
+                    case let .created(response):
                         return response
                     default:
                         try throwUnexpectedResponseStatus(
-                            expectedStatus: "ok",
+                            expectedStatus: "created",
                             response: self
                         )
                     }

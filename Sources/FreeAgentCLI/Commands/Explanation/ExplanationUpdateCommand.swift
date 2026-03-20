@@ -21,6 +21,9 @@ struct ExplanationUpdateCommand: ClientCommand {
     @Option(name: .long, help: "Gross value")
     var grossValue: String?
 
+    @Option(name: .long, help: "Bill URL to mark as paid")
+    var paidBill: String?
+
     @Option(name: .long, help: "User URL for DLA/salary payment")
     var paidUser: String?
 
@@ -56,6 +59,7 @@ struct ExplanationUpdateCommand: ClientCommand {
             category: category,
             description: description,
             grossValue: grossValue,
+            paidBill: paidBill,
             paidUser: paidUser
         )
 
