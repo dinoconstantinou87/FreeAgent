@@ -16,7 +16,7 @@ struct InvoiceUpdateCommand: ClientCommand {
     var notes: String?
     
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
-        let invoicePayload = Operations.UpdateInvoice.Input.Body.JsonPayload.InvoicePayload(
+        let invoicePayload = Components.Schemas.InvoiceUpdatePayload(
             notes: notes
         )
         

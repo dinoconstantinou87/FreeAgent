@@ -54,7 +54,7 @@ struct ExplanationUpdateCommand: ClientCommand {
             )
         }
 
-        let payload = Operations.UpdateABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload(
+        let payload = Components.Schemas.BankTransactionExplanationUpdatePayload(
             attachment: attachmentPayload,
             category: category,
             description: description,

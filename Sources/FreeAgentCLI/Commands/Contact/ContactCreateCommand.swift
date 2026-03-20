@@ -22,7 +22,7 @@ struct ContactCreateCommand: ClientCommand {
     var email: String?
 
     func run(client: Client) async throws -> OpenAPIObjectContainer? {
-        let contactPayload = Operations.CreateContact.Input.Body.JsonPayload.ContactPayload(
+        let contactPayload = Components.Schemas.ContactCreatePayload(
             email: email,
             firstName: firstName,
             lastName: lastName,

@@ -19,7 +19,7 @@ struct InvoiceSendEmailCommand: ClientCommand {
     var subject: String?
     
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
-        let emailPayload = Operations.SendInvoiceEmail.Input.Body.JsonPayload.InvoicePayload.EmailPayload(
+        let emailPayload = Components.Schemas.EmailPayload(
             body: body,
             subject: subject
         )

@@ -25,7 +25,7 @@ struct InvoiceCreateCommand: ClientCommand {
     var paymentTermsInDays: Double
     
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
-        let invoicePayload = Operations.CreateInvoice.Input.Body.JsonPayload.InvoicePayload(
+        let invoicePayload = Components.Schemas.InvoiceCreatePayload(
             contact: contact,
             currency: currency,
             datedOn: datedOn,

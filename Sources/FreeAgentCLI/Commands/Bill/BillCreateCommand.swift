@@ -37,14 +37,14 @@ struct BillCreateCommand: ClientCommand {
     var salesTaxRate: String?
 
     func run(client: Client) async throws -> OpenAPIObjectContainer? {
-        let billItem = Operations.CreateBill.Input.Body.JsonPayload.BillPayload.BillItemsPayloadPayload(
+        let billItem = Components.Schemas.BillItemPayload(
             category: category,
             description: description,
             totalValue: totalValue,
             salesTaxRate: salesTaxRate
         )
 
-        let billPayload = Operations.CreateBill.Input.Body.JsonPayload.BillPayload(
+        let billPayload = Components.Schemas.BillCreatePayload(
             contact: contact,
             reference: reference,
             datedOn: datedOn,

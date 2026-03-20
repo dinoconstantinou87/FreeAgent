@@ -46,7 +46,7 @@ struct ExplanationCreateCommand: ClientCommand {
     var rebillFactor: String?
 
     func run(client: Client) async throws -> OpenAPIObjectContainer? {
-        let payload = Operations.CreateABankTransactionExplanation.Input.Body.JsonPayload.BankTransactionExplanationPayload(
+        let payload = Components.Schemas.BankTransactionExplanationCreatePayload(
             bankAccount: bankAccount,
             bankTransaction: bankTransaction,
             category: category,
