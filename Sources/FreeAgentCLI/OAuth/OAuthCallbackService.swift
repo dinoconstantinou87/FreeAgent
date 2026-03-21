@@ -5,10 +5,11 @@ import ServiceLifecycle
 @preconcurrency import Swifter
 
 struct AuthCallbackService: Service {
+
+    // MARK: Internal
+
     let url: URL
     let client: AuthClient
-
-    private let logger = Logger(label: "oauth-callback")
 
     func run() async throws {
         let stream = AsyncThrowingStream { continuation in
@@ -44,4 +45,9 @@ struct AuthCallbackService: Service {
             client.handle(url: url)
         }
     }
+
+    // MARK: Private
+
+    private let logger = Logger(label: "oauth-callback")
+
 }
