@@ -101,3 +101,50 @@ jobs:
             "freeagent-${TAG}-macos-universal.tar.gz.sha256"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Update Homebrew tap
+        env:
+          GH_TOKEN: ${{ secrets.TAP_GITHUB_TOKEN }}
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          SHA256=$(cat "freeagent-${TAG}-macos-universal.tar.gz.sha256" | awk '{print $1}')
+          TARBALL_URL="https://github.com/dinoconstantinou87/FreeAgent/releases/download/${TAG}/freeagent-${TAG}-macos-universal.tar.gz"
+
+          git clone https://x-access-token:${GH_TOKEN}@github.com/dinoconstantinou87/homebrew-tap.git /tmp/homebrew-tap
+          cd /tmp/homebrew-tap
+
+          cat > Formula/freeagent.rb <<FORMULA
+          class Freeagent < Formula
+            desc "Command-line interface for the FreeAgent accounting API"
+            homepage "https://github.com/dinoconstantinou87/FreeAgent"
+            url "${TARBALL_URL}"
+            sha256 "${SHA256}"
+            license "MIT"
+
+            depends_on :macos
+
+            def install
+              bin.install "freeagent"
+            end
+
+            test do
+              assert_match version.to_s, shell_output("\#{bin}/freeagent --version")
+            end
+          end
+          FORMULA
+          sed -i '' 's/^          //' Formula/freeagent.rb
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "update-freeagent-${VERSION}"
+          git add Formula/freeagent.rb
+          git commit -m "Update freeagent to ${VERSION}"
+          git push origin "update-freeagent-${VERSION}"
+
+          gh pr create \
+            --repo dinoconstantinou87/homebrew-tap \
+            --title "Update freeagent to ${VERSION}" \
+            --body "Automated update from [FreeAgent release ${TAG}](https://github.com/dinoconstantinou87/FreeAgent/releases/tag/${TAG})" \
+            --base main \
+            --head "update-freeagent-${VERSION}"
