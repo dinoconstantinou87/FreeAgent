@@ -20,11 +20,11 @@ jobs:
     name: Build and Release
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - uses: jdx/mise-action@v2
+      - uses: jdx/mise-action@v4
 
       - name: Lint
         run: |
@@ -58,13 +58,13 @@ jobs:
           git push
 
       - name: Cache swift-openapi-generator
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: .swift-openapi-generator
           key: openapi-generator-1.10.2
 
       - name: Cache SPM build
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: .build
           key: spm-release-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
