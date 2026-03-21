@@ -7,7 +7,7 @@ SWIFT_OPENAPI_GENERATOR_GIT_URL ?= https://github.com/apple/swift-openapi-genera
 SWIFT_OPENAPI_GENERATOR_GIT_TAG ?= 1.10.2
 SWIFT_OPENAPI_GENERATOR_CLONE_DIR ?= $(CURRENT_MAKEFILE_DIR)/.swift-openapi-generator
 SWIFT_OPENAPI_GENERATOR_BUILD_CONFIGURATION ?= debug
-OPENAPI_YAML_PATH ?= $(CURRENT_MAKEFILE_DIR)/openapi.yaml
+OPENAPI_YAML_PATH ?= $(CURRENT_MAKEFILE_DIR)/openapi-bundled.yaml
 OPENAPI_GENERATOR_CONFIG_PATH ?= $(CURRENT_MAKEFILE_DIR)/openapi-generator-config.yaml
 OUTPUT_DIRECTORY ?= $(CURRENT_MAKEFILE_DIR)/Sources/FreeAgentAPI/Generated
 OPENAPI_SOURCE_DIR ?= $(CURRENT_MAKEFILE_DIR)/openapi
@@ -34,7 +34,7 @@ help:  # Display this help.
 	@-+echo "  SWIFT_OPENAPI_GENERATOR_GIT_TAG (e.g. 1.0.0)"
 	@-+echo "  SWIFT_OPENAPI_GENERATOR_CLONE_DIR (e.g. .swift-openapi-generator)"
 	@-+echo "  SWIFT_OPENAPI_GENERATOR_BUILD_CONFIGURATION (e.g. release)"
-	@-+echo "  OPENAPI_YAML_PATH (e.g. openapi.yaml)"
+	@-+echo "  OPENAPI_YAML_PATH (e.g. openapi-bundled.yaml)"
 	@-+echo "  OPENAPI_GENERATOR_CONFIG_PATH (e.g. openapi-generator-config.yaml)"
 	@-+echo "  OUTPUT_DIRECTORY (e.g. Sources/FreeAgentAPI/Generated)"
 

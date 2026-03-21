@@ -2,9 +2,9 @@ name: CI
 
 on:
   pull_request:
-    branches: [develop, main]
+    branches: [main]
   push:
-    branches: [develop]
+    branches: [main]
 
 jobs:
   lint:
@@ -18,7 +18,23 @@ jobs:
 
   build:
     name: Build
+    needs: lint
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
+
+      - name: Cache swift-openapi-generator
+        uses: actions/cache@v4
+        with:
+          path: .swift-openapi-generator
+          key: openapi-generator-1.10.2
+
+      - name: Cache SPM build
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: spm-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-${{ runner.os }}-
+
+      - run: make generate
       - run: swift build
