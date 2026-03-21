@@ -9,7 +9,7 @@ Manage your invoices, bills, expenses, bank accounts, contacts and more — dire
 ### Homebrew
 
 ```bash
-brew install freeagent
+brew install dinoconstantinou87/tap/freeagent
 ```
 
 ## Getting Started
