@@ -7,5 +7,5 @@ DerivedData/
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .netrc
 .swift-openapi-generator/
-openapi.yaml
+/openapi.yaml
 Sources/FreeAgentAPI/Generated/

@@ -1,0 +1,118 @@
+openapi: 3.0.3
+info:
+  title: FreeAgent
+  version: 1.0.0
+  contact: {}
+servers:
+- url: https://api.freeagent.com
+  description: Production
+- url: https://api.sandbox.freeagent.com
+  description: Sandbox
+paths:
+  /v2/bank_accounts:
+    $ref: 'paths/bank_accounts.yaml#/list'
+  /v2/bank_accounts/{id}:
+    $ref: 'paths/bank_accounts.yaml#/show'
+  /v2/bank_transaction_explanations:
+    $ref: 'paths/bank_transaction_explanations.yaml#/list'
+  /v2/bank_transaction_explanations/{id}:
+    $ref: 'paths/bank_transaction_explanations.yaml#/show'
+  /v2/bank_transactions:
+    $ref: 'paths/bank_transactions.yaml#/list'
+  /v2/bank_transactions/{id}:
+    $ref: 'paths/bank_transactions.yaml#/show'
+  /v2/bills:
+    $ref: 'paths/bills.yaml#/create'
+  /v2/categories:
+    $ref: 'paths/categories.yaml#/list'
+  /v2/company:
+    $ref: 'paths/company.yaml#/show'
+  /v2/contacts:
+    $ref: 'paths/contacts.yaml#/list'
+  /v2/expenses:
+    $ref: 'paths/expenses.yaml#/list'
+  /v2/expenses/{id}:
+    $ref: 'paths/expenses.yaml#/show'
+  /v2/invoices/{id}/transitions/mark_as_sent:
+    $ref: 'paths/invoices.yaml#/mark_as_sent'
+  /v2/invoices/{id}/transitions/mark_as_cancelled:
+    $ref: 'paths/invoices.yaml#/mark_as_cancelled'
+  /v2/invoices/{id}/transitions/mark_as_scheduled:
+    $ref: 'paths/invoices.yaml#/mark_as_scheduled'
+  /v2/invoices/{id}/transitions/mark_as_draft:
+    $ref: 'paths/invoices.yaml#/mark_as_draft'
+  /v2/invoices:
+    $ref: 'paths/invoices.yaml#/list'
+  /v2/invoices/{id}:
+    $ref: 'paths/invoices.yaml#/show'
+  /v2/invoices/timeline:
+    $ref: 'paths/invoices.yaml#/timeline'
+  /v2/invoices/{id}/pdf:
+    $ref: 'paths/invoices.yaml#/pdf'
+  /v2/invoices/{id}/send_email:
+    $ref: 'paths/invoices.yaml#/send_email'
+  /v2/invoice_items:
+    $ref: 'paths/invoices.yaml#/create_item'
+  /v2/invoice_items/{id}:
+    $ref: 'paths/invoices.yaml#/update_item'
+  /v2/recurring_invoices:
+    $ref: 'paths/recurring_invoices.yaml#/list'
+  /v2/recurring_invoices/{id}:
+    $ref: 'paths/recurring_invoices.yaml#/show'
+components:
+  schemas:
+    InvoiceView:
+      $ref: 'components/schemas/InvoiceView.yaml'
+    ExpensePayload:
+      $ref: 'components/schemas/ExpensePayload.yaml'
+    AttachmentPayload:
+      $ref: 'components/schemas/AttachmentPayload.yaml'
+    InvoiceItemPayload:
+      $ref: 'components/schemas/InvoiceItemPayload.yaml'
+    Errors:
+      $ref: 'components/schemas/Errors.yaml'
+    BankTransactionExplanationCreatePayload:
+      $ref: 'components/schemas/BankTransactionExplanationCreatePayload.yaml'
+    BankTransactionExplanationUpdatePayload:
+      $ref: 'components/schemas/BankTransactionExplanationUpdatePayload.yaml'
+    BillCreatePayload:
+      $ref: 'components/schemas/BillCreatePayload.yaml'
+    BillItemPayload:
+      $ref: 'components/schemas/BillItemPayload.yaml'
+    ContactCreatePayload:
+      $ref: 'components/schemas/ContactCreatePayload.yaml'
+    InvoiceCreatePayload:
+      $ref: 'components/schemas/InvoiceCreatePayload.yaml'
+    InvoiceUpdatePayload:
+      $ref: 'components/schemas/InvoiceUpdatePayload.yaml'
+    EmailPayload:
+      $ref: 'components/schemas/EmailPayload.yaml'
+  responses:
+    EmptyResponse:
+      description: Error response
+    ErrorResponse:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Errors'
+    UnauthorizedResponse:
+      description: Unauthorized - Authentication required or invalid credentials
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows: {}
+security:
+- oauth2: []
+tags:
+- name: Bank Accounts
+- name: Bank Transaction Explanations
+- name: Bank Transactions
+- name: Bills
+- name: Categories
+- name: Company
+- name: Contacts
+- name: Expenses
+- name: Invoices
+- name: Invoice Transitions
+- name: Recurring Invoices
