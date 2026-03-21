@@ -1,5 +1,7 @@
 import Foundation
 
+// MARK: - CustomInvoiceView
+
 public enum CustomInvoiceView: Hashable, Sendable {
     case all
     case recentOpenOrOverdue
@@ -13,32 +15,12 @@ public enum CustomInvoiceView: Hashable, Sendable {
     case lastMonths(Int)
 }
 
+// MARK: RawRepresentable
+
 extension CustomInvoiceView: RawRepresentable {
-    public var rawValue: String {
-        switch self {
-        case .all:
-            return "all"
-        case .recentOpenOrOverdue:
-            return "recent_open_or_overdue"
-        case .open:
-            return "open"
-        case .overdue:
-            return "overdue"
-        case .openOrOverdue:
-            return "open_or_overdue"
-        case .draft:
-            return "draft"
-        case .scheduledToEmail:
-            return "scheduled_to_email"
-        case .thankYouEmails:
-            return "thank_you_emails"
-        case .reminderEmails:
-            return "reminder_emails"
-        case .lastMonths(let months):
-            return "last_\(months)_months"
-        }
-    }
-    
+
+    // MARK: Lifecycle
+
     public init?(rawValue: String) {
         switch rawValue {
         case "all":
@@ -60,7 +42,7 @@ extension CustomInvoiceView: RawRepresentable {
         case "reminder_emails":
             self = .reminderEmails
         default:
-            if rawValue.hasPrefix("last_") && rawValue.hasSuffix("_months") {
+            if rawValue.hasPrefix("last_"), rawValue.hasSuffix("_months") {
                 let numberPart = String(rawValue.dropFirst(5).dropLast(7))
                 if let months = Int(numberPart), months > 0 {
                     self = .lastMonths(months)
@@ -70,26 +52,60 @@ extension CustomInvoiceView: RawRepresentable {
             return nil
         }
     }
+
+    // MARK: Public
+
+    public var rawValue: String {
+        switch self {
+        case .all:
+            "all"
+        case .recentOpenOrOverdue:
+            "recent_open_or_overdue"
+        case .open:
+            "open"
+        case .overdue:
+            "overdue"
+        case .openOrOverdue:
+            "open_or_overdue"
+        case .draft:
+            "draft"
+        case .scheduledToEmail:
+            "scheduled_to_email"
+        case .thankYouEmails:
+            "thank_you_emails"
+        case .reminderEmails:
+            "reminder_emails"
+        case .lastMonths(let months):
+            "last_\(months)_months"
+        }
+    }
+
 }
 
+// MARK: Codable
+
 extension CustomInvoiceView: Codable {
+
+    // MARK: Lifecycle
+
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let rawValue = try container.decode(String.self)
-        
+
         guard let value = CustomInvoiceView(rawValue: rawValue) else {
             throw DecodingError.dataCorruptedError(
                 in: container,
                 debugDescription: "Invalid invoice view value: \(rawValue)"
             )
         }
-        
+
         self = value
     }
-    
+
+    // MARK: Public
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encode(rawValue)
     }
 }
-

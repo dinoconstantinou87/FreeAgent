@@ -1,12 +1,15 @@
 import ArgumentParser
 import Foundation
-import OpenAPIRuntime
-import OpenAPIURLSession
 import FreeAgentAPI
 import Noora
+import OpenAPIRuntime
+import OpenAPIURLSession
+
+// MARK: - ClientCommand
 
 public protocol ClientCommand: AsyncParsableCommand {
     associatedtype Response: Codable
+
     func run(client: Client) async throws -> Response?
 }
 
@@ -33,7 +36,7 @@ extension ClientCommand {
                 )
             ]
         )
-        
+
         do {
             if let result = try await run(client: client) {
                 try Noora().json(result)

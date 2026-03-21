@@ -1,16 +1,18 @@
 import Foundation
-import OpenAPIRuntime
 import HTTPTypes
+import OpenAPIRuntime
+
+// MARK: - AuthMiddleware
 
 public struct AuthMiddleware: ClientMiddleware {
-    let config: AuthConfig
-    let storage = AuthStorage()
+
+    // MARK: Public
 
     public func intercept(
         _ request: HTTPRequest,
         body: HTTPBody?,
         baseURL: URL,
-        operationID: String,
+        operationID _: String,
         next: (HTTPRequest, HTTPBody?, URL) async throws -> (HTTPResponse, HTTPBody?)
     ) async throws -> (HTTPResponse, HTTPBody?) {
         let credential = try await credential()
@@ -19,6 +21,13 @@ public struct AuthMiddleware: ClientMiddleware {
 
         return try await next(request, body, baseURL)
     }
+
+    // MARK: Internal
+
+    let config: AuthConfig
+    let storage = AuthStorage()
+
+    // MARK: Private
 
     private func credential() async throws -> AuthCredential {
         guard let credential = try storage.get() else {
@@ -34,11 +43,13 @@ public struct AuthMiddleware: ClientMiddleware {
     }
 }
 
-public extension ClientMiddleware where Self == AuthMiddleware {
-    static func auth(_ config: AuthConfig) -> AuthMiddleware {
+extension ClientMiddleware where Self == AuthMiddleware {
+    public static func auth(_ config: AuthConfig) -> AuthMiddleware {
         AuthMiddleware(config: config)
     }
 }
+
+// MARK: - AuthMiddlewareError
 
 enum AuthMiddlewareError: Error {
     case noCredentialFound

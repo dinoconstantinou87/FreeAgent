@@ -1,6 +1,6 @@
 import ArgumentParser
-import FreeAgentAPI
 import Foundation
+import FreeAgentAPI
 import OpenAPIRuntime
 
 struct InvoiceListCommand: ClientCommand {
@@ -8,28 +8,28 @@ struct InvoiceListCommand: ClientCommand {
         commandName: "list",
         abstract: "List invoices"
     )
-    
+
     @Option(name: .long, help: "Filter by view")
     var view: CustomInvoiceView?
-    
+
     @Option(name: .long, help: "Filter invoices by contact ID")
     var contact: String?
-    
+
     @Option(name: .long, help: "Filter invoices by project ID")
     var project: String?
-    
+
     @Option(name: .long, help: "Include invoice items nested within each invoice")
     var nestedInvoiceItems: Bool?
-    
+
     @Option(name: .long, help: "Filter invoices by currency code")
     var currency: String?
-    
+
     @Option(name: .long, help: "Show invoices updated after this timestamp")
     var updatedSince: String?
-    
+
     @Option(name: .long, help: "Sort order")
     var sort: Operations.ListInvoices.Input.Query.SortPayload?
-    
+
     func run(client: Client) async throws -> OpenAPIObjectContainer? {
         let input = Operations.ListInvoices.Input(
             query: .init(
@@ -42,7 +42,7 @@ struct InvoiceListCommand: ClientCommand {
                 sort: sort
             )
         )
-        
+
         return try await client.listInvoices(input)
             .ok.body.json.additionalProperties
     }

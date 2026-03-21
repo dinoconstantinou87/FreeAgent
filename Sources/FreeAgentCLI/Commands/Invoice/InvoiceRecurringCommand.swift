@@ -6,7 +6,7 @@ struct InvoiceRecurringCommand: AsyncParsableCommand {
         abstract: "Manage recurring invoices",
         subcommands: [
             InvoiceListRecurringCommand.self,
-            InvoiceShowRecurringCommand.self
+            InvoiceShowRecurringCommand.self,
         ]
     )
 }

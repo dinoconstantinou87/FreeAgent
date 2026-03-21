@@ -7,7 +7,7 @@ struct AuthCommand: AsyncParsableCommand {
         abstract: "Authentication",
         subcommands: [
             LoginCommand.self,
-            LogoutCommand.self
+            LogoutCommand.self,
         ]
     )
 }

@@ -1,6 +1,6 @@
 import ArgumentParser
-import FreeAgentAPI
 import Foundation
+import FreeAgentAPI
 import OpenAPIRuntime
 
 struct InvoiceDeleteCommand: ClientCommand {
@@ -8,7 +8,7 @@ struct InvoiceDeleteCommand: ClientCommand {
         commandName: "delete",
         abstract: "Delete an invoice"
     )
-    
+
     @Argument(help: "Invoice ID")
     var id: String
 

@@ -1,6 +1,6 @@
 import ArgumentParser
-import FreeAgentAPI
 import Foundation
+import FreeAgentAPI
 import Noora
 
 struct LogoutCommand: AsyncParsableCommand {
@@ -8,7 +8,7 @@ struct LogoutCommand: AsyncParsableCommand {
         commandName: "logout",
         abstract: "Logout"
     )
-    
+
     mutating func run() async throws {
         try AuthStorage().clear()
         Noora().success(.alert("Logged out"))

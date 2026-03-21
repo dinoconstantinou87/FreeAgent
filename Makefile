@@ -50,6 +50,12 @@ generate: bundle $(SWIFT_OPENAPI_GENERATOR_BIN) $(OPENAPI_GENERATOR_CONFIG_PATH)
 build:  # Runs swift build.
 	swift build
 
+lint:  # Run SwiftLint on the project.
+	swiftlint
+
+format:  # Run SwiftFormat on the project.
+	swiftformat .
+
 clean:  # Delete the output directory used for generated sources.
 	@echo 'Delete entire directory: $(OUTPUT_DIRECTORY)? [y/N] ' && read ans && [ $${ans:-N} = y ] || (echo "Aborted"; exit 1)
 	rm -rf "$(OUTPUT_DIRECTORY)"
@@ -95,4 +101,4 @@ $(OPENAPI_BUNDLER_BIN): $(wildcard $(CURRENT_MAKEFILE_DIR)/Sources/OpenAPIBundle
 $(OUTPUT_DIRECTORY):
 	mkdir -p "$@"
 
-.PHONY: help bundle generate build clean clean-all dump
+.PHONY: help bundle generate build lint format clean clean-all dump

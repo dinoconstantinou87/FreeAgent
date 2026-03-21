@@ -2,6 +2,8 @@ import ArgumentParser
 import Foundation
 import Yams
 
+// MARK: - OpenAPIBundler
+
 @main
 struct OpenAPIBundler: ParsableCommand {
     static let configuration = CommandConfiguration(
@@ -14,15 +16,6 @@ struct OpenAPIBundler: ParsableCommand {
     @Argument(help: "Path to write the bundled output")
     var output: String
 
-    func run() throws {
-        let inputURL = URL(fileURLWithPath: input).standardizedFileURL
-        let root = try Self.loadNode(at: inputURL)
-        let resolved = try Self.resolveRefs(in: root, baseURL: inputURL)
-
-        let yaml = try Yams.serialize(node: resolved)
-        try yaml.write(toFile: output, atomically: true, encoding: .utf8)
-    }
-
     static func loadNode(at url: URL) throws -> Node {
         let contents = try String(contentsOf: url, encoding: .utf8)
         guard let node = try Yams.compose(yaml: contents) else {
@@ -34,17 +27,19 @@ struct OpenAPIBundler: ParsableCommand {
     static func resolveRefs(in node: Node, baseURL: URL) throws -> Node {
         switch node {
         case .mapping(let mapping):
-            if let refValue = mapping[Node("$ref")],
-               case .scalar(let scalar) = refValue,
-               isExternalRef(scalar.string) {
+            if
+                let refValue = mapping[Node("$ref")],
+                case .scalar(let scalar) = refValue,
+                isExternalRef(scalar.string)
+            {
                 let resolved = try resolveExternalRef(scalar.string, relativeTo: baseURL)
                 let resolvedBaseURL = refFileURL(scalar.string, relativeTo: baseURL)
                 return try resolveRefs(in: resolved, baseURL: resolvedBaseURL)
             }
 
-            var pairs: [(Node, Node)] = []
+            var pairs = [(Node, Node)]()
             for (key, value) in mapping {
-                pairs.append((key, try resolveRefs(in: value, baseURL: baseURL)))
+                try pairs.append((key, resolveRefs(in: value, baseURL: baseURL)))
             }
             return .mapping(.init(pairs, mapping.tag, mapping.style))
 
@@ -91,15 +86,29 @@ struct OpenAPIBundler: ParsableCommand {
 
         var current = document
         for part in parts where !part.isEmpty {
-            guard case .mapping(let mapping) = current,
-                  let next = mapping[Node(part)] else {
+            guard
+                case .mapping(let mapping) = current,
+                let next = mapping[Node(part)]
+            else {
                 throw BundlerError.pointerResolutionFailed(pointer)
             }
             current = next
         }
         return current
     }
+
+    func run() throws {
+        let inputURL = URL(fileURLWithPath: input).standardizedFileURL
+        let root = try Self.loadNode(at: inputURL)
+        let resolved = try Self.resolveRefs(in: root, baseURL: inputURL)
+
+        let yaml = try Yams.serialize(node: resolved)
+        try yaml.write(toFile: output, atomically: true, encoding: .utf8)
+    }
+
 }
+
+// MARK: - BundlerError
 
 enum BundlerError: Error, CustomStringConvertible {
     case emptyDocument(String)

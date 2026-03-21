@@ -1,6 +1,6 @@
 import ArgumentParser
-import FreeAgentAPI
 import Foundation
+import FreeAgentAPI
 import OpenAPIRuntime
 
 struct InvoiceTimelineCommand: ClientCommand {
@@ -8,10 +8,10 @@ struct InvoiceTimelineCommand: ClientCommand {
         commandName: "timeline",
         abstract: "Get invoice timeline"
     )
-    
+
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
         let input = Operations.GetInvoiceTimeline.Input()
-        
+
         return try await client.getInvoiceTimeline(input)
             .ok.body.json.additionalProperties
     }

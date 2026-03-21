@@ -1,6 +1,6 @@
 import ArgumentParser
-import FreeAgentAPI
 import Foundation
+import FreeAgentAPI
 import OpenAPIRuntime
 
 struct BankAccountShowCommand: ClientCommand {

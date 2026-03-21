@@ -1,6 +1,6 @@
 import ArgumentParser
-import FreeAgentAPI
 import Foundation
+import FreeAgentAPI
 import OpenAPIRuntime
 
 struct ExplanationUpdateCommand: ClientCommand {
@@ -39,13 +39,14 @@ struct ExplanationUpdateCommand: ClientCommand {
             let base64 = data.base64EncodedString()
             let fileName = url.lastPathComponent
             let ext = url.pathExtension.lowercased()
-            let contentType: Components.Schemas.AttachmentPayload.ContentTypePayload = switch ext {
-            case "pdf": .applicationXPdf
-            case "png": .imagePng
-            case "jpg", "jpeg": .imageJpeg
-            case "gif": .imageGif
-            default: .applicationXPdf
-            }
+            let contentType: Components.Schemas.AttachmentPayload.ContentTypePayload =
+                switch ext {
+                case "pdf": .applicationXPdf
+                case "png": .imagePng
+                case "jpg", "jpeg": .imageJpeg
+                case "gif": .imageGif
+                default: .applicationXPdf
+                }
 
             attachmentPayload = .init(
                 data: base64,

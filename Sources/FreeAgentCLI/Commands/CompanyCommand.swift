@@ -1,6 +1,6 @@
 import ArgumentParser
-import FreeAgentAPI
 import Foundation
+import FreeAgentAPI
 import OpenAPIRuntime
 import OpenAPIURLSession
 
@@ -9,7 +9,7 @@ struct CompanyCommand: ClientCommand {
         commandName: "company",
         abstract: "Get company details"
     )
-    
+
     func run(client: Client) async throws -> OpenAPIObjectContainer? {
         try await client.companyDetails().ok.body.json.additionalProperties
     }

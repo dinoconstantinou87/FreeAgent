@@ -1,6 +1,6 @@
 import ArgumentParser
-import FreeAgentAPI
 import Foundation
+import FreeAgentAPI
 import Noora
 
 struct SetupCommand: AsyncParsableCommand {
@@ -8,7 +8,7 @@ struct SetupCommand: AsyncParsableCommand {
         commandName: "setup",
         abstract: "Set up the FreeAgent CLI"
     )
-    
+
     mutating func run() async throws {
         let key = Noora().textPrompt(
             title: "FreeAgent app OAuth ID",

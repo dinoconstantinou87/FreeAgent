@@ -19,7 +19,7 @@ struct InvoiceCommand: AsyncParsableCommand {
             InvoiceSendEmailCommand.self,
             InvoiceCreateItemCommand.self,
             InvoiceUpdateItemCommand.self,
-            InvoiceRecurringCommand.self
+            InvoiceRecurringCommand.self,
         ]
     )
 }

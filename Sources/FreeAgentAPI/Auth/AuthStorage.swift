@@ -2,10 +2,12 @@ import Foundation
 @preconcurrency import KeychainAccess
 
 public struct AuthStorage: Sendable {
-    private let keychain = Keychain(service: "freeagent.cli")
-    private let key = "freeagent.cli.credential"
-    
-    public init() {}
+
+    // MARK: Lifecycle
+
+    public init() { }
+
+    // MARK: Public
 
     public func get() throws -> AuthCredential? {
         try keychain.getData(key)
@@ -22,4 +24,10 @@ public struct AuthStorage: Sendable {
     public func clear() throws {
         try keychain.remove(key)
     }
+
+    // MARK: Private
+
+    private let keychain = Keychain(service: "freeagent.cli")
+    private let key = "freeagent.cli.credential"
+
 }

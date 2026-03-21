@@ -1,18 +1,18 @@
 import ArgumentParser
-import FreeAgentAPI
 import Foundation
+import FreeAgentAPI
+import Logging
 import Noora
 import ServiceLifecycle
-import Logging
 
 struct LoginCommand: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "login",
         abstract: "Login"
     )
-    
+
     @Option(name: .long)
-    var environment: Environment = .production
+    var environment = Environment.production
 
     mutating func run() async throws {
         let config = try await Config.load()

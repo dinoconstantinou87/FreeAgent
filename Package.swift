@@ -12,10 +12,12 @@ let package = Package(
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "FreeAgentAPI",
-            targets: ["FreeAgentAPI"]),
+            targets: ["FreeAgentAPI"]
+        ),
         .executable(
             name: "freeagent",
-            targets: ["FreeAgentCLI"])
+            targets: ["FreeAgentCLI"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.5.0"),
@@ -28,7 +30,7 @@ let package = Package(
         .package(url: "https://github.com/OAuthSwift/OAuthSwift", from: "2.2.0"),
         .package(url: "https://github.com/httpswift/swifter.git", from: "1.5.0"),
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", from: "4.2.2"),
-        .package(url: "https://github.com/jpsim/Yams", from: "5.0.0")
+        .package(url: "https://github.com/jpsim/Yams", from: "5.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -39,12 +41,13 @@ let package = Package(
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
                 .product(name: "OAuthSwift", package: "OAuthSwift"),
-                .product(name: "KeychainAccess", package: "KeychainAccess")
+                .product(name: "KeychainAccess", package: "KeychainAccess"),
             ],
             swiftSettings: [
                 .swiftLanguageMode(.v6),
-                .enableExperimentalFeature("StrictConcurrency")
-            ]),
+                .enableExperimentalFeature("StrictConcurrency"),
+            ]
+        ),
         .executableTarget(
             name: "FreeAgentCLI",
             dependencies: [
@@ -54,17 +57,19 @@ let package = Package(
                 .product(name: "ServiceLifecycle", package: "swift-service-lifecycle"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "Noora", package: "Noora"),
-                .product(name: "Swifter", package: "swifter")
+                .product(name: "Swifter", package: "swifter"),
             ],
             swiftSettings: [
                 .swiftLanguageMode(.v6),
-                .enableExperimentalFeature("StrictConcurrency")
-            ]),
+                .enableExperimentalFeature("StrictConcurrency"),
+            ]
+        ),
         .executableTarget(
             name: "OpenAPIBundler",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
-                .product(name: "Yams", package: "Yams")
-            ]),
+                .product(name: "Yams", package: "Yams"),
+            ]
+        ),
     ]
 )

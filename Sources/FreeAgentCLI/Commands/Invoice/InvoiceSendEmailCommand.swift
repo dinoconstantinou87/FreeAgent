@@ -1,6 +1,6 @@
 import ArgumentParser
-import FreeAgentAPI
 import Foundation
+import FreeAgentAPI
 import OpenAPIRuntime
 
 struct InvoiceSendEmailCommand: ClientCommand {
@@ -8,31 +8,31 @@ struct InvoiceSendEmailCommand: ClientCommand {
         commandName: "send-email",
         abstract: "Send invoice via email"
     )
-    
+
     @Argument(help: "Invoice ID")
     var id: String
-    
+
     @Option(name: .long, help: "Email body")
     var body: String?
-    
+
     @Option(name: .long, help: "Email subject")
     var subject: String?
-    
+
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
         let emailPayload = Components.Schemas.EmailPayload(
             body: body,
             subject: subject
         )
-        
+
         let invoicePayload = Operations.SendInvoiceEmail.Input.Body.JsonPayload.InvoicePayload(
             email: emailPayload
         )
-        
+
         let input = Operations.SendInvoiceEmail.Input(
             path: .init(id: id),
             body: .json(.init(invoice: invoicePayload))
         )
-        
+
         return try await client.sendInvoiceEmail(input)
             .ok.body.json.additionalProperties
     }

@@ -12,16 +12,6 @@ Manage your invoices, bills, expenses, bank accounts, contacts and more — dire
 brew install freeagent
 ```
 
-### Build from source
-
-```bash
-git clone https://github.com/dinoconstantinou87/FreeAgent.git
-cd FreeAgent
-swift build -c release
-```
-
-Requires macOS 15+ and Swift 6.1+.
-
 ## Getting Started
 
 ### 1. Create a FreeAgent OAuth App

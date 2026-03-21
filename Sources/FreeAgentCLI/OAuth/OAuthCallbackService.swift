@@ -1,11 +1,14 @@
 import Foundation
-@preconcurrency import Swifter
-import ServiceLifecycle
 import FreeAgentAPI
+import Logging
+import ServiceLifecycle
+@preconcurrency import Swifter
 
 struct AuthCallbackService: Service {
     let url: URL
     let client: AuthClient
+
+    private let logger = Logger(label: "oauth-callback")
 
     func run() async throws {
         let stream = AsyncThrowingStream { continuation in
@@ -27,7 +30,7 @@ struct AuthCallbackService: Service {
 
             do {
                 try server.start(UInt16(url.port ?? 80))
-                print("Waiting for login to complete...")
+                logger.info("Waiting for login to complete...")
             } catch {
                 continuation.yield(with: .failure(error))
             }

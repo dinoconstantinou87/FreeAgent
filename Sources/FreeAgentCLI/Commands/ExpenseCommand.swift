@@ -7,7 +7,7 @@ struct ExpenseCommand: AsyncParsableCommand {
         subcommands: [
             ExpenseListCommand.self,
             ExpenseCreateCommand.self,
-            ExpenseShowCommand.self
+            ExpenseShowCommand.self,
         ]
     )
 }

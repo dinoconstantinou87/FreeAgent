@@ -6,7 +6,7 @@ struct BankAccountCommand: AsyncParsableCommand {
         abstract: "Manage bank accounts",
         subcommands: [
             BankAccountListCommand.self,
-            BankAccountShowCommand.self
+            BankAccountShowCommand.self,
         ]
     )
 }

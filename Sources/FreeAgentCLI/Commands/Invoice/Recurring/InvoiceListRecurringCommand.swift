@@ -1,6 +1,6 @@
 import ArgumentParser
-import FreeAgentAPI
 import Foundation
+import FreeAgentAPI
 import OpenAPIRuntime
 
 struct InvoiceListRecurringCommand: ClientCommand {
@@ -8,13 +8,13 @@ struct InvoiceListRecurringCommand: ClientCommand {
         commandName: "list",
         abstract: "List recurring invoices"
     )
-    
+
     @Option(name: .long, help: "Filter by view")
     var view: Operations.ListAllRecurringInvoices.Input.Query.ViewPayload?
-    
+
     @Option(name: .long, help: "Filter by contact ID")
     var contact: String?
-    
+
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
         let input = Operations.ListAllRecurringInvoices.Input(
             query: .init(
@@ -22,7 +22,7 @@ struct InvoiceListRecurringCommand: ClientCommand {
                 contact: contact
             )
         )
-        
+
         return try await client.listAllRecurringInvoices(input)
             .ok.body.json.additionalProperties
     }

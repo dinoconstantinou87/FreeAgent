@@ -18,7 +18,7 @@ struct FreeAgentCLI: AsyncParsableCommand {
             BankTransactionCommand.self,
             ExplanationCommand.self,
             CategoryCommand.self,
-            ExpenseCommand.self
+            ExpenseCommand.self,
         ]
     )
 }

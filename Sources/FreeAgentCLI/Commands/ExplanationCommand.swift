@@ -9,7 +9,7 @@ struct ExplanationCommand: AsyncParsableCommand {
             ExplanationCreateCommand.self,
             ExplanationShowCommand.self,
             ExplanationUpdateCommand.self,
-            ExplanationDeleteCommand.self
+            ExplanationDeleteCommand.self,
         ]
     )
 }

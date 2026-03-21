@@ -1,10 +1,11 @@
 import Foundation
 @preconcurrency import OAuthSwift
 
+// MARK: - AuthClient
+
 public struct AuthClient: Sendable {
-    private let config: AuthConfig
-    private let client: OAuth2Swift
-    private let storage = AuthStorage()
+
+    // MARK: Lifecycle
 
     public init(config: AuthConfig) {
         self.config = config
@@ -17,8 +18,10 @@ public struct AuthClient: Sendable {
         )
     }
 
+    // MARK: Public
+
     public func authorize(callbackUrl: URL) async throws {
-        return try await withCheckedThrowingContinuation { continuation in
+        try await withCheckedThrowingContinuation { continuation in
             client.authorize(withCallbackURL: callbackUrl, scope: "", state: "") { result in
                 do {
                     try handle(result)
@@ -30,6 +33,12 @@ public struct AuthClient: Sendable {
         }
     }
 
+    public func handle(url: URL) {
+        OAuthSwift.handle(url: url)
+    }
+
+    // MARK: Internal
+
     func refresh() async throws -> AuthCredential {
         guard let credential = try storage.get() else {
             throw AuthClientError.noCredentialFound
@@ -38,7 +47,7 @@ public struct AuthClient: Sendable {
         return try await withCheckedThrowingContinuation { continuation in
             client.renewAccessToken(withRefreshToken: credential.refreshToken) { result in
                 do {
-                    continuation.resume(returning: try handle(result))
+                    try continuation.resume(returning: handle(result))
                 } catch {
                     continuation.resume(throwing: error)
                 }
@@ -46,10 +55,16 @@ public struct AuthClient: Sendable {
         }
     }
 
+    // MARK: Private
+
+    private let config: AuthConfig
+    private let client: OAuth2Swift
+    private let storage = AuthStorage()
+
     @discardableResult
     private func handle(_ result: Result<OAuthSwift.TokenSuccess, OAuthSwiftError>) throws -> AuthCredential {
         switch result {
-        case .success(let (result, _, _)):
+        case .success((let result, _, _)):
             let credential = AuthCredential(
                 token: result.oauthToken,
                 refreshToken: result.oauthRefreshToken,
@@ -60,15 +75,15 @@ public struct AuthClient: Sendable {
             try storage.set(credential)
 
             return credential
+
         case .failure(let error):
             throw error
         }
     }
 
-    public func handle(url: URL) {
-        OAuthSwift.handle(url: url)
-    }
 }
+
+// MARK: - AuthClientError
 
 public enum AuthClientError: Error {
     case noCredentialFound
