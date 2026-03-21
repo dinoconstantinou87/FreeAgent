@@ -31,6 +31,7 @@ let package = Package(
         .package(url: "https://github.com/httpswift/swifter.git", from: "1.5.0"),
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", from: "4.2.2"),
         .package(url: "https://github.com/jpsim/Yams", from: "5.0.0"),
+        .package(url: "https://github.com/Kolos65/Mockable.git", from: "0.1.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -42,10 +43,12 @@ let package = Package(
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
                 .product(name: "OAuthSwift", package: "OAuthSwift"),
                 .product(name: "KeychainAccess", package: "KeychainAccess"),
+                .product(name: "Mockable", package: "Mockable"),
             ],
             swiftSettings: [
                 .swiftLanguageMode(.v6),
                 .enableExperimentalFeature("StrictConcurrency"),
+                .define("MOCKING", .when(configuration: .debug)),
             ]
         ),
         .executableTarget(
@@ -69,6 +72,17 @@ let package = Package(
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Yams", package: "Yams"),
+            ]
+        ),
+        .testTarget(
+            name: "FreeAgentAPITests",
+            dependencies: [
+                "FreeAgentAPI",
+                .product(name: "Mockable", package: "Mockable"),
+            ],
+            swiftSettings: [
+                .swiftLanguageMode(.v6),
+                .enableExperimentalFeature("StrictConcurrency"),
             ]
         ),
     ]

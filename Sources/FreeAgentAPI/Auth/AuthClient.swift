@@ -7,8 +7,9 @@ public struct AuthClient: Sendable {
 
     // MARK: Lifecycle
 
-    public init(config: AuthConfig) {
+    public init(config: AuthConfig, storage: any AuthStorageInterface = AuthStorage()) {
         self.config = config
+        self.storage = storage
         client = OAuth2Swift(
             consumerKey: config.key,
             consumerSecret: config.secret,
@@ -59,7 +60,7 @@ public struct AuthClient: Sendable {
 
     private let config: AuthConfig
     private let client: OAuth2Swift
-    private let storage = AuthStorage()
+    private let storage: any AuthStorageInterface
 
     @discardableResult
     private func handle(_ result: Result<OAuthSwift.TokenSuccess, OAuthSwiftError>) throws -> AuthCredential {
