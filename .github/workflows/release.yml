@@ -22,6 +22,22 @@ jobs:
           swiftformat --lint .
           swiftlint lint Sources
 
+      - name: Cache swift-openapi-generator
+        uses: actions/cache@v4
+        with:
+          path: .swift-openapi-generator
+          key: openapi-generator-1.10.2
+
+      - name: Cache SPM build
+        uses: actions/cache@v4
+        with:
+          path: .build
+          key: spm-release-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-release-${{ runner.os }}-
+
+      - name: Generate API client
+        run: make generate
+
       - name: Build universal binary
         run: |
           swift build -c release --arch arm64
