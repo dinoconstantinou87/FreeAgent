@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and Release
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: jdx/mise-action@v2
+
+      - name: Lint
+        run: |
+          swiftformat --lint .
+          swiftlint lint Sources
+
+      - name: Build universal binary
+        run: |
+          swift build -c release --arch arm64
+          swift build -c release --arch x86_64
+          lipo -create \
+            .build/arm64-apple-macosx/release/freeagent \
+            .build/x86_64-apple-macosx/release/freeagent \
+            -output freeagent
+          strip -rSTx freeagent
+
+      - name: Package binary
+        run: |
+          tar czf freeagent-${GITHUB_REF_NAME}-macos-universal.tar.gz freeagent
+          shasum -a 256 freeagent-${GITHUB_REF_NAME}-macos-universal.tar.gz > freeagent-${GITHUB_REF_NAME}-macos-universal.tar.gz.sha256
+
+      - name: Create GitHub Release
+        run: |
+          gh release create ${GITHUB_REF_NAME} \
+            --title "${GITHUB_REF_NAME}" \
+            --generate-notes \
+            freeagent-${GITHUB_REF_NAME}-macos-universal.tar.gz \
+            freeagent-${GITHUB_REF_NAME}-macos-universal.tar.gz.sha256
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
