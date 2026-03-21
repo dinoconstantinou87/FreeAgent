@@ -1,11 +1,15 @@
 import Foundation
 @preconcurrency import KeychainAccess
 
-public struct AuthStorage: Sendable {
+// MARK: - AuthStorage
+
+public struct AuthStorage: AuthStorageInterface {
 
     // MARK: Lifecycle
 
-    public init() { }
+    public init(keychain: any KeychainInterface = Keychain(service: "freeagent.cli")) {
+        self.keychain = keychain
+    }
 
     // MARK: Public
 
@@ -27,7 +31,25 @@ public struct AuthStorage: Sendable {
 
     // MARK: Private
 
-    private let keychain = Keychain(service: "freeagent.cli")
+    private let keychain: any KeychainInterface
     private let key = "freeagent.cli.credential"
 
+}
+
+// MARK: - Keychain + KeychainInterface
+
+extension Keychain: @retroactive @unchecked Sendable {}
+
+extension Keychain: KeychainInterface {
+    public func getData(_ key: String) throws -> Data? {
+        try getData(key, ignoringAttributeSynchronizable: true)
+    }
+
+    public func set(_ value: Data, key: String) throws {
+        try set(value, key: key, ignoringAttributeSynchronizable: true)
+    }
+
+    public func remove(_ key: String) throws {
+        try remove(key, ignoringAttributeSynchronizable: true)
+    }
 }

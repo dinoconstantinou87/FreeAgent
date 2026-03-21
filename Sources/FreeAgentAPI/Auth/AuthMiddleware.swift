@@ -25,7 +25,7 @@ public struct AuthMiddleware: ClientMiddleware {
     // MARK: Internal
 
     let config: AuthConfig
-    let storage = AuthStorage()
+    let storage: any AuthStorageInterface
 
     // MARK: Private
 
@@ -44,8 +44,8 @@ public struct AuthMiddleware: ClientMiddleware {
 }
 
 extension ClientMiddleware where Self == AuthMiddleware {
-    public static func auth(_ config: AuthConfig) -> AuthMiddleware {
-        AuthMiddleware(config: config)
+    public static func auth(_ config: AuthConfig, storage: any AuthStorageInterface = AuthStorage()) -> AuthMiddleware {
+        AuthMiddleware(config: config, storage: storage)
     }
 }
 
