@@ -6,10 +6,9 @@ import Testing
 
 @testable import FreeAgentAPI
 
-@Suite("AuthMiddleware")
 struct AuthMiddlewareTests {
 
-    private let config = AuthConfig(key: "key", secret: "secret", environment: .sandbox)
+    // MARK: Internal
 
     @Test("adds bearer token to request")
     func addsBearerToken() async throws {
@@ -28,9 +27,9 @@ struct AuthMiddlewareTests {
         let (response, _) = try await middleware.intercept(
             request,
             body: nil,
-            baseURL: URL(string: "https://api.example.com")!,
+            baseURL: try #require(URL(string: "https://api.example.com")),
             operationID: "test"
-        ) { request, body, url in
+        ) { request, body, _ in
             #expect(request.headerFields[.authorization] == "Bearer test-token")
             return (HTTPResponse(status: .ok), body)
         }
@@ -39,7 +38,7 @@ struct AuthMiddlewareTests {
     }
 
     @Test("throws when no credential is stored")
-    func throwsWhenNoCredential() async {
+    func throwsWhenNoCredential() async throws {
         let storage = MockAuthStorageInterface()
         given(storage).get().willReturn(nil)
 
@@ -50,11 +49,16 @@ struct AuthMiddlewareTests {
             try await middleware.intercept(
                 request,
                 body: nil,
-                baseURL: URL(string: "https://api.example.com")!,
+                baseURL: try #require(URL(string: "https://api.example.com")),
                 operationID: "test"
-            ) { request, body, url in
+            ) { _, body, _ in
                 (HTTPResponse(status: .ok), body)
             }
         }
     }
+
+    // MARK: Private
+
+    private let config = AuthConfig(key: "key", secret: "secret", environment: .sandbox)
+
 }

@@ -36,9 +36,12 @@ public struct AuthStorage: AuthStorageInterface {
 
 }
 
-// MARK: - Keychain + KeychainInterface
+// MARK: - Keychain + @retroactive @unchecked Sendable
 
-extension Keychain: @retroactive @unchecked Sendable {}
+// swiftlint:disable:next no_unchecked_sendable
+extension Keychain: @retroactive @unchecked Sendable { }
+
+// MARK: - Keychain + KeychainInterface
 
 extension Keychain: KeychainInterface {
     public func getData(_ key: String) throws -> Data? {

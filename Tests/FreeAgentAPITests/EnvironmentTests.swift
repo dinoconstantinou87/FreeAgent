@@ -3,7 +3,8 @@ import Testing
 
 @testable import FreeAgentAPI
 
-@Suite("Environment")
+// MARK: - EnvironmentTests
+
 struct EnvironmentTests {
 
     @Test("production baseURL points to api.freeagent.com", .tags(.production))

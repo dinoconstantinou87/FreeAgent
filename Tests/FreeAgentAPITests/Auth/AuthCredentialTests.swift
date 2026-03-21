@@ -3,7 +3,6 @@ import Testing
 
 @testable import FreeAgentAPI
 
-@Suite("AuthCredential")
 struct AuthCredentialTests {
 
     @Test("has not expired when expiresAt is nil")

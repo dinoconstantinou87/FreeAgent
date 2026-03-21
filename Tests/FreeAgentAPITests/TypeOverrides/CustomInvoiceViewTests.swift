@@ -3,7 +3,6 @@ import Testing
 
 @testable import FreeAgentAPI
 
-@Suite("CustomInvoiceView")
 struct CustomInvoiceViewTests {
 
     @Test(

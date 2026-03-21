@@ -4,10 +4,9 @@ import Testing
 
 @testable import FreeAgentAPI
 
-@Suite("AuthStorage")
 struct AuthStorageTests {
 
-    private let keychain = MockKeychainInterface()
+    // MARK: Internal
 
     @Test("get returns nil when keychain has no data")
     func getReturnsNilWhenEmpty() throws {
@@ -76,4 +75,9 @@ struct AuthStorageTests {
 
         verify(keychain).remove(.value("freeagent.cli.credential")).called(.once)
     }
+
+    // MARK: Private
+
+    private let keychain = MockKeychainInterface()
+
 }
