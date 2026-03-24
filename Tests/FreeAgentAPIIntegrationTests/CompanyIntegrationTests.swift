@@ -19,29 +19,38 @@ struct CompanyIntegrationTests {
         let response = try await client.companyDetails()
         let company = try response.ok.body.json.company
 
-        // Required fields
-        #expect(company.url == "https://api.sandbox.freeagent.com/v2/company")
-        #expect(company.name == "Acme Technologies Ltd")
-        #expect(company.subdomain == "acmetechnologiesltd")
-        #expect(company._type == "UkLimitedCompany")
-        #expect(company.currency == "GBP")
-        #expect(company.mileageUnits == "miles")
-        #expect(company.companyStartDate == "2025-01-01")
-        #expect(company.freeagentStartDate == "2025-01-01")
-        #expect(company.firstAccountingYearEnd == "2026-01-31")
+        var expected = Components.Schemas.Company(
+            url: "https://api.sandbox.freeagent.com/v2/company",
+            name: "Acme Technologies Ltd",
+            subdomain: "acmetechnologiesltd",
+            _type: "UkLimitedCompany",
+            currency: "GBP",
+            mileageUnits: "miles",
+            companyStartDate: "2025-01-01",
+            freeagentStartDate: "2025-01-01",
+            firstAccountingYearEnd: "2026-01-31",
+            companyRegistrationNumber: "12345678",
+            salesTaxRegistrationStatus: "Registered",
+            salesTaxName: "VAT",
+            salesTaxRegistrationNumber: "999888777",
+            salesTaxEffectiveDate: "2025-01-01",
+            salesTaxIsValueAdded: true,
+            salesTaxRates: ["20.0", "5.0", "0.0"],
+            ecVatReportingEnabled: false,
+            initialVatBasis: "Invoice",
+            cisEnabled: false,
+            cisSubcontractor: false,
+            cisContractor: false,
+            address1: "42 Innovation Street",
+            town: "Manchester",
+            postcode: "M1 4BT",
+            country: "United Kingdom"
+        )
 
-        // Optional fields
-        #expect(company.companyRegistrationNumber == "12345678")
-        #expect(company.salesTaxRegistrationStatus == "Registered")
-        #expect(company.salesTaxName == "VAT")
-        #expect(company.salesTaxIsValueAdded == true)
-        #expect(company.salesTaxRegistrationNumber == "999888777")
-        #expect(company.salesTaxEffectiveDate == "2025-01-01")
-        #expect(company.initialVatBasis == "Invoice")
-        #expect(company.country == "United Kingdom")
-        #expect(company.address1 == "42 Innovation Street")
-        #expect(company.town == "Manchester")
-        #expect(company.postcode == "M1 4BT")
+        expected.createdAt = company.createdAt
+        expected.updatedAt = company.updatedAt
+
+        #expect(company == expected)
     }
 
     // MARK: Private
