@@ -85,6 +85,13 @@ jobs:
         if: steps.detect.outputs.skip == 'true'
         run: echo "No OpenAPI changes detected, skipping integration tests."
 
+      - name: Cache swift-openapi-generator
+        if: steps.detect.outputs.skip != 'true'
+        uses: actions/cache@v5
+        with:
+          path: .swift-openapi-generator
+          key: openapi-generator-1.10.2
+
       - name: Cache SPM build
         if: steps.detect.outputs.skip != 'true'
         uses: actions/cache@v5
@@ -92,6 +99,10 @@ jobs:
           path: .build
           key: spm-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
           restore-keys: spm-${{ runner.os }}-
+
+      - name: Generate API client
+        if: steps.detect.outputs.skip != 'true'
+        run: make generate
 
       - name: Refresh access token
         if: steps.detect.outputs.skip != 'true'
