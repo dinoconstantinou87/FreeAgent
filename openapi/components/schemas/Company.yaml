@@ -1,4 +1,14 @@
 type: object
+required:
+  - url
+  - name
+  - subdomain
+  - type
+  - currency
+  - mileage_units
+  - company_start_date
+  - freeagent_start_date
+  - first_accounting_year_end
 properties:
   url:
     type: string

@@ -85,5 +85,17 @@ let package = Package(
                 .enableExperimentalFeature("StrictConcurrency"),
             ]
         ),
+        .testTarget(
+            name: "FreeAgentAPIIntegrationTests",
+            dependencies: [
+                "FreeAgentAPI",
+                .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
+                .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
+            ],
+            swiftSettings: [
+                .swiftLanguageMode(.v6),
+                .enableExperimentalFeature("StrictConcurrency"),
+            ]
+        ),
     ]
 )
