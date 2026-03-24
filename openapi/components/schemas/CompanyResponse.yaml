@@ -1,0 +1,6 @@
+type: object
+required:
+- company
+properties:
+  company:
+    $ref: 'Company.yaml'

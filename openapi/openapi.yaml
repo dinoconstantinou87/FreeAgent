@@ -87,6 +87,10 @@ components:
       $ref: 'components/schemas/InvoiceUpdatePayload.yaml'
     EmailPayload:
       $ref: 'components/schemas/EmailPayload.yaml'
+    Company:
+      $ref: 'components/schemas/Company.yaml'
+    CompanyResponse:
+      $ref: 'components/schemas/CompanyResponse.yaml'
   responses:
     EmptyResponse:
       description: Error response
