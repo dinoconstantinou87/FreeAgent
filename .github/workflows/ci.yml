@@ -116,9 +116,9 @@ jobs:
           echo "::add-mask::$refresh_token"
           echo "FREEAGENT_ACCESS_TOKEN=$access_token" >> "$GITHUB_ENV"
 
-          # Build updated credential JSON for secret rotation
+          # Build updated credential JSON for secret rotation (compact single-line)
           expires_at=$(python3 -c "import time; print(time.time() + $expires_in)")
-          updated_credential=$(echo '${{ secrets.FREEAGENT_CREDENTIAL }}' | jq \
+          updated_credential=$(echo '${{ secrets.FREEAGENT_CREDENTIAL }}' | jq -c \
             --arg token "$access_token" \
             --arg refresh "$refresh_token" \
             --arg expires "$expires_at" \
