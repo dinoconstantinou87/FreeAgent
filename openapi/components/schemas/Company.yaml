@@ -1,0 +1,102 @@
+type: object
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/company
+  name:
+    type: string
+    example: My Company
+  subdomain:
+    type: string
+    example: mycompany
+  type:
+    type: string
+    example: UkLimitedCompany
+  currency:
+    type: string
+    example: GBP
+  mileage_units:
+    type: string
+    example: miles
+  company_start_date:
+    type: string
+    example: '2020-05-01'
+  freeagent_start_date:
+    type: string
+    example: '2020-05-01'
+  first_accounting_year_end:
+    type: string
+    example: '2011-04-30'
+  company_registration_number:
+    type: string
+    example: '123456'
+  sales_tax_registration_status:
+    type: string
+    example: Registered
+  sales_tax_name:
+    type: string
+    example: VAT
+  sales_tax_registration_number:
+    type: string
+    example: '123456'
+  sales_tax_effective_date:
+    type: string
+    example: '2020-05-01'
+  sales_tax_is_value_added:
+    type: boolean
+    example: true
+  sales_tax_rates:
+    type: array
+    items:
+      type: string
+  ec_vat_reporting_enabled:
+    type: boolean
+    example: false
+  vat_frs_type:
+    type: string
+    example: Not on Flat Rate Scheme
+  initial_vat_basis:
+    type: string
+    example: Cash
+  cis_enabled:
+    type: boolean
+    example: true
+  cis_subcontractor:
+    type: boolean
+    example: true
+  cis_contractor:
+    type: boolean
+    example: false
+  address1:
+    type: string
+    example: 1 Main Street
+  address2:
+    type: string
+    example: Suite 100
+  town:
+    type: string
+    example: Edinburgh
+  region:
+    type: string
+    example: Midlothian
+  postcode:
+    type: string
+    example: EH1 1AA
+  country:
+    type: string
+    example: United Kingdom
+  contact_email:
+    type: string
+    example: info@mycompany.example.com
+  contact_phone:
+    type: string
+    example: '0131 234 5678'
+  website:
+    type: string
+    example: https://www.mycompany.example.com
+  created_at:
+    type: string
+    example: '2020-05-01T00:00:00.000Z'
+  updated_at:
+    type: string
+    example: '2020-05-01T00:00:00.000Z'
