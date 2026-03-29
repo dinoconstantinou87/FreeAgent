@@ -25,6 +25,7 @@ extension ClientCommand {
         let transport = URLSessionTransport()
         let client = Client(
             serverURL: serverURL,
+            configuration: .init(dateTranscoder: .freeAgent),
             transport: transport,
             middlewares: [
                 .auth(

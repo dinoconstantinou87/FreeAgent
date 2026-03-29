@@ -15,6 +15,7 @@ enum SandboxClient {
 
         return Client(
             serverURL: Environment.sandbox.baseURL,
+            configuration: .init(dateTranscoder: .freeAgent),
             transport: URLSessionTransport(),
             middlewares: [BearerTokenMiddleware(token: token)]
         )

@@ -1,0 +1,8 @@
+type: object
+required:
+- contacts
+properties:
+  contacts:
+    type: array
+    items:
+      $ref: 'Contact.yaml'

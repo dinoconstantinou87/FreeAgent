@@ -1,0 +1,105 @@
+type: object
+required:
+  - url
+  - status
+  - created_at
+  - updated_at
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/contacts/2
+  first_name:
+    type: string
+    example: Frederick
+  last_name:
+    type: string
+    example: Testington
+  organisation_name:
+    type: string
+    example: Testington & Sons Ltd
+  email:
+    type: string
+    example: fred@testingtonandsons.example.com
+  billing_email:
+    type: string
+    example: billing@testingtonandsons.example.com
+  phone_number:
+    type: string
+    example: '12345678'
+  mobile:
+    type: string
+    example: '9876543210'
+  address1:
+    type: string
+    example: 11 George Street
+  address2:
+    type: string
+    example: South Court
+  address3:
+    type: string
+    example: Flat 6
+  town:
+    type: string
+    example: London
+  region:
+    type: string
+    example: Southwark
+  postcode:
+    type: string
+    example: SE1 6HA
+  country:
+    type: string
+    example: United Kingdom
+  contact_name_on_invoices:
+    type: boolean
+    example: true
+  default_payment_terms_in_days:
+    type: integer
+    example: 30
+  locale:
+    type: string
+    example: en
+  account_balance:
+    type: string
+    example: '-100.0'
+  uses_contact_invoice_sequence:
+    type: boolean
+    example: false
+  charge_sales_tax:
+    type: string
+    example: Auto
+  sales_tax_registration_number:
+    type: string
+    example: ST12345
+  active_projects_count:
+    type: integer
+    example: 1
+  direct_debit_mandate_state:
+    type: string
+    example: active
+  status:
+    type: string
+    enum:
+      - Active
+      - Hidden
+    example: Active
+  is_cis_subcontractor:
+    type: boolean
+    example: true
+  cis_deduction_rate:
+    type: string
+    example: cis_standard
+  unique_tax_reference:
+    type: string
+    example: '1234567890'
+  subcontractor_verification_number:
+    type: string
+    example: V1234567890
+  created_at:
+    type: string
+    format: date-time
+    example: '2011-09-14T16:00:41Z'
+  updated_at:
+    type: string
+    format: date-time
+    example: '2011-09-16T09:34:41Z'

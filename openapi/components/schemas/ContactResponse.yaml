@@ -1,0 +1,6 @@
+type: object
+required:
+- contact
+properties:
+  contact:
+    $ref: 'Contact.yaml'
