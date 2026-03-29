@@ -79,6 +79,9 @@ properties:
     example: active
   status:
     type: string
+    enum:
+      - Active
+      - Hidden
     example: Active
   is_cis_subcontractor:
     type: boolean
