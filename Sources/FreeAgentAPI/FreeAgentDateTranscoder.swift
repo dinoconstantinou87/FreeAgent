@@ -1,6 +1,8 @@
 import Foundation
 import OpenAPIRuntime
 
+// MARK: - FreeAgentDateTranscoder
+
 /// A date transcoder that handles ISO 8601 dates with and without fractional seconds.
 ///
 /// The FreeAgent API returns dates in both formats:
@@ -31,14 +33,16 @@ public struct FreeAgentDateTranscoder: DateTranscoder {
 
     // MARK: Private
 
-    private let withFractionalSeconds: Date.ISO8601FormatStyle = .iso8601.dateSeparator(.dash).timeSeparator(.colon)
+    private let withFractionalSeconds = Date.ISO8601FormatStyle.iso8601.dateSeparator(.dash).timeSeparator(.colon)
         .timeZone(separator: .omitted).includingFractionalSeconds()
 
-    private let withoutFractionalSeconds: Date.ISO8601FormatStyle = .iso8601.dateSeparator(.dash).timeSeparator(.colon)
+    private let withoutFractionalSeconds = Date.ISO8601FormatStyle.iso8601.dateSeparator(.dash).timeSeparator(.colon)
         .timeZone(separator: .omitted)
 }
 
 extension DateTranscoder where Self == FreeAgentDateTranscoder {
     /// A date transcoder that handles ISO 8601 dates with and without fractional seconds.
-    public static var freeAgent: Self { FreeAgentDateTranscoder() }
+    public static var freeAgent: Self {
+        FreeAgentDateTranscoder()
+    }
 }
