@@ -23,7 +23,7 @@ struct ContactIntegrationTests {
 
         let contact = try #require(contacts.first)
         #expect(contact.url.contains("/v2/contacts/"))
-        #expect(contact.status == .Active)
+        #expect(contact.status == .active)
         #expect(contact.createdAt <= Date())
         #expect(contact.updatedAt <= Date())
     }
@@ -42,7 +42,7 @@ struct ContactIntegrationTests {
 
         #expect(created.url.contains("/v2/contacts/"))
         #expect(created.organisationName == "Integration Test Ltd")
-        #expect(created.status == .Active)
+        #expect(created.status == .active)
         #expect(created.createdAt <= Date())
         #expect(created.updatedAt <= Date())
     }
