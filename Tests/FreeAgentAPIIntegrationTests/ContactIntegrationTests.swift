@@ -24,8 +24,8 @@ struct ContactIntegrationTests {
         let contact = try #require(contacts.first)
         #expect(contact.url.contains("/v2/contacts/"))
         #expect(contact.status == .Active)
-        #expect(!contact.createdAt.isEmpty)
-        #expect(!contact.updatedAt.isEmpty)
+        #expect(contact.createdAt <= Date())
+        #expect(contact.updatedAt <= Date())
     }
 
     @Test("POST /v2/contacts creates a contact and GET /v2/contacts returns it")
@@ -43,8 +43,8 @@ struct ContactIntegrationTests {
         #expect(created.url.contains("/v2/contacts/"))
         #expect(created.organisationName == "Integration Test Ltd")
         #expect(created.status == .Active)
-        #expect(!created.createdAt.isEmpty)
-        #expect(!created.updatedAt.isEmpty)
+        #expect(created.createdAt <= Date())
+        #expect(created.updatedAt <= Date())
     }
 
     // MARK: Private

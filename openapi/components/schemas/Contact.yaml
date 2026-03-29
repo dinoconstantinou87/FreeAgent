@@ -97,7 +97,9 @@ properties:
     example: V1234567890
   created_at:
     type: string
+    format: date-time
     example: '2011-09-14T16:00:41Z'
   updated_at:
     type: string
+    format: date-time
     example: '2011-09-16T09:34:41Z'
