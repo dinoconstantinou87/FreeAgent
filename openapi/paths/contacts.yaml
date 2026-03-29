@@ -11,8 +11,7 @@ list:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/ContactListResponse'
       '401':
         $ref: '#/components/responses/UnauthorizedResponse'
   post:
@@ -40,7 +39,6 @@ list:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/ContactResponse'
       '401':
         $ref: '#/components/responses/UnauthorizedResponse'

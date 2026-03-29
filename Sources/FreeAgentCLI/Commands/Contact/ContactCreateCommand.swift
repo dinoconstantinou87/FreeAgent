@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct ContactCreateCommand: ClientCommand {
     static let configuration = CommandConfiguration(
@@ -21,7 +20,7 @@ struct ContactCreateCommand: ClientCommand {
     @Option(name: .long, help: "Email address")
     var email: String?
 
-    func run(client: Client) async throws -> OpenAPIObjectContainer? {
+    func run(client: Client) async throws -> Components.Schemas.ContactResponse? {
         let contactPayload = Components.Schemas.ContactCreatePayload(
             email: email,
             firstName: firstName,
@@ -34,6 +33,6 @@ struct ContactCreateCommand: ClientCommand {
         )
 
         return try await client.createContact(input)
-            .created.body.json.additionalProperties
+            .created.body.json
     }
 }

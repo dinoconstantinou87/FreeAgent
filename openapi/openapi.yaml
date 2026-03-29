@@ -79,6 +79,12 @@ components:
       $ref: 'components/schemas/BillCreatePayload.yaml'
     BillItemPayload:
       $ref: 'components/schemas/BillItemPayload.yaml'
+    Contact:
+      $ref: 'components/schemas/Contact.yaml'
+    ContactResponse:
+      $ref: 'components/schemas/ContactResponse.yaml'
+    ContactListResponse:
+      $ref: 'components/schemas/ContactListResponse.yaml'
     ContactCreatePayload:
       $ref: 'components/schemas/ContactCreatePayload.yaml'
     InvoiceCreatePayload:
