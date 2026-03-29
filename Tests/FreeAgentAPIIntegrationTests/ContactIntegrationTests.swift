@@ -43,8 +43,8 @@ struct ContactIntegrationTests {
         #expect(created.url.contains("/v2/contacts/"))
         #expect(created.organisationName == "Integration Test Ltd")
         #expect(created.status == .active)
-        #expect(created.createdAt <= Date())
-        #expect(created.updatedAt <= Date())
+        #expect(abs(created.createdAt.timeIntervalSinceNow) < 5)
+        #expect(abs(created.updatedAt.timeIntervalSinceNow) < 5)
     }
 
     // MARK: Private
