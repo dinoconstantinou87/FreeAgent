@@ -11,14 +11,14 @@ public struct FreeAgentDateTranscoder: DateTranscoder {
     // MARK: Public
 
     public func encode(_ date: Date) throws -> String {
-        formatterWithFractionalSeconds.string(from: date)
+        date.formatted(withFractionalSeconds)
     }
 
     public func decode(_ dateString: String) throws -> Date {
-        if let date = formatterWithFractionalSeconds.date(from: dateString) {
+        if let date = try? Date(dateString, strategy: withFractionalSeconds) {
             return date
         }
-        if let date = formatterWithoutFractionalSeconds.date(from: dateString) {
+        if let date = try? Date(dateString, strategy: withoutFractionalSeconds) {
             return date
         }
         throw DecodingError.dataCorrupted(
@@ -31,17 +31,11 @@ public struct FreeAgentDateTranscoder: DateTranscoder {
 
     // MARK: Private
 
-    private let formatterWithFractionalSeconds: ISO8601DateFormatter = {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return formatter
-    }()
+    private let withFractionalSeconds: Date.ISO8601FormatStyle = .iso8601.dateSeparator(.dash).timeSeparator(.colon)
+        .timeZone(separator: .omitted).includingFractionalSeconds()
 
-    private let formatterWithoutFractionalSeconds: ISO8601DateFormatter = {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime]
-        return formatter
-    }()
+    private let withoutFractionalSeconds: Date.ISO8601FormatStyle = .iso8601.dateSeparator(.dash).timeSeparator(.colon)
+        .timeZone(separator: .omitted)
 }
 
 extension DateTranscoder where Self == FreeAgentDateTranscoder {
