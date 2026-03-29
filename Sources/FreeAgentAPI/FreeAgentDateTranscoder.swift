@@ -33,11 +33,21 @@ public struct FreeAgentDateTranscoder: DateTranscoder {
 
     // MARK: Private
 
-    private let withFractionalSeconds = Date.ISO8601FormatStyle.iso8601.dateSeparator(.dash).timeSeparator(.colon)
-        .timeZone(separator: .omitted).includingFractionalSeconds()
+    private let withFractionalSeconds = Date.ISO8601FormatStyle(
+        dateSeparator: .dash,
+        dateTimeSeparator: .standard,
+        timeSeparator: .colon,
+        timeZoneSeparator: .omitted,
+        includingFractionalSeconds: true
+    )
 
-    private let withoutFractionalSeconds = Date.ISO8601FormatStyle.iso8601.dateSeparator(.dash).timeSeparator(.colon)
-        .timeZone(separator: .omitted)
+    private let withoutFractionalSeconds = Date.ISO8601FormatStyle(
+        dateSeparator: .dash,
+        dateTimeSeparator: .standard,
+        timeSeparator: .colon,
+        timeZoneSeparator: .omitted,
+        includingFractionalSeconds: false
+    )
 }
 
 extension DateTranscoder where Self == FreeAgentDateTranscoder {
