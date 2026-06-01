@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct ExplanationCreateCommand: ClientCommand {
     static let configuration = CommandConfiguration(
@@ -45,7 +44,13 @@ struct ExplanationCreateCommand: ClientCommand {
     @Option(name: .long, help: "Rebill factor")
     var rebillFactor: String?
 
-    func run(client: Client) async throws -> OpenAPIObjectContainer? {
+    @Option(name: .long, help: "Sales tax rate, e.g. 20.0 or 0.0 to zero-rate (e.g. EU purchases, gift vouchers)")
+    var salesTaxRate: String?
+
+    @Option(name: .long, help: "Manual sales tax amount override (e.g. 0.0)")
+    var manualSalesTax: String?
+
+    func run(client: Client) async throws -> Components.Schemas.BankTransactionExplanationResponse? {
         let payload = Components.Schemas.BankTransactionExplanationCreatePayload(
             bankAccount: bankAccount,
             bankTransaction: bankTransaction,
@@ -58,7 +63,9 @@ struct ExplanationCreateCommand: ClientCommand {
             paidUser: paidUser,
             project: project,
             rebillFactor: rebillFactor,
-            rebillType: rebillType
+            rebillType: rebillType,
+            salesTaxRate: salesTaxRate,
+            manualSalesTaxAmount: manualSalesTax
         )
 
         let input = Operations.CreateABankTransactionExplanation.Input(
@@ -66,6 +73,6 @@ struct ExplanationCreateCommand: ClientCommand {
         )
 
         return try await client.createABankTransactionExplanation(input)
-            .created.body.json.additionalProperties
+            .created.body.json
     }
 }

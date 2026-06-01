@@ -17,3 +17,9 @@ properties:
   paid_user:
     type: string
     example: https://api.freeagent.com/v2/users/1
+  sales_tax_rate:
+    type: string
+    example: '0.0'
+  manual_sales_tax_amount:
+    type: string
+    example: '0.0'

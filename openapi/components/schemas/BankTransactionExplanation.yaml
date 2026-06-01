@@ -1,7 +1,10 @@
 type: object
+required:
+  - url
 properties:
-  attachment:
-    $ref: '#/components/schemas/AttachmentPayload'
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/bank_transaction_explanations/1
   bank_account:
     type: string
     example: https://api.freeagent.com/v2/bank_accounts/1
@@ -20,6 +23,18 @@ properties:
   gross_value:
     type: string
     example: '-730.0'
+  sales_tax_rate:
+    type: string
+    example: '0.0'
+  sales_tax_value:
+    type: string
+    example: '0.0'
+  sales_tax_status:
+    type: string
+    example: TAXABLE
+  manual_sales_tax_amount:
+    type: string
+    example: '0.0'
   paid_bill:
     type: string
     example: https://api.freeagent.com/v2/bills/123
@@ -32,15 +47,21 @@ properties:
   project:
     type: string
     example: https://api.freeagent.com/v2/projects/1
-  rebill_factor:
+  marked_for_review:
+    type: boolean
+    example: false
+  is_money_in:
+    type: boolean
+    example: false
+  is_money_out:
+    type: boolean
+    example: true
+  is_deletable:
+    type: boolean
+    example: true
+  is_locked:
+    type: boolean
+    example: false
+  updated_at:
     type: string
-    example: '0.25'
-  rebill_type:
-    type: string
-    example: markup
-  sales_tax_rate:
-    type: string
-    example: '0.0'
-  manual_sales_tax_amount:
-    type: string
-    example: '0.0'
+    format: date-time
