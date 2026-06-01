@@ -73,8 +73,7 @@ list:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BankTransactionExplanationResponse'
       '401':
         $ref: '#/components/responses/UnauthorizedResponse'
 show:
@@ -90,8 +89,7 @@ show:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BankTransactionExplanationResponse'
       '401':
         $ref: '#/components/responses/UnauthorizedResponse'
   put:
@@ -114,8 +112,7 @@ show:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BankTransactionExplanationResponse'
       '401':
         $ref: '#/components/responses/UnauthorizedResponse'
   delete:

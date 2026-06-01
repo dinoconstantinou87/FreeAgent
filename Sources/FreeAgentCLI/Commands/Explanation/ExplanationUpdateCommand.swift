@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct ExplanationUpdateCommand: ClientCommand {
     static let configuration = CommandConfiguration(
@@ -30,7 +29,13 @@ struct ExplanationUpdateCommand: ClientCommand {
     @Option(name: .long, help: "Path to file to attach (PDF or image)")
     var attachment: String?
 
-    func run(client: Client) async throws -> OpenAPIObjectContainer? {
+    @Option(name: .long, help: "Sales tax rate, e.g. 20.0 or 0.0 to zero-rate (e.g. EU purchases, gift vouchers)")
+    var salesTaxRate: String?
+
+    @Option(name: .long, help: "Manual sales tax amount override (e.g. 0.0)")
+    var manualSalesTax: String?
+
+    func run(client: Client) async throws -> Components.Schemas.BankTransactionExplanationResponse? {
         var attachmentPayload: Components.Schemas.AttachmentPayload?
 
         if let attachmentPath = attachment {
@@ -61,7 +66,9 @@ struct ExplanationUpdateCommand: ClientCommand {
             description: description,
             grossValue: grossValue,
             paidBill: paidBill,
-            paidUser: paidUser
+            paidUser: paidUser,
+            salesTaxRate: salesTaxRate,
+            manualSalesTaxAmount: manualSalesTax
         )
 
         let input = Operations.UpdateABankTransactionExplanation.Input(
@@ -70,6 +77,6 @@ struct ExplanationUpdateCommand: ClientCommand {
         )
 
         return try await client.updateABankTransactionExplanation(input)
-            .ok.body.json.additionalProperties
+            .ok.body.json
     }
 }
