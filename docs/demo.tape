@@ -66,12 +66,3 @@ Type "CAT=https://api.sandbox.freeagent.com/v2/categories/250" Enter
 Sleep 750ms
 Type "freeagent explanation create --bank-transaction $TX --bank-account $ACC --category $CAT --dated-on 2025-08-21 --description 'Office supplies' --gross-value -45.99 | jq -c '.bank_transaction_explanation | {dated_on, gross_value, description}'" Enter
 Sleep 3s
-
-Hide
-Type "clear" Enter
-Show
-
-Type "# It drops off the unexplained list" Enter
-Sleep 300ms
-Type "freeagent bank-transaction list --bank-account $ACC --view unexplained | jq '.bank_transactions | length'" Enter
-Sleep 3s
