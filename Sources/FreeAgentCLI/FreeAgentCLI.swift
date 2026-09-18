@@ -6,7 +6,7 @@ struct FreeAgentCLI: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
         commandName: "freeagent",
         abstract: "FreeAgent API CLI",
-        version: "0.3.0",
+        version: version,
         subcommands: [
             SetupCommand.self,
             AuthCommand.self,
