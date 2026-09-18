@@ -1,0 +1,8 @@
+type: object
+required:
+- attachments
+properties:
+  attachments:
+    type: array
+    items:
+      $ref: 'Attachment.yaml'

@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: FreeAgent
-  version: '2024-10-01'
+  version: '2026-09-01'
   contact: {}
 servers:
 - url: https://api.freeagent.com
@@ -17,6 +17,10 @@ paths:
     $ref: 'paths/bank_transaction_explanations.yaml#/list'
   /v2/bank_transaction_explanations/{id}:
     $ref: 'paths/bank_transaction_explanations.yaml#/show'
+  /v2/bank_transaction_explanations/{id}/attachments:
+    $ref: 'paths/bank_transaction_explanation_attachments.yaml#/list'
+  /v2/attachments/{id}:
+    $ref: 'paths/attachments.yaml#/show'
   /v2/bank_transactions:
     $ref: 'paths/bank_transactions.yaml#/list'
   /v2/bank_transactions/{id}:
@@ -67,6 +71,20 @@ components:
       $ref: 'components/schemas/ExpensePayload.yaml'
     AttachmentPayload:
       $ref: 'components/schemas/AttachmentPayload.yaml'
+    Attachment:
+      $ref: 'components/schemas/Attachment.yaml'
+    AttachmentResponse:
+      $ref: 'components/schemas/AttachmentResponse.yaml'
+    AttachmentListResponse:
+      $ref: 'components/schemas/AttachmentListResponse.yaml'
+    AttachmentCreatePayload:
+      $ref: 'components/schemas/AttachmentCreatePayload.yaml'
+    AttachmentUpdatePayload:
+      $ref: 'components/schemas/AttachmentUpdatePayload.yaml'
+    AttachmentCreateRequest:
+      $ref: 'components/schemas/AttachmentCreateRequest.yaml'
+    AttachmentUpdateRequest:
+      $ref: 'components/schemas/AttachmentUpdateRequest.yaml'
     InvoiceItemPayload:
       $ref: 'components/schemas/InvoiceItemPayload.yaml'
     Errors:
@@ -119,8 +137,10 @@ components:
 security:
 - oauth2: []
 tags:
+- name: Attachments
 - name: Bank Accounts
 - name: Bank Transaction Explanations
+- name: Bank Transaction Explanation Attachments
 - name: Bank Transactions
 - name: Bills
 - name: Categories

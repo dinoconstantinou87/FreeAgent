@@ -1,0 +1,34 @@
+show:
+  get:
+    tags:
+    - Attachments
+    summary: Show Attachment
+    description: Show a single attachment
+    operationId: showAttachment
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachmentResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  delete:
+    tags:
+    - Attachments
+    summary: Delete Attachment
+    description: Delete a single attachment
+    operationId: deleteAttachment
+    responses:
+      '200':
+        $ref: '#/components/responses/EmptyResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

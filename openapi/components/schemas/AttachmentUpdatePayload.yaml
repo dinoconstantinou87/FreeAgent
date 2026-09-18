@@ -1,0 +1,24 @@
+type: object
+required:
+- url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/attachments/1
+  data:
+    type: string
+    description: Binary data of the file encoded as base64
+    example: iVBORw0KGgo...
+  file_name:
+    type: string
+    example: receipt.pdf
+  content_type:
+    type: string
+    example: application/pdf
+  description:
+    type: string
+    example: Invoice receipt
+  _destroy:
+    type: string
+    description: Set to 'true' to remove this attachment
+    example: 'true'

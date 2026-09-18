@@ -1,0 +1,33 @@
+type: object
+required:
+- url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/attachments/1
+  content_src:
+    type: string
+    description: URL to the original full-size file
+  content_src_medium:
+    type: string
+    description: URL to a medium-size thumbnail, when one exists
+  content_src_small:
+    type: string
+    description: URL to a small-size thumbnail, when one exists
+  expires_at:
+    type: string
+    format: date-time
+    description: When the content_src URLs expire
+  content_type:
+    type: string
+    example: application/pdf
+  file_name:
+    type: string
+    example: receipt.pdf
+  file_size:
+    type: integer
+    description: Size of the original file in bytes
+    example: 135228
+  description:
+    type: string
+    example: Invoice receipt
