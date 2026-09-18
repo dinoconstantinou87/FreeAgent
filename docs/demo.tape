@@ -11,9 +11,9 @@ Require jq
 
 Set Shell "bash"
 Set Theme "Catppuccin Mocha"
-Set FontSize 16
-Set Width 1400
-Set Height 300
+Set FontSize 20
+Set Width 1500
+Set Height 320
 Set Padding 24
 Set BorderRadius 10
 Set WindowBar Colorful
