@@ -23,6 +23,7 @@ list:
         example: 2018-01-01
     - name: bank_account
       in: query
+      required: true
       schema:
         type: string
         example: https://api.freeagent.com/v2/bank_accounts/:id
