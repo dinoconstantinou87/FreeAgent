@@ -17,7 +17,7 @@ struct ExplanationUpdateCommand: ClientCommand {
     @Option(name: .long, help: "Description")
     var description: String?
 
-    @Option(name: .long, help: "Gross value")
+    @Option(name: .long, parsing: .unconditional, help: "Gross value")
     var grossValue: String?
 
     @Option(name: .long, help: "Bill URL to mark as paid")

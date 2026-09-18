@@ -18,7 +18,7 @@ struct ExpenseCreateCommand: ClientCommand {
     @Option(name: .long, help: "Description of the expense")
     var description: String
 
-    @Option(name: .long, help: "Gross value (e.g. -12.0)")
+    @Option(name: .long, parsing: .unconditional, help: "Gross value (e.g. -12.0)")
     var grossValue: String
 
     @Option(name: .long, help: "Sales tax rate (e.g. 20.0)")

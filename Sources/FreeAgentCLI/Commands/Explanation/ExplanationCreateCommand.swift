@@ -23,7 +23,7 @@ struct ExplanationCreateCommand: ClientCommand {
     @Option(name: .long, help: "Description of the explanation")
     var description: String
 
-    @Option(name: .long, help: "Gross value (e.g. -730.0)")
+    @Option(name: .long, parsing: .unconditional, help: "Gross value (e.g. -730.0)")
     var grossValue: String
 
     @Option(name: .long, help: "Bill URL to mark as paid (e.g. https://api.freeagent.com/v2/bills/123)")
