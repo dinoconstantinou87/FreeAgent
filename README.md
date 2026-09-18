@@ -19,19 +19,23 @@ freeagent invoice list --view open_or_overdue
 freeagent invoice send-email 12345 --subject "Invoice 12345 from Acme Ltd"
 ```
 
-Mark it sent once it has gone out, or pull down the PDF:
+Mark it sent once it has gone out, or save the PDF to disk:
 
 ```bash
 freeagent invoice mark-sent 12345
-freeagent invoice pdf 12345
+freeagent invoice pdf 12345 | jq -r '.pdf.content' | base64 --decode > invoice-12345.pdf
 ```
 
 ## Explain Bank Transactions
 
-Find the transactions FreeAgent has not matched yet:
+Bank transactions are scoped to an account, so look up its URL first, then find
+everything FreeAgent has not matched yet:
 
 ```bash
-freeagent bank-transaction list --view unexplained --from-date 2026-01-01
+freeagent bank-account list
+freeagent bank-transaction list \
+  --bank-account https://api.freeagent.com/v2/bank_accounts/123 \
+  --view unexplained
 ```
 
 Explain one as payment of a bill, which marks that bill paid:
