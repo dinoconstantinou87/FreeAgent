@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: FreeAgent
-  version: 1.0.0
+  version: '2024-10-01'
   contact: {}
 servers:
 - url: https://api.freeagent.com
