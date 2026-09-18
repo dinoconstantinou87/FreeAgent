@@ -34,7 +34,8 @@ extension ClientCommand {
                         secret: config.auth.secret,
                         environment: credential.environment
                     )
-                )
+                ),
+                .apiVersion(),
             ]
         )
 
