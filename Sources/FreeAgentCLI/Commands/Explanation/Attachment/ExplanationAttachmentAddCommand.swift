@@ -2,7 +2,12 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
+// MARK: - ExplanationAttachmentAddCommand
+
 struct ExplanationAttachmentAddCommand: ClientCommand {
+
+    // MARK: Internal
+
     static let configuration = CommandConfiguration(
         commandName: "add",
         abstract: "Add attachments to a bank transaction explanation",
@@ -20,11 +25,17 @@ struct ExplanationAttachmentAddCommand: ClientCommand {
 
     func run(client: Client) async throws -> Components.Schemas.AttachmentListResponse? {
         let attachments = try file.map { path in
-            let attachment = try AttachmentFile(path: path)
-            return Components.Schemas.AttachmentCreatePayload(
-                data: attachment.data,
-                fileName: attachment.fileName,
-                contentType: attachment.contentType,
+            let url = URL(fileURLWithPath: path)
+            let ext = url.pathExtension.lowercased()
+
+            guard let contentType = Self.contentTypes[ext] else {
+                throw ExplanationAttachmentAddError.unsupportedFileType(ext)
+            }
+
+            return try Components.Schemas.AttachmentCreatePayload(
+                data: Data(contentsOf: url).base64EncodedString(),
+                fileName: url.lastPathComponent,
+                contentType: contentType,
                 description: description
             )
         }
@@ -36,5 +47,29 @@ struct ExplanationAttachmentAddCommand: ClientCommand {
 
         return try await client.createBankTransactionExplanationAttachments(input)
             .created.body.json
+    }
+
+    // MARK: Private
+
+    private static let contentTypes = [
+        "pdf": "application/pdf",
+        "png": "image/png",
+        "jpg": "image/jpeg",
+        "jpeg": "image/jpeg",
+        "gif": "image/gif",
+    ]
+
+}
+
+// MARK: - ExplanationAttachmentAddError
+
+enum ExplanationAttachmentAddError: Error, CustomStringConvertible {
+    case unsupportedFileType(String)
+
+    var description: String {
+        switch self {
+        case .unsupportedFileType(let ext):
+            "Unsupported attachment type '\(ext)'. Supported types: pdf, png, jpg, jpeg, gif"
+        }
     }
 }
