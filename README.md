@@ -38,10 +38,6 @@ $ freeagent --help
 $ freeagent invoice list --help
 ```
 
-Wherever a command refers to another record, it accepts either the bare ID or
-the full API URL - `--bank-account 123` and
-`--bank-account https://api.freeagent.com/v2/bank_accounts/123` are equivalent.
-
 ## Development
 
 The API client is auto-generated from an OpenAPI specification using [swift-openapi-generator](https://github.com/apple/swift-openapi-generator):
