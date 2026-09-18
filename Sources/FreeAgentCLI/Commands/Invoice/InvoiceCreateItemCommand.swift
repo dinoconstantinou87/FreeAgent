@@ -21,7 +21,7 @@ struct InvoiceCreateItemCommand: ClientCommand {
     @Option(name: .long, help: "Item quantity")
     var quantity: Double?
 
-    @Option(name: .long, help: "Item price")
+    @Option(name: .long, parsing: .unconditional, help: "Item price")
     var price: Double?
 
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
