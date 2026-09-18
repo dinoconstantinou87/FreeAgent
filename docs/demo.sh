@@ -6,10 +6,11 @@ readonly SANDBOX_HOST="api.sandbox.freeagent.com"
 readonly REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 readonly TAPE="$REPO_ROOT/docs/demo.tape"
 readonly EXPLANATION_DESCRIPTION="Office supplies"
-readonly TARGET_TRANSACTION="Staples"
+readonly TAPE_BANK_ACCOUNT_ID="39907"
+readonly TAPE_TRANSACTION_ID="2581845"
+readonly TAPE_CATEGORY_ID="250"
 
 INVOICE_ID=""
-BANK_ACCOUNT=""
 
 info() { printf '\033[36m==>\033[0m %s\n' "$*"; }
 warn() { printf '\033[33m==>\033[0m %s\n' "$*" >&2; }
@@ -26,7 +27,7 @@ fi
 delete_explanations_created_by_the_tape() {
     local explanations id
     explanations="$(
-        freeagent explanation list --bank-account "$BANK_ACCOUNT" 2>/dev/null |
+        freeagent explanation list --bank-account "$TAPE_BANK_ACCOUNT_ID" 2>/dev/null |
             jq -r --arg d "$EXPLANATION_DESCRIPTION" \
                 '.bank_transaction_explanations[]? | select(.description == $d) | .url | split("/") | last'
     )" || explanations=""
@@ -49,9 +50,7 @@ teardown() {
     local status=$?
     trap - EXIT INT TERM
     info "Removing fixtures"
-    if [[ -n "$BANK_ACCOUNT" ]]; then
-        delete_explanations_created_by_the_tape
-    fi
+    delete_explanations_created_by_the_tape
     if [[ -n "$INVOICE_ID" ]]; then
         delete_invoice_fixture
     fi
@@ -83,14 +82,22 @@ require_sandbox_account() {
     info "Sandbox account: $company_name"
 }
 
-require_target_transaction() {
-    local matches
+require_tape_references() {
+    local unexplained matches
+    unexplained="$(freeagent bank-transaction list --bank-account "$TAPE_BANK_ACCOUNT_ID" --view unexplained)" ||
+        die "bank account $TAPE_BANK_ACCOUNT_ID does not resolve - the tape references it by ID"
+
     matches="$(
-        freeagent bank-transaction list --bank-account "$BANK_ACCOUNT" --view unexplained |
-            jq -r --arg p "$TARGET_TRANSACTION" \
-                '[.bank_transactions[]? | select(.description | test($p))] | length'
+        jq -r --arg id "$TAPE_TRANSACTION_ID" \
+            '[.bank_transactions[]? | select(.url | endswith("/" + $id))] | length' <<<"$unexplained"
     )"
-    [[ "${matches:-0}" -gt 0 ]] || die "no unexplained '$TARGET_TRANSACTION' transaction - the tape has nothing to explain"
+    [[ "${matches:-0}" -gt 0 ]] ||
+        die "bank transaction $TAPE_TRANSACTION_ID is not unexplained on account $TAPE_BANK_ACCOUNT_ID - the tape references it by ID"
+
+    freeagent category list |
+        jq -e --arg id "$TAPE_CATEGORY_ID" \
+            'any(..; objects | select(.url? // "" | endswith("/" + $id)))' >/dev/null ||
+        die "category $TAPE_CATEGORY_ID does not resolve - the tape references it by ID"
 }
 
 create_overdue_invoice_fixture() {
@@ -119,9 +126,7 @@ main() {
     require_valid_tape
     require_sandbox_account
 
-    BANK_ACCOUNT="$(freeagent bank-account list | jq -r '.bank_accounts[0].url')"
-    [[ -n "$BANK_ACCOUNT" && "$BANK_ACCOUNT" != "null" ]] || die "no bank account found"
-    require_target_transaction
+    require_tape_references
 
     info "Creating fixtures"
     create_overdue_invoice_fixture

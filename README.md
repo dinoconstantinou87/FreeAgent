@@ -6,54 +6,6 @@ Manage your invoices, bills, expenses, bank accounts, contacts and more — dire
 
 ![freeagent in use](docs/demo.gif)
 
-## Chase What You're Owed
-
-See everything outstanding, then email an invoice to its contact:
-
-```bash
-freeagent invoice list --view open_or_overdue
-freeagent invoice send-email 12345 --subject "Invoice 12345 from Acme Ltd"
-```
-
-Mark it sent once it has gone out, or save the PDF to disk:
-
-```bash
-freeagent invoice mark-sent 12345
-freeagent invoice pdf 12345 | jq -r '.pdf.content' | base64 --decode > invoice-12345.pdf
-```
-
-## Explain Bank Transactions
-
-Bank transactions are scoped to an account, so look up its URL first, then find
-everything FreeAgent has not matched yet:
-
-```bash
-freeagent bank-account list
-freeagent bank-transaction list \
-  --bank-account https://api.freeagent.com/v2/bank_accounts/123 \
-  --view unexplained
-```
-
-Explain one as payment of a bill, which marks that bill paid:
-
-```bash
-freeagent explanation create \
-  --bank-transaction https://api.freeagent.com/v2/bank_transactions/456 \
-  --bank-account https://api.freeagent.com/v2/bank_accounts/123 \
-  --paid-bill https://api.freeagent.com/v2/bills/789 \
-  --dated-on 2026-09-18 \
-  --description "Office rent" \
-  --gross-value -730.0
-```
-
-## Script It
-
-Every command prints JSON, so your accounts compose with the rest of your toolchain:
-
-```bash
-freeagent invoice list --view overdue | jq '.invoices[] | {reference, contact_name, due_value}'
-```
-
 ## Installation
 
 ### Homebrew
@@ -85,6 +37,10 @@ Use `--help` on any command to explore its subcommands, flags and accepted value
 $ freeagent --help
 $ freeagent invoice list --help
 ```
+
+Wherever a command refers to another record, it accepts either the bare ID or
+the full API URL - `--bank-account 123` and
+`--bank-account https://api.freeagent.com/v2/bank_accounts/123` are equivalent.
 
 ## Development
 

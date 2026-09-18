@@ -49,9 +49,7 @@ Show
 
 Type "# Which bank transactions still need explaining?" Enter
 Sleep 300ms
-Type "ACC=$(freeagent bank-account list | jq -r '.bank_accounts[0].url')" Enter
-Sleep 1500ms
-Type "freeagent bank-transaction list --bank-account $ACC --view unexplained | jq -c '.bank_transactions[] | {dated_on, amount, description}'" Enter
+Type "freeagent bank-transaction list --bank-account 39907 --view unexplained | jq -c '.bank_transactions[] | {dated_on, amount, description}'" Enter
 Sleep 3s
 
 Hide
@@ -60,9 +58,5 @@ Show
 
 Type "# Explain the Staples debit as an office cost" Enter
 Sleep 300ms
-Type "TX=$(freeagent bank-transaction list --bank-account $ACC --view unexplained | jq -r --arg p Staples '.bank_transactions[] | select(.description | test($p)) | .url')" Enter
-Sleep 1500ms
-Type "CAT=https://api.sandbox.freeagent.com/v2/categories/250" Enter
-Sleep 750ms
-Type "freeagent explanation create --bank-transaction $TX --bank-account $ACC --category $CAT --dated-on 2025-08-21 --description 'Office supplies' --gross-value -45.99 | jq -c '.bank_transaction_explanation | {dated_on, gross_value, description}'" Enter
+Type "freeagent explanation create --bank-transaction 2581845 --bank-account 39907 --category 250 --dated-on 2025-08-21 --description 'Office supplies' --gross-value -45.99 | jq -c '.bank_transaction_explanation | {dated_on, gross_value, description}'" Enter
 Sleep 3s
