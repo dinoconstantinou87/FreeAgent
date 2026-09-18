@@ -1,0 +1,9 @@
+type: object
+required:
+- attachments
+properties:
+  attachments:
+    type: array
+    maxItems: 10
+    items:
+      $ref: 'AttachmentCreatePayload.yaml'

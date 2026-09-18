@@ -1,0 +1,18 @@
+type: object
+required:
+- data
+- file_name
+properties:
+  data:
+    type: string
+    description: Binary data of the file encoded as base64
+    example: iVBORw0KGgo...
+  file_name:
+    type: string
+    example: receipt.pdf
+  content_type:
+    type: string
+    example: application/pdf
+  description:
+    type: string
+    example: Invoice receipt

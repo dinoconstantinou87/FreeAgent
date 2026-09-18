@@ -10,6 +10,7 @@ struct ExplanationCommand: AsyncParsableCommand {
             ExplanationShowCommand.self,
             ExplanationUpdateCommand.self,
             ExplanationDeleteCommand.self,
+            ExplanationAttachmentCommand.self,
         ]
     )
 }

@@ -19,6 +19,7 @@ struct FreeAgentCLI: AsyncParsableCommand {
             ExplanationCommand.self,
             CategoryCommand.self,
             ExpenseCommand.self,
+            AttachmentCommand.self,
         ]
     )
 }

@@ -1,0 +1,63 @@
+list:
+  get:
+    tags:
+    - Bank Transaction Explanation Attachments
+    summary: List Bank Transaction Explanation Attachments
+    description: List all attachments on a bank transaction explanation
+    operationId: listBankTransactionExplanationAttachments
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachmentListResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  post:
+    tags:
+    - Bank Transaction Explanation Attachments
+    summary: Create Bank Transaction Explanation Attachments
+    description: Add up to 10 attachments to a bank transaction explanation, to a maximum of 50 in total
+    operationId: createBankTransactionExplanationAttachments
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttachmentCreateRequest'
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachmentListResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  put:
+    tags:
+    - Bank Transaction Explanation Attachments
+    summary: Update Bank Transaction Explanation Attachments
+    description: Add, update or remove attachments on a bank transaction explanation
+    operationId: updateBankTransactionExplanationAttachments
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AttachmentUpdateRequest'
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AttachmentListResponse'
+      '401':
+        $ref: '#/components/responses/UnauthorizedResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
