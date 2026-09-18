@@ -4,11 +4,9 @@ A command-line interface for the [FreeAgent](https://www.freeagent.com/) account
 
 Manage your invoices, bills, expenses, bank accounts, contacts and more — directly from the terminal.
 
-<!-- TODO: uncomment once the terminal demo GIF is added
 <p align="center">
   <img src="docs/demo.gif" alt="freeagent in use" width="80%" />
 </p>
--->
 
 ## Chase What You're Owed
 

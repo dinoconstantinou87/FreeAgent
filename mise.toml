@@ -1,3 +1,10 @@
 [tools]
+"asdf:ivanvc/asdf-ttyd" = "1.7.7"
+ffmpeg = "9.0.1"
 swiftformat = { version = "latest", no_app = "true", rename_exe = "swiftformat" }
 swiftlint = "latest"
+vhs = "0.11.0"
+
+[tasks.demo]
+description = "Record the README demo GIF against a FreeAgent sandbox account"
+run = "bash docs/demo.sh"
