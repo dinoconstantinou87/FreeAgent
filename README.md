@@ -3,9 +3,11 @@
 [![CI](https://github.com/dinoconstantinou87/FreeAgent/actions/workflows/ci.yml/badge.svg)](https://github.com/dinoconstantinou87/FreeAgent/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/dinoconstantinou87/FreeAgent)](https://github.com/dinoconstantinou87/FreeAgent/releases/latest)
 
-A command-line interface for the [FreeAgent](https://www.freeagent.com/) accounting API, built with Swift.
+An unofficial command-line interface for the [FreeAgent](https://www.freeagent.com/) accounting API, built with Swift - for UK contractors and small businesses running their books through FreeAgent.
 
-Manage your invoices, bills, expenses, bank accounts, contacts and more — directly from the terminal.
+Manage your invoices, bills, expenses, bank accounts, contacts and more - directly from the terminal.
+
+> This project is not affiliated with, endorsed by, or supported by FreeAgent Central Limited. "FreeAgent" is their trademark.
 
 ![freeagent in use](docs/demo.gif)
 
