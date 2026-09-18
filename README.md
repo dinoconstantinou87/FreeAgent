@@ -1,7 +1,7 @@
 # FreeAgent CLI
 
 [![CI](https://github.com/dinoconstantinou87/FreeAgent/actions/workflows/ci.yml/badge.svg)](https://github.com/dinoconstantinou87/FreeAgent/actions/workflows/ci.yml)
-[![Release](https://github.com/dinoconstantinou87/FreeAgent/actions/workflows/release.yml/badge.svg)](https://github.com/dinoconstantinou87/FreeAgent/actions/workflows/release.yml)
+[![Release](https://img.shields.io/github/v/release/dinoconstantinou87/FreeAgent)](https://github.com/dinoconstantinou87/FreeAgent/releases/latest)
 
 A command-line interface for the [FreeAgent](https://www.freeagent.com/) accounting API, built with Swift.
 
