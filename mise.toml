@@ -1,3 +1,12 @@
 [tools]
 swiftformat = { version = "latest", no_app = "true", rename_exe = "swiftformat" }
 swiftlint = "latest"
+
+[tasks.demo]
+description = "Record the README demo GIF against a FreeAgent sandbox account"
+run = "bash docs/demo.sh"
+
+[tasks.demo.tools]
+vhs = "0.11.0"
+ffmpeg = "9.0.1"
+"asdf:ivanvc/asdf-ttyd" = "1.7.7"
