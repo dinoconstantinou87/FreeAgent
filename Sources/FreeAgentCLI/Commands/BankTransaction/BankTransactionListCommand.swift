@@ -10,7 +10,7 @@ struct BankTransactionListCommand: ClientCommand {
     )
 
     @Option(name: .long, help: "Bank account URL (e.g. https://api.freeagent.com/v2/bank_accounts/123)")
-    var bankAccount: String?
+    var bankAccount: String
 
     @Option(name: .long, help: "Start date (YYYY-MM-DD)")
     var fromDate: String?
