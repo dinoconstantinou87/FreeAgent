@@ -1,9 +1,11 @@
 import Foundation
 import Testing
 
+@testable import FreeAgentAPI
+
 enum IntegrationTest {
     static func isModelEnabled(_ model: String) -> Bool {
-        guard let token = ProcessInfo.processInfo.environment["FREEAGENT_ACCESS_TOKEN"], !token.isEmpty else {
+        guard SandboxClient.token != nil else {
             return false
         }
 

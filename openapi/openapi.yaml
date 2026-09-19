@@ -89,6 +89,12 @@ components:
       $ref: 'components/schemas/InvoiceItemPayload.yaml'
     Errors:
       $ref: 'components/schemas/Errors.yaml'
+    ErrorDetail:
+      $ref: 'components/schemas/ErrorDetail.yaml'
+    ErrorObject:
+      $ref: 'components/schemas/ErrorObject.yaml'
+    ErrorList:
+      $ref: 'components/schemas/ErrorList.yaml'
     BankTransactionExplanationCreatePayload:
       $ref: 'components/schemas/BankTransactionExplanationCreatePayload.yaml'
     BankTransactionExplanationUpdatePayload:
@@ -121,15 +127,13 @@ components:
       $ref: 'components/schemas/CompanyResponse.yaml'
   responses:
     EmptyResponse:
-      description: Error response
+      description: Success
     ErrorResponse:
       description: Error response
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Errors'
-    UnauthorizedResponse:
-      description: Unauthorized - Authentication required or invalid credentials
   securitySchemes:
     oauth2:
       type: oauth2

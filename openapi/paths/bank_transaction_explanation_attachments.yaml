@@ -12,8 +12,8 @@ list:
           application/json:
             schema:
               $ref: '#/components/schemas/AttachmentListResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   post:
     tags:
     - Bank Transaction Explanation Attachments
@@ -32,8 +32,8 @@ list:
           application/json:
             schema:
               $ref: '#/components/schemas/AttachmentListResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   put:
     tags:
     - Bank Transaction Explanation Attachments
@@ -52,8 +52,8 @@ list:
           application/json:
             schema:
               $ref: '#/components/schemas/AttachmentListResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   parameters:
   - name: id
     in: path

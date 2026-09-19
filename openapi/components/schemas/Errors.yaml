@@ -1,2 +1,6 @@
 type: object
-additionalProperties: true
+properties:
+  errors:
+    oneOf:
+    - $ref: 'ErrorObject.yaml'
+    - $ref: 'ErrorList.yaml'

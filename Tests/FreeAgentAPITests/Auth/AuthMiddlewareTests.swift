@@ -37,7 +37,7 @@ struct AuthMiddlewareTests {
         #expect(response.status == .ok)
     }
 
-    @Test("throws when no credential is stored")
+    @Test("throws an unauthenticated error when no credential is stored")
     func throwsWhenNoCredential() async throws {
         let storage = MockAuthStorageInterface()
         given(storage).get().willReturn(nil)
@@ -45,7 +45,7 @@ struct AuthMiddlewareTests {
         let middleware = AuthMiddleware(config: config, storage: storage)
         let request = HTTPRequest(method: .get, scheme: "https", authority: "api.example.com", path: "/test")
 
-        await #expect(throws: AuthMiddlewareError.self) {
+        await #expect(throws: APIError(kind: .unauthenticated)) {
             try await middleware.intercept(
                 request,
                 body: nil,
