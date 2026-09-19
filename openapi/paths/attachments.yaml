@@ -12,8 +12,8 @@ show:
           application/json:
             schema:
               $ref: '#/components/schemas/AttachmentResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   delete:
     tags:
     - Attachments
@@ -23,8 +23,8 @@ show:
     responses:
       '200':
         $ref: '#/components/responses/EmptyResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   parameters:
   - name: id
     in: path

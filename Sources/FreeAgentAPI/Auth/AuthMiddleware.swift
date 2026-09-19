@@ -31,7 +31,7 @@ public struct AuthMiddleware: ClientMiddleware {
 
     private func credential() async throws -> AuthCredential {
         guard let credential = try storage.get() else {
-            throw AuthMiddlewareError.noCredentialFound
+            throw APIError(kind: .unauthenticated)
         }
 
         guard !credential.hasExpired() else {
@@ -47,10 +47,4 @@ extension ClientMiddleware where Self == AuthMiddleware {
     public static func auth(_ config: AuthConfig, storage: any AuthStorageInterface = AuthStorage()) -> AuthMiddleware {
         AuthMiddleware(config: config, storage: storage)
     }
-}
-
-// MARK: - AuthMiddlewareError
-
-enum AuthMiddlewareError: Error {
-    case noCredentialFound
 }

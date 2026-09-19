@@ -12,8 +12,8 @@ list:
           application/json:
             schema:
               $ref: '#/components/schemas/ContactListResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   post:
     tags:
     - Contacts
@@ -40,5 +40,5 @@ list:
           application/json:
             schema:
               $ref: '#/components/schemas/ContactResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'

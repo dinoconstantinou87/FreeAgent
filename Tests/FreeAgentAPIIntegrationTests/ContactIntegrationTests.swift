@@ -47,6 +47,24 @@ struct ContactIntegrationTests {
         #expect(abs(created.updatedAt.timeIntervalSinceNow) < 5)
     }
 
+    @Test("POST /v2/contacts reports every reason FreeAgent rejected the contact")
+    func createContactReportsEveryValidationMessage() async throws {
+        let payload = Components.Schemas.ContactCreatePayload(email: "notanemail")
+        let input = Operations.CreateContact.Input(body: .json(.init(contact: payload)))
+
+        do {
+            _ = try await client.createContact(input)
+            Issue.record("Expected FreeAgent to reject a contact with no name and an invalid email")
+        } catch {
+            let error = try #require(APIError.from(error))
+
+            #expect(error.kind == .rejected)
+            #expect(error.status == 422)
+            #expect(error.messages.contains("email is not a valid email address"))
+            #expect(error.messages.count > 1)
+        }
+    }
+
     // MARK: Private
 
     private let client: Client

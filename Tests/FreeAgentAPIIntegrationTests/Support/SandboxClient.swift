@@ -8,8 +8,24 @@ import OpenAPIURLSession
 // MARK: - SandboxClient
 
 enum SandboxClient {
+
+    static var token: String? {
+        if let token = ProcessInfo.processInfo.environment["FREEAGENT_ACCESS_TOKEN"], !token.isEmpty {
+            return token
+        }
+
+        guard
+            let credential = try? AuthStorage().get(),
+            credential.environment == .sandbox
+        else {
+            return nil
+        }
+
+        return credential.token
+    }
+
     static func makeClient() -> Client? {
-        guard let token = ProcessInfo.processInfo.environment["FREEAGENT_ACCESS_TOKEN"] else {
+        guard let token else {
             return nil
         }
 
@@ -17,9 +33,14 @@ enum SandboxClient {
             serverURL: Environment.sandbox.baseURL,
             configuration: .init(dateTranscoder: .freeAgent),
             transport: URLSessionTransport(),
-            middlewares: [BearerTokenMiddleware(token: token), APIVersionMiddleware(version: apiVersion)]
+            middlewares: [
+                BearerTokenMiddleware(token: token),
+                APIVersionMiddleware(version: apiVersion),
+                APIErrorMiddleware(),
+            ]
         )
     }
+
 }
 
 // MARK: - BearerTokenMiddleware

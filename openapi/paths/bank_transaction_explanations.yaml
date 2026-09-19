@@ -35,8 +35,8 @@ list:
             schema:
               type: object
               additionalProperties: true
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   post:
     tags:
     - Bank Transaction Explanations
@@ -75,8 +75,8 @@ list:
           application/json:
             schema:
               $ref: '#/components/schemas/BankTransactionExplanationResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
 show:
   get:
     tags:
@@ -91,8 +91,8 @@ show:
           application/json:
             schema:
               $ref: '#/components/schemas/BankTransactionExplanationResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   put:
     tags:
     - Bank Transaction Explanations
@@ -114,8 +114,8 @@ show:
           application/json:
             schema:
               $ref: '#/components/schemas/BankTransactionExplanationResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   delete:
     tags:
     - Bank Transaction Explanations
@@ -125,8 +125,8 @@ show:
     responses:
       '200':
         description: Success
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   parameters:
   - name: id
     in: path

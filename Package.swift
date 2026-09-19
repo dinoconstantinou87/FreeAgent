@@ -75,6 +75,17 @@ let package = Package(
             ]
         ),
         .testTarget(
+            name: "FreeAgentCLITests",
+            dependencies: [
+                "FreeAgentCLI",
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+            ],
+            swiftSettings: [
+                .swiftLanguageMode(.v6),
+                .enableExperimentalFeature("StrictConcurrency"),
+            ]
+        ),
+        .testTarget(
             name: "FreeAgentAPITests",
             dependencies: [
                 "FreeAgentAPI",

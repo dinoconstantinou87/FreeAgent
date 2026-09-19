@@ -12,5 +12,5 @@ show:
           application/json:
             schema:
               $ref: '#/components/schemas/CompanyResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'

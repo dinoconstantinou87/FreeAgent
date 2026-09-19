@@ -14,19 +14,34 @@ public protocol ClientCommand: AsyncParsableCommand {
 }
 
 extension ClientCommand {
+
+    // MARK: Public
+
     public func run() async throws {
+        do {
+            if let result = try await run(client: try await client()) {
+                try Noora().json(result)
+            }
+        } catch {
+            let failure = CommandFailure(error)
+            Noora().error(failure.alert)
+            throw failure.exitCode
+        }
+    }
+
+    // MARK: Private
+
+    private func client() async throws -> Client {
         guard let credential = try AuthStorage().get() else {
-            Noora().error(.alert("Not logged in", takeaways: ["Run \(.command("freeagent auth login"))"]))
-            throw ExitCode.failure
+            throw APIError(kind: .unauthenticated)
         }
 
         let config = try await Config.load()
-        let serverURL = credential.environment.baseURL
-        let transport = URLSessionTransport()
-        let client = Client(
-            serverURL: serverURL,
+
+        return Client(
+            serverURL: credential.environment.baseURL,
             configuration: .init(dateTranscoder: .freeAgent),
-            transport: transport,
+            transport: URLSessionTransport(),
             middlewares: [
                 .auth(
                     .init(
@@ -36,16 +51,8 @@ extension ClientCommand {
                     )
                 ),
                 .apiVersion(),
+                .apiError(),
             ]
         )
-
-        do {
-            if let result = try await run(client: client) {
-                try Noora().json(result)
-            }
-        } catch {
-            Noora().error(.alert("Failed to execute command: \(error)"))
-            throw ExitCode.failure
-        }
     }
 }

@@ -16,8 +16,6 @@ mark_as_sent:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
   parameters:
   - name: id
     in: path
@@ -43,8 +41,6 @@ mark_as_cancelled:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
   parameters:
   - name: id
     in: path
@@ -70,8 +66,6 @@ mark_as_scheduled:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
   parameters:
   - name: id
     in: path
@@ -97,8 +91,6 @@ mark_as_draft:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
   parameters:
   - name: id
     in: path
@@ -168,8 +160,6 @@ list:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
   post:
     tags:
     - Invoices
@@ -205,8 +195,6 @@ list:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
 show:
   get:
     tags:
@@ -224,8 +212,6 @@ show:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
   put:
     tags:
     - Invoices
@@ -255,8 +241,6 @@ show:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
   delete:
     tags:
     - Invoices
@@ -266,12 +250,8 @@ show:
     responses:
       '200':
         description: Success
-      '409':
-        $ref: '#/components/responses/EmptyResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
   parameters:
   - name: id
     in: path
@@ -296,8 +276,6 @@ timeline:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
 pdf:
   get:
     tags:
@@ -315,8 +293,6 @@ pdf:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
   parameters:
   - name: id
     in: path
@@ -361,8 +337,6 @@ send_email:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
   parameters:
   - name: id
     in: path
@@ -407,8 +381,6 @@ create_item:
               additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
 update_item:
   put:
     tags:
@@ -437,8 +409,8 @@ update_item:
             schema:
               type: object
               additionalProperties: true
-      '401':
-        $ref: '#/components/responses/UnauthorizedResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   parameters:
   - name: id
     in: path
