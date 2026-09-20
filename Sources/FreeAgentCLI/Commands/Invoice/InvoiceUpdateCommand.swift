@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct InvoiceUpdateCommand: ClientCommand {
     static let configuration = CommandConfiguration(
@@ -15,7 +14,7 @@ struct InvoiceUpdateCommand: ClientCommand {
     @Option(name: .long, help: "Notes for the invoice")
     var notes: String?
 
-    func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
+    func run(client: Client) async throws -> Components.Schemas.InvoiceResponse? {
         let invoicePayload = Components.Schemas.InvoiceUpdatePayload(
             notes: notes
         )
@@ -26,6 +25,6 @@ struct InvoiceUpdateCommand: ClientCommand {
         )
 
         return try await client.updateInvoice(input)
-            .ok.body.json.additionalProperties
+            .ok.body.json
     }
 }

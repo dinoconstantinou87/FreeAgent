@@ -12,8 +12,7 @@ mark_as_sent:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoiceResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
@@ -37,8 +36,7 @@ mark_as_cancelled:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoiceResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
@@ -62,8 +60,7 @@ mark_as_scheduled:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoiceResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
@@ -87,8 +84,7 @@ mark_as_draft:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoiceResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
@@ -156,8 +152,7 @@ list:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoiceListResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   post:
@@ -191,8 +186,7 @@ list:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoiceResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
 show:
@@ -208,8 +202,7 @@ show:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoiceResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   put:
@@ -237,8 +230,7 @@ show:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoiceResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   delete:
@@ -272,8 +264,7 @@ timeline:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoiceTimelineResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
 pdf:
@@ -289,8 +280,7 @@ pdf:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoicePdfResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
@@ -330,11 +320,6 @@ send_email:
     responses:
       '200':
         description: Success
-        content:
-          application/json:
-            schema:
-              type: object
-              additionalProperties: true
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
@@ -377,8 +362,7 @@ create_item:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoiceItemResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
 update_item:
@@ -407,8 +391,7 @@ update_item:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/InvoiceItemResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:

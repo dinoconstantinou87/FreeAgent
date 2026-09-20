@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct InvoiceMarkScheduledCommand: ClientCommand {
     static let configuration = CommandConfiguration(
@@ -12,12 +11,12 @@ struct InvoiceMarkScheduledCommand: ClientCommand {
     @Argument(help: "Invoice ID")
     var id: String
 
-    func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
+    func run(client: Client) async throws -> Components.Schemas.InvoiceResponse? {
         let input = Operations.MarkInvoiceAsScheduled.Input(
             path: .init(id: id)
         )
 
         return try await client.markInvoiceAsScheduled(input)
-            .ok.body.json.additionalProperties
+            .ok.body.json
     }
 }

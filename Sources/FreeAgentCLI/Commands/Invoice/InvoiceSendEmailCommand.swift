@@ -12,16 +12,24 @@ struct InvoiceSendEmailCommand: ClientCommand {
     @Argument(help: "Invoice ID")
     var id: String
 
+    @Option(name: .long, help: "Recipient email address")
+    var to: String
+
+    @Option(name: .long, help: "Sender email address, must be verified on the FreeAgent account")
+    var from: String?
+
     @Option(name: .long, help: "Email body")
     var body: String?
 
     @Option(name: .long, help: "Email subject")
     var subject: String?
 
-    func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
+    func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIValueContainer? {
         let emailPayload = Components.Schemas.EmailPayload(
             body: body,
-            subject: subject
+            from: from,
+            subject: subject,
+            to: to
         )
 
         let invoicePayload = Operations.SendInvoiceEmail.Input.Body.JsonPayload.InvoicePayload(
@@ -33,7 +41,7 @@ struct InvoiceSendEmailCommand: ClientCommand {
             body: .json(.init(invoice: invoicePayload))
         )
 
-        return try await client.sendInvoiceEmail(input)
-            .ok.body.json.additionalProperties
+        _ = try await client.sendInvoiceEmail(input).ok
+        return nil
     }
 }

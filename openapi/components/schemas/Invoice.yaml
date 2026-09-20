@@ -1,0 +1,157 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/invoices/1
+  contact:
+    type: string
+    example: https://api.freeagent.com/v2/contacts/1
+  contact_name:
+    type: string
+    example: Acme Ltd
+  client_contact_name:
+    type: string
+    example: Alice Johnson
+  project:
+    type: string
+    example: https://api.freeagent.com/v2/projects/1
+  property:
+    type: string
+    example: https://api.freeagent.com/v2/properties/1
+  bank_account:
+    type: string
+    example: https://api.freeagent.com/v2/bank_accounts/1
+  recurring_invoice:
+    type: string
+    example: https://api.freeagent.com/v2/recurring_invoices/1
+  reference:
+    type: string
+    example: '001'
+  status:
+    type: string
+    example: Draft
+  long_status:
+    type: string
+    example: Draft
+  dated_on:
+    type: string
+    example: 2025-08-23
+  due_on:
+    type: string
+    example: 2025-09-22
+  paid_on:
+    type: string
+    example: 2025-09-01
+  written_off_date:
+    type: string
+    example: 2025-10-01
+  payment_terms_in_days:
+    type: integer
+    example: 30
+  payment_terms:
+    type: string
+    example: Payment due within 30 days
+  po_reference:
+    type: string
+    example: PO-1234
+  comments:
+    type: string
+    example: Thanks for your business
+  currency:
+    type: string
+    example: GBP
+  exchange_rate:
+    type: string
+    example: '1.0'
+  net_value:
+    type: string
+    example: '950.0'
+  sales_tax_value:
+    type: string
+    example: '190.0'
+  second_sales_tax_value:
+    type: string
+    example: '0.0'
+  total_value:
+    type: string
+    example: '1140.0'
+  paid_value:
+    type: string
+    example: '0.0'
+  due_value:
+    type: string
+    example: '1140.0'
+  discount_percent:
+    type: string
+    example: '0.0'
+  involves_sales_tax:
+    type: boolean
+    example: true
+  is_interim_uk_vat:
+    type: boolean
+    example: false
+  ec_status:
+    type: string
+    example: UK/Non-EC
+  place_of_supply:
+    type: string
+    example: United Kingdom
+  cis_rate:
+    type: string
+    example: cis_standard
+  cis_deduction_rate:
+    type: string
+    example: '20.0'
+  cis_deduction:
+    type: string
+    example: '0.0'
+  cis_deduction_suffered:
+    type: string
+    example: '0.0'
+  omit_header:
+    type: boolean
+    example: false
+  show_project_name:
+    type: boolean
+    example: false
+  always_show_bic_and_iban:
+    type: boolean
+    example: false
+  send_new_invoice_emails:
+    type: boolean
+    example: false
+  send_reminder_emails:
+    type: boolean
+    example: false
+  send_thank_you_emails:
+    type: boolean
+    example: false
+  include_timeslips:
+    type: string
+    example: none
+  include_expenses:
+    type: string
+    example: none
+  include_estimates:
+    type: string
+    example: none
+  payment_url:
+    type: string
+    example: https://pay.freeagent.com/abc123
+  payment_methods:
+    type: object
+    additionalProperties: true
+  invoice_items:
+    type: array
+    items:
+      $ref: 'InvoiceItem.yaml'
+  created_at:
+    type: string
+    format: date-time
+    example: '2025-08-23T06:48:35Z'
+  updated_at:
+    type: string
+    format: date-time
+    example: '2026-09-20T09:30:32Z'

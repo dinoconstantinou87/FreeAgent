@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct InvoiceListCommand: ClientCommand {
     static let configuration = CommandConfiguration(
@@ -30,7 +29,7 @@ struct InvoiceListCommand: ClientCommand {
     @Option(name: .long, help: "Sort order")
     var sort: Operations.ListInvoices.Input.Query.SortPayload?
 
-    func run(client: Client) async throws -> OpenAPIObjectContainer? {
+    func run(client: Client) async throws -> Components.Schemas.InvoiceListResponse? {
         let input = Operations.ListInvoices.Input(
             query: .init(
                 nestedInvoiceItems: nestedInvoiceItems,
@@ -44,6 +43,6 @@ struct InvoiceListCommand: ClientCommand {
         )
 
         return try await client.listInvoices(input)
-            .ok.body.json.additionalProperties
+            .ok.body.json
     }
 }

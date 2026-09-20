@@ -1,0 +1,17 @@
+type: object
+properties:
+  reference:
+    type: string
+    example: '007'
+  summary:
+    type: string
+    example: 'Payment: 007: 14.40 received'
+  description:
+    type: string
+    example: Payment received
+  dated_on:
+    type: string
+    example: 2025-09-02
+  amount:
+    type: string
+    example: '14.4'

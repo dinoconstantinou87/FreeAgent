@@ -1,0 +1,6 @@
+type: object
+required:
+- pdf
+properties:
+  pdf:
+    $ref: 'InvoicePdf.yaml'
