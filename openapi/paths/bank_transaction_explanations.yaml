@@ -33,8 +33,7 @@ list:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BankTransactionExplanationListResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   post:

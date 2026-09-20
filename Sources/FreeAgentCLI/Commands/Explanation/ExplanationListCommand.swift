@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct ExplanationListCommand: ClientCommand {
     static let configuration = CommandConfiguration(
@@ -21,7 +20,7 @@ struct ExplanationListCommand: ClientCommand {
     @Option(name: .long, help: "Show explanations updated after this date")
     var updatedSince: String?
 
-    func run(client: Client) async throws -> OpenAPIObjectContainer? {
+    func run(client: Client) async throws -> Components.Schemas.BankTransactionExplanationListResponse? {
         let input = Operations.ListAllBankTransactionExplanations.Input(
             query: .init(
                 fromDate: fromDate,
@@ -32,6 +31,6 @@ struct ExplanationListCommand: ClientCommand {
         )
 
         return try await client.listAllBankTransactionExplanations(input)
-            .ok.body.json.additionalProperties
+            .ok.body.json
     }
 }
