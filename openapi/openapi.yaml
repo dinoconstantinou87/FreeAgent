@@ -115,6 +115,10 @@ components:
       $ref: 'components/schemas/BillCreatePayload.yaml'
     BillItemPayload:
       $ref: 'components/schemas/BillItemPayload.yaml'
+    Category:
+      $ref: 'components/schemas/Category.yaml'
+    CategoryListResponse:
+      $ref: 'components/schemas/CategoryListResponse.yaml'
     Contact:
       $ref: 'components/schemas/Contact.yaml'
     ContactResponse:
