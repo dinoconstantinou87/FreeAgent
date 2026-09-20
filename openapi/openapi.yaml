@@ -103,6 +103,8 @@ components:
       $ref: 'components/schemas/BankTransactionExplanation.yaml'
     BankTransactionExplanationResponse:
       $ref: 'components/schemas/BankTransactionExplanationResponse.yaml'
+    BankTransactionExplanationListResponse:
+      $ref: 'components/schemas/BankTransactionExplanationListResponse.yaml'
     BillCreatePayload:
       $ref: 'components/schemas/BillCreatePayload.yaml'
     BillItemPayload:
