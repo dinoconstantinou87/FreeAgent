@@ -95,6 +95,12 @@ components:
       $ref: 'components/schemas/ErrorObject.yaml'
     ErrorList:
       $ref: 'components/schemas/ErrorList.yaml'
+    BankAccount:
+      $ref: 'components/schemas/BankAccount.yaml'
+    BankAccountResponse:
+      $ref: 'components/schemas/BankAccountResponse.yaml'
+    BankAccountListResponse:
+      $ref: 'components/schemas/BankAccountListResponse.yaml'
     BankTransactionExplanationCreatePayload:
       $ref: 'components/schemas/BankTransactionExplanationCreatePayload.yaml'
     BankTransactionExplanationUpdatePayload:

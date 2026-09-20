@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct BankAccountListCommand: ClientCommand {
     static let configuration = CommandConfiguration(
@@ -12,12 +11,12 @@ struct BankAccountListCommand: ClientCommand {
     @Option(name: .long, help: "Filter by view (e.g. standard_bank_accounts)")
     var view: String?
 
-    func run(client: Client) async throws -> OpenAPIObjectContainer? {
+    func run(client: Client) async throws -> Components.Schemas.BankAccountListResponse? {
         let input = Operations.ListBankAccounts.Input(
             query: .init(view: view)
         )
 
         return try await client.listBankAccounts(input)
-            .ok.body.json.additionalProperties
+            .ok.body.json
     }
 }

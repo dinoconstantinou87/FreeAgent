@@ -17,8 +17,7 @@ list:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BankAccountListResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
 show:
@@ -34,8 +33,7 @@ show:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BankAccountResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
