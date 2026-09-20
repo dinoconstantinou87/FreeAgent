@@ -1,0 +1,8 @@
+type: object
+required:
+- bank_accounts
+properties:
+  bank_accounts:
+    type: array
+    items:
+      $ref: 'BankAccount.yaml'

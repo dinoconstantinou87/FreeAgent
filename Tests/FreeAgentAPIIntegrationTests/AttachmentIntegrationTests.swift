@@ -210,11 +210,8 @@ struct AttachmentIntegrationTests {
     }
 
     private func firstBankAccountURL() async throws -> String? {
-        let body = try await client.listBankAccounts(.init())
-            .ok.body.json.additionalProperties.value
-        let accounts = try #require(body["bank_accounts"] as? [Any])
-        let account = try #require(accounts.first as? [String: Any])
-        return account["url"] as? String
+        try await client.listBankAccounts(.init())
+            .ok.body.json.bankAccounts.first?.url
     }
 
     private func createExplanation() async throws -> String {
