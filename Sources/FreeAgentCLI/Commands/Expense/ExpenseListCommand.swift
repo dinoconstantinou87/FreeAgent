@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct ExpenseListCommand: ClientCommand {
     static let configuration = CommandConfiguration(
@@ -9,10 +8,10 @@ struct ExpenseListCommand: ClientCommand {
         abstract: "List expenses"
     )
 
-    func run(client: Client) async throws -> OpenAPIObjectContainer? {
+    func run(client: Client) async throws -> Components.Schemas.ExpenseListResponse? {
         let input = Operations.ListAllExpenses.Input()
 
         return try await client.listAllExpenses(input)
-            .ok.body.json.additionalProperties
+            .ok.body.json
     }
 }

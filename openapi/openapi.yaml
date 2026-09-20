@@ -69,6 +69,12 @@ components:
       $ref: 'components/schemas/InvoiceView.yaml'
     ExpensePayload:
       $ref: 'components/schemas/ExpensePayload.yaml'
+    Expense:
+      $ref: 'components/schemas/Expense.yaml'
+    ExpenseResponse:
+      $ref: 'components/schemas/ExpenseResponse.yaml'
+    ExpenseListResponse:
+      $ref: 'components/schemas/ExpenseListResponse.yaml'
     AttachmentPayload:
       $ref: 'components/schemas/AttachmentPayload.yaml'
     Attachment:
