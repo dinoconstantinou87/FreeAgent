@@ -101,6 +101,12 @@ components:
       $ref: 'components/schemas/BankAccountResponse.yaml'
     BankAccountListResponse:
       $ref: 'components/schemas/BankAccountListResponse.yaml'
+    BankTransaction:
+      $ref: 'components/schemas/BankTransaction.yaml'
+    BankTransactionResponse:
+      $ref: 'components/schemas/BankTransactionResponse.yaml'
+    BankTransactionListResponse:
+      $ref: 'components/schemas/BankTransactionListResponse.yaml'
     BankTransactionExplanationCreatePayload:
       $ref: 'components/schemas/BankTransactionExplanationCreatePayload.yaml'
     BankTransactionExplanationUpdatePayload:

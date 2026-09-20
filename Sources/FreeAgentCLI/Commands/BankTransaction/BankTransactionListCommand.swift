@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct BankTransactionListCommand: ClientCommand {
     static let configuration = CommandConfiguration(
@@ -33,7 +32,7 @@ struct BankTransactionListCommand: ClientCommand {
     @Option(name: .long, help: "Results per page (max 100)")
     var perPage: Int?
 
-    func run(client: Client) async throws -> OpenAPIObjectContainer? {
+    func run(client: Client) async throws -> Components.Schemas.BankTransactionListResponse? {
         let input = Operations.ListAllBankTransactionsUnderACertainBankAccount.Input(
             query: .init(
                 bankAccount: bankAccount,
@@ -48,6 +47,6 @@ struct BankTransactionListCommand: ClientCommand {
         )
 
         return try await client.listAllBankTransactionsUnderACertainBankAccount(input)
-            .ok.body.json.additionalProperties
+            .ok.body.json
     }
 }
