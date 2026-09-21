@@ -1,6 +1,6 @@
 import Foundation
 
-public enum Environment: String, Codable, Sendable {
+public enum Environment: String, Codable, Sendable, CaseIterable {
     case production
     case sandbox
 
