@@ -2,7 +2,7 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct ContactCreateCommand: ClientCommand {
+struct ContactCreateCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
         commandName: "create",
         abstract: "Create a new contact"
@@ -19,6 +19,9 @@ struct ContactCreateCommand: ClientCommand {
 
     @Option(name: .long, help: "Email address")
     var email: String?
+
+    @Flag(help: "Print the request instead of sending it")
+    var dryRun = false
 
     func run(client: Client) async throws -> Components.Schemas.ContactResponse? {
         let contactPayload = Components.Schemas.ContactCreatePayload(

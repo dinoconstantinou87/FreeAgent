@@ -2,7 +2,8 @@
 #
 # Records against a FreeAgent *sandbox* account. docs/demo.sh creates the
 # fixtures this tape needs and removes them afterwards, including the bank
-# transaction explanation created below.
+# transaction explanation created below if the recording stops before the
+# tape deletes it.
 
 Output demo.gif
 
@@ -60,3 +61,17 @@ Type "# Explain the Staples debit as an office cost" Enter
 Sleep 300ms
 Type "freeagent explanation create --bank-transaction 2581845 --bank-account 39907 --category 250 --dated-on 2025-08-21 --description 'Office supplies' --gross-value -45.99 | jq -c '.bank_transaction_explanation | {dated_on, gross_value, description}'" Enter
 Sleep 3s
+
+Hide
+Type "id=$(freeagent explanation list --bank-account 39907 | jq -r --arg d 'Office supplies' '.bank_transaction_explanations[] | select(.description == $d) | .url' | sed 's:.*/::' | head -1)" Enter
+Type "clear" Enter
+Show
+
+Type "# Changed my mind - deleting asks first" Enter
+Sleep 300ms
+Type "freeagent explanation delete $id" Enter
+Sleep 1500ms
+Left
+Sleep 600ms
+Enter
+Sleep 2500ms

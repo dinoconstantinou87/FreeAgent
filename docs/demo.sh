@@ -33,7 +33,7 @@ delete_explanations_created_by_the_tape() {
     )" || explanations=""
 
     for id in $explanations; do
-        freeagent explanation delete "$id" >/dev/null 2>&1 &&
+        freeagent explanation delete "$id" --yes >/dev/null 2>&1 &&
             info "    explanation $id" ||
             warn "    could not delete explanation $id"
     done
@@ -41,7 +41,7 @@ delete_explanations_created_by_the_tape() {
 
 delete_invoice_fixture() {
     freeagent invoice mark-draft "$INVOICE_ID" >/dev/null 2>&1 || true
-    freeagent invoice delete "$INVOICE_ID" >/dev/null 2>&1 &&
+    freeagent invoice delete "$INVOICE_ID" --yes >/dev/null 2>&1 &&
         info "    invoice $INVOICE_ID" ||
         warn "    could not delete invoice $INVOICE_ID"
 }

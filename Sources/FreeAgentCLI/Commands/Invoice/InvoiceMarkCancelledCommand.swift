@@ -2,7 +2,7 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct InvoiceMarkCancelledCommand: ClientCommand {
+struct InvoiceMarkCancelledCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
         commandName: "mark-cancelled",
         abstract: "Mark invoice as cancelled"
@@ -10,6 +10,9 @@ struct InvoiceMarkCancelledCommand: ClientCommand {
 
     @Argument(help: "Invoice ID")
     var id: String
+
+    @Flag(help: "Print the request instead of sending it")
+    var dryRun = false
 
     func run(client: Client) async throws -> Components.Schemas.InvoiceResponse? {
         let input = Operations.MarkInvoiceAsCancelled.Input(

@@ -3,7 +3,7 @@ import Foundation
 import FreeAgentAPI
 import OpenAPIRuntime
 
-struct InvoiceSendEmailCommand: ClientCommand {
+struct InvoiceSendEmailCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
         commandName: "send-email",
         abstract: "Send invoice via email"
@@ -23,6 +23,9 @@ struct InvoiceSendEmailCommand: ClientCommand {
 
     @Option(name: .long, help: "Email subject")
     var subject: String?
+
+    @Flag(help: "Print the request instead of sending it")
+    var dryRun = false
 
     func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIValueContainer? {
         let emailPayload = Components.Schemas.EmailPayload(

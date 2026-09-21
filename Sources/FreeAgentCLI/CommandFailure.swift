@@ -10,6 +10,12 @@ struct CommandFailure: Equatable {
     // MARK: Lifecycle
 
     init(_ error: any Error) {
+        if let refusal = error as? CommandRefusal {
+            alert = refusal.alert
+            exitCode = refusal.exitCode
+            return
+        }
+
         guard let cause = APIError.from(error) else {
             alert = .alert("Failed to execute command: \(Self.cause(of: error))")
             exitCode = .failure
@@ -54,6 +60,32 @@ struct CommandFailure: Equatable {
         guard error.messages.count > 1 else { return error.kind.takeaways }
 
         return error.messages.map { TerminalText(stringLiteral: $0) } + error.kind.takeaways
+    }
+}
+
+extension CommandRefusal {
+
+    var exitCode: ExitCode {
+        switch self {
+        case .notInteractive: .validationFailure
+        case .declined: .failure
+        }
+    }
+
+    var alert: ErrorAlert {
+        switch self {
+        case .notInteractive:
+            .alert(
+                "Confirmation required when not running interactively",
+                takeaways: [
+                    "Pass \(.command("--yes")) to confirm",
+                    "Pass \(.command("--dry-run")) to preview the request instead",
+                ]
+            )
+
+        case .declined:
+            .alert("Cancelled, nothing was changed")
+        }
     }
 }
 

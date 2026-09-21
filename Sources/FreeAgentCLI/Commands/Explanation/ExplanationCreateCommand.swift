@@ -2,7 +2,7 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct ExplanationCreateCommand: ClientCommand {
+struct ExplanationCreateCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
         commandName: "create",
         abstract: "Create a bank transaction explanation"
@@ -49,6 +49,9 @@ struct ExplanationCreateCommand: ClientCommand {
 
     @Option(name: .long, help: "Manual sales tax amount override (e.g. 0.0)")
     var manualSalesTax: String?
+
+    @Flag(help: "Print the request instead of sending it")
+    var dryRun = false
 
     func run(client: Client) async throws -> Components.Schemas.BankTransactionExplanationResponse? {
         let payload = Components.Schemas.BankTransactionExplanationCreatePayload(

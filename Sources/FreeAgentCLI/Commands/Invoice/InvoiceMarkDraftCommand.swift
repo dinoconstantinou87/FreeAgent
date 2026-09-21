@@ -2,7 +2,7 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct InvoiceMarkDraftCommand: ClientCommand {
+struct InvoiceMarkDraftCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
         commandName: "mark-draft",
         abstract: "Mark invoice as draft"
@@ -10,6 +10,9 @@ struct InvoiceMarkDraftCommand: ClientCommand {
 
     @Argument(help: "Invoice ID")
     var id: String
+
+    @Flag(help: "Print the request instead of sending it")
+    var dryRun = false
 
     func run(client: Client) async throws -> Components.Schemas.InvoiceResponse? {
         let input = Operations.MarkInvoiceAsDraft.Input(
