@@ -67,6 +67,9 @@ extension ClientCommand {
                 )
             ),
             .apiError(),
+            .retry(willRetry: { delay in
+                Noora.standardError().info(.alert("Rate limited - retrying in \(delay.components.seconds)s"))
+            }),
         ]
 
         return Client(
