@@ -3,7 +3,7 @@ import Foundation
 import FreeAgentAPI
 import OpenAPIRuntime
 
-struct ExplanationDeleteCommand: ClientCommand {
+struct ExplanationDeleteCommand: DestructiveCommand {
     static let configuration = CommandConfiguration(
         commandName: "delete",
         abstract: "Delete a bank transaction explanation"
@@ -11,6 +11,16 @@ struct ExplanationDeleteCommand: ClientCommand {
 
     @Argument(help: "Explanation ID")
     var id: String
+
+    @Flag(help: "Print the request instead of sending it")
+    var dryRun = false
+
+    @Flag(help: "Skip the confirmation prompt")
+    var yes = false
+
+    var confirmation: String {
+        "Delete explanation \(id)?"
+    }
 
     func run(client: Client) async throws -> OpenAPIValueContainer? {
         let input = Operations.DeleteABankTransactionExplanation.Input(

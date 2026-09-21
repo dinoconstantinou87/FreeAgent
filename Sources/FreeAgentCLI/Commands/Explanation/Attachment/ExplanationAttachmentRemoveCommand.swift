@@ -2,7 +2,7 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct ExplanationAttachmentRemoveCommand: ClientCommand {
+struct ExplanationAttachmentRemoveCommand: DestructiveCommand {
     static let configuration = CommandConfiguration(
         commandName: "remove",
         abstract: "Remove attachments from a bank transaction explanation"
@@ -13,6 +13,18 @@ struct ExplanationAttachmentRemoveCommand: ClientCommand {
 
     @Option(name: .long, help: "URL of an attachment to remove. Repeat for multiple attachments.")
     var attachment: [String]
+
+    @Flag(help: "Print the request instead of sending it")
+    var dryRun = false
+
+    @Flag(help: "Skip the confirmation prompt")
+    var yes = false
+
+    var confirmation: String {
+        attachment.count == 1
+            ? "Remove the attachment from explanation \(id)?"
+            : "Remove \(attachment.count) attachments from explanation \(id)?"
+    }
 
     func run(client: Client) async throws -> Components.Schemas.AttachmentListResponse? {
         let attachments = attachment.map {
