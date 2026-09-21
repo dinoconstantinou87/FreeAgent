@@ -1,0 +1,40 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/categories/285
+  description:
+    type: string
+    example: Accommodation and Meals
+  nominal_code:
+    type: string
+    example: '285'
+  group_description:
+    type: string
+    example: Admin Expenses
+  auto_sales_tax_rate:
+    type: string
+    example: Standard
+  tax_reporting_name:
+    type: string
+    example: Administrative expenses
+  allowable_for_tax:
+    type: boolean
+    example: true
+  bank_account:
+    type: string
+    example: https://api.freeagent.com/v2/bank_accounts/1
+  capital_asset_type:
+    type: string
+    example: https://api.freeagent.com/v2/capital_asset_types/1
+  stock_item:
+    type: string
+    example: https://api.freeagent.com/v2/stock_items/1
+  hire_purchase:
+    type: string
+    example: https://api.freeagent.com/v2/hire_purchases/1
+  user:
+    type: string
+    example: https://api.freeagent.com/v2/users/1

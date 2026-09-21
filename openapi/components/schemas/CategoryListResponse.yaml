@@ -1,0 +1,23 @@
+type: object
+required:
+- admin_expenses_categories
+- cost_of_sales_categories
+- income_categories
+- general_categories
+properties:
+  admin_expenses_categories:
+    type: array
+    items:
+      $ref: 'Category.yaml'
+  cost_of_sales_categories:
+    type: array
+    items:
+      $ref: 'Category.yaml'
+  income_categories:
+    type: array
+    items:
+      $ref: 'Category.yaml'
+  general_categories:
+    type: array
+    items:
+      $ref: 'Category.yaml'
