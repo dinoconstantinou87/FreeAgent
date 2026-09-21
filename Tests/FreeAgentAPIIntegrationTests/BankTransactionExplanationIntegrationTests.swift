@@ -107,17 +107,16 @@ struct BankTransactionExplanationIntegrationTests {
         let input = Operations.ListAllBankTransactionsUnderACertainBankAccount.Input(
             query: .init(bankAccount: account, view: "unexplained", perPage: 1)
         )
-        let body = try await client.listAllBankTransactionsUnderACertainBankAccount(input)
-            .ok.body.json.additionalProperties.value
-
-        let transactions = try #require(body["bank_transactions"] as? [Any])
-        let transaction = try #require(transactions.first as? [String: Any])
+        let transaction = try #require(
+            try await client.listAllBankTransactionsUnderACertainBankAccount(input)
+                .ok.body.json.bankTransactions.first
+        )
 
         return try UnexplainedTransaction(
-            url: #require(transaction["url"] as? String),
+            url: transaction.url,
             bankAccount: account,
-            datedOn: #require(transaction["dated_on"] as? String),
-            grossValue: #require(transaction["unexplained_amount"] as? String)
+            datedOn: #require(transaction.datedOn),
+            grossValue: #require(transaction.unexplainedAmount)
         )
     }
 

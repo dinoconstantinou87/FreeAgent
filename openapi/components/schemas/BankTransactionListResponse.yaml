@@ -1,0 +1,8 @@
+type: object
+required:
+- bank_transactions
+properties:
+  bank_transactions:
+    type: array
+    items:
+      $ref: 'BankTransaction.yaml'

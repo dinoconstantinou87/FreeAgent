@@ -53,8 +53,7 @@ list:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BankTransactionListResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
 show:
@@ -70,8 +69,7 @@ show:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/BankTransactionResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:

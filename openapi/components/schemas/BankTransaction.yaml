@@ -1,0 +1,50 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/bank_transactions/1
+  bank_account:
+    type: string
+    example: https://api.freeagent.com/v2/bank_accounts/1
+  amount:
+    type: string
+    example: '-59.99'
+  unexplained_amount:
+    type: string
+    example: '0.0'
+  dated_on:
+    type: string
+    example: 2025-08-23
+  description:
+    type: string
+    example: Office supplies
+  full_description:
+    type: string
+    example: Payment to Office Supplies Ltd
+  transaction_id:
+    type: string
+    example: '004'
+  is_manual:
+    type: boolean
+    example: false
+  matching_transactions_count:
+    type: integer
+    example: 0
+  bank_transaction_explanations:
+    type: array
+    items:
+      $ref: 'BankTransactionExplanation.yaml'
+  uploaded_at:
+    type: string
+    format: date-time
+    example: '2025-08-23T20:45:06Z'
+  created_at:
+    type: string
+    format: date-time
+    example: '2025-08-23T20:45:06Z'
+  updated_at:
+    type: string
+    format: date-time
+    example: '2026-03-20T17:44:12Z'
