@@ -1,0 +1,4 @@
+description: Total number of results across all pages
+required: false
+schema:
+  type: integer

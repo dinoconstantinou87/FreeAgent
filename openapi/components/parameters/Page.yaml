@@ -1,0 +1,7 @@
+name: page
+in: query
+description: Page number, starting at 1
+schema:
+  type: integer
+  minimum: 1
+  default: 1

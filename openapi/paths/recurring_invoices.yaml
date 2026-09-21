@@ -22,9 +22,16 @@ list:
       schema:
         type: string
         example: https://api.freeagent.com/v2/contacts/:id
+    - $ref: '#/components/parameters/Page'
+    - $ref: '#/components/parameters/PerPage'
     responses:
       '200':
         description: Success
+        headers:
+          Link:
+            $ref: '#/components/headers/Link'
+          X-Total-Count:
+            $ref: '#/components/headers/XTotalCount'
         content:
           application/json:
             schema:

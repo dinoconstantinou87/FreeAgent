@@ -181,6 +181,16 @@ components:
       $ref: 'components/schemas/Company.yaml'
     CompanyResponse:
       $ref: 'components/schemas/CompanyResponse.yaml'
+  parameters:
+    Page:
+      $ref: 'components/parameters/Page.yaml'
+    PerPage:
+      $ref: 'components/parameters/PerPage.yaml'
+  headers:
+    Link:
+      $ref: 'components/headers/Link.yaml'
+    XTotalCount:
+      $ref: 'components/headers/XTotalCount.yaml'
   responses:
     EmptyResponse:
       description: Success

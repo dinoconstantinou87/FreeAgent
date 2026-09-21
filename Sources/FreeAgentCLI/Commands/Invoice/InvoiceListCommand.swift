@@ -29,20 +29,28 @@ struct InvoiceListCommand: ClientCommand {
     @Option(name: .long, help: "Sort order")
     var sort: Operations.ListInvoices.Input.Query.SortPayload?
 
-    func run(client: Client) async throws -> Components.Schemas.InvoiceListResponse? {
-        let input = Operations.ListInvoices.Input(
-            query: .init(
-                nestedInvoiceItems: nestedInvoiceItems,
-                contact: contact,
-                project: project,
-                currency: currency,
-                view: view,
-                updatedSince: updatedSince,
-                sort: sort
-            )
-        )
+    @Option(name: .long, help: "Maximum number of invoices to fetch")
+    var limit = ListLimit.default
 
-        return try await client.listInvoices(input)
-            .ok.body.json
+    func run(client: Client) async throws -> Components.Schemas.InvoiceListResponse? {
+        let invoices = try await Paginator.collect(limit: limit.value) { page, perPage in
+            let ok = try await client.listInvoices(
+                .init(query: .init(
+                    nestedInvoiceItems: nestedInvoiceItems,
+                    contact: contact,
+                    project: project,
+                    currency: currency,
+                    view: view,
+                    updatedSince: updatedSince,
+                    sort: sort,
+                    page: page,
+                    perPage: perPage
+                ))
+            ).ok
+
+            return (try ok.body.json.invoices, ok.headers.xTotalCount)
+        }
+
+        return .init(invoices: invoices)
     }
 }

@@ -27,7 +27,7 @@ fi
 delete_explanations_created_by_the_tape() {
     local explanations id
     explanations="$(
-        freeagent explanation list --bank-account "$TAPE_BANK_ACCOUNT_ID" 2>/dev/null |
+        freeagent explanation list --bank-account "$TAPE_BANK_ACCOUNT_ID" --limit 500 2>/dev/null |
             jq -r --arg d "$EXPLANATION_DESCRIPTION" \
                 '.bank_transaction_explanations[]? | select(.description == $d) | .url | split("/") | last'
     )" || explanations=""
@@ -84,7 +84,7 @@ require_sandbox_account() {
 
 require_tape_references() {
     local unexplained matches
-    unexplained="$(freeagent bank-transaction list --bank-account "$TAPE_BANK_ACCOUNT_ID" --view unexplained)" ||
+    unexplained="$(freeagent bank-transaction list --bank-account "$TAPE_BANK_ACCOUNT_ID" --view unexplained --limit 500)" ||
         die "bank account $TAPE_BANK_ACCOUNT_ID does not resolve - the tape references it by ID"
 
     matches="$(

@@ -26,27 +26,27 @@ struct BankTransactionListCommand: ClientCommand {
     @Option(name: .long, help: "Show only last uploaded transactions (true/false)")
     var lastUploaded: String?
 
-    @Option(name: .long, help: "Page number")
-    var page: Int?
-
-    @Option(name: .long, help: "Results per page (max 100)")
-    var perPage: Int?
+    @Option(name: .long, help: "Maximum number of bank transactions to fetch")
+    var limit = ListLimit.default
 
     func run(client: Client) async throws -> Components.Schemas.BankTransactionListResponse? {
-        let input = Operations.ListAllBankTransactionsUnderACertainBankAccount.Input(
-            query: .init(
-                bankAccount: bankAccount,
-                fromDate: fromDate,
-                toDate: toDate,
-                updatedSince: updatedSince,
-                view: view,
-                lastUploaded: lastUploaded,
-                page: page,
-                perPage: perPage
-            )
-        )
+        let transactions = try await Paginator.collect(limit: limit.value) { page, perPage in
+            let ok = try await client.listAllBankTransactionsUnderACertainBankAccount(
+                .init(query: .init(
+                    bankAccount: bankAccount,
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    updatedSince: updatedSince,
+                    view: view,
+                    lastUploaded: lastUploaded,
+                    page: page,
+                    perPage: perPage
+                ))
+            ).ok
 
-        return try await client.listAllBankTransactionsUnderACertainBankAccount(input)
-            .ok.body.json
+            return (try ok.body.json.bankTransactions, ok.headers.xTotalCount)
+        }
+
+        return .init(bankTransactions: transactions)
     }
 }

@@ -1,0 +1,4 @@
+description: RFC 8288 links to the first, last, previous and next pages, omitted on single-page results
+required: false
+schema:
+  type: string
