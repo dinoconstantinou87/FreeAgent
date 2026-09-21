@@ -1,0 +1,46 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/invoice_items/1
+  position:
+    type: integer
+    example: 1
+  item_type:
+    type: string
+    example: Hours
+  description:
+    type: string
+    example: Consultancy
+  quantity:
+    type: string
+    example: '10.0'
+  price:
+    type: string
+    example: '95.0'
+  category:
+    type: string
+    example: https://api.freeagent.com/v2/categories/001
+  sales_tax_rate:
+    type: string
+    example: '20.0'
+  sales_tax_status:
+    type: string
+    example: TAXABLE
+  second_sales_tax_rate:
+    type: string
+    example: '0.0'
+  second_sales_tax_status:
+    type: string
+    example: TAXABLE
+  suffers_cis_deduction:
+    type: boolean
+    example: false
+  stock_item:
+    type: string
+    example: https://api.freeagent.com/v2/stock_items/1
+  project:
+    type: string
+    example: https://api.freeagent.com/v2/projects/1

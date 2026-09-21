@@ -1,0 +1,8 @@
+type: object
+required:
+- invoice_timeline_items
+properties:
+  invoice_timeline_items:
+    type: array
+    items:
+      $ref: 'InvoiceTimelineItem.yaml'

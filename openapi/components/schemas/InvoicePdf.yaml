@@ -1,0 +1,6 @@
+type: object
+properties:
+  content:
+    type: string
+    description: Base64 encoded PDF data, wrapped across lines
+    example: JVBERi0xLjQK...

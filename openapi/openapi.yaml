@@ -93,6 +93,24 @@ components:
       $ref: 'components/schemas/AttachmentUpdateRequest.yaml'
     InvoiceItemPayload:
       $ref: 'components/schemas/InvoiceItemPayload.yaml'
+    Invoice:
+      $ref: 'components/schemas/Invoice.yaml'
+    InvoiceItem:
+      $ref: 'components/schemas/InvoiceItem.yaml'
+    InvoiceResponse:
+      $ref: 'components/schemas/InvoiceResponse.yaml'
+    InvoiceListResponse:
+      $ref: 'components/schemas/InvoiceListResponse.yaml'
+    InvoiceItemResponse:
+      $ref: 'components/schemas/InvoiceItemResponse.yaml'
+    InvoiceTimelineItem:
+      $ref: 'components/schemas/InvoiceTimelineItem.yaml'
+    InvoiceTimelineResponse:
+      $ref: 'components/schemas/InvoiceTimelineResponse.yaml'
+    InvoicePdf:
+      $ref: 'components/schemas/InvoicePdf.yaml'
+    InvoicePdfResponse:
+      $ref: 'components/schemas/InvoicePdfResponse.yaml'
     Errors:
       $ref: 'components/schemas/Errors.yaml'
     ErrorDetail:
