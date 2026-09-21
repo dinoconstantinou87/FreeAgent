@@ -1,0 +1,8 @@
+type: object
+required:
+- recurring_invoices
+properties:
+  recurring_invoices:
+    type: array
+    items:
+      $ref: 'RecurringInvoice.yaml'

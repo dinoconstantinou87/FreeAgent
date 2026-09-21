@@ -28,8 +28,7 @@ list:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/RecurringInvoiceListResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
 show:
@@ -45,8 +44,7 @@ show:
         content:
           application/json:
             schema:
-              type: object
-              additionalProperties: true
+              $ref: '#/components/schemas/RecurringInvoiceResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:

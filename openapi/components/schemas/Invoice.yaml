@@ -141,8 +141,7 @@ properties:
     type: string
     example: https://pay.freeagent.com/abc123
   payment_methods:
-    type: object
-    additionalProperties: true
+    $ref: 'InvoicePaymentMethods.yaml'
   invoice_items:
     type: array
     items:
