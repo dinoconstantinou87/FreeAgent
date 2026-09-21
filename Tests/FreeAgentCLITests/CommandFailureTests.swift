@@ -90,6 +90,28 @@ struct CommandFailureTests {
         #expect(failure.alert.message.plain() == "FreeAgent has no such record (HTTP 404): Resource not found")
     }
 
+    @Test("refuses an unconfirmed destructive command as a usage error")
+    func refusesWithoutConfirmation() {
+        let failure = CommandFailure(CommandRefusal.notInteractive)
+
+        #expect(failure.exitCode == .validationFailure)
+        #expect(failure.alert.message.plain() == "Confirmation required when not running interactively")
+        #expect(
+            failure.alert.takeaways.map { $0.plain() } == [
+                "Pass '--yes' to confirm",
+                "Pass '--dry-run' to preview the request instead",
+            ]
+        )
+    }
+
+    @Test("reports a command that declined to run as a plain failure")
+    func reportsDeclinedCommand() {
+        let failure = CommandFailure(CommandRefusal.declined)
+
+        #expect(failure.exitCode == .failure)
+        #expect(failure.alert.message.plain() == "Cancelled, nothing was changed")
+    }
+
     @Test("falls back to a generic failure for errors that are not from the API")
     func fallsBackForOtherErrors() {
         struct Boom: Error { }

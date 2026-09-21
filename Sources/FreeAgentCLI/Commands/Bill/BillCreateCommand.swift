@@ -2,7 +2,7 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct BillCreateCommand: ClientCommand {
+struct BillCreateCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
         commandName: "create",
         abstract: "Create a new bill"
@@ -34,6 +34,9 @@ struct BillCreateCommand: ClientCommand {
 
     @Option(name: .long, help: "Sales tax rate (e.g. 20.0)")
     var salesTaxRate: String?
+
+    @Flag(help: "Print the request instead of sending it")
+    var dryRun = false
 
     func run(client: Client) async throws -> Components.Schemas.BillResponse? {
         let billItem = Components.Schemas.BillItemPayload(

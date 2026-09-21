@@ -2,7 +2,7 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct InvoiceCreateItemCommand: ClientCommand {
+struct InvoiceCreateItemCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
         commandName: "create-item",
         abstract: "Create invoice item"
@@ -22,6 +22,9 @@ struct InvoiceCreateItemCommand: ClientCommand {
 
     @Option(name: .long, parsing: .unconditional, help: "Item price")
     var price: Double?
+
+    @Flag(help: "Print the request instead of sending it")
+    var dryRun = false
 
     func run(client: Client) async throws -> Components.Schemas.InvoiceItemResponse? {
         let invoiceItemPayload = Components.Schemas.InvoiceItemPayload(

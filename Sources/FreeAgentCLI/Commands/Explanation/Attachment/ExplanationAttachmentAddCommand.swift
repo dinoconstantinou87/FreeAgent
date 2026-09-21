@@ -4,7 +4,7 @@ import FreeAgentAPI
 
 // MARK: - ExplanationAttachmentAddCommand
 
-struct ExplanationAttachmentAddCommand: ClientCommand {
+struct ExplanationAttachmentAddCommand: MutatingCommand {
 
     // MARK: Internal
 
@@ -22,6 +22,9 @@ struct ExplanationAttachmentAddCommand: ClientCommand {
 
     @Option(name: .long, help: "Description applied to each attached file")
     var description: String?
+
+    @Flag(help: "Print the request instead of sending it")
+    var dryRun = false
 
     func run(client: Client) async throws -> Components.Schemas.AttachmentListResponse? {
         let attachments = try file.map { path in

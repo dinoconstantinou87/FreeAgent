@@ -2,7 +2,7 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct ExpenseCreateCommand: ClientCommand {
+struct ExpenseCreateCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
         commandName: "create",
         abstract: "Create an expense"
@@ -28,6 +28,9 @@ struct ExpenseCreateCommand: ClientCommand {
 
     @Option(name: .long, help: "User URL (e.g. https://api.freeagent.com/v2/users/1)")
     var user: String?
+
+    @Flag(help: "Print the request instead of sending it")
+    var dryRun = false
 
     func run(client: Client) async throws -> Components.Schemas.ExpenseResponse? {
         let expensePayload = Components.Schemas.ExpensePayload(
