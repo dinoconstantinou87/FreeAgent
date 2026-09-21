@@ -5,9 +5,17 @@ list:
     summary: List Contacts
     description: List Contacts
     operationId: listContacts
+    parameters:
+    - $ref: '#/components/parameters/Page'
+    - $ref: '#/components/parameters/PerPage'
     responses:
       '200':
         description: Success
+        headers:
+          Link:
+            $ref: '#/components/headers/Link'
+          X-Total-Count:
+            $ref: '#/components/headers/XTotalCount'
         content:
           application/json:
             schema:

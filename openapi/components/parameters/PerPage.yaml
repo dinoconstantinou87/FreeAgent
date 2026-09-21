@@ -1,0 +1,8 @@
+name: per_page
+in: query
+description: Results per page, at most 100
+schema:
+  type: integer
+  minimum: 1
+  maximum: 100
+  default: 25

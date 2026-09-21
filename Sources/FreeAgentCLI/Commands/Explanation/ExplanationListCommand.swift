@@ -20,17 +20,25 @@ struct ExplanationListCommand: ClientCommand {
     @Option(name: .long, help: "Show explanations updated after this date")
     var updatedSince: String?
 
-    func run(client: Client) async throws -> Components.Schemas.BankTransactionExplanationListResponse? {
-        let input = Operations.ListAllBankTransactionExplanations.Input(
-            query: .init(
-                fromDate: fromDate,
-                toDate: toDate,
-                updatedSince: updatedSince,
-                bankAccount: bankAccount
-            )
-        )
+    @Option(name: .long, help: "Maximum number of explanations to fetch")
+    var limit = ListLimit.default
 
-        return try await client.listAllBankTransactionExplanations(input)
-            .ok.body.json
+    func run(client: Client) async throws -> Components.Schemas.BankTransactionExplanationListResponse? {
+        let explanations = try await Paginator.collect(limit: limit.value) { page, perPage in
+            let ok = try await client.listAllBankTransactionExplanations(
+                .init(query: .init(
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    updatedSince: updatedSince,
+                    bankAccount: bankAccount,
+                    page: page,
+                    perPage: perPage
+                ))
+            ).ok
+
+            return (try ok.body.json.bankTransactionExplanations, ok.headers.xTotalCount)
+        }
+
+        return .init(bankTransactionExplanations: explanations)
     }
 }

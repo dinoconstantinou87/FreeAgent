@@ -37,19 +37,16 @@ list:
       schema:
         type: string
         example: 'true'
-    - name: page
-      in: query
-      schema:
-        type: integer
-        example: 1
-    - name: per_page
-      in: query
-      schema:
-        type: integer
-        example: 100
+    - $ref: '#/components/parameters/Page'
+    - $ref: '#/components/parameters/PerPage'
     responses:
       '200':
         description: Success
+        headers:
+          Link:
+            $ref: '#/components/headers/Link'
+          X-Total-Count:
+            $ref: '#/components/headers/XTotalCount'
         content:
           application/json:
             schema:
