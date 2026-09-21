@@ -1,0 +1,17 @@
+type: object
+properties:
+  paypal:
+    type: boolean
+    example: false
+  gocardless_preauth:
+    type: boolean
+    example: false
+  gocardless_instant_bank_pay:
+    type: boolean
+    example: false
+  stripe:
+    type: boolean
+    example: false
+  tyl:
+    type: boolean
+    example: false

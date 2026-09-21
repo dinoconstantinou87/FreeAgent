@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct InvoiceShowRecurringCommand: ClientCommand {
     static let configuration = CommandConfiguration(
@@ -12,12 +11,12 @@ struct InvoiceShowRecurringCommand: ClientCommand {
     @Argument(help: "Recurring invoice ID")
     var id: String
 
-    func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIObjectContainer? {
+    func run(client: Client) async throws -> Components.Schemas.RecurringInvoiceResponse? {
         let input = Operations.ShowRecurringInvoice.Input(
             path: .init(id: id)
         )
 
         return try await client.showRecurringInvoice(input)
-            .ok.body.json.additionalProperties
+            .ok.body.json
     }
 }

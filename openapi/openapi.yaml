@@ -111,6 +111,14 @@ components:
       $ref: 'components/schemas/InvoicePdf.yaml'
     InvoicePdfResponse:
       $ref: 'components/schemas/InvoicePdfResponse.yaml'
+    InvoicePaymentMethods:
+      $ref: 'components/schemas/InvoicePaymentMethods.yaml'
+    RecurringInvoice:
+      $ref: 'components/schemas/RecurringInvoice.yaml'
+    RecurringInvoiceResponse:
+      $ref: 'components/schemas/RecurringInvoiceResponse.yaml'
+    RecurringInvoiceListResponse:
+      $ref: 'components/schemas/RecurringInvoiceListResponse.yaml'
     Errors:
       $ref: 'components/schemas/Errors.yaml'
     ErrorDetail:

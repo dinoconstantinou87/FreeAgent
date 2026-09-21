@@ -1,0 +1,105 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/recurring_invoices/1
+  contact:
+    type: string
+    example: https://api.freeagent.com/v2/contacts/1
+  contact_name:
+    type: string
+    example: Acme Ltd
+  client_contact_name:
+    type: string
+    example: Alice Johnson
+  bank_account:
+    type: string
+    example: https://api.freeagent.com/v2/bank_accounts/1
+  reference:
+    type: string
+    example: '025'
+  profile_id:
+    type: string
+    example: '001'
+  recurring_status:
+    type: string
+    example: Draft
+  frequency:
+    type: string
+    example: Monthly
+  dated_on:
+    type: string
+    example: 2026-10-01
+  next_recurs_on:
+    type: string
+    example: 2026-10-01
+  recurring_end_date:
+    type: string
+    example: 2026-12-01
+  payment_terms_in_days:
+    type: integer
+    example: 30
+  payment_terms:
+    type: string
+    example: Payment due within 30 days
+  comments:
+    type: string
+    example: Thanks for your business
+  currency:
+    type: string
+    example: GBP
+  exchange_rate:
+    type: string
+    example: '1.0'
+  net_value:
+    type: string
+    example: '100.0'
+  sales_tax_value:
+    type: string
+    example: '20.0'
+  total_value:
+    type: string
+    example: '120.0'
+  due_value:
+    type: string
+    example: '120.0'
+  discount_percent:
+    type: string
+    example: '10.0'
+  discount_value:
+    type: string
+    example: '10.0'
+  is_interim_uk_vat:
+    type: boolean
+    example: false
+  omit_header:
+    type: boolean
+    example: false
+  always_show_bic_and_iban:
+    type: boolean
+    example: false
+  send_new_invoice_emails:
+    type: boolean
+    example: false
+  send_reminder_emails:
+    type: boolean
+    example: false
+  send_thank_you_emails:
+    type: boolean
+    example: false
+  payment_methods:
+    $ref: 'InvoicePaymentMethods.yaml'
+  recurring_invoice_items:
+    type: array
+    items:
+      $ref: 'InvoiceItem.yaml'
+  created_at:
+    type: string
+    format: date-time
+    example: '2026-09-21T08:57:10Z'
+  updated_at:
+    type: string
+    format: date-time
+    example: '2026-09-21T08:57:10Z'
