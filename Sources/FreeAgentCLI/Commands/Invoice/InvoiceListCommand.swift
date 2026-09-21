@@ -8,7 +8,7 @@ struct InvoiceListCommand: ClientCommand {
         abstract: "List invoices"
     )
 
-    @Option(name: .long, help: "Filter by view")
+    @Option(name: .long, help: "Filter by view, or last_N_months (e.g. last_3_months)")
     var view: CustomInvoiceView?
 
     @Option(name: .long, help: "Filter invoices by contact ID")

@@ -9,6 +9,7 @@ struct FreeAgentCLI: AsyncParsableCommand {
         version: version,
         subcommands: [
             SetupCommand.self,
+            CompletionCommand.self,
             AuthCommand.self,
             CompanyCommand.self,
             InvoiceCommand.self,
