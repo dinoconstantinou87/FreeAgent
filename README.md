@@ -41,12 +41,6 @@ $ freeagent --help
 $ freeagent invoice list --help
 ```
 
-List commands return at most 30 records. Raise the ceiling with `--limit`:
-
-```bash
-$ freeagent invoice list --limit 200
-```
-
 ## Development
 
 The API client is auto-generated from an OpenAPI specification using [swift-openapi-generator](https://github.com/apple/swift-openapi-generator):
