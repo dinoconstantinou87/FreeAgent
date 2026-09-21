@@ -1,0 +1,58 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/bill_items/1
+  bill:
+    type: string
+    example: https://api.freeagent.com/v2/bills/1
+  category:
+    type: string
+    example: https://api.freeagent.com/v2/categories/285
+  description:
+    type: string
+    example: Hosting
+  quantity:
+    type: string
+    example: '1.0'
+  unit:
+    type: string
+    example: Hours
+  total_value:
+    type: string
+    example: '120.0'
+  total_value_ex_tax:
+    type: string
+    example: '100.0'
+  sales_tax_rate:
+    type: string
+    example: '20.0'
+  sales_tax_status:
+    type: string
+    example: TAXABLE
+  sales_tax_value:
+    type: string
+    example: '20.0'
+  second_sales_tax_rate:
+    type: string
+    example: '0.0'
+  second_sales_tax_status:
+    type: string
+    example: TAXABLE
+  second_sales_tax_value:
+    type: string
+    example: '0.0'
+  stock_item:
+    type: string
+    example: https://api.freeagent.com/v2/stock_items/1
+  locked_attributes:
+    type: array
+    items:
+      type: string
+    example:
+      - total_value
+  locked_reason:
+    type: string
+    example: This bill item is locked

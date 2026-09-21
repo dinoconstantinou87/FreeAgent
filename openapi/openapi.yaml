@@ -123,6 +123,12 @@ components:
       $ref: 'components/schemas/BankTransactionExplanationResponse.yaml'
     BankTransactionExplanationListResponse:
       $ref: 'components/schemas/BankTransactionExplanationListResponse.yaml'
+    Bill:
+      $ref: 'components/schemas/Bill.yaml'
+    BillItem:
+      $ref: 'components/schemas/BillItem.yaml'
+    BillResponse:
+      $ref: 'components/schemas/BillResponse.yaml'
     BillCreatePayload:
       $ref: 'components/schemas/BillCreatePayload.yaml'
     BillItemPayload:
