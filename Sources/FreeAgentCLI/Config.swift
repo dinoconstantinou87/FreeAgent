@@ -17,8 +17,8 @@ public struct Config: Codable, Sendable {
     public var auth: Auth
 
     public static func load() async throws -> Config {
-        let reader = try await ConfigReader(providers: [
-            JSONProvider(filePath: .init(url.path()))
+        let reader = ConfigReader(providers: [
+            try await FileProvider<JSONSnapshot>(filePath: .init(url.path(percentEncoded: false)))
         ])
 
         return try Config(auth: Auth(reader: reader.scoped(to: "auth")))
@@ -56,12 +56,7 @@ extension Config {
         public init(reader: ConfigReader) throws {
             key = try reader.requiredString(forKey: "key")
             secret = try reader.requiredString(forKey: "secret", isSecret: true)
-
-            if let callbackUrl = try URL(string: reader.requiredString(forKey: "callbackUrl")) {
-                self.callbackUrl = callbackUrl
-            } else {
-                throw ConfigError.invalidUrl
-            }
+            callbackUrl = try reader.requiredString(forKey: "callbackUrl", as: URL.self)
         }
 
         public init(key: String, secret: String, callbackUrl: URL) {
@@ -77,10 +72,4 @@ extension Config {
         public var callbackUrl: URL
 
     }
-}
-
-// MARK: - ConfigError
-
-enum ConfigError: Error {
-    case invalidUrl
 }
