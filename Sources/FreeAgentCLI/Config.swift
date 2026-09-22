@@ -14,12 +14,22 @@ public struct Config: Codable, Sendable {
 
     // MARK: Public
 
+    public static let url = FileManager.default.homeDirectoryForCurrentUser
+        .appendingPathComponent(".freeagent")
+        .appendingPathComponent("config.json")
+
     public var auth: Auth
 
-    public static func load() async throws -> Config {
-        let reader = try await ConfigReader(providers: [
-            JSONProvider(filePath: .init(url.path()))
-        ])
+    public static func load(from url: URL = Config.url) async throws -> Config {
+        var providers: [any ConfigProvider] = [
+            EnvironmentVariablesProvider().prefixKeys(with: "freeagent")
+        ]
+
+        if let file = try? await JSONProvider(filePath: .init(url.path())) {
+            providers.append(file)
+        }
+
+        let reader = ConfigReader(providers: providers)
 
         return try Config(auth: Auth(reader: reader.scoped(to: "auth")))
     }
@@ -39,11 +49,6 @@ public struct Config: Codable, Sendable {
         try data.write(to: url)
     }
 
-    // MARK: Private
-
-    private static let url = FileManager.default.homeDirectoryForCurrentUser
-        .appendingPathComponent(".freeagent")
-        .appendingPathComponent("config.json")
 }
 
 // MARK: Config.Auth

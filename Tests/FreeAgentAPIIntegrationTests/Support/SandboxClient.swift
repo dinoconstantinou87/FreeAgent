@@ -1,3 +1,4 @@
+import Configuration
 import Foundation
 import HTTPTypes
 import OpenAPIRuntime
@@ -9,19 +10,16 @@ import OpenAPIURLSession
 
 enum SandboxClient {
 
-    static var token: String? {
-        if let token = ProcessInfo.processInfo.environment["FREEAGENT_ACCESS_TOKEN"], !token.isEmpty {
-            return token
-        }
+    static let reader = ConfigReader(providers: [
+        EnvironmentVariablesProvider().prefixKeys(with: "freeagent")
+    ])
 
-        guard
-            let credential = try? AuthStorage().get(),
-            credential.environment == .sandbox
-        else {
+    static var token: String? {
+        guard let token = reader.string(forKey: "token", isSecret: true), !token.isEmpty else {
             return nil
         }
 
-        return credential.token
+        return token
     }
 
     static func makeClient() -> Client? {

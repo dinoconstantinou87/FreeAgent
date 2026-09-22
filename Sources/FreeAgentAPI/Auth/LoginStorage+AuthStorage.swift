@@ -4,7 +4,7 @@ import OAuthenticator
 extension LoginStorage {
     static func backed(by storage: any AuthStorageInterface, environment: Environment) -> LoginStorage {
         LoginStorage(
-            retrieveLogin: { try storage.get()?.login },
+            retrieveLogin: { try await storage.get()?.login },
             storeLogin: { login in
                 guard login.accessToken.valid else {
                     return

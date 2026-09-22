@@ -127,7 +127,7 @@ jobs:
 
           echo "::add-mask::$access_token"
           echo "::add-mask::$refresh_token"
-          echo "FREEAGENT_ACCESS_TOKEN=$access_token" >> "$GITHUB_ENV"
+          echo "FREEAGENT_TOKEN=$access_token" >> "$GITHUB_ENV"
 
           # Build updated credential JSON for secret rotation (compact single-line)
           expires_at=$(python3 -c "import time; print(time.time() + $expires_in)")
@@ -141,7 +141,7 @@ jobs:
       - name: Run integration tests
         if: steps.detect.outputs.skip != 'true'
         env:
-          FREEAGENT_ACCESS_TOKEN: ${{ env.FREEAGENT_ACCESS_TOKEN }}
+          FREEAGENT_TOKEN: ${{ env.FREEAGENT_TOKEN }}
           CHANGED_MODELS: ${{ env.CHANGED_MODELS }}
         run: swift test --filter FreeAgentAPIIntegrationTests
 

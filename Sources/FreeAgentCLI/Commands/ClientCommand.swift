@@ -52,7 +52,7 @@ extension ClientCommand {
     // MARK: Private
 
     private func client() async throws -> Client {
-        guard let credential = try AuthStorage().get() else {
+        guard let credential = try await AuthStorage().get() else {
             throw APIError(kind: .unauthenticated)
         }
 

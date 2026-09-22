@@ -41,7 +41,8 @@ let package = Package(
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
-                .product(name: "KeychainAccess", package: "KeychainAccess"),
+                .product(name: "Configuration", package: "swift-configuration"),
+                .product(name: "KeychainAccess", package: "KeychainAccess", condition: .when(platforms: [.macOS])),
                 .product(name: "Mockable", package: "Mockable"),
             ],
             swiftSettings: [
@@ -90,6 +91,7 @@ let package = Package(
             name: "FreeAgentAPITests",
             dependencies: [
                 "FreeAgentAPI",
+                .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "Mockable", package: "Mockable"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
             ],
@@ -103,6 +105,7 @@ let package = Package(
             name: "FreeAgentAPIIntegrationTests",
             dependencies: [
                 "FreeAgentAPI",
+                .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
             ],

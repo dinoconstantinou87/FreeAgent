@@ -1,3 +1,4 @@
+import Configuration
 import Foundation
 import Testing
 
@@ -9,7 +10,9 @@ enum IntegrationTest {
             return false
         }
 
-        guard let changed = ProcessInfo.processInfo.environment["CHANGED_MODELS"], !changed.isEmpty else {
+        let reader = ConfigReader(providers: [EnvironmentVariablesProvider()])
+
+        guard let changed = reader.string(forKey: "changedModels"), !changed.isEmpty else {
             // No CHANGED_MODELS set means run all (e.g. local testing)
             return true
         }
