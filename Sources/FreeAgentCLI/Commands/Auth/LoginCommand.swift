@@ -1,9 +1,7 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import Logging
 import Noora
-import ServiceLifecycle
 
 struct LoginCommand: AsyncParsableCommand {
     static let configuration = CommandConfiguration(
@@ -16,29 +14,13 @@ struct LoginCommand: AsyncParsableCommand {
 
     mutating func run() async throws {
         let config = try await Config.load()
-        let client = AuthClient(config: .init(key: config.auth.key, secret: config.auth.secret, environment: environment))
-        let services = ServiceGroup(
-            configuration: ServiceGroupConfiguration(
-                services: [
-                    AuthCallbackService(url: config.auth.callbackUrl, client: client)
-                ],
-                gracefulShutdownSignals: [.sigterm],
-                logger: Logger(label: "oauth-callback")
-            )
+        let client = AuthClient(
+            config: .init(config.auth, environment: environment),
+            userAuthenticator: LoopbackUserAuthenticator(callbackUrl: config.auth.callbackUrl).userAuthenticator
         )
 
-        try await withThrowingTaskGroup { group in
-            group.addTask {
-                try await client.authorize(callbackUrl: config.auth.callbackUrl)
-                Noora().success(.alert("Logged in"))
-            }
+        try await client.authorize()
 
-            group.addTask {
-                try await services.run()
-            }
-
-            try await group.next()
-            group.cancelAll()
-        }
+        Noora().success(.alert("Logged in"))
     }
 }

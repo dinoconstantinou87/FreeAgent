@@ -16,6 +16,15 @@ struct CommandFailure: Equatable {
             return
         }
 
+        if let auth = error as? AuthError {
+            alert = .alert(
+                TerminalText(stringLiteral: Self.summary(of: auth)),
+                takeaways: auth.takeaways
+            )
+            exitCode = auth.exitCode
+            return
+        }
+
         guard let cause = APIError.from(error) else {
             alert = .alert("Failed to execute command: \(Self.cause(of: error))")
             exitCode = .failure
@@ -40,6 +49,14 @@ struct CommandFailure: Equatable {
         guard let error = error as? ClientError else { return error }
 
         return cause(of: error.underlyingError)
+    }
+
+    private static func summary(of error: AuthError) -> String {
+        guard let message = error.message else {
+            return error.summary
+        }
+
+        return "\(error.summary): \(message)"
     }
 
     private static func summary(of error: APIError) -> String {
@@ -123,6 +140,32 @@ extension APIError.Kind {
         case .rateLimited: ["Wait before retrying"]
         case .serverError: ["Retry - this is a fault on FreeAgent's side"]
         case .unknownOutcome: ["Check FreeAgent before retrying, so the change is not applied twice"]
+        default: []
+        }
+    }
+}
+
+extension AuthError {
+
+    var exitCode: ExitCode {
+        switch self {
+        case .unauthenticated: ExitCode(2)
+        case .denied, .declined: ExitCode(4)
+        case .unexpected: .failure
+        }
+    }
+
+    var summary: String {
+        switch self {
+        case .unauthenticated: "Not authenticated with FreeAgent"
+        case .denied, .declined: "FreeAgent rejected the authorization request"
+        case .unexpected: "FreeAgent returned an unexpected response while authenticating"
+        }
+    }
+
+    var takeaways: [TerminalText] {
+        switch self {
+        case .unauthenticated: ["Run \(.command("freeagent auth login"))"]
         default: []
         }
     }

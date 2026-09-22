@@ -13,24 +13,17 @@ struct AuthMiddlewareTests {
     @Test("adds bearer token to request")
     func addsBearerToken() async throws {
         let storage = MockAuthStorageInterface()
-        let credential = AuthCredential(
-            token: "test-token",
-            refreshToken: "refresh",
-            expiresAt: Date.now.addingTimeInterval(3600),
-            environment: .sandbox
+        given(storage).get().willReturn(
+            AuthCredential(
+                token: "stored-token",
+                refreshToken: "stored-refresh",
+                expiresAt: Date.now.addingTimeInterval(3600),
+                environment: .sandbox
+            )
         )
-        given(storage).get().willReturn(credential)
 
-        let middleware = AuthMiddleware(config: config, storage: storage)
-        let request = HTTPRequest(method: .get, scheme: "https", authority: "api.example.com", path: "/test")
-
-        let (response, _) = try await middleware.intercept(
-            request,
-            body: nil,
-            baseURL: try #require(URL(string: "https://api.example.com")),
-            operationID: "test"
-        ) { request, body, _ in
-            #expect(request.headerFields[.authorization] == "Bearer test-token")
+        let (response, _) = try await intercept(storage: storage) { request, body, _ in
+            #expect(request.headerFields[.authorization] == "Bearer stored-token")
             return (HTTPResponse(status: .ok), body)
         }
 
@@ -42,16 +35,8 @@ struct AuthMiddlewareTests {
         let storage = MockAuthStorageInterface()
         given(storage).get().willReturn(nil)
 
-        let middleware = AuthMiddleware(config: config, storage: storage)
-        let request = HTTPRequest(method: .get, scheme: "https", authority: "api.example.com", path: "/test")
-
-        await #expect(throws: APIError(kind: .unauthenticated)) {
-            try await middleware.intercept(
-                request,
-                body: nil,
-                baseURL: try #require(URL(string: "https://api.example.com")),
-                operationID: "test"
-            ) { _, body, _ in
+        await #expect(throws: AuthError.unauthenticated) {
+            try await intercept(storage: storage) { _, body, _ in
                 (HTTPResponse(status: .ok), body)
             }
         }
@@ -59,6 +44,28 @@ struct AuthMiddlewareTests {
 
     // MARK: Private
 
-    private let config = AuthConfig(key: "key", secret: "secret", environment: .sandbox)
+    private let baseURL = URL(string: "https://api.example.com")!
+
+    private let config = AuthConfig(
+        key: "the-key",
+        secret: "the-secret",
+        callbackUrl: URL(string: "http://localhost:8080/callback")!,
+        environment: .sandbox
+    )
+
+    private func intercept(
+        storage: MockAuthStorageInterface,
+        next: (HTTPRequest, HTTPBody?, URL) async throws -> (HTTPResponse, HTTPBody?)
+    ) async throws -> (HTTPResponse, HTTPBody?) {
+        let middleware = AuthMiddleware(client: AuthClient(config: config, storage: storage))
+
+        return try await middleware.intercept(
+            HTTPRequest(method: .get, scheme: "https", authority: "api.example.com", path: "/test"),
+            body: nil,
+            baseURL: baseURL,
+            operationID: "test",
+            next: next
+        )
+    }
 
 }

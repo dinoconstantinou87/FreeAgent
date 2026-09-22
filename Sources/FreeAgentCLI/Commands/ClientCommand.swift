@@ -59,13 +59,7 @@ extension ClientCommand {
         let config = try await Config.load()
 
         let chain: [any ClientMiddleware] = [.apiVersion()] + middlewares + [
-            .auth(
-                .init(
-                    key: config.auth.key,
-                    secret: config.auth.secret,
-                    environment: credential.environment
-                )
-            ),
+            .auth(.init(config.auth, environment: credential.environment)),
             .apiError(),
             .retry(willRetry: { delay in
                 Noora.standardError().info(.alert("Rate limited - retrying in \(delay.components.seconds)s"))

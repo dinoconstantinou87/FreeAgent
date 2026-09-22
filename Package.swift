@@ -22,12 +22,11 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.5.0"),
         .package(url: "https://github.com/apple/swift-configuration.git", from: "0.1.1"),
-        .package(url: "https://github.com/swift-server/swift-service-lifecycle.git", from: "2.6.1"),
         .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.8.2"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession", from: "1.1.0"),
         .package(url: "https://github.com/tuist/Noora", from: "0.49.1"),
-        .package(url: "https://github.com/OAuthSwift/OAuthSwift", from: "2.2.0"),
+        .package(url: "https://github.com/ChimeHQ/OAuthenticator", from: "0.7.2"),
         .package(url: "https://github.com/httpswift/swifter.git", from: "1.5.0"),
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", from: "4.2.2"),
         .package(url: "https://github.com/jpsim/Yams", from: "5.0.0"),
@@ -41,7 +40,7 @@ let package = Package(
             dependencies: [
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
-                .product(name: "OAuthSwift", package: "OAuthSwift"),
+                .product(name: "OAuthenticator", package: "OAuthenticator"),
                 .product(name: "KeychainAccess", package: "KeychainAccess"),
                 .product(name: "Mockable", package: "Mockable"),
             ],
@@ -57,9 +56,9 @@ let package = Package(
                 "FreeAgentAPI",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Configuration", package: "swift-configuration"),
-                .product(name: "ServiceLifecycle", package: "swift-service-lifecycle"),
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "Noora", package: "Noora"),
+                .product(name: "OAuthenticator", package: "OAuthenticator"),
                 .product(name: "Swifter", package: "swifter"),
             ],
             swiftSettings: [
@@ -79,6 +78,8 @@ let package = Package(
             dependencies: [
                 "FreeAgentCLI",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "OAuthenticator", package: "OAuthenticator"),
+                .product(name: "Swifter", package: "swifter"),
             ],
             swiftSettings: [
                 .swiftLanguageMode(.v6),
@@ -90,10 +91,12 @@ let package = Package(
             dependencies: [
                 "FreeAgentAPI",
                 .product(name: "Mockable", package: "Mockable"),
+                .product(name: "OAuthenticator", package: "OAuthenticator"),
             ],
             swiftSettings: [
                 .swiftLanguageMode(.v6),
                 .enableExperimentalFeature("StrictConcurrency"),
+                .define("MOCKING", .when(configuration: .debug)),
             ]
         ),
         .testTarget(
