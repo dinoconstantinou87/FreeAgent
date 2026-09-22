@@ -9,6 +9,8 @@ servers:
 - url: https://api.sandbox.freeagent.com
   description: Sandbox
 paths:
+  /v2/token_endpoint:
+    $ref: 'paths/oauth.yaml#/token'
   /v2/bank_accounts:
     $ref: 'paths/bank_accounts.yaml#/list'
   /v2/bank_accounts/{id}:
@@ -177,6 +179,16 @@ components:
       $ref: 'components/schemas/InvoiceUpdatePayload.yaml'
     EmailPayload:
       $ref: 'components/schemas/EmailPayload.yaml'
+    TokenRequest:
+      $ref: 'components/schemas/TokenRequest.yaml'
+    AuthorizationCodeGrant:
+      $ref: 'components/schemas/AuthorizationCodeGrant.yaml'
+    RefreshTokenGrant:
+      $ref: 'components/schemas/RefreshTokenGrant.yaml'
+    TokenResponse:
+      $ref: 'components/schemas/TokenResponse.yaml'
+    OAuthError:
+      $ref: 'components/schemas/OAuthError.yaml'
     Company:
       $ref: 'components/schemas/Company.yaml'
     CompanyResponse:
@@ -194,6 +206,15 @@ components:
   responses:
     EmptyResponse:
       description: Success
+    OAuthErrorResponse:
+      description: OAuth error response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OAuthError'
+        text/plain:
+          schema:
+            type: string
     ErrorResponse:
       description: Error response
       content:
@@ -208,6 +229,7 @@ security:
 - oauth2: []
 tags:
 - name: Attachments
+- name: OAuth
 - name: Bank Accounts
 - name: Bank Transaction Explanations
 - name: Bank Transaction Explanation Attachments

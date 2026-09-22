@@ -1,0 +1,8 @@
+oneOf:
+- $ref: 'AuthorizationCodeGrant.yaml'
+- $ref: 'RefreshTokenGrant.yaml'
+discriminator:
+  propertyName: grant_type
+  mapping:
+    authorization_code: '#/components/schemas/AuthorizationCodeGrant'
+    refresh_token: '#/components/schemas/RefreshTokenGrant'

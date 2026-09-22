@@ -1,0 +1,23 @@
+token:
+  post:
+    tags:
+    - OAuth
+    summary: Token Endpoint
+    description: Exchange an authorization code or a refresh token for an access token
+    operationId: tokenEndpoint
+    security: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/TokenRequest'
+    responses:
+      '200':
+        description: Access token
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TokenResponse'
+      default:
+        $ref: '#/components/responses/OAuthErrorResponse'
