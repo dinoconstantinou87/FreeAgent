@@ -9,11 +9,10 @@ struct AuthStorageTests {
     // MARK: Lifecycle
 
     init() {
-        file = CredentialFile(
-            directory: FileManager.default.temporaryDirectory
-                .appendingPathComponent("AuthStorageTests")
-                .appendingPathComponent(UUID().uuidString)
-        )
+        directory = FileManager.default.temporaryDirectory
+            .appendingPathComponent("AuthStorageTests")
+            .appendingPathComponent(UUID().uuidString)
+        file = CredentialFile(directory: directory)
     }
 
     // MARK: Internal
@@ -144,14 +143,14 @@ struct AuthStorageTests {
 
     // MARK: Private
 
+    private let directory: URL
     private let file: CredentialFile
 
     private func storage(_ variables: [String: String] = [:]) -> AuthStorage {
         AuthStorage(
             variables: EnvironmentVariablesProvider(environmentVariables: variables)
                 .prefixKeys(with: "freeagent"),
-            keychain: nil,
-            file: file
+            store: .file(directory: directory)
         )
     }
 

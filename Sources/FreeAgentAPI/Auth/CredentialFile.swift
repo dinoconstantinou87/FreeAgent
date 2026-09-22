@@ -3,26 +3,23 @@ import SystemPackage
 
 // MARK: - CredentialFile
 
-public struct CredentialFile: Sendable {
+struct CredentialFile: Sendable {
 
     // MARK: Lifecycle
 
-    public init(directory: URL = CredentialFile.defaultDirectory) {
+    init(directory: URL) {
         url = directory.appendingPathComponent("credential.json")
     }
 
-    // MARK: Public
+    // MARK: Internal
 
-    public static let defaultDirectory = FileManager.default.homeDirectoryForCurrentUser
-        .appendingPathComponent(".freeagent")
+    let url: URL
 
-    public let url: URL
-
-    public var path: FilePath {
+    var path: FilePath {
         FilePath(url.path)
     }
 
-    public func write(_ data: Data) throws {
+    func write(_ data: Data) throws {
         let files = FileManager.default
         let directory = url.deletingLastPathComponent()
 
@@ -41,7 +38,7 @@ public struct CredentialFile: Sendable {
         }
     }
 
-    public func remove() throws {
+    func remove() throws {
         guard FileManager.default.fileExists(atPath: url.path) else {
             return
         }
@@ -53,6 +50,6 @@ public struct CredentialFile: Sendable {
 
 // MARK: - CredentialFileError
 
-public enum CredentialFileError: Error, Equatable {
+enum CredentialFileError: Error, Equatable {
     case writeFailed(String)
 }

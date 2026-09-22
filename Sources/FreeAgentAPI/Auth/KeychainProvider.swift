@@ -5,24 +5,24 @@ import Foundation
 
 // MARK: - KeychainProvider
 
-public struct KeychainProvider: Sendable {
+struct KeychainProvider: Sendable {
 
     // MARK: Lifecycle
 
-    public init(service: String = "freeagent.cli", key: String = KeychainProvider.credentialKey) {
+    init(service: String = "freeagent.cli", key: String = KeychainProvider.credentialKey) {
         keychain = Keychain(service: service)
         self.key = key
     }
 
-    // MARK: Public
+    // MARK: Internal
 
-    public static let credentialKey = "freeagent.cli.credential"
+    static let credentialKey = "freeagent.cli.credential"
 
-    public func write(_ data: Data) throws {
+    func write(_ data: Data) throws {
         try keychain.set(data, key: key, ignoringAttributeSynchronizable: true)
     }
 
-    public func remove() throws {
+    func remove() throws {
         try keychain.remove(key, ignoringAttributeSynchronizable: true)
     }
 
@@ -40,19 +40,19 @@ public struct KeychainProvider: Sendable {
 // MARK: ConfigProvider
 
 extension KeychainProvider: ConfigProvider {
-    public var providerName: String {
+    var providerName: String {
         "KeychainProvider"
     }
 
-    public func value(forKey key: AbsoluteConfigKey, type: ConfigType) throws -> LookupResult {
+    func value(forKey key: AbsoluteConfigKey, type: ConfigType) throws -> LookupResult {
         Snapshot(credential: storedCredential).value(forKey: key, type: type)
     }
 
-    public func fetchValue(forKey key: AbsoluteConfigKey, type: ConfigType) async throws -> LookupResult {
+    func fetchValue(forKey key: AbsoluteConfigKey, type: ConfigType) async throws -> LookupResult {
         try value(forKey: key, type: type)
     }
 
-    public func watchValue<Return>(
+    func watchValue<Return>(
         forKey key: AbsoluteConfigKey,
         type: ConfigType,
         updatesHandler: (ConfigUpdatesAsyncSequence<Result<LookupResult, any Error>, Never>) async throws -> Return
@@ -60,11 +60,11 @@ extension KeychainProvider: ConfigProvider {
         try await watchValueFromValue(forKey: key, type: type, updatesHandler: updatesHandler)
     }
 
-    public func snapshot() -> any ConfigSnapshotProtocol {
+    func snapshot() -> any ConfigSnapshotProtocol {
         Snapshot(credential: storedCredential)
     }
 
-    public func watchSnapshot<Return>(
+    func watchSnapshot<Return>(
         updatesHandler: (ConfigUpdatesAsyncSequence<any ConfigSnapshotProtocol, Never>) async throws -> Return
     ) async throws -> Return {
         try await watchSnapshotFromSnapshot(updatesHandler: updatesHandler)
