@@ -26,6 +26,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
+      - name: Resolve Swift toolchain
+        run: echo "SWIFT_BUILD_ID=$(swift --version | grep -o 'swiftlang-[0-9.]*')" >> "$GITHUB_ENV"
+
       - name: Cache swift-openapi-generator
         uses: actions/cache@v5
         with:
@@ -36,8 +39,8 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .build
-          key: spm-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
-          restore-keys: spm-${{ runner.os }}-
+          key: spm-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-
 
       - run: make generate
       - run: swift build
@@ -51,6 +54,9 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      - name: Resolve Swift toolchain
+        run: echo "SWIFT_BUILD_ID=$(swift --version | grep -o 'swiftlang-[0-9.]*')" >> "$GITHUB_ENV"
 
       - name: Detect changed models
         id: detect
@@ -102,8 +108,8 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .build
-          key: spm-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
-          restore-keys: spm-${{ runner.os }}-
+          key: spm-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-
 
       - name: Generate API client
         if: steps.detect.outputs.skip != 'true'
