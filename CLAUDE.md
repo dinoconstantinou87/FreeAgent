@@ -1,6 +1,6 @@
 # FreeAgent CLI
 
-A macOS CLI tool for interacting with the FreeAgent API, built with Swift 6.1.
+A macOS CLI tool for interacting with the FreeAgent API, built with Swift 6.2.
 
 ## Commands
 

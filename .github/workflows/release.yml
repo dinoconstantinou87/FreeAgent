@@ -15,6 +15,9 @@ on:
 permissions:
   contents: write
 
+env:
+  DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+
 jobs:
   release:
     name: Build and Release
@@ -25,6 +28,9 @@ jobs:
           fetch-depth: 0
 
       - uses: jdx/mise-action@v4
+
+      - name: Resolve Swift toolchain
+        run: echo "SWIFT_BUILD_ID=$(swift --version | grep -o 'swiftlang-[0-9.]*')" >> "$GITHUB_ENV"
 
       - name: Lint
         run: |
@@ -70,8 +76,8 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .build
-          key: spm-release-${{ runner.os }}-${{ hashFiles('Package.resolved') }}
-          restore-keys: spm-release-${{ runner.os }}-
+          key: spm-release-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-release-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-
 
       - name: Generate API client
         run: make generate
