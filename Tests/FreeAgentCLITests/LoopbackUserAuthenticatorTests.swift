@@ -1,7 +1,6 @@
 import Foundation
 import OAuthenticator
 import Swifter
-import Synchronization
 import Testing
 
 @testable import FreeAgentCLI
@@ -14,73 +13,31 @@ struct LoopbackUserAuthenticatorTests {
 
     @Test("returns the redirect url the browser was sent to")
     func returnsRedirectUrl() async throws {
-        let port = try Self.freePort()
-        let callbackUrl = try #require(URL(string: "http://localhost:\(port)/callback"))
+        let flow = try await authenticate(query: "code=the-code&state=the-state")
 
-        let authenticator = LoopbackUserAuthenticator(callbackUrl: callbackUrl) { _ in
-            Task {
-                try await Self.get("http://localhost:\(port)/callback?code=the-code&state=the-state")
-            }
-        }
-
-        let redirect = try await authenticator.userAuthenticator(Self.authorizationUrl, "http")
-
-        #expect(redirect.queryValues(named: "code").first == "the-code")
-        #expect(redirect.queryValues(named: "state").first == "the-state")
-    }
-
-    @Test("serves the completion page to the browser before shutting down")
-    func servesCompletionPage() async throws {
-        let port = try Self.freePort()
-        let callbackUrl = try #require(URL(string: "http://localhost:\(port)/callback"))
-        let page = Mutex("")
-
-        let authenticator = LoopbackUserAuthenticator(callbackUrl: callbackUrl) { _ in
-            Task {
-                let body = try await Self.get("http://localhost:\(port)/callback?code=the-code")
-                page.withLock { $0 = body }
-            }
-        }
-
-        _ = try await authenticator.userAuthenticator(Self.authorizationUrl, "http")
-
-        try await Task.sleep(for: .milliseconds(200))
-
-        let body = page.withLock { $0 }
-        #expect(body.contains("Authentication Complete"))
+        #expect(flow.redirect.queryValues(named: "code").first == "the-code")
+        #expect(flow.redirect.queryValues(named: "state").first == "the-state")
     }
 
     @Test("opens the authorization url it was given")
     func opensAuthorizationUrl() async throws {
-        let port = try Self.freePort()
-        let callbackUrl = try #require(URL(string: "http://localhost:\(port)/callback"))
-        let opened = Mutex<URL?>(nil)
+        let flow = try await authenticate()
 
-        let authenticator = LoopbackUserAuthenticator(callbackUrl: callbackUrl) { url in
-            opened.withLock { $0 = url }
-            Task {
-                try await Self.get("http://localhost:\(port)/callback?code=the-code")
-            }
-        }
+        #expect(flow.opened == Self.authorizationUrl)
+    }
 
-        _ = try await authenticator.userAuthenticator(Self.authorizationUrl, "http")
+    @Test("serves the completion page to the browser before shutting down")
+    func servesCompletionPage() async throws {
+        let flow = try await authenticate()
 
-        let url = opened.withLock { $0 }
-        #expect(url == Self.authorizationUrl)
+        #expect(flow.page.contains("Authentication Complete"))
     }
 
     @Test("releases the callback port once authentication completes")
     func releasesPort() async throws {
         let port = try Self.freePort()
-        let callbackUrl = try #require(URL(string: "http://localhost:\(port)/callback"))
 
-        let authenticator = LoopbackUserAuthenticator(callbackUrl: callbackUrl) { _ in
-            Task {
-                try await Self.get("http://localhost:\(port)/callback?code=the-code")
-            }
-        }
-
-        _ = try await authenticator.userAuthenticator(Self.authorizationUrl, "http")
+        _ = try await authenticate(port: port)
 
         #expect(throws: Never.self) {
             try Self.bind(port: port)
@@ -88,6 +45,12 @@ struct LoopbackUserAuthenticatorTests {
     }
 
     // MARK: Private
+
+    private struct Flow {
+        let redirect: URL
+        let opened: URL
+        let page: String
+    }
 
     private static let authorizationUrl = URL(filePath: "/approve_app")
 
@@ -104,7 +67,6 @@ struct LoopbackUserAuthenticatorTests {
         socket.close()
     }
 
-    @discardableResult
     private static func get(_ string: String) async throws -> String {
         guard let url = URL(string: string) else {
             return ""
@@ -113,6 +75,27 @@ struct LoopbackUserAuthenticatorTests {
         let (data, _) = try await URLSession.shared.data(from: url)
 
         return String(decoding: data, as: UTF8.self)
+    }
+
+    private func authenticate(
+        port: UInt16? = nil,
+        query: String = "code=the-code"
+    ) async throws -> Flow {
+        let port = try port ?? Self.freePort()
+        let callbackUrl = try #require(URL(string: "http://localhost:\(port)/callback"))
+        let browser = AsyncStream<URL>.makeStream()
+
+        let authenticator = LoopbackUserAuthenticator(callbackUrl: callbackUrl) { url in
+            browser.continuation.yield(url)
+        }
+
+        async let redirect = authenticator.userAuthenticator(Self.authorizationUrl, "http")
+
+        var opened = browser.stream.makeAsyncIterator()
+        let authorizationUrl = try #require(await opened.next())
+        let page = try await Self.get("http://localhost:\(port)/callback?\(query)")
+
+        return Flow(redirect: try await redirect, opened: authorizationUrl, page: page)
     }
 
 }
