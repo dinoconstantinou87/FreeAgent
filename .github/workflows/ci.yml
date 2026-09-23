@@ -6,23 +6,24 @@ on:
   push:
     branches: [main]
 
-env:
-  DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
-
 jobs:
   lint:
     name: Lint
     runs-on: macos-15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
     steps:
       - uses: actions/checkout@v6
       - uses: jdx/mise-action@v4
       - run: swiftformat --lint .
       - run: swiftlint lint Sources
 
-  build:
-    name: Build
+  macos:
+    name: macOS
     needs: lint
     runs-on: macos-15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
     steps:
       - uses: actions/checkout@v6
 
@@ -46,10 +47,43 @@ jobs:
       - run: swift build
       - run: swift test
 
+  linux:
+    name: Linux
+    needs: lint
+    runs-on: ubuntu-latest
+    container: swift:6.4.0-noble
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install make
+        run: apt-get update && apt-get install -y make
+
+      - name: Resolve Swift toolchain
+        run: echo "SWIFT_BUILD_ID=$(swift --version 2>&1 | grep -o 'swift-[0-9.]*-RELEASE')" >> "$GITHUB_ENV"
+
+      - name: Cache swift-openapi-generator
+        uses: actions/cache@v5
+        with:
+          path: .swift-openapi-generator
+          key: openapi-generator-1.10.2-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}
+
+      - name: Cache SPM build
+        uses: actions/cache@v5
+        with:
+          path: .build
+          key: spm-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-
+
+      - run: make generate
+      - run: swift build
+      - run: swift test
+
   integration:
     name: Integration Tests
-    needs: build
+    needs: macos
     runs-on: macos-15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
     steps:
       - uses: actions/checkout@v6
         with:

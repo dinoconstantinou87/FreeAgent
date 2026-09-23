@@ -26,8 +26,8 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.8.2"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession", from: "1.1.0"),
         .package(url: "https://github.com/tuist/Noora", from: "0.49.1"),
+        .package(url: "https://github.com/swhitty/FlyingFox", from: "0.27.1"),
         .package(url: "https://github.com/ChimeHQ/OAuthenticator", from: "0.7.2"),
-        .package(url: "https://github.com/httpswift/swifter.git", from: "1.5.0"),
         .package(url: "https://github.com/kishikawakatsumi/KeychainAccess", from: "4.2.2"),
         .package(url: "https://github.com/jpsim/Yams", from: "5.0.0"),
         .package(url: "https://github.com/Kolos65/Mockable.git", from: "0.1.0"),
@@ -60,7 +60,7 @@ let package = Package(
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "Noora", package: "Noora"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
-                .product(name: "Swifter", package: "swifter"),
+                .product(name: "FlyingFox", package: "FlyingFox"),
             ],
             swiftSettings: [
                 .swiftLanguageMode(.v6),
@@ -81,7 +81,7 @@ let package = Package(
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
-                .product(name: "Swifter", package: "swifter"),
+                .product(name: "FlyingSocks", package: "FlyingFox"),
             ],
             swiftSettings: [
                 .swiftLanguageMode(.v6),

@@ -1,8 +1,8 @@
+import FlyingFox
 import Foundation
 import FreeAgentAPI
 import Logging
 import OAuthenticator
-@preconcurrency import Swifter
 
 struct LoopbackUserAuthenticator: Sendable {
 
@@ -43,7 +43,11 @@ struct LoopbackUserAuthenticator: Sendable {
 
     private static func open(_ url: URL) throws {
         let process = Process()
+        #if os(macOS)
         process.executableURL = URL(filePath: "/usr/bin/open")
+        #else
+        process.executableURL = URL(filePath: "/usr/bin/xdg-open")
+        #endif
         process.arguments = [url.absoluteString]
 
         try process.run()
@@ -52,43 +56,57 @@ struct LoopbackUserAuthenticator: Sendable {
     private static func authenticate(
         callbackUrl: URL,
         authorizationUrl: URL,
-        openUrl: OpenUrl
+        openUrl: @escaping OpenUrl
     ) async throws -> URL {
-        let server = HttpServer()
+        let server = HTTPServer(port: UInt16(callbackUrl.port ?? 80), logger: .disabled)
         let redirects = AsyncStream<URL>.makeStream()
 
-        server[callbackUrl.path()] = { request in
+        await server.appendRoute(HTTPRoute(callbackUrl.path())) { request in
             var components = URLComponents()
             components.path = request.path
-            components.queryItems = request.queryParams.map { name, value in
-                URLQueryItem(name: name, value: value)
+            components.queryItems = request.query.map { item in
+                URLQueryItem(name: item.name, value: item.value)
             }
 
             guard let url = components.url else {
-                return .badRequest(.text("Authentication Failed"))
+                return HTTPResponse(statusCode: .badRequest, body: Data("Authentication Failed".utf8))
             }
 
-            return .raw(200, "OK", ["Content-Type": "text/plain; charset=utf-8"]) { writer in
-                try writer.write(Data(completionMessage.utf8))
+            redirects.continuation.yield(url)
 
-                redirects.continuation.yield(url)
+            return HTTPResponse(
+                statusCode: .ok,
+                headers: [.contentType: "text/plain; charset=utf-8"],
+                body: Data(completionMessage.utf8)
+            )
+        }
+
+        return try await withThrowingTaskGroup(of: URL.self) { group in
+            group.addTask {
+                try await server.run()
+                throw AuthenticatorError.missingAuthorizationCode
             }
-        }
 
-        try server.start(UInt16(callbackUrl.port ?? 80))
+            group.addTask {
+                try await server.waitUntilListening()
+                try openUrl(authorizationUrl)
+                logger.info("Waiting for login to complete...")
 
-        defer {
-            server.stop()
-        }
+                for await url in redirects.stream {
+                    return url
+                }
 
-        try openUrl(authorizationUrl)
-        logger.info("Waiting for login to complete...")
+                throw AuthenticatorError.missingAuthorizationCode
+            }
 
-        for await url in redirects.stream {
+            guard let url = try await group.next() else {
+                throw AuthenticatorError.missingAuthorizationCode
+            }
+
+            await server.stop()
+
             return url
         }
-
-        throw AuthenticatorError.missingAuthorizationCode
     }
 
 }

@@ -1,4 +1,7 @@
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import HTTPTypes
 import Mockable
 import OAuthenticator
@@ -6,6 +9,8 @@ import OpenAPIRuntime
 import Testing
 
 @testable import FreeAgentAPI
+
+// MARK: - AuthProviderTests
 
 struct AuthProviderTests {
 
@@ -161,7 +166,10 @@ struct AuthProviderTests {
         return try await provider(
             Login(accessToken: Token(value: "stale"), refreshToken: Token(value: "the-refresh")),
             credentials,
-            { _ in (Data(), URLResponse()) }
+            { _ in (
+                Data(),
+                URLResponse(url: Environment.sandbox.baseURL, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+            ) }
         )
     }
 

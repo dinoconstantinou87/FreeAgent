@@ -1,6 +1,9 @@
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+import FlyingSocks
 import OAuthenticator
-import Swifter
 import Testing
 
 @testable import FreeAgentCLI
@@ -55,16 +58,30 @@ struct LoopbackUserAuthenticatorTests {
     private static let authorizationUrl = URL(filePath: "/approve_app")
 
     private static func freePort() throws -> UInt16 {
-        let socket = try Socket.tcpSocketForListen(0)
-        let port = try socket.port()
-        socket.close()
+        let socket = try listen(port: 0)
+
+        defer {
+            try? socket.close()
+        }
+
+        guard case .ip6(_, let port) = try socket.sockname() else {
+            throw SocketError.unsupportedAddress
+        }
 
         return port
     }
 
     private static func bind(port: UInt16) throws {
-        let socket = try Socket.tcpSocketForListen(port)
-        socket.close()
+        try listen(port: port).close()
+    }
+
+    private static func listen(port: UInt16) throws -> Socket {
+        let socket = try Socket(domain: AF_INET6)
+        try socket.setValue(true, for: .localAddressReuse)
+        try socket.bind(to: .inet6(port: port))
+        try socket.listen()
+
+        return socket
     }
 
     private static func get(_ string: String) async throws -> String {
