@@ -16,14 +16,6 @@ public struct Config: Codable, Sendable {
 
     public var auth: Auth
 
-    public static func load() async throws -> Config {
-        let reader = ConfigReader(providers: [
-            try await FileProvider<JSONSnapshot>(filePath: .init(url.path(percentEncoded: false)))
-        ])
-
-        return try Config(auth: Auth(reader: reader.scoped(to: "auth")))
-    }
-
     public func save() throws {
         let url = Config.url
         let files = FileManager.default
@@ -39,11 +31,25 @@ public struct Config: Codable, Sendable {
         try data.write(to: url)
     }
 
-    // MARK: Private
+    // MARK: Internal
 
-    private static let url = FileManager.default.homeDirectoryForCurrentUser
+    static let url = FileManager.default.homeDirectoryForCurrentUser
         .appendingPathComponent(".freeagent")
         .appendingPathComponent("config.json")
+
+    static func reader(
+        environment: Environment,
+        fileURL: URL = url
+    ) async throws -> ConfigReader {
+        try await ConfigReader(providers: [
+            InMemoryProvider(name: "arguments", values: [
+                "auth.environment": ConfigValue(.string(environment.rawValue), isSecret: false)
+            ]),
+            EnvironmentVariablesProvider().prefixKeys(with: "freeagent"),
+            FileProvider<JSONSnapshot>(filePath: .init(fileURL.path(percentEncoded: false)), allowMissing: true),
+        ])
+    }
+
 }
 
 // MARK: Config.Auth
@@ -52,12 +58,6 @@ extension Config {
     public struct Auth: Codable, Sendable {
 
         // MARK: Lifecycle
-
-        public init(reader: ConfigReader) throws {
-            key = try reader.requiredString(forKey: "key")
-            secret = try reader.requiredString(forKey: "secret", isSecret: true)
-            callbackUrl = try reader.requiredString(forKey: "callbackUrl", as: URL.self)
-        }
 
         public init(key: String, secret: String, callbackUrl: URL) {
             self.key = key

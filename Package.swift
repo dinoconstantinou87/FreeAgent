@@ -38,6 +38,7 @@ let package = Package(
         .target(
             name: "FreeAgentAPI",
             dependencies: [
+                .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
@@ -78,6 +79,7 @@ let package = Package(
             dependencies: [
                 "FreeAgentCLI",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
                 .product(name: "Swifter", package: "swifter"),
             ],
@@ -90,6 +92,7 @@ let package = Package(
             name: "FreeAgentAPITests",
             dependencies: [
                 "FreeAgentAPI",
+                .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "Mockable", package: "Mockable"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
             ],

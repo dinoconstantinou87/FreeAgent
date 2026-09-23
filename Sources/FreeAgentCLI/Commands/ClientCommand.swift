@@ -1,4 +1,5 @@
 import ArgumentParser
+import Configuration
 import Foundation
 import FreeAgentAPI
 import Noora
@@ -56,10 +57,10 @@ extension ClientCommand {
             throw APIError(kind: .unauthenticated)
         }
 
-        let config = try await Config.load()
+        let auth = try await AuthConfig(config: Config.reader(environment: credential.environment).scoped(to: "auth"))
 
         let chain: [any ClientMiddleware] = [.apiVersion()] + middlewares + [
-            .auth(.init(config.auth, environment: credential.environment)),
+            .auth(auth),
             .apiError(),
             .retry(willRetry: { delay in
                 Noora.standardError().info(.alert("Rate limited - retrying in \(delay.components.seconds)s"))
@@ -67,7 +68,7 @@ extension ClientCommand {
         ]
 
         return Client(
-            serverURL: credential.environment.baseURL,
+            serverURL: auth.environment.baseURL,
             configuration: .init(dateTranscoder: .freeAgent),
             transport: URLSessionTransport(),
             middlewares: chain
