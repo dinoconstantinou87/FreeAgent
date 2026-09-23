@@ -60,7 +60,7 @@ jobs:
   macos:
     name: macOS
     needs: prepare
-    uses: ./.github/workflows/universal-macos.yml
+    uses: ./.github/workflows/macos.yml
     with:
       ref: ${{ needs.prepare.outputs.sha }}
       version: ${{ needs.prepare.outputs.version }}
@@ -69,7 +69,7 @@ jobs:
   linux:
     name: Linux
     needs: prepare
-    uses: ./.github/workflows/static-linux.yml
+    uses: ./.github/workflows/linux.yml
     with:
       ref: ${{ needs.prepare.outputs.sha }}
       version: ${{ needs.prepare.outputs.version }}

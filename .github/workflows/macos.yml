@@ -1,4 +1,4 @@
-name: Universal macOS
+name: macOS
 
 on:
   workflow_call:
@@ -15,7 +15,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Build And Test
     runs-on: macos-15
     env:
       DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
@@ -42,11 +42,17 @@ jobs:
         uses: actions/cache@v5
         with:
           path: .build
-          key: spm-universal-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-${{ hashFiles('Package.resolved') }}
-          restore-keys: spm-universal-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-
+          key: spm-${{ runner.os }}-${{ runner.arch }}-${{ env.SWIFT_BUILD_ID }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-${{ runner.os }}-${{ runner.arch }}-${{ env.SWIFT_BUILD_ID }}-
 
       - name: Generate API client
         run: make generate
+
+      - name: Build
+        run: swift build
+
+      - name: Test
+        run: swift test
 
       - name: Build universal binary
         run: |
