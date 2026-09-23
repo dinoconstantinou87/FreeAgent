@@ -8,17 +8,17 @@ struct AuthStorageTests {
 
     // MARK: Internal
 
-    @Test("get returns nil when keychain has no data")
+    @Test("get returns nil when the store has no data")
     func getReturnsNilWhenEmpty() throws {
-        given(keychain).getData(.any).willReturn(nil)
+        given(store).read().willReturn(nil)
 
-        let storage = AuthStorage(keychain: keychain)
+        let storage = AuthStorage(store: store)
         let result = try storage.get()
 
         #expect(result == nil)
     }
 
-    @Test("get returns decoded credential from keychain")
+    @Test("get returns decoded credential from the store")
     func getReturnsCredential() throws {
         let credential = AuthCredential(
             token: "token",
@@ -27,9 +27,9 @@ struct AuthStorageTests {
             environment: .sandbox
         )
         let data = try JSONEncoder().encode(credential)
-        given(keychain).getData(.any).willReturn(data)
+        given(store).read().willReturn(data)
 
-        let storage = AuthStorage(keychain: keychain)
+        let storage = AuthStorage(store: store)
         let result = try storage.get()
 
         #expect(result?.token == "token")
@@ -37,22 +37,22 @@ struct AuthStorageTests {
         #expect(result?.environment == .sandbox)
     }
 
-    @Test("get throws when keychain data is corrupted")
+    @Test("get throws when the stored data is corrupted")
     func getThrowsOnCorruptedData() {
-        given(keychain).getData(.any).willReturn(Data("not json".utf8))
+        given(store).read().willReturn(Data("not json".utf8))
 
-        let storage = AuthStorage(keychain: keychain)
+        let storage = AuthStorage(store: store)
 
         #expect(throws: DecodingError.self) {
             try storage.get()
         }
     }
 
-    @Test("set encodes credential and stores in keychain")
+    @Test("set encodes credential and writes it to the store")
     func setStoresCredential() throws {
-        given(keychain).set(.any, key: .any).willReturn()
+        given(store).write(.any).willReturn()
 
-        let storage = AuthStorage(keychain: keychain)
+        let storage = AuthStorage(store: store)
         let credential = AuthCredential(
             token: "token",
             refreshToken: "refresh",
@@ -62,22 +62,27 @@ struct AuthStorageTests {
 
         try storage.set(credential)
 
-        verify(keychain).set(.any, key: .value("freeagent.cli.credential")).called(.once)
+        verify(store)
+            .write(.matching { data in
+                let written = try? JSONDecoder().decode(AuthCredential.self, from: data)
+                return written?.token == "token" && written?.environment == .production
+            })
+            .called(.once)
     }
 
-    @Test("clear removes credential from keychain")
+    @Test("clear removes credential from the store")
     func clearRemovesCredential() throws {
-        given(keychain).remove(.any).willReturn()
+        given(store).remove().willReturn()
 
-        let storage = AuthStorage(keychain: keychain)
+        let storage = AuthStorage(store: store)
 
         try storage.clear()
 
-        verify(keychain).remove(.value("freeagent.cli.credential")).called(.once)
+        verify(store).remove().called(.once)
     }
 
     // MARK: Private
 
-    private let keychain = MockKeychainInterface()
+    private let store = MockCredentialStoreInterface()
 
 }
