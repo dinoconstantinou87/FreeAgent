@@ -48,9 +48,6 @@ jobs:
       - name: Generate API client
         run: make generate
 
-      - name: Build
-        run: swift build
-
       - name: Test
         run: swift test
 
