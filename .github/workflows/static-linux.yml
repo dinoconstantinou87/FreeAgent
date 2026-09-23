@@ -1,0 +1,97 @@
+name: Static Linux
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        default: ''
+      version:
+        type: string
+        default: ''
+      upload:
+        type: boolean
+        default: false
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-24.04-arm
+    container: swift:6.4.0-noble
+    env:
+      VERSION: ${{ inputs.version }}
+      STATIC_SDK_URL: https://download.swift.org/swift-6.4.0-release/static-sdk/swift-6.4.0-RELEASE/swift-6.4.0-RELEASE_static-linux-0.1.0.artifactbundle.tar.gz
+      STATIC_SDK_CHECKSUM: 47d2fd89eebfdf9eb4d536b6710414297f755c17926cdebc4742c08982b40a9e
+      SWIFT_SDKS_PATH: .swift-sdks
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Set version
+        if: inputs.version != ''
+        run: printf 'let version = "%s"\n' "$VERSION" > Sources/FreeAgentCLI/Version.swift
+
+      - name: Install make
+        run: apt-get update && apt-get install -y make
+
+      - name: Resolve Swift toolchain
+        run: echo "SWIFT_BUILD_ID=$(swift --version 2>&1 | grep -o 'swift-[0-9.]*-RELEASE')" >> "$GITHUB_ENV"
+
+      - name: Cache swift-openapi-generator
+        uses: actions/cache@v5
+        with:
+          path: .swift-openapi-generator
+          key: openapi-generator-1.10.2-${{ runner.os }}-${{ runner.arch }}-${{ env.SWIFT_BUILD_ID }}
+
+      - name: Cache static Linux SDK
+        id: sdk-cache
+        uses: actions/cache@v5
+        with:
+          path: ${{ env.SWIFT_SDKS_PATH }}
+          key: static-linux-sdk-${{ env.STATIC_SDK_CHECKSUM }}
+
+      - name: Cache SPM build
+        uses: actions/cache@v5
+        with:
+          path: .build
+          key: spm-static-${{ runner.os }}-${{ runner.arch }}-${{ env.SWIFT_BUILD_ID }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-static-${{ runner.os }}-${{ runner.arch }}-${{ env.SWIFT_BUILD_ID }}-
+
+      - name: Install static Linux SDK
+        if: steps.sdk-cache.outputs.cache-hit != 'true'
+        run: swift sdk install "$STATIC_SDK_URL" --checksum "$STATIC_SDK_CHECKSUM" --swift-sdks-path "$SWIFT_SDKS_PATH"
+
+      - name: Generate API client
+        run: make generate
+
+      - name: Build static binaries
+        run: |
+          for arch in x86_64 aarch64; do
+            swift build -c release --swift-sdk "${arch}-swift-linux-musl" --swift-sdks-path "$SWIFT_SDKS_PATH" --product freeagent -Xlinker -s
+          done
+
+      - name: Verify binaries are static
+        run: |
+          for arch in x86_64 aarch64; do
+            if readelf -l ".build/out/Products/Release-staticlinux-${arch}/freeagent" | grep -q INTERP; then
+              echo "::error::freeagent for ${arch} is dynamically linked"
+              exit 1
+            fi
+          done
+
+      - name: Package binaries
+        if: inputs.upload
+        run: |
+          for arch in x86_64 aarch64; do
+            tarball="freeagent-v${VERSION}-linux-${arch}.tar.gz"
+            tar czf "$tarball" -C ".build/out/Products/Release-staticlinux-${arch}" freeagent
+            sha256sum "$tarball" > "${tarball}.sha256"
+          done
+
+      - uses: actions/upload-artifact@v7
+        if: inputs.upload
+        with:
+          name: linux
+          path: freeagent-v${{ inputs.version }}-linux-*.tar.gz*
+          if-no-files-found: error

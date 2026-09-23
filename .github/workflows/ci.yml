@@ -78,6 +78,16 @@ jobs:
       - run: swift build
       - run: swift test
 
+  universal-macos:
+    name: Universal macOS
+    needs: lint
+    uses: ./.github/workflows/universal-macos.yml
+
+  static-linux:
+    name: Static Linux
+    needs: lint
+    uses: ./.github/workflows/static-linux.yml
+
   integration:
     name: Integration Tests
     needs: macos

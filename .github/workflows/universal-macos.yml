@@ -1,0 +1,73 @@
+name: Universal macOS
+
+on:
+  workflow_call:
+    inputs:
+      ref:
+        type: string
+        default: ''
+      version:
+        type: string
+        default: ''
+      upload:
+        type: boolean
+        default: false
+
+jobs:
+  build:
+    name: Build
+    runs-on: macos-15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+      VERSION: ${{ inputs.version }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Set version
+        if: inputs.version != ''
+        run: printf 'let version = "%s"\n' "$VERSION" > Sources/FreeAgentCLI/Version.swift
+
+      - name: Resolve Swift toolchain
+        run: echo "SWIFT_BUILD_ID=$(swift --version | grep -o 'swiftlang-[0-9.]*')" >> "$GITHUB_ENV"
+
+      - name: Cache swift-openapi-generator
+        uses: actions/cache@v5
+        with:
+          path: .swift-openapi-generator
+          key: openapi-generator-1.10.2
+
+      - name: Cache SPM build
+        uses: actions/cache@v5
+        with:
+          path: .build
+          key: spm-universal-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-${{ hashFiles('Package.resolved') }}
+          restore-keys: spm-universal-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-
+
+      - name: Generate API client
+        run: make generate
+
+      - name: Build universal binary
+        run: |
+          swift build -c release --arch arm64
+          swift build -c release --arch x86_64
+          lipo -create \
+            .build/arm64-apple-macosx/release/freeagent \
+            .build/x86_64-apple-macosx/release/freeagent \
+            -output freeagent
+          strip -rSTx freeagent
+
+      - name: Package binary
+        if: inputs.upload
+        run: |
+          tarball="freeagent-v${VERSION}-macos-universal.tar.gz"
+          tar czf "$tarball" freeagent
+          shasum -a 256 "$tarball" > "${tarball}.sha256"
+
+      - uses: actions/upload-artifact@v7
+        if: inputs.upload
+        with:
+          name: macos
+          path: freeagent-v${{ inputs.version }}-macos-universal.tar.gz*
+          if-no-files-found: error
