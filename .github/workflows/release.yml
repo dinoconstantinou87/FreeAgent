@@ -15,22 +15,22 @@ on:
 permissions:
   contents: write
 
-env:
-  DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
-
 jobs:
-  release:
-    name: Build and Release
+  prepare:
+    name: Prepare
     runs-on: macos-15
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      tag: ${{ steps.version.outputs.tag }}
+      sha: ${{ steps.version.outputs.sha }}
     steps:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       - uses: jdx/mise-action@v4
-
-      - name: Resolve Swift toolchain
-        run: echo "SWIFT_BUILD_ID=$(swift --version | grep -o 'swiftlang-[0-9.]*')" >> "$GITHUB_ENV"
 
       - name: Lint
         run: |
@@ -51,72 +51,59 @@ jobs:
           esac
 
           NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
-          echo "version=${NEW_VERSION}" >> "$GITHUB_OUTPUT"
-          echo "tag=v${NEW_VERSION}" >> "$GITHUB_OUTPUT"
+          {
+            echo "version=${NEW_VERSION}"
+            echo "tag=v${NEW_VERSION}"
+            echo "sha=$(git rev-parse HEAD)"
+          } >> "$GITHUB_OUTPUT"
 
-      - name: Update version in source
-        run: |
-          VERSION="${{ steps.version.outputs.version }}"
-          sed -i '' "s/^let version = \".*\"$/let version = \"${VERSION}\"/" Sources/FreeAgentCLI/Version.swift
-          grep -qx "let version = \"${VERSION}\"" Sources/FreeAgentCLI/Version.swift
+  macos:
+    name: macOS
+    needs: prepare
+    uses: ./.github/workflows/macos.yml
+    with:
+      ref: ${{ needs.prepare.outputs.sha }}
+      version: ${{ needs.prepare.outputs.version }}
+      upload: true
 
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add Sources/FreeAgentCLI/Version.swift
-          git commit -m "chore: bump version to ${VERSION}"
-          git push
+  linux:
+    name: Linux
+    needs: prepare
+    uses: ./.github/workflows/linux.yml
+    with:
+      ref: ${{ needs.prepare.outputs.sha }}
+      version: ${{ needs.prepare.outputs.version }}
+      upload: true
 
-      - name: Cache swift-openapi-generator
-        uses: actions/cache@v5
+  publish:
+    name: Publish
+    needs: [prepare, macos, linux]
+    runs-on: macos-15
+    env:
+      VERSION: ${{ needs.prepare.outputs.version }}
+      TAG: ${{ needs.prepare.outputs.tag }}
+      SHA: ${{ needs.prepare.outputs.sha }}
+    steps:
+      - uses: actions/download-artifact@v8
         with:
-          path: .swift-openapi-generator
-          key: openapi-generator-1.10.2
-
-      - name: Cache SPM build
-        uses: actions/cache@v5
-        with:
-          path: .build
-          key: spm-release-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-${{ hashFiles('Package.resolved') }}
-          restore-keys: spm-release-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-
-
-      - name: Generate API client
-        run: make generate
-
-      - name: Build universal binary
-        run: |
-          swift build -c release --arch arm64
-          swift build -c release --arch x86_64
-          lipo -create \
-            .build/arm64-apple-macosx/release/freeagent \
-            .build/x86_64-apple-macosx/release/freeagent \
-            -output freeagent
-          strip -rSTx freeagent
-
-      - name: Package binary
-        run: |
-          TAG="${{ steps.version.outputs.tag }}"
-          tar czf "freeagent-${TAG}-macos-universal.tar.gz" freeagent
-          shasum -a 256 "freeagent-${TAG}-macos-universal.tar.gz" > "freeagent-${TAG}-macos-universal.tar.gz.sha256"
+          merge-multiple: true
 
       - name: Create tag and GitHub Release
-        run: |
-          TAG="${{ steps.version.outputs.tag }}"
-          git tag "$TAG"
-          git push origin "$TAG"
-          gh release create "$TAG" \
-            --title "$TAG" \
-            --generate-notes \
-            "freeagent-${TAG}-macos-universal.tar.gz" \
-            "freeagent-${TAG}-macos-universal.tar.gz.sha256"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "$TAG" \
+            --repo "${{ github.repository }}" \
+            --target "$SHA" \
+            --title "$TAG" \
+            --generate-notes \
+            freeagent-"${TAG}"-*.tar.gz \
+            freeagent-"${TAG}"-*.tar.gz.sha256
 
       - name: Update Homebrew tap
         env:
           GH_TOKEN: ${{ secrets.TAP_GITHUB_TOKEN }}
         run: |
-          TAG="${{ steps.version.outputs.tag }}"
-          VERSION="${{ steps.version.outputs.version }}"
           SHA256=$(cat "freeagent-${TAG}-macos-universal.tar.gz.sha256" | awk '{print $1}')
           TARBALL_URL="https://github.com/dinoconstantinou87/FreeAgent/releases/download/${TAG}/freeagent-${TAG}-macos-universal.tar.gz"
 
