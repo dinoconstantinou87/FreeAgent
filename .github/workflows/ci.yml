@@ -18,8 +18,8 @@ jobs:
       - run: swiftformat --lint .
       - run: swiftlint lint Sources
 
-  build:
-    name: Build
+  macos:
+    name: macOS
     needs: lint
     runs-on: macos-15
     env:
@@ -80,7 +80,7 @@ jobs:
 
   integration:
     name: Integration Tests
-    needs: build
+    needs: macos
     runs-on: macos-15
     env:
       DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
