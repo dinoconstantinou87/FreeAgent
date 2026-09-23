@@ -7,36 +7,35 @@ public struct FileCredentialStore: CredentialStoreInterface {
     public init(
         url: URL = FileManager.default.homeDirectoryForCurrentUser
             .appendingPathComponent(".freeagent")
-            .appendingPathComponent("credentials.json")
+            .appendingPathComponent("credentials.json"),
+        fileManager: any FileManagerInterface = FileManager.default
     ) {
         self.url = url
+        self.fileManager = fileManager
     }
 
     // MARK: Public
 
     public func read() throws -> Data? {
-        guard FileManager.default.fileExists(atPath: url.path) else {
-            return nil
-        }
-
-        return try Data(contentsOf: url)
+        fileManager.contents(atPath: url.path)
     }
 
     public func write(_ data: Data) throws {
-        try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
-        try data.write(to: url, options: .atomic)
+        try fileManager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+        try fileManager.write(data, to: url)
     }
 
     public func remove() throws {
-        guard FileManager.default.fileExists(atPath: url.path) else {
+        guard fileManager.fileExists(atPath: url.path) else {
             return
         }
 
-        try FileManager.default.removeItem(at: url)
+        try fileManager.removeItem(at: url)
     }
 
     // MARK: Private
 
     private let url: URL
+    private let fileManager: any FileManagerInterface
 
 }

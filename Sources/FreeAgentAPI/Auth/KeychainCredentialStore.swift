@@ -2,13 +2,13 @@
 import Foundation
 @preconcurrency import KeychainAccess
 
-// MARK: - KeychainCredentialStore
-
 public struct KeychainCredentialStore: CredentialStoreInterface {
 
     // MARK: Lifecycle
 
-    public init() { }
+    public init(keychain: any KeychainInterface = Keychain(service: "freeagent.cli")) {
+        self.keychain = keychain
+    }
 
     // MARK: Public
 
@@ -26,13 +26,8 @@ public struct KeychainCredentialStore: CredentialStoreInterface {
 
     // MARK: Private
 
-    private let keychain = Keychain(service: "freeagent.cli")
+    private let keychain: any KeychainInterface
     private let key = "freeagent.cli.credential"
 
 }
-
-// MARK: - Keychain + @retroactive @unchecked Sendable
-
-// swiftlint:disable:next no_unchecked_sendable
-extension Keychain: @retroactive @unchecked Sendable { }
 #endif

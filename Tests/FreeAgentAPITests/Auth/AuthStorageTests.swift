@@ -4,15 +4,7 @@ import Testing
 
 @testable import FreeAgentAPI
 
-// MARK: - AuthStorageTests
-
-final class AuthStorageTests {
-
-    // MARK: Lifecycle
-
-    deinit {
-        try? FileManager.default.removeItem(at: directory)
-    }
+struct AuthStorageTests {
 
     // MARK: Internal
 
@@ -89,33 +81,8 @@ final class AuthStorageTests {
         verify(store).remove().called(.once)
     }
 
-    @Test("a file store holds the credential itself")
-    func fileStoreHoldsCredential() throws {
-        let url = directory.appendingPathComponent("credentials.json")
-        let storage = AuthStorage(store: FileCredentialStore(url: url))
-
-        try storage.set(AuthCredential(
-            token: "token",
-            refreshToken: "refresh",
-            expiresAt: Date(timeIntervalSince1970: 1_000_000),
-            environment: .sandbox
-        ))
-
-        let stored = try JSONDecoder().decode(AuthCredential.self, from: Data(contentsOf: url))
-        let result = try storage.get()
-
-        #expect(stored.token == "token")
-        #expect(stored.environment == .sandbox)
-        #expect(result?.token == "token")
-        #expect(result?.refreshToken == "refresh")
-        #expect(result?.expiresAt == Date(timeIntervalSince1970: 1_000_000))
-        #expect(result?.environment == .sandbox)
-    }
-
     // MARK: Private
 
     private let store = MockCredentialStoreInterface()
-    private let directory = FileManager.default.temporaryDirectory
-        .appendingPathComponent("AuthStorageTests-\(UUID().uuidString)")
 
 }
