@@ -21,7 +21,11 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.5.0"),
-        .package(url: "https://github.com/apple/swift-configuration.git", from: "1.2.1"),
+        .package(
+            url: "https://github.com/apple/swift-configuration.git",
+            from: "1.2.1",
+            traits: [.defaults, "CommandLineArguments"]
+        ),
         .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.8.2"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession", from: "1.1.0"),
@@ -38,6 +42,7 @@ let package = Package(
         .target(
             name: "FreeAgentAPI",
             dependencies: [
+                .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
@@ -78,6 +83,7 @@ let package = Package(
             dependencies: [
                 "FreeAgentCLI",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
                 .product(name: "Swifter", package: "swifter"),
             ],
@@ -90,6 +96,7 @@ let package = Package(
             name: "FreeAgentAPITests",
             dependencies: [
                 "FreeAgentAPI",
+                .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "Mockable", package: "Mockable"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
             ],

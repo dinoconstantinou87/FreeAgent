@@ -1,3 +1,4 @@
+import Configuration
 import Foundation
 import OAuthenticator
 
@@ -10,6 +11,15 @@ public struct AuthConfig: Sendable {
         self.secret = secret
         self.callbackUrl = callbackUrl
         self.environment = environment
+    }
+
+    public init(config: ConfigReader) throws {
+        try self.init(
+            key: config.requiredString(forKey: "key"),
+            secret: config.requiredString(forKey: "secret", isSecret: true),
+            callbackUrl: config.requiredString(forKey: "callbackUrl", as: URL.self),
+            environment: config.requiredString(forKey: "environment", as: Environment.self)
+        )
     }
 
     // MARK: Public
