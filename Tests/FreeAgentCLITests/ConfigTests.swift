@@ -7,6 +7,7 @@ import Testing
 
 // MARK: - ConfigTests
 
+@Suite(.serialized)
 final class ConfigTests {
 
     // MARK: Lifecycle
@@ -31,61 +32,39 @@ final class ConfigTests {
         #expect(config.environment == .production)
     }
 
-    @Test("reads every auth key from FREEAGENT_AUTH_ environment variables")
+    @Test("reads the auth keys from FREEAGENT_AUTH_ environment variables")
     func readsEnvironmentVariables() async throws {
         let config = try await AuthConfig(config: reader(environmentVariables: [
             "FREEAGENT_AUTH_KEY": "env-key",
             "FREEAGENT_AUTH_SECRET": "env-secret",
             "FREEAGENT_AUTH_CALLBACK_URL": "http://localhost:9090/callback",
-            "FREEAGENT_AUTH_ENVIRONMENT": "sandbox",
         ]))
 
         #expect(config.key == "env-key")
         #expect(config.secret == "env-secret")
         #expect(config.callbackUrl == URL(string: "http://localhost:9090/callback"))
-        #expect(config.environment == .sandbox)
     }
 
-    @Test("reads --environment from the command line", arguments: [
-        ["auth", "login", "--environment", "sandbox"],
-        ["auth", "login", "--environment=sandbox"],
-    ])
-    func readsCommandLine(arguments: [String]) async throws {
-        let reader = try await reader(arguments: arguments)
+    @Test("prefers environment variables over the file")
+    func prefersEnvironmentVariables() async throws {
+        try JSONEncoder().encode(["auth": ["key": "file-key"]]).write(to: fileURL)
 
-        #expect(try reader.requiredString(forKey: "environment", as: Environment.self) == .sandbox)
+        let reader = try await reader(environmentVariables: ["FREEAGENT_AUTH_KEY": "env-key"])
+
+        #expect(try reader.requiredString(forKey: "key") == "env-key")
     }
 
-    @Test(
-        "resolves the environment from overrides, then the command line, then environment variables, then the file",
-        arguments: [
-            (override: nil, argument: nil, variable: nil, file: nil, expected: Environment.production),
-            (override: nil, argument: nil, variable: nil, file: .sandbox, expected: .sandbox),
-            (override: nil, argument: nil, variable: .production, file: .sandbox, expected: .production),
-            (override: nil, argument: .sandbox, variable: .production, file: .sandbox, expected: .sandbox),
-            (override: .production, argument: .sandbox, variable: .production, file: .sandbox, expected: .production),
-        ] as [(Environment?, Environment?, Environment?, Environment?, Environment)]
-    )
-    func resolvesEnvironment(
-        override: Environment?,
-        argument: Environment?,
-        variable: Environment?,
-        file: Environment?,
-        expected: Environment
-    ) async throws {
-        if let file {
-            try JSONEncoder().encode(["auth": ["environment": file]]).write(to: fileURL)
-        }
+    @Test("uses the given environment over environment variables and the file", arguments: Environment.allCases)
+    func usesGivenEnvironment(environment: Environment) async throws {
+        let other: Environment = environment == .production ? .sandbox : .production
+        try JSONEncoder().encode(["auth": ["environment": other]]).write(to: fileURL)
 
         let reader = try await reader(
-            overrides: override.map { override in
-                [InMemoryProvider(values: ["auth.environment": ConfigValue(.string(override.rawValue), isSecret: false)])]
-            } ?? [],
-            arguments: argument.map { ["--environment", $0.rawValue] } ?? [],
-            environmentVariables: variable.map { ["FREEAGENT_AUTH_ENVIRONMENT": $0.rawValue] } ?? [:]
+            environment: environment,
+            environmentVariables: ["FREEAGENT_AUTH_ENVIRONMENT": other.rawValue]
         )
 
-        #expect(try reader.requiredString(forKey: "environment", as: Environment.self) == expected)
+        #expect(try reader.requiredString(forKey: "environment", as: Environment.self) == environment)
     }
 
     @Test("names the missing key when nothing is configured")
@@ -104,17 +83,19 @@ final class ConfigTests {
     private let fileURL = FileManager.default.temporaryDirectory.appending(path: "\(UUID().uuidString).json")
 
     private func reader(
-        overrides: [any ConfigProvider] = [],
-        arguments: [String] = [],
+        environment: Environment = .production,
         environmentVariables: [String: String] = [:]
     ) async throws -> ConfigReader {
-        try await Config.reader(
-            overrides: overrides,
-            arguments: ["freeagent"] + arguments,
-            environmentVariables: environmentVariables,
-            fileURL: fileURL
-        )
-        .scoped(to: "auth")
+        for (name, value) in environmentVariables {
+            setenv(name, value, 1)
+        }
+        defer {
+            for name in environmentVariables.keys {
+                unsetenv(name)
+            }
+        }
+
+        return try await Config.reader(environment: environment, fileURL: fileURL).scoped(to: "auth")
     }
 
 }

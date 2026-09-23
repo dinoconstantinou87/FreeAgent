@@ -10,10 +10,10 @@ struct LoginCommand: AsyncParsableCommand {
     )
 
     @Option(name: .long)
-    var environment: Environment?
+    var environment = Environment.production
 
     mutating func run() async throws {
-        let config = try await AuthConfig(config: Config.reader().scoped(to: "auth"))
+        let config = try await AuthConfig(config: Config.reader(environment: environment).scoped(to: "auth"))
         let client = AuthClient(
             config: config,
             userAuthenticator: LoopbackUserAuthenticator(callbackUrl: config.callbackUrl).userAuthenticator

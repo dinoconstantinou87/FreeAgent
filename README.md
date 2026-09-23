@@ -32,8 +32,6 @@ $ freeagent auth login
 
 `setup` saves your OAuth credentials to `~/.freeagent/config.json`. `login` opens your browser for authorization — tokens are stored securely in the macOS Keychain.
 
-The `FREEAGENT_AUTH_KEY`, `FREEAGENT_AUTH_SECRET`, `FREEAGENT_AUTH_CALLBACK_URL` and `FREEAGENT_AUTH_ENVIRONMENT` environment variables take precedence over the file, so CI can skip `setup`. `auth login --environment` takes precedence over both.
-
 ## Reference
 
 Use `--help` on any command to explore its subcommands, flags and accepted values:

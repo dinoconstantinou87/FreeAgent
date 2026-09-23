@@ -38,20 +38,15 @@ public struct Config: Codable, Sendable {
         .appendingPathComponent("config.json")
 
     static func reader(
-        overrides: [any ConfigProvider] = [],
-        arguments: [String] = CommandLine.arguments,
-        environmentVariables: [String: String] = ProcessInfo.processInfo.environment,
+        environment: Environment,
         fileURL: URL = url
     ) async throws -> ConfigReader {
-        try await ConfigReader(providers: overrides + [
-            CommandLineArgumentsProvider(arguments: arguments)
-                .mapKeys { key in AbsoluteConfigKey(Array(key.components.dropFirst()), context: key.context) },
-            EnvironmentVariablesProvider(environmentVariables: environmentVariables)
-                .prefixKeys(with: "freeagent"),
-            FileProvider<JSONSnapshot>(filePath: .init(fileURL.path(percentEncoded: false)), allowMissing: true),
-            InMemoryProvider(name: "defaults", values: [
-                "auth.environment": ConfigValue(.string(Environment.production.rawValue), isSecret: false)
+        try await ConfigReader(providers: [
+            InMemoryProvider(name: "arguments", values: [
+                "auth.environment": ConfigValue(.string(environment.rawValue), isSecret: false)
             ]),
+            EnvironmentVariablesProvider().prefixKeys(with: "freeagent"),
+            FileProvider<JSONSnapshot>(filePath: .init(fileURL.path(percentEncoded: false)), allowMissing: true),
         ])
     }
 

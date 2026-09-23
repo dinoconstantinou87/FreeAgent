@@ -57,12 +57,7 @@ extension ClientCommand {
             throw APIError(kind: .unauthenticated)
         }
 
-        let reader = try await Config.reader(overrides: [
-            InMemoryProvider(values: [
-                "auth.environment": ConfigValue(.string(credential.environment.rawValue), isSecret: false)
-            ])
-        ])
-        let auth = try AuthConfig(config: reader.scoped(to: "auth"))
+        let auth = try await AuthConfig(config: Config.reader(environment: credential.environment).scoped(to: "auth"))
 
         let chain: [any ClientMiddleware] = [.apiVersion()] + middlewares + [
             .auth(auth),
