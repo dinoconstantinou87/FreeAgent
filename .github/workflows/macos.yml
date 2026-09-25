@@ -52,6 +52,7 @@ jobs:
         run: swift test
 
       - name: Build universal binary
+        if: inputs.upload
         run: |
           swift build -c release --arch arm64
           swift build -c release --arch x86_64
