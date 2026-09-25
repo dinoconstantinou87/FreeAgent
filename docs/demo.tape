@@ -14,7 +14,7 @@ Set Shell "bash"
 Set Theme "Catppuccin Mocha"
 Set FontSize 20
 Set Width 1500
-Set Height 400
+Set Height 860
 Set Padding 24
 Set BorderRadius 10
 Set WindowBar Colorful
