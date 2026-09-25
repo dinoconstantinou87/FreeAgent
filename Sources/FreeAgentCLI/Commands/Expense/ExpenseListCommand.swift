@@ -2,22 +2,33 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct ExpenseListCommand: ClientCommand {
+struct ExpenseListCommand: ListCommand {
     static let configuration = CommandConfiguration(
         commandName: "list",
         abstract: "List expenses"
     )
 
-    @Option(name: .long, help: "Maximum number of expenses to fetch")
-    var limit = ListLimit.default
+    static let noun = "expenses"
 
-    func run(client: Client) async throws -> Components.Schemas.ExpenseListResponse? {
-        let expenses = try await Paginator.collect(limit: limit.value) { page, perPage in
-            let ok = try await client.listAllExpenses(.init(query: .init(page: page, perPage: perPage))).ok
+    static let columns: [ListColumn<Components.Schemas.Expense>] = [
+        ListColumn("ID") { .id(url: $0.url) },
+        ListColumn("Dated On") { .date($0.datedOn) },
+        ListColumn("Description") { .text($0.description) },
+        ListColumn("Gross Value") { .currency($0.grossValue, code: $0.currency) },
+    ]
 
-            return (try ok.body.json.expenses, ok.headers.xTotalCount)
-        }
+    @OptionGroup var pagination: PaginationOptions
 
-        return .init(expenses: expenses)
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
+
+    func fetch(client: Client, page: Int) async throws -> (response: Components.Schemas.ExpenseListResponse, totalCount: Int?) {
+        let ok = try await client.listAllExpenses(.init(query: .init(page: page, perPage: pagination.size))).ok
+
+        return (try ok.body.json, ok.headers.xTotalCount)
+    }
+
+    func items(in response: Components.Schemas.ExpenseListResponse) -> [Components.Schemas.Expense] {
+        response.expenses
     }
 }

@@ -27,7 +27,7 @@ fi
 delete_explanations_created_by_the_tape() {
     local explanations id
     explanations="$(
-        freeagent explanation list --bank-account "$TAPE_BANK_ACCOUNT_ID" 2>/dev/null |
+        freeagent explanation list --bank-account "$TAPE_BANK_ACCOUNT_ID" --json --page-size 100 2>/dev/null |
             jq -r --arg d "$EXPLANATION_DESCRIPTION" \
                 '.bank_transaction_explanations[]? | select(.description == $d) | .url | split("/") | last'
     )" || explanations=""
@@ -84,7 +84,7 @@ require_sandbox_account() {
 
 require_tape_references() {
     local unexplained matches
-    unexplained="$(freeagent bank-transaction list --bank-account "$TAPE_BANK_ACCOUNT_ID" --view unexplained)" ||
+    unexplained="$(freeagent bank-transaction list --bank-account "$TAPE_BANK_ACCOUNT_ID" --view unexplained --json --page-size 100)" ||
         die "bank account $TAPE_BANK_ACCOUNT_ID does not resolve - the tape references it by ID"
 
     matches="$(
@@ -102,7 +102,7 @@ require_tape_references() {
 
 create_overdue_invoice_fixture() {
     local contact dated_on invoice
-    contact="$(freeagent contact list | jq -r '.contacts[0].url')"
+    contact="$(freeagent contact list --json | jq -r '.contacts[0].url')"
     [[ -n "$contact" && "$contact" != "null" ]] || die "no contact found to invoice"
     dated_on="$(date -v-60d +%Y-%m-%d 2>/dev/null || date -d '60 days ago' +%Y-%m-%d)"
 

@@ -14,7 +14,7 @@ Set Shell "bash"
 Set Theme "Catppuccin Mocha"
 Set FontSize 20
 Set Width 1500
-Set Height 320
+Set Height 400
 Set Padding 24
 Set BorderRadius 10
 Set WindowBar Colorful
@@ -41,8 +41,10 @@ Show
 
 Type "# What is still owed to me?" Enter
 Sleep 300ms
-Type "freeagent invoice list --view open_or_overdue | jq -c '.invoices[] | {reference, contact_name, due_on, due_value}'" Enter
-Sleep 2500ms
+Type "freeagent invoice list --view open_or_overdue --page-size 3" Enter
+Sleep 3s
+Type "q"
+Sleep 500ms
 
 Hide
 Type "clear" Enter
@@ -50,8 +52,12 @@ Show
 
 Type "# Which bank transactions still need explaining?" Enter
 Sleep 300ms
-Type "freeagent bank-transaction list --bank-account 39907 --view unexplained | jq -c '.bank_transactions[] | {dated_on, amount, description}'" Enter
+Type "freeagent bank-transaction list --bank-account 39907 --view unexplained --page-size 3" Enter
 Sleep 3s
+Type "n"
+Sleep 3s
+Type "q"
+Sleep 500ms
 
 Hide
 Type "clear" Enter
@@ -63,7 +69,7 @@ Type "freeagent explanation create --bank-transaction 2581845 --bank-account 399
 Sleep 3s
 
 Hide
-Type "id=$(freeagent explanation list --bank-account 39907 | jq -r --arg d 'Office supplies' '.bank_transaction_explanations[] | select(.description == $d) | .url' | sed 's:.*/::' | head -1)" Enter
+Type "id=$(freeagent explanation list --bank-account 39907 --json --page-size 100 | jq -r --arg d 'Office supplies' '.bank_transaction_explanations[] | select(.description == $d) | .url' | sed 's:.*/::' | head -1)" Enter
 Type "clear" Enter
 Show
 

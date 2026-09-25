@@ -2,11 +2,23 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct InvoiceListCommand: ClientCommand {
+struct InvoiceListCommand: ListCommand {
     static let configuration = CommandConfiguration(
         commandName: "list",
         abstract: "List invoices"
     )
+
+    static let noun = "invoices"
+
+    static let columns: [ListColumn<Components.Schemas.Invoice>] = [
+        ListColumn("ID") { .id(url: $0.url) },
+        ListColumn("Reference") { .text($0.reference) },
+        ListColumn("Contact") { .text($0.contactName) },
+        ListColumn("Dated On") { .date($0.datedOn) },
+        ListColumn("Due On") { .date($0.dueOn) },
+        ListColumn("Status") { .status($0.status) },
+        ListColumn("Total") { .currency($0.totalValue, code: $0.currency) },
+    ]
 
     @Option(name: .long, help: "Filter by view, or last_N_months (e.g. last_3_months)")
     var view: CustomInvoiceView?
@@ -29,28 +41,30 @@ struct InvoiceListCommand: ClientCommand {
     @Option(name: .long, help: "Sort order")
     var sort: Operations.ListInvoices.Input.Query.SortPayload?
 
-    @Option(name: .long, help: "Maximum number of invoices to fetch")
-    var limit = ListLimit.default
+    @OptionGroup var pagination: PaginationOptions
 
-    func run(client: Client) async throws -> Components.Schemas.InvoiceListResponse? {
-        let invoices = try await Paginator.collect(limit: limit.value) { page, perPage in
-            let ok = try await client.listInvoices(
-                .init(query: .init(
-                    nestedInvoiceItems: nestedInvoiceItems,
-                    contact: contact,
-                    project: project,
-                    currency: currency,
-                    view: view,
-                    updatedSince: updatedSince,
-                    sort: sort,
-                    page: page,
-                    perPage: perPage
-                ))
-            ).ok
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
 
-            return (try ok.body.json.invoices, ok.headers.xTotalCount)
-        }
+    func fetch(client: Client, page: Int) async throws -> (response: Components.Schemas.InvoiceListResponse, totalCount: Int?) {
+        let ok = try await client.listInvoices(
+            .init(query: .init(
+                nestedInvoiceItems: nestedInvoiceItems,
+                contact: contact,
+                project: project,
+                currency: currency,
+                view: view,
+                updatedSince: updatedSince,
+                sort: sort,
+                page: page,
+                perPage: pagination.size
+            ))
+        ).ok
 
-        return .init(invoices: invoices)
+        return (try ok.body.json, ok.headers.xTotalCount)
+    }
+
+    func items(in response: Components.Schemas.InvoiceListResponse) -> [Components.Schemas.Invoice] {
+        response.invoices
     }
 }

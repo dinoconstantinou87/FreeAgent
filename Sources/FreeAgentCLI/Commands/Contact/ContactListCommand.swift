@@ -2,22 +2,38 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct ContactListCommand: ClientCommand {
+struct ContactListCommand: ListCommand {
     static let configuration = CommandConfiguration(
         commandName: "list",
         abstract: "List contacts"
     )
 
-    @Option(name: .long, help: "Maximum number of contacts to fetch")
-    var limit = ListLimit.default
+    static let noun = "contacts"
 
-    func run(client: Client) async throws -> Components.Schemas.ContactListResponse? {
-        let contacts = try await Paginator.collect(limit: limit.value) { page, perPage in
-            let ok = try await client.listContacts(.init(query: .init(page: page, perPage: perPage))).ok
+    static let columns: [ListColumn<Components.Schemas.Contact>] = [
+        ListColumn("ID") { .id(url: $0.url) },
+        ListColumn("Organisation") { .text($0.organisationName) },
+        ListColumn("Name") { contact in
+            let name = [contact.firstName, contact.lastName].compactMap(\.self).joined(separator: " ")
 
-            return (try ok.body.json.contacts, ok.headers.xTotalCount)
-        }
+            return .text(name.isEmpty ? nil : name)
+        },
+        ListColumn("Email") { .text($0.email) },
+        ListColumn("Status") { .status($0.status.rawValue) },
+    ]
 
-        return .init(contacts: contacts)
+    @OptionGroup var pagination: PaginationOptions
+
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
+
+    func fetch(client: Client, page: Int) async throws -> (response: Components.Schemas.ContactListResponse, totalCount: Int?) {
+        let ok = try await client.listContacts(.init(query: .init(page: page, perPage: pagination.size))).ok
+
+        return (try ok.body.json, ok.headers.xTotalCount)
+    }
+
+    func items(in response: Components.Schemas.ContactListResponse) -> [Components.Schemas.Contact] {
+        response.contacts
     }
 }
