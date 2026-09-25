@@ -45,6 +45,7 @@ jobs:
           key: openapi-generator-1.13.0-${{ runner.os }}-${{ runner.arch }}-${{ env.SWIFT_BUILD_ID }}
 
       - name: Cache static Linux SDK
+        if: inputs.upload
         id: sdk-cache
         uses: actions/cache@v5
         with:
@@ -59,7 +60,7 @@ jobs:
           restore-keys: spm-${{ runner.os }}-${{ runner.arch }}-${{ env.SWIFT_BUILD_ID }}-
 
       - name: Install static Linux SDK
-        if: steps.sdk-cache.outputs.cache-hit != 'true'
+        if: inputs.upload && steps.sdk-cache.outputs.cache-hit != 'true'
         run: swift sdk install "$STATIC_SDK_URL" --checksum "$STATIC_SDK_CHECKSUM" --swift-sdks-path "$SWIFT_SDKS_PATH"
 
       - name: Generate API client
@@ -69,12 +70,14 @@ jobs:
         run: swift test
 
       - name: Build static binaries
+        if: inputs.upload
         run: |
           for arch in x86_64 aarch64; do
             swift build -c release --swift-sdk "${arch}-swift-linux-musl" --swift-sdks-path "$SWIFT_SDKS_PATH" --product freeagent -Xlinker -s
           done
 
       - name: Verify binaries are static
+        if: inputs.upload
         run: |
           for arch in x86_64 aarch64; do
             if readelf -l ".build/out/Products/Release-staticlinux-${arch}/freeagent" | grep -q INTERP; then
