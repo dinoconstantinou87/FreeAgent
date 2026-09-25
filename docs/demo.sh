@@ -94,7 +94,7 @@ require_tape_references() {
     [[ "${matches:-0}" -gt 0 ]] ||
         die "bank transaction $TAPE_TRANSACTION_ID is not unexplained on account $TAPE_BANK_ACCOUNT_ID - the tape references it by ID"
 
-    freeagent category list |
+    freeagent category list --json |
         jq -e --arg id "$TAPE_CATEGORY_ID" \
             'any(..; objects | select(.url? // "" | endswith("/" + $id)))' >/dev/null ||
         die "category $TAPE_CATEGORY_ID does not resolve - the tape references it by ID"

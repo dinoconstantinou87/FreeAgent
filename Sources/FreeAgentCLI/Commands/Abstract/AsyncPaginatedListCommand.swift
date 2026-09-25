@@ -1,9 +1,9 @@
 import FreeAgentAPI
 import Noora
 
-// MARK: - ListCommand
+// MARK: - AsyncPaginatedListCommand
 
-protocol ListCommand: ClientCommand {
+protocol AsyncPaginatedListCommand: ClientCommand {
     associatedtype Response
     associatedtype Item
 
@@ -18,7 +18,7 @@ protocol ListCommand: ClientCommand {
     func items(in response: Response) -> [Item]
 }
 
-extension ListCommand {
+extension AsyncPaginatedListCommand {
     func run(client: Client) async throws -> Response? {
         let firstPage = try await fetch(client: client, page: pagination.page)
 

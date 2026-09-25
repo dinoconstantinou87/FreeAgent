@@ -56,6 +56,26 @@ struct NoorablePaginatedTableTests {
         #expect(ui.description == "No invoices found on page 3\n")
     }
 
+    @Test("prints every row of a complete list when not interactive")
+    func rendersCompleteList() throws {
+        try ui.paginatedTable(
+            noun: "attachments",
+            headers: ["File Name"],
+            rows: (1...12).map { ["receipt-\($0).pdf"] },
+            pageSize: 10
+        )
+
+        #expect(ui.description.contains("receipt-1.pdf"))
+        #expect(ui.description.contains("receipt-12.pdf"))
+    }
+
+    @Test("says nothing was found when a complete list is empty")
+    func reportsEmptyCompleteList() throws {
+        try ui.paginatedTable(noun: "attachments", headers: ["File Name"], rows: [], pageSize: 10)
+
+        #expect(ui.description == "No attachments found\n")
+    }
+
     @Test(
         "counts pages from the total",
         arguments: [(25, 10, 3), (20, 10, 2), (1, 10, 1), (100, 100, 1), (101, 100, 2)]

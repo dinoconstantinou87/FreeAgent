@@ -2,7 +2,7 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct ExplanationListCommand: ListCommand {
+struct ExplanationListCommand: AsyncPaginatedListCommand {
     static let configuration = CommandConfiguration(
         commandName: "list",
         abstract: "List bank transaction explanations"

@@ -2,7 +2,7 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct ContactListCommand: ListCommand {
+struct ContactListCommand: AsyncPaginatedListCommand {
     static let configuration = CommandConfiguration(
         commandName: "list",
         abstract: "List contacts"
