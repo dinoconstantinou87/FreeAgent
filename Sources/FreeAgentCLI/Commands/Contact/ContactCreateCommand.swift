@@ -23,7 +23,10 @@ struct ContactCreateCommand: MutatingCommand {
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
 
-    func run(client: Client) async throws -> Components.Schemas.ContactResponse? {
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
+
+    func perform(client: Client) async throws -> Components.Schemas.ContactResponse {
         let contactPayload = Components.Schemas.ContactCreatePayload(
             email: email,
             firstName: firstName,
@@ -37,5 +40,9 @@ struct ContactCreateCommand: MutatingCommand {
 
         return try await client.createContact(input)
             .created.body.json
+    }
+
+    func success(for response: Components.Schemas.ContactResponse) -> String {
+        "Created contact \(response.contact.url)"
     }
 }

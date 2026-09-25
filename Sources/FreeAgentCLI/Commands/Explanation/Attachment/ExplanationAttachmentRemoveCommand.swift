@@ -20,13 +20,16 @@ struct ExplanationAttachmentRemoveCommand: DestructiveCommand {
     @Flag(help: "Skip the confirmation prompt")
     var yes = false
 
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
+
     var confirmation: String {
         attachment.count == 1
             ? "Remove the attachment from explanation \(id)?"
             : "Remove \(attachment.count) attachments from explanation \(id)?"
     }
 
-    func run(client: Client) async throws -> Components.Schemas.AttachmentListResponse? {
+    func perform(client: Client) async throws -> Components.Schemas.AttachmentListResponse {
         let attachments = attachment.map {
             Components.Schemas.AttachmentUpdatePayload(url: $0, _destroy: "true")
         }
@@ -38,5 +41,11 @@ struct ExplanationAttachmentRemoveCommand: DestructiveCommand {
 
         return try await client.updateBankTransactionExplanationAttachments(input)
             .ok.body.json
+    }
+
+    func success(for _: Components.Schemas.AttachmentListResponse) -> String {
+        attachment.count == 1
+            ? "Removed the attachment from explanation \(id)"
+            : "Removed \(attachment.count) attachments from explanation \(id)"
     }
 }

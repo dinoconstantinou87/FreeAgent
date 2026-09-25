@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct AttachmentDeleteCommand: DestructiveCommand {
     static let configuration = CommandConfiguration(
@@ -22,12 +21,16 @@ struct AttachmentDeleteCommand: DestructiveCommand {
         "Delete attachment \(id)?"
     }
 
-    func run(client: Client) async throws -> OpenAPIValueContainer? {
+    func perform(client: Client) async throws -> EmptyResponse {
         let input = Operations.DeleteAttachment.Input(
             path: .init(id: id)
         )
 
         _ = try await client.deleteAttachment(input).ok
-        return nil
+        return EmptyResponse()
+    }
+
+    func success(for _: EmptyResponse) -> String {
+        "Deleted attachment \(id)"
     }
 }

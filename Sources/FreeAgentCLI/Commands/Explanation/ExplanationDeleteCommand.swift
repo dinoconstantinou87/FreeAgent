@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct ExplanationDeleteCommand: DestructiveCommand {
     static let configuration = CommandConfiguration(
@@ -22,12 +21,16 @@ struct ExplanationDeleteCommand: DestructiveCommand {
         "Delete explanation \(id)?"
     }
 
-    func run(client: Client) async throws -> OpenAPIValueContainer? {
+    func perform(client: Client) async throws -> EmptyResponse {
         let input = Operations.DeleteABankTransactionExplanation.Input(
             path: .init(id: id)
         )
 
         _ = try await client.deleteABankTransactionExplanation(input).ok
-        return nil
+        return EmptyResponse()
+    }
+
+    func success(for _: EmptyResponse) -> String {
+        "Deleted explanation \(id)"
     }
 }

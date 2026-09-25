@@ -1,7 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import OpenAPIRuntime
 
 struct InvoiceSendEmailCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
@@ -27,7 +26,7 @@ struct InvoiceSendEmailCommand: MutatingCommand {
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
 
-    func run(client: Client) async throws -> OpenAPIRuntime.OpenAPIValueContainer? {
+    func perform(client: Client) async throws -> EmptyResponse {
         let emailPayload = Components.Schemas.EmailPayload(
             body: body,
             from: from,
@@ -45,6 +44,10 @@ struct InvoiceSendEmailCommand: MutatingCommand {
         )
 
         _ = try await client.sendInvoiceEmail(input).ok
-        return nil
+        return EmptyResponse()
+    }
+
+    func success(for _: EmptyResponse) -> String {
+        "Sent invoice \(id) to \(to)"
     }
 }

@@ -65,7 +65,7 @@ Show
 
 Type "# Explain the Staples debit as an office cost" Enter
 Sleep 300ms
-Type "freeagent explanation create --bank-transaction 2581845 --bank-account 39907 --category 250 --dated-on 2025-08-21 --description 'Office supplies' --gross-value -45.99 | jq -c '.bank_transaction_explanation | {dated_on, gross_value, description}'" Enter
+Type "freeagent explanation create --bank-transaction 2581845 --bank-account 39907 --category 250 --dated-on 2025-08-21 --description 'Office supplies' --gross-value -45.99" Enter
 Sleep 3s
 
 Hide

@@ -106,7 +106,7 @@ create_overdue_invoice_fixture() {
     [[ -n "$contact" && "$contact" != "null" ]] || die "no contact found to invoice"
     dated_on="$(date -v-60d +%Y-%m-%d 2>/dev/null || date -d '60 days ago' +%Y-%m-%d)"
 
-    invoice="$(freeagent invoice create --contact "$contact" --dated-on "$dated_on" --payment-terms-in-days 30)"
+    invoice="$(freeagent invoice create --contact "$contact" --dated-on "$dated_on" --payment-terms-in-days 30 --json)"
     INVOICE_ID="$(jq -r '.invoice.url | split("/") | last' <<<"$invoice")"
     [[ -n "$INVOICE_ID" && "$INVOICE_ID" != "null" ]] || die "could not create the invoice fixture"
 
