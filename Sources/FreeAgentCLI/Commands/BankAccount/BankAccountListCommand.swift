@@ -2,25 +2,40 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct BankAccountListCommand: ClientCommand {
+struct BankAccountListCommand: ListCommand {
     static let configuration = CommandConfiguration(
         commandName: "list",
         abstract: "List bank accounts"
     )
 
+    static let noun = "bank accounts"
+
+    static let columns: [ListColumn<Components.Schemas.BankAccount>] = [
+        ListColumn("ID") { .id(url: $0.url) },
+        ListColumn("Name") { .text($0.name) },
+        ListColumn("Bank") { .text($0.bankName) },
+        ListColumn("Type") { .text($0._type) },
+        ListColumn("Balance") { .currency($0.currentBalance, code: $0.currency) },
+    ]
+
     @Option(name: .long, help: "Filter by view (e.g. standard_bank_accounts)")
     var view: String?
 
-    @Option(name: .long, help: "Maximum number of bank accounts to fetch")
-    var limit = ListLimit.default
+    @OptionGroup var pagination: PaginationOptions
 
-    func run(client: Client) async throws -> Components.Schemas.BankAccountListResponse? {
-        let accounts = try await Paginator.collect(limit: limit.value) { page, perPage in
-            let ok = try await client.listBankAccounts(.init(query: .init(view: view, page: page, perPage: perPage))).ok
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
 
-            return (try ok.body.json.bankAccounts, ok.headers.xTotalCount)
-        }
+    func fetch(
+        client: Client,
+        page: Int
+    ) async throws -> (response: Components.Schemas.BankAccountListResponse, totalCount: Int?) {
+        let ok = try await client.listBankAccounts(.init(query: .init(view: view, page: page, perPage: pagination.size))).ok
 
-        return .init(bankAccounts: accounts)
+        return (try ok.body.json, ok.headers.xTotalCount)
+    }
+
+    func items(in response: Components.Schemas.BankAccountListResponse) -> [Components.Schemas.BankAccount] {
+        response.bankAccounts
     }
 }

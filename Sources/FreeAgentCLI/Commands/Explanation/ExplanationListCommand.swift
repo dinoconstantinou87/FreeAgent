@@ -2,11 +2,20 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct ExplanationListCommand: ClientCommand {
+struct ExplanationListCommand: ListCommand {
     static let configuration = CommandConfiguration(
         commandName: "list",
         abstract: "List bank transaction explanations"
     )
+
+    static let noun = "explanations"
+
+    static let columns: [ListColumn<Components.Schemas.BankTransactionExplanation>] = [
+        ListColumn("ID") { .id(url: $0.url) },
+        ListColumn("Dated On") { .date($0.datedOn) },
+        ListColumn("Description") { .text($0.description) },
+        ListColumn("Gross Value") { .currency($0.grossValue, code: nil) },
+    ]
 
     @Option(name: .long, help: "Bank account URL (e.g. https://api.freeagent.com/v2/bank_accounts/123)")
     var bankAccount: String
@@ -20,25 +29,32 @@ struct ExplanationListCommand: ClientCommand {
     @Option(name: .long, help: "Show explanations updated after this date")
     var updatedSince: String?
 
-    @Option(name: .long, help: "Maximum number of explanations to fetch")
-    var limit = ListLimit.default
+    @OptionGroup var pagination: PaginationOptions
 
-    func run(client: Client) async throws -> Components.Schemas.BankTransactionExplanationListResponse? {
-        let explanations = try await Paginator.collect(limit: limit.value) { page, perPage in
-            let ok = try await client.listAllBankTransactionExplanations(
-                .init(query: .init(
-                    fromDate: fromDate,
-                    toDate: toDate,
-                    updatedSince: updatedSince,
-                    bankAccount: bankAccount,
-                    page: page,
-                    perPage: perPage
-                ))
-            ).ok
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
 
-            return (try ok.body.json.bankTransactionExplanations, ok.headers.xTotalCount)
-        }
+    func fetch(
+        client: Client,
+        page: Int
+    ) async throws -> (response: Components.Schemas.BankTransactionExplanationListResponse, totalCount: Int?) {
+        let ok = try await client.listAllBankTransactionExplanations(
+            .init(query: .init(
+                fromDate: fromDate,
+                toDate: toDate,
+                updatedSince: updatedSince,
+                bankAccount: bankAccount,
+                page: page,
+                perPage: pagination.size
+            ))
+        ).ok
 
-        return .init(bankTransactionExplanations: explanations)
+        return (try ok.body.json, ok.headers.xTotalCount)
+    }
+
+    func items(
+        in response: Components.Schemas.BankTransactionExplanationListResponse
+    ) -> [Components.Schemas.BankTransactionExplanation] {
+        response.bankTransactionExplanations
     }
 }

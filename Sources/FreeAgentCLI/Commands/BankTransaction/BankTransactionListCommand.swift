@@ -2,11 +2,21 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct BankTransactionListCommand: ClientCommand {
+struct BankTransactionListCommand: ListCommand {
     static let configuration = CommandConfiguration(
         commandName: "list",
         abstract: "List bank transactions"
     )
+
+    static let noun = "bank transactions"
+
+    static let columns: [ListColumn<Components.Schemas.BankTransaction>] = [
+        ListColumn("ID") { .id(url: $0.url) },
+        ListColumn("Dated On") { .date($0.datedOn) },
+        ListColumn("Description") { .text($0.description) },
+        ListColumn("Amount") { .currency($0.amount, code: nil) },
+        ListColumn("Unexplained") { .currency($0.unexplainedAmount, code: nil) },
+    ]
 
     @Option(name: .long, help: "Bank account URL (e.g. https://api.freeagent.com/v2/bank_accounts/123)")
     var bankAccount: String
@@ -26,27 +36,32 @@ struct BankTransactionListCommand: ClientCommand {
     @Option(name: .long, help: "Show only last uploaded transactions (true/false)")
     var lastUploaded: String?
 
-    @Option(name: .long, help: "Maximum number of bank transactions to fetch")
-    var limit = ListLimit.default
+    @OptionGroup var pagination: PaginationOptions
 
-    func run(client: Client) async throws -> Components.Schemas.BankTransactionListResponse? {
-        let transactions = try await Paginator.collect(limit: limit.value) { page, perPage in
-            let ok = try await client.listAllBankTransactionsUnderACertainBankAccount(
-                .init(query: .init(
-                    bankAccount: bankAccount,
-                    fromDate: fromDate,
-                    toDate: toDate,
-                    updatedSince: updatedSince,
-                    view: view,
-                    lastUploaded: lastUploaded,
-                    page: page,
-                    perPage: perPage
-                ))
-            ).ok
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
 
-            return (try ok.body.json.bankTransactions, ok.headers.xTotalCount)
-        }
+    func fetch(
+        client: Client,
+        page: Int
+    ) async throws -> (response: Components.Schemas.BankTransactionListResponse, totalCount: Int?) {
+        let ok = try await client.listAllBankTransactionsUnderACertainBankAccount(
+            .init(query: .init(
+                bankAccount: bankAccount,
+                fromDate: fromDate,
+                toDate: toDate,
+                updatedSince: updatedSince,
+                view: view,
+                lastUploaded: lastUploaded,
+                page: page,
+                perPage: pagination.size
+            ))
+        ).ok
 
-        return .init(bankTransactions: transactions)
+        return (try ok.body.json, ok.headers.xTotalCount)
+    }
+
+    func items(in response: Components.Schemas.BankTransactionListResponse) -> [Components.Schemas.BankTransaction] {
+        response.bankTransactions
     }
 }
