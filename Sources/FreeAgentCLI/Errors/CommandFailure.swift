@@ -84,7 +84,7 @@ extension CommandRefusal {
 
     var exitCode: ExitCode {
         switch self {
-        case .notInteractive: .validationFailure
+        case .notInteractive, .fileExists: .validationFailure
         case .declined: .failure
         }
     }
@@ -102,6 +102,15 @@ extension CommandRefusal {
 
         case .declined:
             .alert("Cancelled, nothing was changed")
+
+        case .fileExists(let path):
+            .alert(
+                "\(path) already exists",
+                takeaways: [
+                    "Pass \(.command("--clobber")) to overwrite it",
+                    "Pass \(.command("--output")) to save somewhere else",
+                ]
+            )
         }
     }
 }

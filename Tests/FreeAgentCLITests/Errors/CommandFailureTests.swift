@@ -112,6 +112,20 @@ struct CommandFailureTests {
         #expect(failure.alert.message.plain() == "Cancelled, nothing was changed")
     }
 
+    @Test("refuses to overwrite an existing file as a usage error")
+    func refusesToOverwrite() {
+        let failure = CommandFailure(CommandRefusal.fileExists(path: "invoice-1234.pdf"))
+
+        #expect(failure.exitCode == .validationFailure)
+        #expect(failure.alert.message.plain() == "invoice-1234.pdf already exists")
+        #expect(
+            failure.alert.takeaways.map { $0.plain() } == [
+                "Pass '--clobber' to overwrite it",
+                "Pass '--output' to save somewhere else",
+            ]
+        )
+    }
+
     @Test("falls back to a generic failure for errors that are not from the API")
     func fallsBackForOtherErrors() {
         struct Boom: Error { }

@@ -35,4 +35,13 @@ extension Noorable {
             index == startPage ? firstRows : try await fetch(index + 1).map(row)
         }
     }
+
+    func paginatedTable(noun: String, headers: [String], rows: [[String]], pageSize: Int) throws {
+        guard !rows.isEmpty else {
+            passthrough("No \(noun) found\n")
+            return
+        }
+
+        try paginatedTable(headers: headers, rows: rows, pageSize: pageSize)
+    }
 }

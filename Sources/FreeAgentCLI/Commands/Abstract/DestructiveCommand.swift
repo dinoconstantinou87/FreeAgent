@@ -1,4 +1,3 @@
-import Foundation
 import Noora
 
 // MARK: - DestructiveCommand
@@ -10,9 +9,7 @@ protocol DestructiveCommand: MutatingCommand {
 
 extension DestructiveCommand {
     func canRun() throws -> Bool {
-        let isInteractive = Terminal.isInteractive() && isatty(STDOUT_FILENO) != 0
-
-        return switch ConfirmationDecision(yes: yes, dryRun: dryRun, isInteractive: isInteractive) {
+        switch ConfirmationDecision(yes: yes, dryRun: dryRun, isInteractive: Terminal.canPrompt()) {
         case .proceed:
             true
         case .refuse:
