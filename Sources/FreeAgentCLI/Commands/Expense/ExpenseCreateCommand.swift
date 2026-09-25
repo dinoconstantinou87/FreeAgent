@@ -32,7 +32,10 @@ struct ExpenseCreateCommand: MutatingCommand {
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
 
-    func run(client: Client) async throws -> Components.Schemas.ExpenseResponse? {
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
+
+    func perform(client: Client) async throws -> Components.Schemas.ExpenseResponse {
         let expensePayload = Components.Schemas.ExpensePayload(
             category: category,
             datedOn: datedOn,
@@ -49,5 +52,9 @@ struct ExpenseCreateCommand: MutatingCommand {
 
         return try await client.createExpense(input)
             .created.body.json
+    }
+
+    func success(for response: Components.Schemas.ExpenseResponse) -> String {
+        "Created expense \(response.expense.url)"
     }
 }

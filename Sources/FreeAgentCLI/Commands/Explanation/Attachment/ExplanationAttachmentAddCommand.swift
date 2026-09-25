@@ -26,7 +26,10 @@ struct ExplanationAttachmentAddCommand: MutatingCommand {
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
 
-    func run(client: Client) async throws -> Components.Schemas.AttachmentListResponse? {
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
+
+    func perform(client: Client) async throws -> Components.Schemas.AttachmentListResponse {
         let attachments = try file.map { path in
             let url = URL(fileURLWithPath: path)
             let ext = url.pathExtension.lowercased()
@@ -50,6 +53,12 @@ struct ExplanationAttachmentAddCommand: MutatingCommand {
 
         return try await client.createBankTransactionExplanationAttachments(input)
             .created.body.json
+    }
+
+    func success(for _: Components.Schemas.AttachmentListResponse) -> String {
+        file.count == 1
+            ? "Added the attachment to explanation \(id)"
+            : "Added \(file.count) attachments to explanation \(id)"
     }
 
     // MARK: Private

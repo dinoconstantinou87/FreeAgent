@@ -38,7 +38,10 @@ struct BillCreateCommand: MutatingCommand {
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
 
-    func run(client: Client) async throws -> Components.Schemas.BillResponse? {
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
+
+    func perform(client: Client) async throws -> Components.Schemas.BillResponse {
         let billItem = Components.Schemas.BillItemPayload(
             category: category,
             description: description,
@@ -61,5 +64,9 @@ struct BillCreateCommand: MutatingCommand {
 
         return try await client.createBill(input)
             .created.body.json
+    }
+
+    func success(for response: Components.Schemas.BillResponse) -> String {
+        "Created bill \(response.bill.url)"
     }
 }

@@ -26,7 +26,10 @@ struct InvoiceCreateItemCommand: MutatingCommand {
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
 
-    func run(client: Client) async throws -> Components.Schemas.InvoiceItemResponse? {
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
+
+    func perform(client: Client) async throws -> Components.Schemas.InvoiceItemResponse {
         let invoiceItemPayload = Components.Schemas.InvoiceItemPayload(
             description: description,
             itemType: itemType,
@@ -40,5 +43,9 @@ struct InvoiceCreateItemCommand: MutatingCommand {
 
         return try await client.createInvoiceItem(input)
             .created.body.json
+    }
+
+    func success(for response: Components.Schemas.InvoiceItemResponse) -> String {
+        "Created item \(response.invoiceItem.url) on invoice \(invoice)"
     }
 }

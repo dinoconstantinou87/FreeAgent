@@ -53,7 +53,10 @@ struct ExplanationCreateCommand: MutatingCommand {
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
 
-    func run(client: Client) async throws -> Components.Schemas.BankTransactionExplanationResponse? {
+    @Flag(name: .long, help: "Output JSON")
+    var json = false
+
+    func perform(client: Client) async throws -> Components.Schemas.BankTransactionExplanationResponse {
         let payload = Components.Schemas.BankTransactionExplanationCreatePayload(
             bankAccount: bankAccount,
             bankTransaction: bankTransaction,
@@ -77,5 +80,9 @@ struct ExplanationCreateCommand: MutatingCommand {
 
         return try await client.createABankTransactionExplanation(input)
             .created.body.json
+    }
+
+    func success(for response: Components.Schemas.BankTransactionExplanationResponse) -> String {
+        "Created explanation \(response.bankTransactionExplanation.url)"
     }
 }
