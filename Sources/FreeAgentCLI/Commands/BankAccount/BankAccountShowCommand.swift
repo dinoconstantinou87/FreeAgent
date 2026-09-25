@@ -10,44 +10,44 @@ struct BankAccountShowCommand: ShowCommand {
 
     static let title = "Bank Account"
 
-    static let sections: [FieldSection<Components.Schemas.BankAccount>] = [
-        FieldSection("Details", fields: [
-            Field("Name") { .text($0.name) },
-            Field("Bank") { .text($0.bankName) },
-            Field("Type") { .text($0._type) },
-            Field("Status") { .status($0.status) },
-            Field("Currency") { .text($0.currency) },
-            Field("Primary") { .flag($0.isPrimary) },
-            Field("Personal") { .flag($0.isPersonal) },
-            Field("Bank Feed") { .flag($0.bankFeedEnabled) },
-            Field("Email") { .text($0.email) },
-        ]),
-        FieldSection("Account", fields: [
-            Field("Account Number") { .text($0.accountNumber) },
-            Field("Sort Code") { .text($0.sortCode) },
-            Field("Secondary Sort Code") { .text($0.secondarySortCode) },
-            Field("IBAN") { .text($0.iban) },
-            Field("BIC") { .text($0.bic) },
-        ]),
-        FieldSection("Balance", fields: [
-            Field("Current") { .currency($0.currentBalance, code: $0.currency) },
-            Field("Opening") { .currency($0.openingBalance, code: $0.currency) },
-        ]),
-        FieldSection("Transactions", fields: [
-            Field("Total") { .number($0.totalCount) },
-            Field("Unexplained") { .number($0.unexplainedTransactionCount) },
-            Field("For Review") { .number($0.markedForReviewCount) },
-            Field("Manually Added") { .number($0.manuallyAddedTransactionCount) },
-            Field("Latest Activity") { .date($0.latestActivityDate) },
-        ]),
-        FieldSection("Dates", fields: [
-            Field("Created") { .timestamp($0.createdAt) },
-            Field("Updated") { .timestamp($0.updatedAt) },
-        ]),
-        FieldSection("IDs", fields: [
+    static var sections: [FieldSection<Components.Schemas.BankAccount>] {
+        FieldSection("Details") {
+            Field("Name") { .text($0.name) }
+            Field("Bank") { .text($0.bankName) }
+            Field("Type") { .text($0._type) }
+            Field("Status") { .status($0.status) }
+            Field("Currency") { .text($0.currency) }
+            Field("Primary") { .flag($0.isPrimary) }
+            Field("Personal") { .flag($0.isPersonal) }
+            Field("Bank Feed") { .flag($0.bankFeedEnabled) }
+            Field("Email") { .text($0.email) }
+        }
+        FieldSection("Account") {
+            Field("Account Number") { .text($0.accountNumber) }
+            Field("Sort Code") { .text($0.sortCode) }
+            Field("Secondary Sort Code") { .text($0.secondarySortCode) }
+            Field("IBAN") { .text($0.iban) }
+            Field("BIC") { .text($0.bic) }
+        }
+        FieldSection("Balance") {
+            Field("Current") { .currency($0.currentBalance, code: $0.currency) }
+            Field("Opening") { .currency($0.openingBalance, code: $0.currency) }
+        }
+        FieldSection("Transactions") {
+            Field("Total") { .number($0.totalCount) }
+            Field("Unexplained") { .number($0.unexplainedTransactionCount) }
+            Field("For Review") { .number($0.markedForReviewCount) }
+            Field("Manually Added") { .number($0.manuallyAddedTransactionCount) }
+            Field("Latest Activity") { .date($0.latestActivityDate) }
+        }
+        FieldSection("Dates") {
+            Field("Created") { .timestamp($0.createdAt) }
+            Field("Updated") { .timestamp($0.updatedAt) }
+        }
+        FieldSection("IDs") {
             Field("Bank Account") { .id(url: $0.url) }
-        ]),
-    ]
+        }
+    }
 
     @Argument(help: "Bank account ID")
     var id: String

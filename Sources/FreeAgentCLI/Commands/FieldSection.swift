@@ -1,7 +1,7 @@
 struct FieldSection<Record>: Sendable {
-    init(_ title: String, fields: [Field<Record>]) {
+    init(_ title: String, @FieldBuilder<Record> fields: () -> [Field<Record>]) {
         self.title = title
-        self.fields = fields
+        self.fields = fields()
     }
 
     let title: String

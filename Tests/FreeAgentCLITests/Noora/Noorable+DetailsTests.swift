@@ -13,17 +13,17 @@ struct NoorableDetailsTests {
             of: Invoice(reference: "006", contact: "Alice Johnson", poReference: nil, paymentTerms: "30 days", items: []),
             title: "Invoice",
             sections: [
-                FieldSection("Details", fields: [
-                    Field("Reference") { .text($0.reference) },
-                    Field("PO Reference") { .text($0.poReference) },
-                    Field("Payment Terms") { .text($0.paymentTerms) },
-                ]),
-                FieldSection("Project", fields: [
+                FieldSection("Details") {
+                    Field("Reference") { .text($0.reference) }
+                    Field("PO Reference") { .text($0.poReference) }
+                    Field("Payment Terms") { .text($0.paymentTerms) }
+                },
+                FieldSection("Project") {
                     Field("Project") { .text($0.poReference) }
-                ]),
-                FieldSection("IDs", fields: [
+                },
+                FieldSection("IDs") {
                     Field("Contact") { .text($0.contact) }
-                ]),
+                },
             ],
             tables: []
         )
@@ -56,13 +56,13 @@ struct NoorableDetailsTests {
             ),
             title: "Invoice",
             sections: [
-                FieldSection("Details", fields: [Field("Reference") { .text($0.reference) }])
+                FieldSection("Details") { Field("Reference") { .text($0.reference) } }
             ],
             tables: [
-                FieldTable("Items", columns: [
-                    Field<Item>("Description") { .text($0.description) },
-                    Field("Quantity") { .text($0.quantity) },
-                ]) { $0.items }
+                FieldTable("Items", items: { $0.items }) {
+                    Field("Description") { .text($0.description) }
+                    Field("Quantity") { .text($0.quantity) }
+                }
             ]
         )
 
@@ -86,10 +86,10 @@ struct NoorableDetailsTests {
             of: Invoice(reference: "006", contact: nil, poReference: nil, paymentTerms: nil, items: []),
             title: "Invoice",
             sections: [
-                FieldSection("Details", fields: [Field("Reference") { .text($0.reference) }])
+                FieldSection("Details") { Field("Reference") { .text($0.reference) } }
             ],
             tables: [
-                FieldTable("Items", columns: [Field<Item>("Description") { .text($0.description) }]) { $0.items }
+                FieldTable("Items", items: { $0.items }) { Field("Description") { .text($0.description) } }
             ]
         )
 

@@ -1,5 +1,11 @@
 struct FieldTable<Record>: Sendable {
-    init<Item>(_ title: String, columns: [Field<Item>], items: @escaping @Sendable (Record) -> [Item]?) {
+    init<Item>(
+        _ title: String,
+        items: @escaping @Sendable (Record) -> [Item]?,
+        @FieldBuilder<Item> columns: () -> [Field<Item>]
+    ) {
+        let columns = columns()
+
         self.title = title
         headers = columns.map(\.label)
         rows = { record in

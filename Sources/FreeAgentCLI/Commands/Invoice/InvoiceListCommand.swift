@@ -10,15 +10,15 @@ struct InvoiceListCommand: ListCommand {
 
     static let noun = "invoices"
 
-    static let columns: [Field<Components.Schemas.Invoice>] = [
-        Field("ID") { .id(url: $0.url) },
-        Field("Reference") { .text($0.reference) },
-        Field("Contact") { .text($0.contactName) },
-        Field("Dated On") { .date($0.datedOn) },
-        Field("Due On") { .date($0.dueOn) },
-        Field("Status") { .status($0.status) },
-        Field("Total") { .currency($0.totalValue, code: $0.currency) },
-    ]
+    static var columns: [Field<Components.Schemas.Invoice>] {
+        Field("ID") { .id(url: $0.url) }
+        Field("Reference") { .text($0.reference) }
+        Field("Contact") { .text($0.contactName) }
+        Field("Dated On") { .date($0.datedOn) }
+        Field("Due On") { .date($0.dueOn) }
+        Field("Status") { .status($0.status) }
+        Field("Total") { .currency($0.totalValue, code: $0.currency) }
+    }
 
     @Option(name: .long, help: "Filter by view, or last_N_months (e.g. last_3_months)")
     var view: CustomInvoiceView?

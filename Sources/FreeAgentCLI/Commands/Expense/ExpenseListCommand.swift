@@ -10,12 +10,12 @@ struct ExpenseListCommand: ListCommand {
 
     static let noun = "expenses"
 
-    static let columns: [Field<Components.Schemas.Expense>] = [
-        Field("ID") { .id(url: $0.url) },
-        Field("Dated On") { .date($0.datedOn) },
-        Field("Description") { .text($0.description) },
-        Field("Gross Value") { .currency($0.grossValue, code: $0.currency) },
-    ]
+    static var columns: [Field<Components.Schemas.Expense>] {
+        Field("ID") { .id(url: $0.url) }
+        Field("Dated On") { .date($0.datedOn) }
+        Field("Description") { .text($0.description) }
+        Field("Gross Value") { .currency($0.grossValue, code: $0.currency) }
+    }
 
     @OptionGroup var pagination: PaginationOptions
 

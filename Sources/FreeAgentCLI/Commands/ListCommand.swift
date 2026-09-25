@@ -8,6 +8,7 @@ protocol ListCommand: ClientCommand {
     associatedtype Item
 
     static var noun: String { get }
+    @FieldBuilder<Item>
     static var columns: [Field<Item>] { get }
 
     var pagination: PaginationOptions { get }
@@ -25,13 +26,15 @@ extension ListCommand {
             return firstPage.response
         }
 
+        let columns = Self.columns
+
         try await Noora().paginatedTable(
             noun: Self.noun,
-            headers: Self.columns.map(\.label),
+            headers: columns.map(\.label),
             page: pagination.page,
             pageSize: pagination.size,
             firstPage: (items(in: firstPage.response), firstPage.totalCount),
-            row: { item in Self.columns.map { $0.cell(item) } },
+            row: { item in columns.map { $0.cell(item) } },
             fetch: { try await items(in: fetch(client: client, page: $0).response) }
         )
 

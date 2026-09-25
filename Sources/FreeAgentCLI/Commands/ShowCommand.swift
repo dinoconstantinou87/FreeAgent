@@ -8,6 +8,7 @@ protocol ShowCommand: ClientCommand {
     associatedtype Record
 
     static var title: String { get }
+    @FieldSectionBuilder<Record>
     static var sections: [FieldSection<Record>] { get }
     static var tables: [FieldTable<Record>] { get }
 

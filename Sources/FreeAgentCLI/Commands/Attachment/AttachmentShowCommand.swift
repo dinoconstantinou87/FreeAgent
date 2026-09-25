@@ -10,23 +10,23 @@ struct AttachmentShowCommand: ShowCommand {
 
     static let title = "Attachment"
 
-    static let sections: [FieldSection<Components.Schemas.Attachment>] = [
-        FieldSection("Details", fields: [
-            Field("File Name") { .text($0.fileName) },
-            Field("Content Type") { .text($0.contentType) },
-            Field("Size") { .bytes($0.fileSize) },
-            Field("Description") { .text($0.description) },
-        ]),
-        FieldSection("Content", fields: [
-            Field("URL") { .text($0.contentSrc) },
-            Field("Medium") { .text($0.contentSrcMedium) },
-            Field("Small") { .text($0.contentSrcSmall) },
-            Field("Expires") { .timestamp($0.expiresAt) },
-        ]),
-        FieldSection("IDs", fields: [
+    static var sections: [FieldSection<Components.Schemas.Attachment>] {
+        FieldSection("Details") {
+            Field("File Name") { .text($0.fileName) }
+            Field("Content Type") { .text($0.contentType) }
+            Field("Size") { .bytes($0.fileSize) }
+            Field("Description") { .text($0.description) }
+        }
+        FieldSection("Content") {
+            Field("URL") { .text($0.contentSrc) }
+            Field("Medium") { .text($0.contentSrcMedium) }
+            Field("Small") { .text($0.contentSrcSmall) }
+            Field("Expires") { .timestamp($0.expiresAt) }
+        }
+        FieldSection("IDs") {
             Field("Attachment") { .id(url: $0.url) }
-        ]),
-    ]
+        }
+    }
 
     @Argument(help: "Attachment ID")
     var id: String
