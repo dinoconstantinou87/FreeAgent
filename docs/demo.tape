@@ -14,7 +14,7 @@ Set Shell "bash"
 Set Theme "Catppuccin Mocha"
 Set FontSize 20
 Set Width 1500
-Set Height 400
+Set Height 860
 Set Padding 24
 Set BorderRadius 10
 Set WindowBar Colorful
@@ -32,7 +32,7 @@ Sleep 750ms
 
 Type "# Who am I connected to?" Enter
 Sleep 300ms
-Type "freeagent company | jq '.company | {name, type, currency, sales_tax_registration_status}'" Enter
+Type "freeagent company" Enter
 Sleep 2500ms
 
 Hide

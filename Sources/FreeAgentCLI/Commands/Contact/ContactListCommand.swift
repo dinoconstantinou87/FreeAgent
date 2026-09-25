@@ -10,17 +10,13 @@ struct ContactListCommand: ListCommand {
 
     static let noun = "contacts"
 
-    static let columns: [ListColumn<Components.Schemas.Contact>] = [
-        ListColumn("ID") { .id(url: $0.url) },
-        ListColumn("Organisation") { .text($0.organisationName) },
-        ListColumn("Name") { contact in
-            let name = [contact.firstName, contact.lastName].compactMap(\.self).joined(separator: " ")
-
-            return .text(name.isEmpty ? nil : name)
-        },
-        ListColumn("Email") { .text($0.email) },
-        ListColumn("Status") { .status($0.status.rawValue) },
-    ]
+    static var columns: [Field<Components.Schemas.Contact>] {
+        Field("ID") { .id(url: $0.url) }
+        Field("Organisation") { .text($0.organisationName) }
+        Field("Name") { .text([$0.firstName, $0.lastName].compactMap(\.self).joined(separator: " ")) }
+        Field("Email") { .text($0.email) }
+        Field("Status") { .status($0.status.rawValue) }
+    }
 
     @OptionGroup var pagination: PaginationOptions
 

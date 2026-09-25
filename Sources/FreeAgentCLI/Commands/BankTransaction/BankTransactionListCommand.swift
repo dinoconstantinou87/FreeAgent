@@ -10,13 +10,13 @@ struct BankTransactionListCommand: ListCommand {
 
     static let noun = "bank transactions"
 
-    static let columns: [ListColumn<Components.Schemas.BankTransaction>] = [
-        ListColumn("ID") { .id(url: $0.url) },
-        ListColumn("Dated On") { .date($0.datedOn) },
-        ListColumn("Description") { .text($0.description) },
-        ListColumn("Amount") { .currency($0.amount, code: nil) },
-        ListColumn("Unexplained") { .currency($0.unexplainedAmount, code: nil) },
-    ]
+    static var columns: [Field<Components.Schemas.BankTransaction>] {
+        Field("ID") { .id(url: $0.url) }
+        Field("Dated On") { .date($0.datedOn) }
+        Field("Description") { .text($0.description) }
+        Field("Amount") { .currency($0.amount, code: nil) }
+        Field("Unexplained") { .currency($0.unexplainedAmount, code: nil) }
+    }
 
     @Option(name: .long, help: "Bank account URL (e.g. https://api.freeagent.com/v2/bank_accounts/123)")
     var bankAccount: String
