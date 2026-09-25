@@ -70,7 +70,7 @@ require_valid_tape() {
 
 require_sandbox_account() {
     local company company_url company_name
-    company="$(freeagent company)" || die "could not reach the API - are you logged in?"
+    company="$(freeagent company --json)" || die "could not reach the API - are you logged in?"
     company_url="$(jq -r '.company.url' <<<"$company")"
     company_name="$(jq -r '.company.name' <<<"$company")"
 

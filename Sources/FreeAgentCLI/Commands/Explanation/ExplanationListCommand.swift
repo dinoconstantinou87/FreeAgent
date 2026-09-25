@@ -10,11 +10,11 @@ struct ExplanationListCommand: ListCommand {
 
     static let noun = "explanations"
 
-    static let columns: [ListColumn<Components.Schemas.BankTransactionExplanation>] = [
-        ListColumn("ID") { .id(url: $0.url) },
-        ListColumn("Dated On") { .date($0.datedOn) },
-        ListColumn("Description") { .text($0.description) },
-        ListColumn("Gross Value") { .currency($0.grossValue, code: nil) },
+    static let columns: [Field<Components.Schemas.BankTransactionExplanation>] = [
+        Field("ID") { .id(url: $0.url) },
+        Field("Dated On") { .date($0.datedOn) },
+        Field("Description") { .text($0.description) },
+        Field("Gross Value") { .currency($0.grossValue, code: nil) },
     ]
 
     @Option(name: .long, help: "Bank account URL (e.g. https://api.freeagent.com/v2/bank_accounts/123)")

@@ -10,14 +10,14 @@ struct InvoiceListRecurringCommand: ListCommand {
 
     static let noun = "recurring invoices"
 
-    static let columns: [ListColumn<Components.Schemas.RecurringInvoice>] = [
-        ListColumn("ID") { .id(url: $0.url) },
-        ListColumn("Reference") { .text($0.reference) },
-        ListColumn("Contact") { .text($0.contactName) },
-        ListColumn("Frequency") { .text($0.frequency) },
-        ListColumn("Next Recurs On") { .date($0.nextRecursOn) },
-        ListColumn("Status") { .status($0.recurringStatus) },
-        ListColumn("Total") { .currency($0.totalValue, code: $0.currency) },
+    static let columns: [Field<Components.Schemas.RecurringInvoice>] = [
+        Field("ID") { .id(url: $0.url) },
+        Field("Reference") { .text($0.reference) },
+        Field("Contact") { .text($0.contactName) },
+        Field("Frequency") { .text($0.frequency) },
+        Field("Next Recurs On") { .date($0.nextRecursOn) },
+        Field("Status") { .status($0.recurringStatus) },
+        Field("Total") { .currency($0.totalValue, code: $0.currency) },
     ]
 
     @Option(name: .long, help: "Filter by view")

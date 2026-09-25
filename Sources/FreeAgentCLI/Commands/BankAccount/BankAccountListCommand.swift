@@ -10,12 +10,12 @@ struct BankAccountListCommand: ListCommand {
 
     static let noun = "bank accounts"
 
-    static let columns: [ListColumn<Components.Schemas.BankAccount>] = [
-        ListColumn("ID") { .id(url: $0.url) },
-        ListColumn("Name") { .text($0.name) },
-        ListColumn("Bank") { .text($0.bankName) },
-        ListColumn("Type") { .text($0._type) },
-        ListColumn("Balance") { .currency($0.currentBalance, code: $0.currency) },
+    static let columns: [Field<Components.Schemas.BankAccount>] = [
+        Field("ID") { .id(url: $0.url) },
+        Field("Name") { .text($0.name) },
+        Field("Bank") { .text($0.bankName) },
+        Field("Type") { .text($0._type) },
+        Field("Balance") { .currency($0.currentBalance, code: $0.currency) },
     ]
 
     @Option(name: .long, help: "Filter by view (e.g. standard_bank_accounts)")

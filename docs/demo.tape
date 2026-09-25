@@ -32,7 +32,7 @@ Sleep 750ms
 
 Type "# Who am I connected to?" Enter
 Sleep 300ms
-Type "freeagent company | jq '.company | {name, type, currency, sales_tax_registration_status}'" Enter
+Type "freeagent company" Enter
 Sleep 2500ms
 
 Hide
