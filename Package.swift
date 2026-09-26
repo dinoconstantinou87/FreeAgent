@@ -22,7 +22,6 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser.git", from: "1.5.0"),
         .package(url: "https://github.com/apple/swift-configuration.git", from: "1.2.1"),
-        .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
         .package(url: "https://github.com/apple/swift-openapi-runtime", from: "1.11.0"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession", from: "1.3.0"),
         .package(url: "https://github.com/tuist/Noora", from: "0.50.0"),
@@ -57,7 +56,6 @@ let package = Package(
                 "FreeAgentAPI",
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Configuration", package: "swift-configuration"),
-                .product(name: "Logging", package: "swift-log"),
                 .product(name: "Noora", package: "Noora"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
                 .product(name: "FlyingFox", package: "FlyingFox"),

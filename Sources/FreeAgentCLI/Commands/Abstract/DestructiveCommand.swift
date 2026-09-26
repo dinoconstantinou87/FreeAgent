@@ -1,3 +1,4 @@
+import ArgumentParser
 import Noora
 
 // MARK: - DestructiveCommand
@@ -13,9 +14,38 @@ extension DestructiveCommand {
         case .proceed:
             true
         case .refuse:
-            throw CommandRefusal.notInteractive
+            throw DestructiveCommandError.confirmationRequired
         case .prompt:
             Noora().yesOrNoChoicePrompt(question: TerminalText(stringLiteral: confirmation), defaultAnswer: false)
+        }
+    }
+}
+
+// MARK: - DestructiveCommandError
+
+enum DestructiveCommandError: CommandError {
+    case confirmationRequired
+
+    // MARK: Internal
+
+    var errorDescription: String? {
+        switch self {
+        case .confirmationRequired:
+            "Confirmation required when not running interactively"
+        }
+    }
+
+    var exitCode: ExitCode {
+        .validationFailure
+    }
+
+    var takeaways: [TerminalText] {
+        switch self {
+        case .confirmationRequired:
+            [
+                "Pass \(.command("--yes")) to confirm",
+                "Pass \(.command("--dry-run")) to preview the request instead",
+            ]
         }
     }
 }

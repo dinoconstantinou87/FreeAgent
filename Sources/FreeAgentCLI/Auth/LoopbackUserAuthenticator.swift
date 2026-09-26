@@ -1,7 +1,7 @@
 import FlyingFox
 import Foundation
 import FreeAgentAPI
-import Logging
+import Noora
 import OAuthenticator
 
 struct LoopbackUserAuthenticator: Sendable {
@@ -9,12 +9,13 @@ struct LoopbackUserAuthenticator: Sendable {
     // MARK: Lifecycle
 
     init(callbackUrl: URL) {
-        self.init(callbackUrl: callbackUrl, openUrl: Self.open)
+        self.init(callbackUrl: callbackUrl, openUrl: Self.open, ui: Noora.standardError())
     }
 
-    init(callbackUrl: URL, openUrl: @escaping OpenUrl) {
+    init(callbackUrl: URL, openUrl: @escaping OpenUrl, ui: any Noorable) {
         self.callbackUrl = callbackUrl
         self.openUrl = openUrl
+        self.ui = ui
     }
 
     // MARK: Internal
@@ -22,24 +23,24 @@ struct LoopbackUserAuthenticator: Sendable {
     typealias OpenUrl = @Sendable (URL) throws -> Void
 
     var userAuthenticator: AuthClient.UserAuthenticator {
-        { [callbackUrl, openUrl] authorizationUrl, _ in
+        { [callbackUrl, openUrl, ui] authorizationUrl, _ in
             try await Self.authenticate(
                 callbackUrl: callbackUrl,
                 authorizationUrl: authorizationUrl,
-                openUrl: openUrl
+                openUrl: openUrl,
+                ui: ui
             )
         }
     }
 
     // MARK: Private
 
-    private static let logger = Logger(label: "oauth-callback")
-
     private static let completionMessage =
         "Authentication Complete - You can close this window and return to the terminal"
 
     private let callbackUrl: URL
     private let openUrl: OpenUrl
+    private let ui: any Noorable
 
     private static func open(_ url: URL) throws {
         let process = Process()
@@ -56,7 +57,8 @@ struct LoopbackUserAuthenticator: Sendable {
     private static func authenticate(
         callbackUrl: URL,
         authorizationUrl: URL,
-        openUrl: @escaping OpenUrl
+        openUrl: @escaping OpenUrl,
+        ui: any Noorable
     ) async throws -> URL {
         let server = HTTPServer(port: UInt16(callbackUrl.port ?? 80), logger: .disabled)
         let redirects = AsyncStream<URL>.makeStream()
@@ -90,7 +92,10 @@ struct LoopbackUserAuthenticator: Sendable {
             group.addTask {
                 try await server.waitUntilListening()
                 try openUrl(authorizationUrl)
-                logger.info("Waiting for login to complete...")
+                ui.info(.alert(
+                    "Waiting for you to log in to FreeAgent in your browser",
+                    takeaways: ["If it did not open, visit \(authorizationUrl.absoluteString)"]
+                ))
 
                 for await url in redirects.stream {
                     return url

@@ -32,7 +32,7 @@ extension ClientCommand {
     public func run() async throws {
         do {
             guard try canRun() else {
-                throw CommandRefusal.declined
+                throw ClientCommandError.cancelled
             }
 
             if let result = try await run(client: try await client()) {
@@ -44,7 +44,7 @@ extension ClientCommand {
                 return
             }
 
-            let failure = CommandFailure(error)
+            let failure = error.commandError
             Noora().error(failure.alert)
             throw failure.exitCode
         }
@@ -73,5 +73,22 @@ extension ClientCommand {
             transport: URLSessionTransport(),
             middlewares: chain
         )
+    }
+}
+
+// MARK: - ClientCommandError
+
+enum ClientCommandError: CommandError {
+    case cancelled
+
+    var errorDescription: String? {
+        switch self {
+        case .cancelled:
+            "Cancelled, nothing was changed"
+        }
+    }
+
+    var exitCode: ExitCode {
+        .failure
     }
 }

@@ -1,6 +1,7 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
+import Noora
 
 // MARK: - ExplanationAttachmentAddCommand
 
@@ -35,7 +36,7 @@ struct ExplanationAttachmentAddCommand: MutatingCommand {
             let ext = url.pathExtension.lowercased()
 
             guard let contentType = Self.contentTypes[ext] else {
-                throw ExplanationAttachmentAddError.unsupportedFileType(ext)
+                throw ExplanationAttachmentAddCommandError.unsupportedFileType(ext)
             }
 
             return try Components.Schemas.AttachmentCreatePayload(
@@ -73,15 +74,26 @@ struct ExplanationAttachmentAddCommand: MutatingCommand {
 
 }
 
-// MARK: - ExplanationAttachmentAddError
+// MARK: - ExplanationAttachmentAddCommandError
 
-enum ExplanationAttachmentAddError: Error, CustomStringConvertible {
+enum ExplanationAttachmentAddCommandError: CommandError {
     case unsupportedFileType(String)
 
-    var description: String {
+    var errorDescription: String? {
         switch self {
         case .unsupportedFileType(let ext):
-            "Unsupported attachment type '\(ext)'. Supported types: pdf, png, jpg, jpeg, gif"
+            "Unsupported attachment type '\(ext)'"
+        }
+    }
+
+    var exitCode: ExitCode {
+        .validationFailure
+    }
+
+    var takeaways: [TerminalText] {
+        switch self {
+        case .unsupportedFileType:
+            ["Attach a pdf, png, jpg, jpeg or gif file"]
         }
     }
 }

@@ -3,13 +3,19 @@ import Foundation
 import FreeAgentAPI
 import Noora
 
-struct SetupCommand: AsyncParsableCommand {
+// MARK: - SetupCommand
+
+struct SetupCommand: CredentialCommand {
     static let configuration = CommandConfiguration(
         commandName: "setup",
         abstract: "Set up the FreeAgent CLI"
     )
 
-    mutating func run() async throws {
+    func perform() async throws -> URL {
+        guard Terminal.canPrompt() else {
+            throw SetupCommandError.notInteractive
+        }
+
         let key = Noora().textPrompt(
             title: "FreeAgent app OAuth ID",
             prompt: "What is your FreeAgent app OAuth ID?",
@@ -41,6 +47,38 @@ struct SetupCommand: AsyncParsableCommand {
 
         try config.save()
 
-        Noora().success(.alert("FreeAgent CLI successfully setup"))
+        return Config.url
+    }
+
+    func success(for url: URL) -> String {
+        "Saved the OAuth app to \(url.path(percentEncoded: false))"
+    }
+}
+
+// MARK: - SetupCommandError
+
+enum SetupCommandError: CommandError {
+    case notInteractive
+
+    // MARK: Internal
+
+    var errorDescription: String? {
+        switch self {
+        case .notInteractive:
+            "Setup needs an interactive terminal"
+        }
+    }
+
+    var exitCode: ExitCode {
+        .validationFailure
+    }
+
+    var takeaways: [TerminalText] {
+        switch self {
+        case .notInteractive:
+            [
+                "Set \(.command("FREEAGENT_AUTH_KEY")), \(.command("FREEAGENT_AUTH_SECRET")) and \(.command("FREEAGENT_AUTH_CALLBACK_URL")) instead"
+            ]
+        }
     }
 }
