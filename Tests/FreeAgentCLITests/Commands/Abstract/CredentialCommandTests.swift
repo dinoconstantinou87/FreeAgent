@@ -22,20 +22,13 @@ struct CredentialCommandTests {
         #expect(command.success(for: Self.credential(in: .production)) == "Logged out of FreeAgent production")
     }
 
-    @Test("shows the saved config relative to the home directory")
-    func abbreviatesConfigPath() throws {
-        let command = try SetupCommand.parse([])
-
-        #expect(command.success(for: Config.url) == "Saved the OAuth app to ~/.freeagent/config.json")
-    }
-
-    @Test("shows a config outside the home directory in full")
-    func keepsPathOutsideHome() throws {
+    @Test("shows where it saved the config")
+    func showsConfigPath() throws {
         let command = try SetupCommand.parse([])
 
         #expect(
-            command.success(for: URL(filePath: "/etc/freeagent/config.json"))
-                == "Saved the OAuth app to /etc/freeagent/config.json"
+            command.success(for: URL(filePath: "/Users/alice/.freeagent/config.json"))
+                == "Saved the OAuth app to /Users/alice/.freeagent/config.json"
         )
     }
 

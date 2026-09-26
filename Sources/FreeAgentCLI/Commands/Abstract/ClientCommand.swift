@@ -36,11 +36,11 @@ extension ClientCommand {
             }
 
             if let result = try await run(client: try await client()) {
-                try Noora().json(result, terminator: "\n")
+                try Noora().json(result)
             }
         } catch {
             if let request = DryRunRequest.from(error) {
-                try Noora().json(DryRunOutput(dryRun: request), terminator: "\n")
+                try Noora().json(DryRunOutput(dryRun: request))
                 return
             }
 

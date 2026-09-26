@@ -6,9 +6,6 @@ import Noora
 // MARK: - SetupCommand
 
 struct SetupCommand: CredentialCommand {
-
-    // MARK: Internal
-
     static let configuration = CommandConfiguration(
         commandName: "setup",
         abstract: "Set up the FreeAgent CLI"
@@ -54,19 +51,7 @@ struct SetupCommand: CredentialCommand {
     }
 
     func success(for url: URL) -> String {
-        "Saved the OAuth app to \(Self.abbreviatingHome(in: url))"
-    }
-
-    // MARK: Private
-
-    private static func abbreviatingHome(in url: URL) -> String {
-        let home = FileManager.default.homeDirectoryForCurrentUser.pathComponents
-
-        guard url.pathComponents.starts(with: home) else {
-            return url.path(percentEncoded: false)
-        }
-
-        return (["~"] + url.pathComponents.dropFirst(home.count)).joined(separator: "/")
+        "Saved the OAuth app to \(url.path(percentEncoded: false))"
     }
 }
 
