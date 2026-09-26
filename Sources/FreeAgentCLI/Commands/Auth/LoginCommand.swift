@@ -1,9 +1,8 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import Noora
 
-struct LoginCommand: AsyncParsableCommand {
+struct LoginCommand: CredentialCommand {
     static let configuration = CommandConfiguration(
         commandName: "login",
         abstract: "Login"
@@ -12,15 +11,17 @@ struct LoginCommand: AsyncParsableCommand {
     @Option(name: .long)
     var environment = Environment.production
 
-    mutating func run() async throws {
+    func perform() async throws -> AuthCredential {
         let config = try await AuthConfig(config: Config.reader(environment: environment).scoped(to: "auth"))
         let client = AuthClient(
             config: config,
             userAuthenticator: LoopbackUserAuthenticator(callbackUrl: config.callbackUrl).userAuthenticator
         )
 
-        try await client.authorize()
+        return try await client.authorize()
+    }
 
-        Noora().success(.alert("Logged in"))
+    func success(for credential: AuthCredential) -> String {
+        "Logged in to FreeAgent \(credential.environment.rawValue)"
     }
 }

@@ -3,6 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import FlyingSocks
+import Noora
 import OAuthenticator
 import Testing
 
@@ -36,6 +37,13 @@ struct LoopbackUserAuthenticatorTests {
         #expect(flow.page.contains("Authentication Complete"))
     }
 
+    @Test("says where to log in in case the browser did not open")
+    func pointsAtAuthorizationUrl() async throws {
+        _ = try await authenticate()
+
+        #expect(ui.description.contains(Self.authorizationUrl.absoluteString))
+    }
+
     @Test("releases the callback port once authentication completes")
     func releasesPort() async throws {
         let port = try Self.freePort()
@@ -56,6 +64,8 @@ struct LoopbackUserAuthenticatorTests {
     }
 
     private static let authorizationUrl = URL(filePath: "/approve_app")
+
+    private let ui = NooraMock(terminal: Terminal(isInteractive: false, isColored: false, signalBehavior: .none))
 
     private static func freePort() throws -> UInt16 {
         let socket = try listen(port: 0)
@@ -102,9 +112,11 @@ struct LoopbackUserAuthenticatorTests {
         let callbackUrl = try #require(URL(string: "http://localhost:\(port)/callback"))
         let browser = AsyncStream<URL>.makeStream()
 
-        let authenticator = LoopbackUserAuthenticator(callbackUrl: callbackUrl) { url in
-            browser.continuation.yield(url)
-        }
+        let authenticator = LoopbackUserAuthenticator(
+            callbackUrl: callbackUrl,
+            openUrl: { url in browser.continuation.yield(url) },
+            ui: ui
+        )
 
         async let redirect = authenticator.userAuthenticator(Self.authorizationUrl, "http")
 

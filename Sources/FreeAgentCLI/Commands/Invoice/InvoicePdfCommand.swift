@@ -3,6 +3,8 @@ import Foundation
 import FreeAgentAPI
 import Noora
 
+// MARK: - InvoicePdfCommand
+
 struct InvoicePdfCommand: ClientCommand {
     static let configuration = CommandConfiguration(
         commandName: "pdf",
@@ -34,7 +36,7 @@ struct InvoicePdfCommand: ClientCommand {
         case .proceed:
             true
         case .refuse:
-            throw CommandRefusal.fileExists(path: path)
+            throw InvoicePdfCommandError.fileExists(path: path)
         case .prompt:
             Noora().yesOrNoChoicePrompt(question: "Overwrite \(path)?", defaultAnswer: false)
         }
@@ -58,5 +60,34 @@ struct InvoicePdfCommand: ClientCommand {
         Noora().success(.alert("Saved invoice \(id) to \(path)"))
 
         return nil
+    }
+}
+
+// MARK: - InvoicePdfCommandError
+
+enum InvoicePdfCommandError: CommandError {
+    case fileExists(path: String)
+
+    // MARK: Internal
+
+    var errorDescription: String? {
+        switch self {
+        case .fileExists(let path):
+            "\(path) already exists"
+        }
+    }
+
+    var exitCode: ExitCode {
+        .validationFailure
+    }
+
+    var takeaways: [TerminalText] {
+        switch self {
+        case .fileExists:
+            [
+                "Pass \(.command("--clobber")) to overwrite it",
+                "Pass \(.command("--output")) to save somewhere else",
+            ]
+        }
     }
 }

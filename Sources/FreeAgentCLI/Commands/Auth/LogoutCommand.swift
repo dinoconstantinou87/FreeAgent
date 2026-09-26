@@ -1,16 +1,25 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import Noora
 
-struct LogoutCommand: AsyncParsableCommand {
+struct LogoutCommand: CredentialCommand {
     static let configuration = CommandConfiguration(
         commandName: "logout",
         abstract: "Logout"
     )
 
-    mutating func run() async throws {
-        try AuthStorage().clear()
-        Noora().success(.alert("Logged out"))
+    func perform() async throws -> AuthCredential {
+        let storage = AuthStorage()
+
+        guard let credential = try storage.get() else {
+            throw AuthError.unauthenticated
+        }
+
+        try storage.clear()
+        return credential
+    }
+
+    func success(for credential: AuthCredential) -> String {
+        "Logged out of FreeAgent \(credential.environment.rawValue)"
     }
 }
