@@ -1,0 +1,39 @@
+type: object
+required:
+- url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/corporation_tax_returns/2025-12-31
+  period_ends_on:
+    type: string
+    example: '2025-12-31'
+  period_starts_on:
+    type: string
+    example: '2025-01-01'
+  amount_due:
+    type: string
+    description: Amount to be paid by payment_due_on
+    example: '2724.03'
+  payment_due_on:
+    type: string
+    example: '2026-10-01'
+  payment_status:
+    type: string
+    description: One of unpaid or marked_as_paid, omitted when nothing is due
+    example: unpaid
+  filing_due_on:
+    type: string
+    example: '2026-12-31'
+  filing_status:
+    type: string
+    description: One of draft, unfiled, pending, rejected, filed or marked_as_filed
+    example: draft
+  filed_at:
+    type: string
+    format: date-time
+    example: '2026-10-09T17:13:34.119+00:00'
+  filed_reference:
+    type: string
+    description: IRMark returned by an online submission
+    example: 4CQXAEAVNA656F6XM3DHYBF6Y37I3S43
