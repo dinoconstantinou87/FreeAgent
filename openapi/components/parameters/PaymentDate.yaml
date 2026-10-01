@@ -1,0 +1,7 @@
+name: payment_date
+in: path
+required: true
+description: Due date of the payment
+schema:
+  type: string
+  example: '2025-12-07'

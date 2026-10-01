@@ -65,6 +65,18 @@ paths:
     $ref: 'paths/recurring_invoices.yaml#/list'
   /v2/recurring_invoices/{id}:
     $ref: 'paths/recurring_invoices.yaml#/show'
+  /v2/vat_returns:
+    $ref: 'paths/vat_returns.yaml#/list'
+  /v2/vat_returns/{period_ends_on}:
+    $ref: 'paths/vat_returns.yaml#/show'
+  /v2/vat_returns/{period_ends_on}/mark_as_filed:
+    $ref: 'paths/vat_returns.yaml#/mark_as_filed'
+  /v2/vat_returns/{period_ends_on}/mark_as_unfiled:
+    $ref: 'paths/vat_returns.yaml#/mark_as_unfiled'
+  /v2/vat_returns/{period_ends_on}/payments/{payment_date}/mark_as_paid:
+    $ref: 'paths/vat_returns.yaml#/mark_payment_as_paid'
+  /v2/vat_returns/{period_ends_on}/payments/{payment_date}/mark_as_unpaid:
+    $ref: 'paths/vat_returns.yaml#/mark_payment_as_unpaid'
 components:
   schemas:
     InvoiceView:
@@ -121,6 +133,18 @@ components:
       $ref: 'components/schemas/RecurringInvoiceResponse.yaml'
     RecurringInvoiceListResponse:
       $ref: 'components/schemas/RecurringInvoiceListResponse.yaml'
+    TaxReturnPayment:
+      $ref: 'components/schemas/TaxReturnPayment.yaml'
+    VatReturn:
+      $ref: 'components/schemas/VatReturn.yaml'
+    VatReturnBreakdown:
+      $ref: 'components/schemas/VatReturnBreakdown.yaml'
+    VatReturnBreakdownRow:
+      $ref: 'components/schemas/VatReturnBreakdownRow.yaml'
+    VatReturnResponse:
+      $ref: 'components/schemas/VatReturnResponse.yaml'
+    VatReturnListResponse:
+      $ref: 'components/schemas/VatReturnListResponse.yaml'
     Errors:
       $ref: 'components/schemas/Errors.yaml'
     ErrorDetail:
@@ -198,6 +222,10 @@ components:
       $ref: 'components/parameters/Page.yaml'
     PerPage:
       $ref: 'components/parameters/PerPage.yaml'
+    PeriodEndsOn:
+      $ref: 'components/parameters/PeriodEndsOn.yaml'
+    PaymentDate:
+      $ref: 'components/parameters/PaymentDate.yaml'
   headers:
     Link:
       $ref: 'components/headers/Link.yaml'
@@ -242,3 +270,4 @@ tags:
 - name: Invoices
 - name: Invoice Transitions
 - name: Recurring Invoices
+- name: VAT Returns

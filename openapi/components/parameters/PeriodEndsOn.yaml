@@ -1,0 +1,7 @@
+name: period_ends_on
+in: path
+required: true
+description: End date of the period the return covers
+schema:
+  type: string
+  example: '2025-10-31'

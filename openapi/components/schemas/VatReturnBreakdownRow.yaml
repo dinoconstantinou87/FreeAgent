@@ -1,0 +1,14 @@
+type: object
+properties:
+  title:
+    type: string
+    example: VAT due on sales and other outputs
+  value:
+    type: string
+    example: '9658.63'
+  key:
+    type: string
+    example: vatDueSales
+  box_number:
+    type: integer
+    example: 1
