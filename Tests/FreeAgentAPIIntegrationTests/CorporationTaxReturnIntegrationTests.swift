@@ -44,7 +44,8 @@ struct CorporationTaxReturnIntegrationTests {
         #expect(corporationTaxReturn.url == listed.url)
         #expect(corporationTaxReturn.filingStatus == listed.filingStatus)
         #expect(corporationTaxReturn.periodStartsOn == listed.periodStartsOn)
-        #expect(corporationTaxReturn.amountDue == listed.amountDue)
+        #expect(corporationTaxReturn.filingDueOn == listed.filingDueOn)
+        #expect(corporationTaxReturn.paymentDueOn == listed.paymentDueOn)
     }
 
     @Test("A corporation tax return can be marked as paid and back to unpaid")
