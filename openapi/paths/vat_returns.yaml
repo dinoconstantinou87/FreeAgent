@@ -1,0 +1,108 @@
+list:
+  get:
+    tags:
+    - VAT Returns
+    summary: List VAT returns
+    description: List VAT returns
+    operationId: listVatReturns
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VatReturnListResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+show:
+  get:
+    tags:
+    - VAT Returns
+    summary: Show VAT return
+    description: Show VAT return
+    operationId: showVatReturn
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VatReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/PeriodEndsOn'
+mark_as_filed:
+  put:
+    tags:
+    - VAT Returns
+    summary: Mark VAT return as filed
+    description: Mark VAT return as filed
+    operationId: markVatReturnAsFiled
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VatReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/PeriodEndsOn'
+mark_as_unfiled:
+  put:
+    tags:
+    - VAT Returns
+    summary: Mark VAT return as unfiled
+    description: Mark VAT return as unfiled
+    operationId: markVatReturnAsUnfiled
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VatReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/PeriodEndsOn'
+mark_payment_as_paid:
+  put:
+    tags:
+    - VAT Returns
+    summary: Mark VAT return payment as paid
+    description: Mark VAT return payment as paid
+    operationId: markVatReturnPaymentAsPaid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VatReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/PeriodEndsOn'
+  - $ref: '#/components/parameters/PaymentDate'
+mark_payment_as_unpaid:
+  put:
+    tags:
+    - VAT Returns
+    summary: Mark VAT return payment as unpaid
+    description: Mark VAT return payment as unpaid
+    operationId: markVatReturnPaymentAsUnpaid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VatReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/PeriodEndsOn'
+  - $ref: '#/components/parameters/PaymentDate'

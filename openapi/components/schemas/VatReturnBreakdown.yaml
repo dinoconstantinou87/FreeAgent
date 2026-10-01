@@ -1,0 +1,9 @@
+type: object
+properties:
+  title:
+    type: string
+    example: VAT Return 01 Aug 25 to 31 Oct 25
+  rows:
+    type: array
+    items:
+      $ref: 'VatReturnBreakdownRow.yaml'

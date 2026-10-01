@@ -1,0 +1,34 @@
+type: object
+required:
+- url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/vat_returns/2025-10-31
+  period_ends_on:
+    type: string
+    example: '2025-10-31'
+  period_starts_on:
+    type: string
+    example: '2025-08-01'
+  payments:
+    type: array
+    items:
+      $ref: 'TaxReturnPayment.yaml'
+  filing_due_on:
+    type: string
+    example: '2025-12-07'
+  filing_status:
+    type: string
+    description: One of unfiled, pending, rejected, filed or marked_as_filed
+    example: unfiled
+  filed_at:
+    type: string
+    format: date-time
+    example: '2025-12-01T10:32:49.000+00:00'
+  filed_reference:
+    type: string
+    description: Form bundle number returned by an online submission
+    example: '00000000001'
+  breakdown:
+    $ref: 'VatReturnBreakdown.yaml'

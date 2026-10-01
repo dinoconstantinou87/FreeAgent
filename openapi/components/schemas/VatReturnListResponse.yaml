@@ -1,0 +1,8 @@
+type: object
+required:
+- vat_returns
+properties:
+  vat_returns:
+    type: array
+    items:
+      $ref: 'VatReturn.yaml'

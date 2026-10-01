@@ -1,0 +1,18 @@
+type: object
+properties:
+  label:
+    type: string
+    example: Payment Due
+  due_on:
+    type: string
+    example: '2025-12-07'
+  amount_due:
+    description: Negative for a refund. VAT returns send the number 0 rather than a string when nothing is due
+    oneOf:
+    - type: string
+    - type: number
+    example: '413.06'
+  status:
+    type: string
+    description: One of unpaid or marked_as_paid, omitted when nothing is due
+    example: unpaid
