@@ -77,6 +77,18 @@ paths:
     $ref: 'paths/vat_returns.yaml#/mark_payment_as_paid'
   /v2/vat_returns/{period_ends_on}/payments/{payment_date}/mark_as_unpaid:
     $ref: 'paths/vat_returns.yaml#/mark_payment_as_unpaid'
+  /v2/corporation_tax_returns:
+    $ref: 'paths/corporation_tax_returns.yaml#/list'
+  /v2/corporation_tax_returns/{period_ends_on}:
+    $ref: 'paths/corporation_tax_returns.yaml#/show'
+  /v2/corporation_tax_returns/{period_ends_on}/mark_as_filed:
+    $ref: 'paths/corporation_tax_returns.yaml#/mark_as_filed'
+  /v2/corporation_tax_returns/{period_ends_on}/mark_as_unfiled:
+    $ref: 'paths/corporation_tax_returns.yaml#/mark_as_unfiled'
+  /v2/corporation_tax_returns/{period_ends_on}/mark_as_paid:
+    $ref: 'paths/corporation_tax_returns.yaml#/mark_as_paid'
+  /v2/corporation_tax_returns/{period_ends_on}/mark_as_unpaid:
+    $ref: 'paths/corporation_tax_returns.yaml#/mark_as_unpaid'
 components:
   schemas:
     InvoiceView:
@@ -145,6 +157,12 @@ components:
       $ref: 'components/schemas/VatReturnResponse.yaml'
     VatReturnListResponse:
       $ref: 'components/schemas/VatReturnListResponse.yaml'
+    CorporationTaxReturn:
+      $ref: 'components/schemas/CorporationTaxReturn.yaml'
+    CorporationTaxReturnResponse:
+      $ref: 'components/schemas/CorporationTaxReturnResponse.yaml'
+    CorporationTaxReturnListResponse:
+      $ref: 'components/schemas/CorporationTaxReturnListResponse.yaml'
     Errors:
       $ref: 'components/schemas/Errors.yaml'
     ErrorDetail:
@@ -271,3 +289,4 @@ tags:
 - name: Invoice Transitions
 - name: Recurring Invoices
 - name: VAT Returns
+- name: Corporation Tax Returns

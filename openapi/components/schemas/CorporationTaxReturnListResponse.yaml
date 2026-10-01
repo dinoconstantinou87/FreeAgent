@@ -1,0 +1,8 @@
+type: object
+required:
+- corporation_tax_returns
+properties:
+  corporation_tax_returns:
+    type: array
+    items:
+      $ref: 'CorporationTaxReturn.yaml'

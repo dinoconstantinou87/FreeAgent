@@ -1,0 +1,106 @@
+list:
+  get:
+    tags:
+    - Corporation Tax Returns
+    summary: List corporation tax returns
+    description: List corporation tax returns
+    operationId: listCorporationTaxReturns
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorporationTaxReturnListResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+show:
+  get:
+    tags:
+    - Corporation Tax Returns
+    summary: Show corporation tax return
+    description: Show corporation tax return
+    operationId: showCorporationTaxReturn
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorporationTaxReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/PeriodEndsOn'
+mark_as_filed:
+  put:
+    tags:
+    - Corporation Tax Returns
+    summary: Mark corporation tax return as filed
+    description: Mark corporation tax return as filed
+    operationId: markCorporationTaxReturnAsFiled
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorporationTaxReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/PeriodEndsOn'
+mark_as_unfiled:
+  put:
+    tags:
+    - Corporation Tax Returns
+    summary: Mark corporation tax return as unfiled
+    description: Mark corporation tax return as unfiled
+    operationId: markCorporationTaxReturnAsUnfiled
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorporationTaxReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/PeriodEndsOn'
+mark_as_paid:
+  put:
+    tags:
+    - Corporation Tax Returns
+    summary: Mark corporation tax return as paid
+    description: Mark corporation tax return as paid
+    operationId: markCorporationTaxReturnAsPaid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorporationTaxReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/PeriodEndsOn'
+mark_as_unpaid:
+  put:
+    tags:
+    - Corporation Tax Returns
+    summary: Mark corporation tax return as unpaid
+    description: Mark corporation tax return as unpaid
+    operationId: markCorporationTaxReturnAsUnpaid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CorporationTaxReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/PeriodEndsOn'
