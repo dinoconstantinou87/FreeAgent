@@ -1,0 +1,6 @@
+type: object
+required:
+- project
+properties:
+  project:
+    $ref: 'Project.yaml'

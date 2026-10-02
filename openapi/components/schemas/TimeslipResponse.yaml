@@ -1,0 +1,6 @@
+type: object
+required:
+- timeslip
+properties:
+  timeslip:
+    $ref: 'Timeslip.yaml'

@@ -1,0 +1,19 @@
+type: object
+properties:
+  user:
+    type: string
+    example: https://api.freeagent.com/v2/users/1
+  task:
+    type: string
+    example: https://api.freeagent.com/v2/tasks/1
+  dated_on:
+    type: string
+    example: '2026-10-02'
+  hours:
+    type: number
+    description: Lost when a running timer stops, which sets the hours the timer started with plus the time it ran
+    example: 1.5
+  comment:
+    type: string
+    description: An empty string removes the comment
+    example: Wrote the timeslip commands

@@ -1,0 +1,8 @@
+type: object
+required:
+- timeslips
+properties:
+  timeslips:
+    type: array
+    items:
+      $ref: 'Timeslip.yaml'

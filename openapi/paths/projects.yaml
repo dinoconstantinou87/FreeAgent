@@ -1,0 +1,23 @@
+show:
+  get:
+    tags:
+    - Projects
+    summary: Show project
+    description: Show project
+    operationId: showProject
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

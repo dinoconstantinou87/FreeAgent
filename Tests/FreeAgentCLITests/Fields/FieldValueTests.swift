@@ -21,6 +21,7 @@ struct FieldValueTests {
             .timestamp(nil),
             .currency(nil, code: "GBP"),
             .percent(nil),
+            .hours(nil),
             .number(nil),
             .bytes(nil),
             .flag(nil),
@@ -75,6 +76,19 @@ struct FieldValueTests {
     @Test("shows a rate it cannot parse as FreeAgent sent it")
     func keepsUnparsablePercent() {
         #expect(format(.percent("n/a")) == "n/a")
+    }
+
+    @Test(
+        "formats hours as hours and minutes",
+        arguments: [("0.0", "0:00"), ("2.5", "2:30"), ("1.01666667", "1:01"), ("0.03333333", "0:02"), ("12.0", "12:00")]
+    )
+    func formatsHours(hours: String, expected: String) {
+        #expect(format(.hours(hours)) == expected)
+    }
+
+    @Test("shows hours it cannot parse as FreeAgent sent them")
+    func keepsUnparsableHours() {
+        #expect(format(.hours("n/a")) == "n/a")
     }
 
     @Test("formats a timestamp as a short date and time in the time zone")

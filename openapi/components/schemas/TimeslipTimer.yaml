@@ -1,0 +1,14 @@
+type: object
+description: Present only while a timer is running
+required:
+  - running
+  - start_from
+properties:
+  running:
+    type: boolean
+    example: true
+  start_from:
+    type: string
+    format: date-time
+    description: When the timer started, less the hours already recorded, so the time worked is now minus this
+    example: '2026-10-02T08:55:58.459Z'

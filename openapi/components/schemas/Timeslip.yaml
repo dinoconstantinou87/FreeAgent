@@ -1,0 +1,42 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/timeslips/1
+  user:
+    type: string
+    example: https://api.freeagent.com/v2/users/1
+  project:
+    type: string
+    description: Always the task's project
+    example: https://api.freeagent.com/v2/projects/1
+  task:
+    type: string
+    example: https://api.freeagent.com/v2/tasks/1
+  dated_on:
+    type: string
+    example: '2026-10-02'
+  hours:
+    type: string
+    description: A running timer adds whole minutes when it stops, so this can carry eight decimal places
+    example: '1.01666667'
+  comment:
+    type: string
+    description: Omitted until set
+    example: Wrote the timeslip commands
+  billed_on_invoice:
+    type: string
+    description: The invoice billing the timeslip, if any
+    example: https://api.freeagent.com/v2/invoices/1
+  timer:
+    $ref: 'TimeslipTimer.yaml'
+  created_at:
+    type: string
+    format: date-time
+    example: '2026-10-02T09:55:11.000Z'
+  updated_at:
+    type: string
+    format: date-time
+    example: '2026-10-02T09:55:11.000Z'
