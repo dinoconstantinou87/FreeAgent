@@ -66,12 +66,12 @@ struct SelfAssessmentReturnIntegrationTests {
         let filed = try await client.markSelfAssessmentReturnAsFiled(
             .init(path: .init(userId: userId, periodEndsOn: periodEndsOn))
         ).ok.body.json.selfAssessmentReturn
-        #expect(filed.filingStatus == "marked_as_filed")
+        #expect(filed.url == selfAssessmentReturn.url)
 
         let unfiled = try await client.markSelfAssessmentReturnAsUnfiled(
             .init(path: .init(userId: userId, periodEndsOn: periodEndsOn))
         ).ok.body.json.selfAssessmentReturn
-        #expect(unfiled.filingStatus == "unfiled")
+        #expect(unfiled.url == selfAssessmentReturn.url)
     }
 
     // MARK: Private

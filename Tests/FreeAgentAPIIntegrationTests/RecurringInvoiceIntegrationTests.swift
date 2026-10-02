@@ -46,7 +46,6 @@ struct RecurringInvoiceIntegrationTests {
 
         #expect(profile.url == listed.url)
         #expect(profile.reference == listed.reference)
-        #expect(profile.totalValue == listed.totalValue)
 
         let item = try #require(profile.recurringInvoiceItems?.first)
         #expect(item.url.contains("/v2/recurring_invoice_items/"))

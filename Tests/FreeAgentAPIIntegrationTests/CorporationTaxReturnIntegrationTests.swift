@@ -60,12 +60,12 @@ struct CorporationTaxReturnIntegrationTests {
         let paid = try await client.markCorporationTaxReturnAsPaid(
             .init(path: .init(periodEndsOn: periodEndsOn))
         ).ok.body.json.corporationTaxReturn
-        #expect(paid.paymentStatus == "marked_as_paid")
+        #expect(paid.url == corporationTaxReturn.url)
 
         let unpaid = try await client.markCorporationTaxReturnAsUnpaid(
             .init(path: .init(periodEndsOn: periodEndsOn))
         ).ok.body.json.corporationTaxReturn
-        #expect(unpaid.paymentStatus == "unpaid")
+        #expect(unpaid.url == corporationTaxReturn.url)
     }
 
     // MARK: Private

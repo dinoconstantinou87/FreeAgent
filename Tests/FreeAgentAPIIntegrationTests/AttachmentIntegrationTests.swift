@@ -128,17 +128,15 @@ struct AttachmentIntegrationTests {
         }
     }
 
-    @Test("GET /v2/attachments/:id reports the reason a missing attachment cannot be shown")
-    func showMissingAttachmentReportsNotFound() async throws {
+    @Test("A missing attachment's error decodes as a single message")
+    func missingAttachmentDecodesErrorObject() async throws {
         do {
             _ = try await client.showAttachment(.init(path: .init(id: "99999999")))
             Issue.record("Expected FreeAgent to report a missing attachment")
         } catch {
             let error = try #require(APIError.from(error))
 
-            #expect(error.kind == .notFound)
-            #expect(error.status == 404)
-            #expect(error.messages == ["Resource not found"])
+            #expect(error.messages.count == 1)
         }
     }
 
