@@ -15,11 +15,11 @@ final class BundleContext {
     var processedFiles = Set<String>()
 }
 
-// MARK: - OpenAPIBundler
+// MARK: - BundleCommand
 
-@main
-struct OpenAPIBundler: ParsableCommand {
+struct BundleCommand: ParsableCommand {
     static let configuration = CommandConfiguration(
+        commandName: "bundle",
         abstract: "Bundle a multi-file OpenAPI spec into a single YAML file"
     )
 

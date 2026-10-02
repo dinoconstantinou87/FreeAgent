@@ -18,7 +18,7 @@ Always run `make format` and `make lint` before committing and pushing.
 
 - `Sources/FreeAgentAPI/` — API library (auth, generated client, type overrides)
 - `Sources/FreeAgentCLI/` — CLI executable (commands, config, OAuth flow)
-- `Sources/OpenAPIBundler/` — Tool to bundle split OpenAPI YAML files
+- `Sources/FreeAgentTools/` — Development tools: `bundle` bundles the split OpenAPI YAML files, `changed-suites` picks the integration suites a spec change affects
 - `Tests/FreeAgentAPITests/` — Unit tests (mirrors source directory structure)
 - `openapi/` — Split OpenAPI spec files
 
