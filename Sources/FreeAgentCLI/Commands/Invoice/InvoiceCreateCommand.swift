@@ -32,6 +32,12 @@ struct InvoiceCreateCommand: MutatingCommand {
     )
     var includeTimeslips: Components.Schemas.InvoiceCreatePayload.IncludeTimeslipsPayload?
 
+    @Option(
+        name: .long,
+        help: "Bill the expenses, bills and bank entries rebilled to the project onto the invoice, on one line or one per expense"
+    )
+    var includeExpenses: Components.Schemas.InvoiceCreatePayload.IncludeExpensesPayload?
+
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
 
@@ -42,6 +48,10 @@ struct InvoiceCreateCommand: MutatingCommand {
         if includeTimeslips != nil, project == nil {
             throw ValidationError("--include-timeslips needs --project, or FreeAgent bills no timeslips")
         }
+
+        if includeExpenses != nil, project == nil {
+            throw ValidationError("--include-expenses needs --project, or FreeAgent bills no expenses")
+        }
     }
 
     func perform(client: Client) async throws -> Components.Schemas.InvoiceResponse {
@@ -49,6 +59,7 @@ struct InvoiceCreateCommand: MutatingCommand {
             contact: contact.value,
             project: project?.value,
             includeTimeslips: includeTimeslips,
+            includeExpenses: includeExpenses,
             currency: currency,
             datedOn: datedOn,
             dueOn: dueOn,

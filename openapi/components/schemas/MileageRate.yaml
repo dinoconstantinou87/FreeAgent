@@ -1,0 +1,11 @@
+type: object
+required:
+- basic_rate
+- additional_rate
+properties:
+  basic_rate:
+    type: string
+    example: '0.55'
+  additional_rate:
+    type: string
+    example: '0.25'

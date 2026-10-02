@@ -6,6 +6,58 @@ list:
     description: List all expenses
     operationId: listAllExpenses
     parameters:
+    - name: view
+      in: query
+      description: Filter expenses by view - FreeAgent answers an unknown view with a 400
+      schema:
+        type: string
+        enum:
+        - recent
+        - recurring
+        example: recurring
+    - name: from_date
+      in: query
+      description: Show expenses dated on or after this date (YYYY-MM-DD) - FreeAgent answers an invalid date with a 400
+      schema:
+        type: string
+        example: 2026-01-01
+    - name: to_date
+      in: query
+      description: Show expenses dated on or before this date (YYYY-MM-DD)
+      schema:
+        type: string
+        example: 2026-12-31
+    - name: updated_since
+      in: query
+      description: Show expenses updated since this timestamp
+      schema:
+        type: string
+        example: 2026-01-01T00:00:00Z
+    - name: project
+      in: query
+      description: Filter expenses by project URL - an unknown project is a 404
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/projects/:id
+    - name: user
+      in: query
+      description: Filter expenses by claimant URL - not documented, and an unknown user matches nothing
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/users/:id
+    - name: sort
+      in: query
+      description: Sort expenses by specified field, descending with a leading hyphen - not documented
+      schema:
+        type: string
+        enum:
+        - dated_on
+        - -dated_on
+        - created_at
+        - -created_at
+        - updated_at
+        - -updated_at
+        example: -dated_on
     - $ref: '#/components/parameters/Page'
     - $ref: '#/components/parameters/PerPage'
     responses:
@@ -26,7 +78,7 @@ list:
     tags:
     - Expenses
     summary: Create expense
-    description: Create expense
+    description: Create expense - a mileage claim uses the Mileage category (249) with mileage and vehicle_type in place of gross_value
     operationId: createExpense
     requestBody:
       content:
@@ -35,68 +87,48 @@ list:
             type: object
             properties:
               expense:
-                $ref: '#/components/schemas/ExpensePayload'
+                $ref: '#/components/schemas/ExpenseCreatePayload'
               expenses:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ExpensePayload'
-                example:
-                - category: https://api.freeagent.com/v2/categories/285
-                  created_at: 2011-08-24 08:10:40+00:00
-                  dated_on: 2011-08-24
-                  description: Some description
-                  gross_value: '-12.0'
-                  manual_sales_tax_amount: '0.12'
-                  sales_tax_rate: '20.0'
-                  updated_at: 2011-08-24 08:10:40+00:00
-                  user: https://api.freeagent.com/v2/users/1
-                - category: https://api.freeagent.com/v2/categories/285
-                  created_at: 2011-08-25 08:10:40+00:00
-                  dated_on: 2011-08-24
-                  description: Some description
-                  gross_value: '-5.0'
-                  manual_sales_tax_amount: '0.12'
-                  sales_tax_rate: '20.0'
-                  updated_at: 2011-08-25 08:10:40+00:00
-                  user: https://api.freeagent.com/v2/users/1
+                  $ref: '#/components/schemas/ExpenseCreatePayload'
           examples:
             Batch create expenses:
               value:
                 expenses:
-                - category: https://api.freeagent.com/v2/categories/285
-                  created_at: 2011-08-24 08:10:40+00:00
+                - user: https://api.freeagent.com/v2/users/1
+                  category: https://api.freeagent.com/v2/categories/285
                   dated_on: 2011-08-24
                   description: Some description
                   gross_value: '-12.0'
-                  manual_sales_tax_amount: '0.12'
                   sales_tax_rate: '20.0'
-                  updated_at: 2011-08-24 08:10:40+00:00
-                  user: https://api.freeagent.com/v2/users/1
-                - category: https://api.freeagent.com/v2/categories/285
-                  created_at: 2011-08-25 08:10:40+00:00
+                - user: https://api.freeagent.com/v2/users/1
+                  category: https://api.freeagent.com/v2/categories/285
                   dated_on: 2011-08-24
                   description: Some description
                   gross_value: '-5.0'
-                  manual_sales_tax_amount: '0.12'
                   sales_tax_rate: '20.0'
-                  updated_at: 2011-08-25 08:10:40+00:00
-                  user: https://api.freeagent.com/v2/users/1
             Create expense:
               value:
                 expense:
+                  user: https://api.freeagent.com/v2/users/1
                   category: https://api.freeagent.com/v2/categories/285
-                  created_at: 2011-08-24 08:10:40+00:00
-                  currency: USD
                   dated_on: 2011-08-24
                   description: Some description
+                  currency: USD
                   gross_value: '-20.0'
                   manual_sales_tax_amount: '0.12'
-                  native_gross_value: '-12.0'
-                  native_sales_tax_value: '-0.12'
-                  sales_tax_rate: '1.0'
-                  sales_tax_value: '-0.2'
-                  updated_at: 2011-08-24 08:10:40+00:00
-                  user: https://api.freeagent.com/v2/users/:id
+            Create mileage claim:
+              value:
+                expense:
+                  user: https://api.freeagent.com/v2/users/1
+                  category: https://api.freeagent.com/v2/categories/249
+                  dated_on: 2026-09-20
+                  description: Client visit
+                  mileage: '42'
+                  vehicle_type: Car
+                  engine_type: Diesel
+                  engine_size: 1601-2000cc
     responses:
       '201':
         description: Created
@@ -122,6 +154,52 @@ show:
               $ref: '#/components/schemas/ExpenseResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
+  put:
+    tags:
+    - Expenses
+    summary: Update expense
+    description: Update expense - fields left out are kept, an empty expense is a 400, and a rebilled expense keeps its locked_attributes, changing one is a 422
+    operationId: updateExpense
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - expense
+            properties:
+              expense:
+                $ref: '#/components/schemas/ExpenseUpdatePayload'
+          examples:
+            Update Expense:
+              value:
+                expense:
+                  description: Team lunch
+            Change Recurrence:
+              value:
+                expense:
+                  recurring: Quarterly
+                  recurring_end_date: 2027-06-16
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExpenseResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Expenses
+    summary: Delete expense
+    description: Delete expense - a rebilled expense is a 409 with no body, and its locked_reason says why
+    operationId: deleteExpense
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   parameters:
   - name: id
     in: path
@@ -129,3 +207,19 @@ show:
     schema:
       type: string
       example: ''
+mileage_settings:
+  get:
+    tags:
+    - Expenses
+    summary: Get mileage settings
+    description: Get mileage settings - the engine types and sizes, and the mileage rates, each for the dates they apply
+    operationId: showMileageSettings
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MileageSettingsResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'

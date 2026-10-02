@@ -5,10 +5,11 @@ import FreeAgentAPI
 struct ExpenseCreateCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
         commandName: "create",
-        abstract: "Create an expense"
+        abstract: "Create an expense",
+        discussion: "A mileage claim uses the Mileage category, 249, with --mileage and --vehicle-type in place of --gross-value."
     )
 
-    @Option(name: .long, help: "Category ID or URL, e.g. 285")
+    @Option(name: .long, help: "Category ID or URL, e.g. 285, or 249 for a mileage claim")
     var category: ResourceID
 
     @Option(name: .long, help: "Date of the expense (YYYY-MM-DD)")
@@ -17,17 +18,21 @@ struct ExpenseCreateCommand: MutatingCommand {
     @Option(name: .long, help: "Description of the expense")
     var description: String
 
-    @Option(name: .long, parsing: .unconditional, help: "Gross value (e.g. -12.0)")
-    var grossValue: String
+    @Option(
+        name: .long,
+        help: "Engine of a car or motorcycle mileage claim, as listed by 'expense mileage-settings' (default: Petrol)"
+    )
+    var engineType: Components.Schemas.ExpenseEngineType?
 
-    @Option(name: .long, help: "Sales tax rate (e.g. 20.0)")
-    var salesTaxRate: String?
+    @Option(
+        name: .long,
+        help: "Engine size of a mileage claim, as listed by 'expense mileage-settings' - an unknown size becomes the first"
+    )
+    var engineSize: String?
 
-    @Option(name: .long, help: "Manual sales tax amount (e.g. 0.12)")
-    var manualSalesTaxAmount: String?
+    @OptionGroup var expense: ExpenseOptions
 
-    @Option(name: .long, help: "User ID or URL")
-    var user: ResourceID?
+    @OptionGroup var user: UserOptions
 
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
@@ -36,14 +41,13 @@ struct ExpenseCreateCommand: MutatingCommand {
     var json = false
 
     func perform(client: Client) async throws -> Components.Schemas.ExpenseResponse {
-        let expensePayload = Components.Schemas.ExpensePayload(
+        let expensePayload = try await expense.createPayload(
+            user: user.id(client: client),
             category: category.value,
             datedOn: datedOn,
             description: description,
-            grossValue: grossValue,
-            manualSalesTaxAmount: manualSalesTaxAmount,
-            salesTaxRate: salesTaxRate,
-            user: user?.value
+            engineType: engineType,
+            engineSize: engineSize
         )
 
         let input = Operations.CreateExpense.Input(

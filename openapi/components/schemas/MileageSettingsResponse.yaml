@@ -1,0 +1,6 @@
+type: object
+required:
+- mileage_settings
+properties:
+  mileage_settings:
+    $ref: '#/components/schemas/MileageSettings'

@@ -8,6 +8,9 @@ struct ExpenseCommand: AsyncParsableCommand {
             ExpenseListCommand.self,
             ExpenseCreateCommand.self,
             ExpenseShowCommand.self,
+            ExpenseUpdateCommand.self,
+            ExpenseDeleteCommand.self,
+            ExpenseMileageSettingsCommand.self,
         ]
     )
 }

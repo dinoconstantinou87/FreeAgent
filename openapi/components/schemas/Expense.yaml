@@ -14,6 +14,14 @@ properties:
   project:
     type: string
     example: https://api.freeagent.com/v2/projects/1
+  project_name:
+    type: string
+    description: Not documented - sent with project
+    example: Website Development
+  contact_name:
+    type: string
+    description: Not documented - the project's contact, sent with project
+    example: Acme Ltd
   property:
     type: string
     example: https://api.freeagent.com/v2/properties/1
@@ -82,6 +90,22 @@ properties:
   rebilled_on_invoice:
     type: string
     example: https://api.freeagent.com/v2/invoices/1
+  rebilled_on_invoice_item:
+    type: string
+    description: Not documented - the invoice item's ID, though the URL path says invoices
+    example: https://api.freeagent.com/v2/invoices/1390808
+  locked_attributes:
+    type: array
+    description: Not documented - the fields a rebilled expense can no longer change
+    items:
+      type: string
+    example:
+    - dated_on
+    - gross_value
+  locked_reason:
+    type: string
+    description: Not documented - why some fields are locked and the expense can't be deleted
+    example: Some parts of this expense are locked, and it can't be deleted, because it has been rebilled.
   recurring:
     type: string
     example: Monthly
@@ -91,6 +115,45 @@ properties:
   recurring_end_date:
     type: string
     example: 2026-08-23
+  mileage:
+    type: string
+    example: '42.0'
+  vehicle_type:
+    type: string
+    example: Car
+  engine_type:
+    type: string
+    example: Diesel
+  engine_size:
+    type: string
+    example: 1601-2000cc
+  engine_type_index:
+    type: integer
+    description: Not documented
+    example: 1
+  engine_size_index:
+    type: integer
+    description: Not documented
+    example: 1
+  reclaim_mileage:
+    type: string
+    description: Documented as an integer, sent as a string
+    example: '1'
+  initial_rate_mileage:
+    type: string
+    example: '42.0'
+  reclaim_mileage_rate:
+    type: string
+    example: '0.55'
+  rebill_mileage_rate:
+    type: string
+    example: '0.55'
+  have_vat_receipt:
+    type: boolean
+    example: true
+  capital_asset:
+    type: string
+    example: https://api.freeagent.com/v2/capital_assets/1
   created_at:
     type: string
     format: date-time

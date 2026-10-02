@@ -41,6 +41,8 @@ paths:
     $ref: 'paths/contacts.yaml#/show'
   /v2/expenses:
     $ref: 'paths/expenses.yaml#/list'
+  /v2/expenses/mileage_settings:
+    $ref: 'paths/expenses.yaml#/mileage_settings'
   /v2/expenses/{id}:
     $ref: 'paths/expenses.yaml#/show'
   /v2/invoices/{id}/transitions/mark_as_sent:
@@ -159,14 +161,38 @@ components:
       $ref: 'components/schemas/InvoiceView.yaml'
     InvoiceViewName:
       $ref: 'components/schemas/InvoiceViewName.yaml'
-    ExpensePayload:
-      $ref: 'components/schemas/ExpensePayload.yaml'
+    ExpenseCreatePayload:
+      $ref: 'components/schemas/ExpenseCreatePayload.yaml'
+    ExpenseUpdatePayload:
+      $ref: 'components/schemas/ExpenseUpdatePayload.yaml'
+    ExpenseRecurringPeriod:
+      $ref: 'components/schemas/ExpenseRecurringPeriod.yaml'
+    ExpenseRebillType:
+      $ref: 'components/schemas/ExpenseRebillType.yaml'
+    ExpenseSalesTaxStatus:
+      $ref: 'components/schemas/ExpenseSalesTaxStatus.yaml'
+    ExpenseVehicleType:
+      $ref: 'components/schemas/ExpenseVehicleType.yaml'
+    ExpenseEngineType:
+      $ref: 'components/schemas/ExpenseEngineType.yaml'
     Expense:
       $ref: 'components/schemas/Expense.yaml'
     ExpenseResponse:
       $ref: 'components/schemas/ExpenseResponse.yaml'
     ExpenseListResponse:
       $ref: 'components/schemas/ExpenseListResponse.yaml'
+    MileageSettingsResponse:
+      $ref: 'components/schemas/MileageSettingsResponse.yaml'
+    MileageSettings:
+      $ref: 'components/schemas/MileageSettings.yaml'
+    MileageEngineOptions:
+      $ref: 'components/schemas/MileageEngineOptions.yaml'
+    MileageRates:
+      $ref: 'components/schemas/MileageRates.yaml'
+    MileageRateSet:
+      $ref: 'components/schemas/MileageRateSet.yaml'
+    MileageRate:
+      $ref: 'components/schemas/MileageRate.yaml'
     AttachmentPayload:
       $ref: 'components/schemas/AttachmentPayload.yaml'
     Attachment:

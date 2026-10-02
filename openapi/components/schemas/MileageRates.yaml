@@ -1,0 +1,14 @@
+type: object
+required:
+- from
+- to
+- value
+properties:
+  from:
+    type: string
+    example: 2026-04-06
+  to:
+    type: string
+    example: 2099-12-31
+  value:
+    $ref: '#/components/schemas/MileageRateSet'
