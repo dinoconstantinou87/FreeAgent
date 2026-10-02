@@ -9,7 +9,7 @@ public struct AuthClient: Sendable {
 
     public init(
         config: AuthConfig,
-        storage: any AuthStorageInterface = AuthStorage(),
+        storage: any AuthStorageInterface,
         userAuthenticator: @escaping UserAuthenticator = { _, _ in throw AuthError.unauthenticated },
         transport: any ClientTransport = URLSessionTransport()
     ) {

@@ -1,3 +1,4 @@
+import Configuration
 import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
@@ -13,8 +14,10 @@ enum SandboxClient {
             return token
         }
 
+        let config = ConfigReader(provider: EnvironmentVariablesProvider().prefixKeys(with: "freeagent")).scoped(to: "auth")
+
         guard
-            let credential = try? AuthStorage().get(),
+            let credential = try? AuthStorage(config: config).get(),
             credential.environment == .sandbox
         else {
             return nil

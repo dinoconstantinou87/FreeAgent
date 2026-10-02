@@ -1,3 +1,4 @@
+import Configuration
 import Foundation
 import Mockable
 import Testing
@@ -79,6 +80,33 @@ struct AuthStorageTests {
         try storage.clear()
 
         verify(store).remove().called(.once)
+    }
+
+    @Test("reads the credential store from the config", arguments: CredentialStoreKind.allCases)
+    func readsCredentialStore(kind: CredentialStoreKind) throws {
+        let config = ConfigReader(provider: InMemoryProvider(values: ["credentialStore": .init(stringLiteral: kind.rawValue)]))
+
+        #expect(throws: Never.self) {
+            try AuthStorage(config: config)
+        }
+    }
+
+    @Test("uses the platform's store when the config names none")
+    func defaultsCredentialStore() {
+        let config = ConfigReader(provider: InMemoryProvider(values: [:]))
+
+        #expect(throws: Never.self) {
+            try AuthStorage(config: config)
+        }
+    }
+
+    @Test("throws when the config names an unknown credential store")
+    func throwsForUnknownCredentialStore() {
+        let config = ConfigReader(provider: InMemoryProvider(values: ["credentialStore": "vault"]))
+
+        #expect(throws: (any Error).self) {
+            try AuthStorage(config: config)
+        }
     }
 
     // MARK: Private

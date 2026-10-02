@@ -114,6 +114,7 @@ let package = Package(
             name: "FreeAgentAPIIntegrationTests",
             dependencies: [
                 "FreeAgentAPI",
+                .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "OpenAPIRuntime", package: "swift-openapi-runtime"),
                 .product(name: "OpenAPIURLSession", package: "swift-openapi-urlsession"),
             ],

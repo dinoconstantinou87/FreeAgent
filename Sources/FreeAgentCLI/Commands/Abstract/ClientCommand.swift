@@ -53,14 +53,16 @@ extension ClientCommand {
     // MARK: Private
 
     private func client() async throws -> Client {
-        guard let credential = try AuthStorage().get() else {
+        let storage = try await AuthStorage(config: Config.reader().scoped(to: "auth"))
+
+        guard let credential = try storage.get() else {
             throw APIError(kind: .unauthenticated)
         }
 
         let auth = try await AuthConfig(config: Config.reader(environment: credential.environment).scoped(to: "auth"))
 
         let chain: [any ClientMiddleware] = [.apiVersion()] + middlewares + [
-            .auth(auth),
+            .auth(auth, storage: storage),
             .apiError(),
             .retry(willRetry: { delay in
                 Noora.standardError().info(.alert("Rate limited - retrying in \(delay.components.seconds)s"))

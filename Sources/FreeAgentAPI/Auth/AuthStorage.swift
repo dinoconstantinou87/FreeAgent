@@ -1,3 +1,4 @@
+import Configuration
 import Foundation
 
 public struct AuthStorage: AuthStorageInterface {
@@ -13,6 +14,15 @@ public struct AuthStorage: AuthStorageInterface {
         self.store = store
     }
     #endif
+
+    public init(config: ConfigReader) throws {
+        guard config.string(forKey: "credentialStore") != nil else {
+            self.init()
+            return
+        }
+
+        try self.init(store: config.requiredString(forKey: "credentialStore", as: CredentialStoreKind.self).store)
+    }
 
     // MARK: Public
 
