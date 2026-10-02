@@ -19,7 +19,7 @@ CURRENT_MAKEFILE_PATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 CURRENT_MAKEFILE_DIR := $(patsubst %/,%,$(dir $(CURRENT_MAKEFILE_PATH)))
 SWIFT_OPENAPI_GENERATOR_BIN := $(SWIFT_OPENAPI_GENERATOR_CLONE_DIR)/.build/$(SWIFT_OPENAPI_GENERATOR_BUILD_CONFIGURATION)/swift-openapi-generator
 SWIFT_OPENAPI_GENERATOR_CLONE_STAMP := $(SWIFT_OPENAPI_GENERATOR_CLONE_DIR)/.cloned-$(SWIFT_OPENAPI_GENERATOR_GIT_TAG)
-OPENAPI_BUNDLER_BIN := $(CURRENT_MAKEFILE_DIR)/.build/debug/OpenAPIBundler
+FREEAGENT_TOOLS_BIN := $(CURRENT_MAKEFILE_DIR)/.build/debug/FreeAgentTools
 OPENAPI_SOURCE_FILES := $(shell find $(OPENAPI_SOURCE_DIR) -name '*.yaml' 2>/dev/null)
 API_VERSION := $(shell grep -m1 '^  version:' "$(OPENAPI_SOURCE_ROOT)" | tr -d " '\"" | cut -d: -f2)
 
@@ -41,8 +41,8 @@ help:  # Display this help.
 	@-+echo "  OPENAPI_GENERATOR_CONFIG_PATH (e.g. openapi-generator-config.yaml)"
 	@-+echo "  OUTPUT_DIRECTORY (e.g. Sources/FreeAgentAPI/Generated)"
 
-bundle: $(OPENAPI_BUNDLER_BIN) $(OPENAPI_SOURCE_FILES)  # Bundle split OpenAPI files into a single openapi.yaml.
-	$(OPENAPI_BUNDLER_BIN) "$(OPENAPI_SOURCE_ROOT)" "$(OPENAPI_YAML_PATH)"
+bundle: $(FREEAGENT_TOOLS_BIN) $(OPENAPI_SOURCE_FILES)  # Bundle split OpenAPI files into a single openapi.yaml.
+	$(FREEAGENT_TOOLS_BIN) bundle "$(OPENAPI_SOURCE_ROOT)" "$(OPENAPI_YAML_PATH)"
 
 generate: bundle $(SWIFT_OPENAPI_GENERATOR_BIN) $(OPENAPI_GENERATOR_CONFIG_PATH) $(OUTPUT_DIRECTORY)  # Bundle and generate Swift sources from OpenAPI spec.
 	$(SWIFT_OPENAPI_GENERATOR_BIN) generate \
@@ -106,8 +106,8 @@ $(SWIFT_OPENAPI_GENERATOR_BIN): $(SWIFT_OPENAPI_GENERATOR_CLONE_STAMP)
 		--configuration "$(SWIFT_OPENAPI_GENERATOR_BUILD_CONFIGURATION)" \
 		--product swift-openapi-generator
 
-$(OPENAPI_BUNDLER_BIN): $(wildcard $(CURRENT_MAKEFILE_DIR)/Sources/OpenAPIBundler/*.swift) $(CURRENT_MAKEFILE_DIR)/Package.swift
-	swift build --product OpenAPIBundler
+$(FREEAGENT_TOOLS_BIN): $(wildcard $(CURRENT_MAKEFILE_DIR)/Sources/FreeAgentTools/*.swift $(CURRENT_MAKEFILE_DIR)/Sources/FreeAgentTools/*/*.swift) $(CURRENT_MAKEFILE_DIR)/Package.swift
+	swift build --product FreeAgentTools
 
 $(OUTPUT_DIRECTORY):
 	mkdir -p "$@"

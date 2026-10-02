@@ -42,65 +42,59 @@ jobs:
       - name: Resolve Swift toolchain
         run: echo "SWIFT_BUILD_ID=$(swift --version | grep -o 'swiftlang-[0-9.]*')" >> "$GITHUB_ENV"
 
-      - name: Detect changed models
-        id: detect
+      - name: Detect spec changes
+        id: specs
         run: |
-          changed_files=$(git diff --name-only origin/main -- openapi/)
-          if [ -z "$changed_files" ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            exit 0
+          if git diff --quiet origin/main -- openapi/; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
-          echo "skip=false" >> "$GITHUB_OUTPUT"
-
-          models=""
-          for file in $changed_files; do
-            basename=$(basename "$file" .yaml)
-            case "$file" in
-              openapi/paths/*)
-                models="$models,$basename"
-                ;;
-              openapi/components/schemas/*)
-                # Map schema files to their model name (lowercase, strip suffixes)
-                model=$(echo "$basename" | sed -E 's/(Response|CreatePayload|UpdatePayload|Payload|View|Item)$//; s/.*/\L&/')
-                models="$models,$model"
-                ;;
-              *)
-                # Shared files (e.g. openapi.yaml) — run all tests
-                echo "CHANGED_MODELS=all" >> "$GITHUB_ENV"
-                exit 0
-                ;;
-            esac
-          done
-
-          # Deduplicate and trim leading comma
-          models=$(echo "$models" | tr ',' '\n' | sort -u | tr '\n' ',' | sed 's/^,//;s/,$//')
-          echo "CHANGED_MODELS=$models" >> "$GITHUB_ENV"
-
-      - name: Skip if no OpenAPI changes
-        if: steps.detect.outputs.skip == 'true'
-        run: echo "No OpenAPI changes detected, skipping integration tests."
 
       - name: Cache swift-openapi-generator
-        if: steps.detect.outputs.skip != 'true'
+        if: steps.specs.outputs.changed == 'true'
         uses: actions/cache@v5
         with:
           path: .swift-openapi-generator
           key: openapi-generator-1.13.0
 
       - name: Cache SPM build
-        if: steps.detect.outputs.skip != 'true'
+        if: steps.specs.outputs.changed == 'true'
         uses: actions/cache@v5
         with:
           path: .build
           key: spm-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-${{ hashFiles('Package.resolved') }}
           restore-keys: spm-${{ runner.os }}-${{ env.SWIFT_BUILD_ID }}-
 
+      - name: Detect changed models
+        id: detect
+        if: steps.specs.outputs.changed == 'true'
+        run: |
+          swift build --product FreeAgentTools
+          git show origin/main:openapi/openapi.yaml > "$RUNNER_TEMP/base-openapi.yaml"
+          "$(swift build --show-bin-path)/FreeAgentTools" changed-suites \
+            --base "$RUNNER_TEMP/base-openapi.yaml" \
+            --output "$RUNNER_TEMP/changed-models.txt" \
+            $(git diff --name-only origin/main -- openapi/)
+          models=$(cat "$RUNNER_TEMP/changed-models.txt")
+
+          if [ -z "$models" ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+            echo "CHANGED_MODELS=$models" >> "$GITHUB_ENV"
+          fi
+
+      - name: Skip if no OpenAPI changes
+        if: steps.detect.outputs.skip != 'false'
+        run: echo "No OpenAPI changes affect an integration suite, skipping integration tests."
+
       - name: Generate API client
-        if: steps.detect.outputs.skip != 'true'
+        if: steps.detect.outputs.skip == 'false'
         run: make generate
 
       - name: Refresh access token
-        if: steps.detect.outputs.skip != 'true'
+        if: steps.detect.outputs.skip == 'false'
         run: |
           response=$(curl -s -X POST "https://api.sandbox.freeagent.com/v2/token_endpoint" \
             -d "grant_type=refresh_token" \
@@ -132,14 +126,14 @@ jobs:
           echo "UPDATED_CREDENTIAL=$updated_credential" >> "$GITHUB_ENV"
 
       - name: Run integration tests
-        if: steps.detect.outputs.skip != 'true'
+        if: steps.detect.outputs.skip == 'false'
         env:
           FREEAGENT_ACCESS_TOKEN: ${{ env.FREEAGENT_ACCESS_TOKEN }}
           CHANGED_MODELS: ${{ env.CHANGED_MODELS }}
         run: swift test --filter FreeAgentAPIIntegrationTests
 
       - name: Update credential secret
-        if: steps.detect.outputs.skip != 'true'
+        if: steps.detect.outputs.skip == 'false'
         env:
           GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |

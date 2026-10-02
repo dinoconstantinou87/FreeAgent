@@ -66,7 +66,7 @@ let package = Package(
             ]
         ),
         .executableTarget(
-            name: "OpenAPIBundler",
+            name: "FreeAgentTools",
             dependencies: [
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Yams", package: "Yams"),
@@ -101,6 +101,13 @@ let package = Package(
                 .swiftLanguageMode(.v6),
                 .enableExperimentalFeature("StrictConcurrency"),
                 .define("MOCKING", .when(configuration: .debug)),
+            ]
+        ),
+        .testTarget(
+            name: "FreeAgentToolsTests",
+            dependencies: [
+                "FreeAgentTools",
+                .product(name: "Yams", package: "Yams"),
             ]
         ),
         .testTarget(
