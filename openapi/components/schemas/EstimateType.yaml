@@ -1,0 +1,6 @@
+type: string
+enum:
+- Estimate
+- Quote
+- Proposal
+example: Estimate

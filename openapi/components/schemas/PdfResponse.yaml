@@ -3,4 +3,4 @@ required:
 - pdf
 properties:
   pdf:
-    $ref: 'InvoicePdf.yaml'
+    $ref: 'Pdf.yaml'

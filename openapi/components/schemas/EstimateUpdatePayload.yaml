@@ -1,0 +1,13 @@
+type: object
+properties:
+  dated_on:
+    type: string
+    example: '2026-10-02'
+  estimate_type:
+    $ref: 'EstimateType.yaml'
+  reference:
+    type: string
+    example: EST-002
+  notes:
+    type: string
+    example: Valid for 30 days

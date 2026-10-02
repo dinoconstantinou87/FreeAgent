@@ -65,6 +65,30 @@ paths:
     $ref: 'paths/recurring_invoices.yaml#/list'
   /v2/recurring_invoices/{id}:
     $ref: 'paths/recurring_invoices.yaml#/show'
+  /v2/estimates:
+    $ref: 'paths/estimates.yaml#/list'
+  /v2/estimates/{id}:
+    $ref: 'paths/estimates.yaml#/show'
+  /v2/estimates/{id}/pdf:
+    $ref: 'paths/estimates.yaml#/pdf'
+  /v2/estimates/{id}/send_email:
+    $ref: 'paths/estimates.yaml#/send_email'
+  /v2/estimates/{id}/duplicate:
+    $ref: 'paths/estimates.yaml#/duplicate'
+  /v2/estimates/{id}/transitions/mark_as_sent:
+    $ref: 'paths/estimates.yaml#/mark_as_sent'
+  /v2/estimates/{id}/transitions/mark_as_draft:
+    $ref: 'paths/estimates.yaml#/mark_as_draft'
+  /v2/estimates/{id}/transitions/mark_as_approved:
+    $ref: 'paths/estimates.yaml#/mark_as_approved'
+  /v2/estimates/{id}/transitions/mark_as_rejected:
+    $ref: 'paths/estimates.yaml#/mark_as_rejected'
+  /v2/estimates/{id}/transitions/convert_to_invoice:
+    $ref: 'paths/estimates.yaml#/convert_to_invoice'
+  /v2/estimate_items:
+    $ref: 'paths/estimates.yaml#/create_item'
+  /v2/estimate_items/{id}:
+    $ref: 'paths/estimates.yaml#/update_item'
   /v2/vat_returns:
     $ref: 'paths/vat_returns.yaml#/list'
   /v2/vat_returns/{period_ends_on}:
@@ -147,10 +171,10 @@ components:
       $ref: 'components/schemas/InvoiceTimelineItem.yaml'
     InvoiceTimelineResponse:
       $ref: 'components/schemas/InvoiceTimelineResponse.yaml'
-    InvoicePdf:
-      $ref: 'components/schemas/InvoicePdf.yaml'
-    InvoicePdfResponse:
-      $ref: 'components/schemas/InvoicePdfResponse.yaml'
+    Pdf:
+      $ref: 'components/schemas/Pdf.yaml'
+    PdfResponse:
+      $ref: 'components/schemas/PdfResponse.yaml'
     InvoicePaymentMethods:
       $ref: 'components/schemas/InvoicePaymentMethods.yaml'
     RecurringInvoice:
@@ -159,6 +183,24 @@ components:
       $ref: 'components/schemas/RecurringInvoiceResponse.yaml'
     RecurringInvoiceListResponse:
       $ref: 'components/schemas/RecurringInvoiceListResponse.yaml'
+    Estimate:
+      $ref: 'components/schemas/Estimate.yaml'
+    EstimateItem:
+      $ref: 'components/schemas/EstimateItem.yaml'
+    EstimateType:
+      $ref: 'components/schemas/EstimateType.yaml'
+    EstimateResponse:
+      $ref: 'components/schemas/EstimateResponse.yaml'
+    EstimateListResponse:
+      $ref: 'components/schemas/EstimateListResponse.yaml'
+    EstimateItemResponse:
+      $ref: 'components/schemas/EstimateItemResponse.yaml'
+    EstimateCreatePayload:
+      $ref: 'components/schemas/EstimateCreatePayload.yaml'
+    EstimateUpdatePayload:
+      $ref: 'components/schemas/EstimateUpdatePayload.yaml'
+    EstimateItemPayload:
+      $ref: 'components/schemas/EstimateItemPayload.yaml'
     TaxReturnPayment:
       $ref: 'components/schemas/TaxReturnPayment.yaml'
     VatReturn:
@@ -316,6 +358,8 @@ tags:
 - name: Invoices
 - name: Invoice Transitions
 - name: Recurring Invoices
+- name: Estimates
+- name: Estimate Transitions
 - name: VAT Returns
 - name: Corporation Tax Returns
 - name: Self Assessment Returns

@@ -1,0 +1,8 @@
+type: object
+required:
+- estimates
+properties:
+  estimates:
+    type: array
+    items:
+      $ref: 'Estimate.yaml'

@@ -1,0 +1,32 @@
+type: object
+properties:
+  description:
+    type: string
+    example: Consultancy
+  item_type:
+    type: string
+    enum:
+    - Hours
+    - Days
+    - Weeks
+    - Months
+    - Years
+    - Products
+    - Services
+    - Training
+    - Expenses
+    - Comment
+    - Bills
+    - Discount
+    - Credit
+    example: Hours
+  price:
+    type: number
+    example: 95
+  quantity:
+    type: number
+    example: 2
+  sales_tax_rate:
+    type: number
+    description: Unlike an invoice item, which defaults to the standard rate, an estimate item created without one is stored and charged at -1%
+    example: 20
