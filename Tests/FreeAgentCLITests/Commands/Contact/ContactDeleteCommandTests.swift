@@ -53,7 +53,7 @@ struct ContactDeleteCommandTests {
             try await command.perform(client: client(transport))
         }
 
-        #expect(error.flatMap(APIError.from)?.kind == .forbidden)
+        #expect(error.flatMap(APIError.from)?.status == 403)
     }
 
     @Test("leaves other API errors alone without listing records")

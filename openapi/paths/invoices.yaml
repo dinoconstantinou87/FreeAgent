@@ -252,7 +252,7 @@ show:
     tags:
     - Invoices
     summary: Delete Invoice
-    description: Delete Invoice
+    description: Delete Invoice - only a draft can be deleted, and any other status is a 409 with no body
     operationId: deleteInvoice
     responses:
       '200':

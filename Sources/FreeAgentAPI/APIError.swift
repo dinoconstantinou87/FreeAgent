@@ -23,7 +23,6 @@ public struct APIError: Error, Equatable, Sendable {
 
     public enum Kind: Equatable, Sendable {
         case unauthenticated
-        case forbidden
         case notFound
         case rejected
         case rateLimited
@@ -64,7 +63,6 @@ extension APIError.Kind {
         self =
             switch status {
             case 401: .unauthenticated
-            case 403: .forbidden
             case 404: .notFound
             case 429: .rateLimited
             case 400 ... 499: .rejected
