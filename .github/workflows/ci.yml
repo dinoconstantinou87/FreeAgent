@@ -46,35 +46,64 @@ jobs:
         id: detect
         run: |
           changed_files=$(git diff --name-only origin/main -- openapi/)
-          if [ -z "$changed_files" ]; then
-            echo "skip=true" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          echo "skip=false" >> "$GITHUB_OUTPUT"
+
+          references() {
+            grep -lE "(#/components/[a-z]+/$1'|'$1\.yaml')" "${@:2}" || true
+          }
 
           models=""
+          components=""
           for file in $changed_files; do
-            basename=$(basename "$file" .yaml)
+            name=$(basename "$file" .yaml)
             case "$file" in
-              openapi/paths/*)
-                models="$models,$basename"
-                ;;
-              openapi/components/schemas/*)
-                # Map schema files to their model name (lowercase, strip suffixes)
-                model=$(echo "$basename" | sed -E 's/(Response|CreatePayload|UpdatePayload|Payload|View|Item)$//; s/.*/\L&/')
-                models="$models,$model"
-                ;;
-              *)
-                # Shared files (e.g. openapi.yaml) — run all tests
-                echo "CHANGED_MODELS=all" >> "$GITHUB_ENV"
-                exit 0
-                ;;
+              openapi/paths/*) models="$models $name" ;;
+              openapi/components/*) components="$components $name" ;;
             esac
           done
 
-          # Deduplicate and trim leading comma
-          models=$(echo "$models" | tr ',' '\n' | sort -u | tr '\n' ',' | sed 's/^,//;s/,$//')
-          echo "CHANGED_MODELS=$models" >> "$GITHUB_ENV"
+          if git diff origin/main -- openapi/openapi.yaml | grep -qE '^[-+]  version:'; then
+            models="all"
+          fi
+
+          pending="$components"
+          while [ -n "$pending" ]; do
+            next=""
+            for name in $pending; do
+              for file in $(references "$name" openapi/components/schemas/*.yaml); do
+                schema=$(basename "$file" .yaml)
+                case " $components $next " in
+                  *" $schema "*) ;;
+                  *) next="$next $schema" ;;
+                esac
+              done
+            done
+            components="$components $next"
+            pending=$(echo $next)
+          done
+
+          shared_responses=$(sed -n '/^  responses:/,/^  securitySchemes:/p' openapi/openapi.yaml)
+          for name in $components; do
+            if echo "$shared_responses" | grep -q "#/components/schemas/$name'"; then
+              models="all"
+            fi
+            for file in $(references "$name" openapi/paths/*.yaml); do
+              models="$models $(basename "$file" .yaml)"
+            done
+          done
+
+          case " $models " in
+            *" all "*)
+              echo "skip=false" >> "$GITHUB_OUTPUT"
+              echo "CHANGED_MODELS=all" >> "$GITHUB_ENV"
+              ;;
+            "  ")
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "skip=false" >> "$GITHUB_OUTPUT"
+              echo "CHANGED_MODELS=$(echo $models | tr ' ' '\n' | sort -u | paste -sd, -)" >> "$GITHUB_ENV"
+              ;;
+          esac
 
       - name: Skip if no OpenAPI changes
         if: steps.detect.outputs.skip == 'true'
