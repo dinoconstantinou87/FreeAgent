@@ -417,6 +417,17 @@ update_item:
               $ref: '#/components/schemas/InvoiceItemResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Invoices
+    summary: Delete Invoice Item
+    description: Delete Invoice Item
+    operationId: deleteInvoiceItem
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   parameters:
   - name: id
     in: path

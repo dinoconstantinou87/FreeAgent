@@ -118,6 +118,16 @@ struct InvoiceIntegrationTests {
 
         #expect(updatedItem.description == "Integration test item, revised")
 
+        let comment = try await client.createInvoiceItem(
+            .init(body: .json(.init(
+                invoice: created.url,
+                invoiceItem: .init(description: "Integration test comment", itemType: .comment, price: 0, quantity: 0)
+            )))
+        ).created.body.json.invoiceItem
+
+        let commentId = String(comment.url.split(separator: "/").last ?? "")
+        _ = try await client.deleteInvoiceItem(.init(path: .init(id: commentId))).ok
+
         let updated = try await client.updateInvoice(
             .init(path: .init(id: id), body: .json(.init(invoice: .init(notes: "Integration test"))))
         ).ok.body.json.invoice
