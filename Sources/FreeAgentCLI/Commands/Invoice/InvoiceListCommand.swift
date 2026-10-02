@@ -21,7 +21,7 @@ struct InvoiceListCommand: AsyncPaginatedListCommand {
     }
 
     @Option(name: .long, help: "Filter by view, or last_N_months (e.g. last_3_months)")
-    var view: CustomInvoiceView?
+    var view: Components.Schemas.InvoiceView?
 
     @Option(name: .long, help: "Filter invoices by contact ID or URL")
     var contact: ResourceID?

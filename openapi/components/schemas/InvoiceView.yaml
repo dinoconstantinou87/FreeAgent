@@ -1,13 +1,6 @@
-type: string
-enum:
-- all
-- recent_open_or_overdue
-- open
-- overdue
-- open_or_overdue
-- draft
-- scheduled_to_email
-- thank_you_emails
-- reminder_emails
-- last_N_months
-example: all
+description: A named view, or last_N_months for invoices dated in the last N months
+anyOf:
+- $ref: 'InvoiceViewName.yaml'
+- type: string
+  pattern: '^last_[1-9][0-9]*_months$'
+  example: last_3_months

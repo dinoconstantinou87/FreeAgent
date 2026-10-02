@@ -1,0 +1,28 @@
+type: object
+required:
+- contact
+- dated_on
+properties:
+  contact:
+    type: string
+    example: https://api.freeagent.com/v2/contacts/1
+  project:
+    type: string
+    example: https://api.freeagent.com/v2/projects/1
+  dated_on:
+    type: string
+    example: '2026-10-02'
+  payment_terms_in_days:
+    type: integer
+    description: Defaults to 0. The due date is always dated_on plus this
+    example: 30
+  reference:
+    type: string
+    description: Defaults to the next invoice reference
+    example: CN-001
+  currency:
+    type: string
+    example: GBP
+  comments:
+    type: string
+    example: Refund for cancelled work

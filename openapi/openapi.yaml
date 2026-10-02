@@ -89,6 +89,18 @@ paths:
     $ref: 'paths/estimates.yaml#/create_item'
   /v2/estimate_items/{id}:
     $ref: 'paths/estimates.yaml#/update_item'
+  /v2/credit_notes:
+    $ref: 'paths/credit_notes.yaml#/list'
+  /v2/credit_notes/{id}:
+    $ref: 'paths/credit_notes.yaml#/show'
+  /v2/credit_notes/{id}/pdf:
+    $ref: 'paths/credit_notes.yaml#/pdf'
+  /v2/credit_notes/{id}/send_email:
+    $ref: 'paths/credit_notes.yaml#/send_email'
+  /v2/credit_notes/{id}/transitions/mark_as_sent:
+    $ref: 'paths/credit_notes.yaml#/mark_as_sent'
+  /v2/credit_notes/{id}/transitions/mark_as_draft:
+    $ref: 'paths/credit_notes.yaml#/mark_as_draft'
   /v2/vat_returns:
     $ref: 'paths/vat_returns.yaml#/list'
   /v2/vat_returns/{period_ends_on}:
@@ -131,6 +143,8 @@ components:
   schemas:
     InvoiceView:
       $ref: 'components/schemas/InvoiceView.yaml'
+    InvoiceViewName:
+      $ref: 'components/schemas/InvoiceViewName.yaml'
     ExpensePayload:
       $ref: 'components/schemas/ExpensePayload.yaml'
     Expense:
@@ -201,6 +215,22 @@ components:
       $ref: 'components/schemas/EstimateUpdatePayload.yaml'
     EstimateItemPayload:
       $ref: 'components/schemas/EstimateItemPayload.yaml'
+    CreditNote:
+      $ref: 'components/schemas/CreditNote.yaml'
+    CreditNoteResponse:
+      $ref: 'components/schemas/CreditNoteResponse.yaml'
+    CreditNoteListResponse:
+      $ref: 'components/schemas/CreditNoteListResponse.yaml'
+    CreditNoteView:
+      $ref: 'components/schemas/CreditNoteView.yaml'
+    CreditNoteViewName:
+      $ref: 'components/schemas/CreditNoteViewName.yaml'
+    CreditNoteCreatePayload:
+      $ref: 'components/schemas/CreditNoteCreatePayload.yaml'
+    CreditNoteUpdatePayload:
+      $ref: 'components/schemas/CreditNoteUpdatePayload.yaml'
+    CreditNoteItemPayload:
+      $ref: 'components/schemas/CreditNoteItemPayload.yaml'
     TaxReturnPayment:
       $ref: 'components/schemas/TaxReturnPayment.yaml'
     VatReturn:
@@ -360,6 +390,8 @@ tags:
 - name: Recurring Invoices
 - name: Estimates
 - name: Estimate Transitions
+- name: Credit Notes
+- name: Credit Note Transitions
 - name: VAT Returns
 - name: Corporation Tax Returns
 - name: Self Assessment Returns
