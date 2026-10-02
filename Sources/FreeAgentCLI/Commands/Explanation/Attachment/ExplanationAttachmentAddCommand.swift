@@ -15,8 +15,8 @@ struct ExplanationAttachmentAddCommand: MutatingCommand {
         discussion: "Adds up to 10 files per call, to a maximum of 50 attachments per explanation."
     )
 
-    @Argument(help: "Explanation ID")
-    var id: String
+    @Argument(help: "Explanation ID or URL")
+    var id: ResourceID
 
     @Option(name: .long, help: "Path to a file to attach (pdf, png, jpg, jpeg or gif). Repeat for multiple files.")
     var file: [String]
@@ -48,7 +48,7 @@ struct ExplanationAttachmentAddCommand: MutatingCommand {
         }
 
         let input = Operations.CreateBankTransactionExplanationAttachments.Input(
-            path: .init(id: id),
+            path: .init(id: id.value),
             body: .json(.init(attachments: attachments))
         )
 

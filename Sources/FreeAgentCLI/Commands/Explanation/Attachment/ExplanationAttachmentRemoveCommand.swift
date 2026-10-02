@@ -8,11 +8,11 @@ struct ExplanationAttachmentRemoveCommand: DestructiveCommand {
         abstract: "Remove attachments from a bank transaction explanation"
     )
 
-    @Argument(help: "Explanation ID")
-    var id: String
+    @Argument(help: "Explanation ID or URL")
+    var id: ResourceID
 
-    @Option(name: .long, help: "URL of an attachment to remove. Repeat for multiple attachments.")
-    var attachment: [String]
+    @Option(name: .long, help: "ID or URL of an attachment to remove. Repeat for multiple attachments.")
+    var attachment: [ResourceID]
 
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
@@ -31,11 +31,11 @@ struct ExplanationAttachmentRemoveCommand: DestructiveCommand {
 
     func perform(client: Client) async throws -> Components.Schemas.AttachmentListResponse {
         let attachments = attachment.map {
-            Components.Schemas.AttachmentUpdatePayload(url: $0, _destroy: "true")
+            Components.Schemas.AttachmentUpdatePayload(url: $0.value, _destroy: "true")
         }
 
         let input = Operations.UpdateBankTransactionExplanationAttachments.Input(
-            path: .init(id: id),
+            path: .init(id: id.value),
             body: .json(.init(attachments: attachments))
         )
 

@@ -17,8 +17,8 @@ struct ExplanationListCommand: AsyncPaginatedListCommand {
         Field("Gross Value") { .currency($0.grossValue, code: nil) }
     }
 
-    @Option(name: .long, help: "Bank account URL (e.g. https://api.freeagent.com/v2/bank_accounts/123)")
-    var bankAccount: String
+    @Option(name: .long, help: "Bank account ID or URL")
+    var bankAccount: ResourceID
 
     @Option(name: .long, help: "Start date (YYYY-MM-DD)")
     var fromDate: String?
@@ -43,7 +43,7 @@ struct ExplanationListCommand: AsyncPaginatedListCommand {
                 fromDate: fromDate,
                 toDate: toDate,
                 updatedSince: updatedSince,
-                bankAccount: bankAccount,
+                bankAccount: bankAccount.value,
                 page: page,
                 perPage: pagination.size
             ))

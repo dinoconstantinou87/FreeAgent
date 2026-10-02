@@ -65,14 +65,14 @@ struct InvoiceShowCommand: ShowCommand {
         Field("Sales Tax") { .percent($0.item.salesTaxRate) }
     }
 
-    @Argument(help: "Invoice ID")
-    var id: String
+    @Argument(help: "Invoice ID or URL")
+    var id: ResourceID
 
     @Flag(name: .long, help: "Output JSON")
     var json = false
 
     func fetch(client: Client) async throws -> Components.Schemas.InvoiceResponse {
-        try await client.showInvoice(.init(path: .init(id: id))).ok.body.json
+        try await client.showInvoice(.init(path: .init(id: id.value))).ok.body.json
     }
 
     func record(in response: Components.Schemas.InvoiceResponse) -> Components.Schemas.Invoice {

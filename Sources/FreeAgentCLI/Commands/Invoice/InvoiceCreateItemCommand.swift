@@ -8,8 +8,8 @@ struct InvoiceCreateItemCommand: MutatingCommand {
         abstract: "Create invoice item"
     )
 
-    @Argument(help: "Invoice ID")
-    var invoice: String
+    @Argument(help: "Invoice ID or URL")
+    var invoice: ResourceID
 
     @Option(name: .long, help: "Item description")
     var description: String
@@ -38,7 +38,7 @@ struct InvoiceCreateItemCommand: MutatingCommand {
         )
 
         let input = Operations.CreateInvoiceItem.Input(
-            body: .json(.init(invoice: invoice, invoiceItem: invoiceItemPayload))
+            body: .json(.init(invoice: invoice.value, invoiceItem: invoiceItemPayload))
         )
 
         return try await client.createInvoiceItem(input)

@@ -8,8 +8,8 @@ struct InvoiceCreateCommand: MutatingCommand {
         abstract: "Create a new invoice"
     )
 
-    @Option(name: .long, help: "Contact ID for the invoice")
-    var contact: String
+    @Option(name: .long, help: "Contact ID or URL")
+    var contact: ResourceID
 
     @Option(name: .long, help: "Invoice dated on (YYYY-MM-DD)")
     var datedOn: String
@@ -31,7 +31,7 @@ struct InvoiceCreateCommand: MutatingCommand {
 
     func perform(client: Client) async throws -> Components.Schemas.InvoiceResponse {
         let invoicePayload = Components.Schemas.InvoiceCreatePayload(
-            contact: contact,
+            contact: contact.value,
             currency: currency,
             datedOn: datedOn,
             dueOn: dueOn,

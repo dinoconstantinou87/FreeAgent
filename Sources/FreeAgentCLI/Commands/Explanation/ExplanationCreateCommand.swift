@@ -8,14 +8,14 @@ struct ExplanationCreateCommand: MutatingCommand {
         abstract: "Create a bank transaction explanation"
     )
 
-    @Option(name: .long, help: "Bank transaction URL (e.g. https://api.freeagent.com/v2/bank_transactions/123)")
-    var bankTransaction: String
+    @Option(name: .long, help: "Bank transaction ID or URL")
+    var bankTransaction: ResourceID
 
-    @Option(name: .long, help: "Bank account URL (e.g. https://api.freeagent.com/v2/bank_accounts/123)")
-    var bankAccount: String
+    @Option(name: .long, help: "Bank account ID or URL")
+    var bankAccount: ResourceID
 
-    @Option(name: .long, help: "Category URL (e.g. https://api.freeagent.com/v2/categories/285)")
-    var category: String?
+    @Option(name: .long, help: "Category ID or URL, e.g. 285")
+    var category: ResourceID?
 
     @Option(name: .long, help: "Date of the explanation (YYYY-MM-DD)")
     var datedOn: String
@@ -26,17 +26,17 @@ struct ExplanationCreateCommand: MutatingCommand {
     @Option(name: .long, parsing: .unconditional, help: "Gross value (e.g. -730.0)")
     var grossValue: String
 
-    @Option(name: .long, help: "Bill URL to mark as paid (e.g. https://api.freeagent.com/v2/bills/123)")
-    var paidBill: String?
+    @Option(name: .long, help: "Bill ID or URL to mark as paid")
+    var paidBill: ResourceID?
 
-    @Option(name: .long, help: "Invoice URL to mark as paid (e.g. https://api.freeagent.com/v2/invoices/123)")
-    var paidInvoice: String?
+    @Option(name: .long, help: "Invoice ID or URL to mark as paid")
+    var paidInvoice: ResourceID?
 
-    @Option(name: .long, help: "User URL for DLA/salary payment (e.g. https://api.freeagent.com/v2/users/1)")
-    var paidUser: String?
+    @Option(name: .long, help: "User ID or URL for DLA/salary payment")
+    var paidUser: ResourceID?
 
-    @Option(name: .long, help: "Project URL (optional)")
-    var project: String?
+    @Option(name: .long, help: "Project ID or URL")
+    var project: ResourceID?
 
     @Option(name: .long, help: "Rebill type (e.g. markup, price)")
     var rebillType: String?
@@ -58,16 +58,16 @@ struct ExplanationCreateCommand: MutatingCommand {
 
     func perform(client: Client) async throws -> Components.Schemas.BankTransactionExplanationResponse {
         let payload = Components.Schemas.BankTransactionExplanationCreatePayload(
-            bankAccount: bankAccount,
-            bankTransaction: bankTransaction,
-            category: category,
+            bankAccount: bankAccount.value,
+            bankTransaction: bankTransaction.value,
+            category: category?.value,
             datedOn: datedOn,
             description: description,
             grossValue: grossValue,
-            paidBill: paidBill,
-            paidInvoice: paidInvoice,
-            paidUser: paidUser,
-            project: project,
+            paidBill: paidBill?.value,
+            paidInvoice: paidInvoice?.value,
+            paidUser: paidUser?.value,
+            project: project?.value,
             rebillFactor: rebillFactor,
             rebillType: rebillType,
             salesTaxRate: salesTaxRate,

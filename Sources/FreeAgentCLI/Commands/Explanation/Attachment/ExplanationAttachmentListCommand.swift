@@ -18,14 +18,14 @@ struct ExplanationAttachmentListCommand: PaginatedListCommand {
         Field("Description") { .text($0.description) }
     }
 
-    @Argument(help: "Explanation ID")
-    var id: String
+    @Argument(help: "Explanation ID or URL")
+    var id: ResourceID
 
     @Flag(name: .long, help: "Output JSON")
     var json = false
 
     func fetch(client: Client) async throws -> Components.Schemas.AttachmentListResponse {
-        try await client.listBankTransactionExplanationAttachments(.init(path: .init(id: id))).ok.body.json
+        try await client.listBankTransactionExplanationAttachments(.init(path: .init(id: id.value))).ok.body.json
     }
 
     func items(in response: Components.Schemas.AttachmentListResponse) -> [Components.Schemas.Attachment] {

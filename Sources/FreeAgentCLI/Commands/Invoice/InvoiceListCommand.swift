@@ -23,11 +23,11 @@ struct InvoiceListCommand: AsyncPaginatedListCommand {
     @Option(name: .long, help: "Filter by view, or last_N_months (e.g. last_3_months)")
     var view: CustomInvoiceView?
 
-    @Option(name: .long, help: "Filter invoices by contact ID")
-    var contact: String?
+    @Option(name: .long, help: "Filter invoices by contact ID or URL")
+    var contact: ResourceID?
 
-    @Option(name: .long, help: "Filter invoices by project ID")
-    var project: String?
+    @Option(name: .long, help: "Filter invoices by project ID or URL")
+    var project: ResourceID?
 
     @Option(name: .long, help: "Include invoice items nested within each invoice")
     var nestedInvoiceItems: Bool?
@@ -50,8 +50,8 @@ struct InvoiceListCommand: AsyncPaginatedListCommand {
         let ok = try await client.listInvoices(
             .init(query: .init(
                 nestedInvoiceItems: nestedInvoiceItems,
-                contact: contact,
-                project: project,
+                contact: contact?.value,
+                project: project?.value,
                 currency: currency,
                 view: view,
                 updatedSince: updatedSince,

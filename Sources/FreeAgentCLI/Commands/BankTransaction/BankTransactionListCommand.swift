@@ -18,8 +18,8 @@ struct BankTransactionListCommand: AsyncPaginatedListCommand {
         Field("Unexplained") { .currency($0.unexplainedAmount, code: nil) }
     }
 
-    @Option(name: .long, help: "Bank account URL (e.g. https://api.freeagent.com/v2/bank_accounts/123)")
-    var bankAccount: String
+    @Option(name: .long, help: "Bank account ID or URL")
+    var bankAccount: ResourceID
 
     @Option(name: .long, help: "Start date (YYYY-MM-DD)")
     var fromDate: String?
@@ -47,7 +47,7 @@ struct BankTransactionListCommand: AsyncPaginatedListCommand {
     ) async throws -> (response: Components.Schemas.BankTransactionListResponse, totalCount: Int?) {
         let ok = try await client.listAllBankTransactionsUnderACertainBankAccount(
             .init(query: .init(
-                bankAccount: bankAccount,
+                bankAccount: bankAccount.value,
                 fromDate: fromDate,
                 toDate: toDate,
                 updatedSince: updatedSince,

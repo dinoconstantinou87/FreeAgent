@@ -71,14 +71,14 @@ struct ExplanationShowCommand: ShowCommand {
         }
     }
 
-    @Argument(help: "Explanation ID")
-    var id: String
+    @Argument(help: "Explanation ID or URL")
+    var id: ResourceID
 
     @Flag(name: .long, help: "Output JSON")
     var json = false
 
     func fetch(client: Client) async throws -> Components.Schemas.BankTransactionExplanationResponse {
-        try await client.getASingleBankTransactionExplanation(.init(path: .init(id: id))).ok.body.json
+        try await client.getASingleBankTransactionExplanation(.init(path: .init(id: id.value))).ok.body.json
     }
 
     func record(

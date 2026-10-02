@@ -8,8 +8,8 @@ struct InvoiceDeleteCommand: DestructiveCommand {
         abstract: "Delete an invoice"
     )
 
-    @Argument(help: "Invoice ID")
-    var id: String
+    @Argument(help: "Invoice ID or URL")
+    var id: ResourceID
 
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
@@ -23,7 +23,7 @@ struct InvoiceDeleteCommand: DestructiveCommand {
 
     func perform(client: Client) async throws -> EmptyResponse {
         let input = Operations.DeleteInvoice.Input(
-            path: .init(id: id)
+            path: .init(id: id.value)
         )
 
         _ = try await client.deleteInvoice(input).ok
