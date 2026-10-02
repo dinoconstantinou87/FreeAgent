@@ -7,6 +7,7 @@ enum FieldValue: Sendable {
     case timestamp(Date?)
     case currency(String?, code: String?)
     case percent(String?)
+    case hours(String?)
     case number(Int?)
     case bytes(Int?)
     case flag(Bool?)
@@ -27,6 +28,8 @@ enum FieldValue: Sendable {
                 amount.map { Self.currency($0, code: code, locale: locale) }
             case .percent(let rate):
                 rate.map { Self.percent($0, locale: locale) }
+            case .hours(let hours):
+                hours.map { Self.hours($0, locale: locale) }
             case .number(let number):
                 number?.formatted(.number.locale(locale))
             case .bytes(let bytes):
@@ -62,5 +65,13 @@ enum FieldValue: Sendable {
         }
 
         return (value / 100).formatted(.percent.locale(locale))
+    }
+
+    private static func hours(_ hours: String, locale: Locale) -> String {
+        guard let value = Double(hours) else {
+            return hours
+        }
+
+        return Duration.seconds(value * 3600).formatted(.time(pattern: .hourMinute).locale(locale))
     }
 }

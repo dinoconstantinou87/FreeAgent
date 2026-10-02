@@ -1,0 +1,26 @@
+type: object
+required:
+- user
+- task
+- dated_on
+properties:
+  user:
+    type: string
+    example: https://api.freeagent.com/v2/users/1
+  project:
+    type: string
+    description: Documented as required, but FreeAgent always uses the task's project and ignores this
+    example: https://api.freeagent.com/v2/projects/1
+  task:
+    type: string
+    example: https://api.freeagent.com/v2/tasks/1
+  dated_on:
+    type: string
+    example: '2026-10-02'
+  hours:
+    type: number
+    description: Defaults to 0. A negative value is a 422
+    example: 1.5
+  comment:
+    type: string
+    example: Wrote the timeslip commands

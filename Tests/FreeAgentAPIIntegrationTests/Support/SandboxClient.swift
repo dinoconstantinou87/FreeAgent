@@ -1,5 +1,4 @@
 import Foundation
-import HTTPTypes
 import OpenAPIRuntime
 import OpenAPIURLSession
 
@@ -34,29 +33,12 @@ enum SandboxClient {
             configuration: .init(dateTranscoder: .freeAgent),
             transport: URLSessionTransport(),
             middlewares: [
-                BearerTokenMiddleware(token: token),
-                APIVersionMiddleware(version: apiVersion),
-                APIErrorMiddleware(),
+                .bearerToken(token),
+                .apiVersion(),
+                .apiError(),
+                .retry(),
             ]
         )
     }
 
-}
-
-// MARK: - BearerTokenMiddleware
-
-struct BearerTokenMiddleware: ClientMiddleware {
-    let token: String
-
-    func intercept(
-        _ request: HTTPRequest,
-        body: HTTPBody?,
-        baseURL: URL,
-        operationID _: String,
-        next: (HTTPRequest, HTTPBody?, URL) async throws -> (HTTPResponse, HTTPBody?)
-    ) async throws -> (HTTPResponse, HTTPBody?) {
-        var request = request
-        request.headerFields[.authorization] = "Bearer \(token)"
-        return try await next(request, body, baseURL)
-    }
 }

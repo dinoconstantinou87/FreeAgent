@@ -1,0 +1,223 @@
+list:
+  get:
+    tags:
+    - Timeslips
+    summary: List timeslips
+    description: List timeslips
+    operationId: listTimeslips
+    parameters:
+    - name: user
+      in: query
+      description: Filter timeslips by user URL
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/users/:id
+    - name: project
+      in: query
+      description: Filter timeslips by project URL - an unknown project is a 404
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/projects/:id
+    - name: task
+      in: query
+      description: Filter timeslips by task URL - an unknown task is a 404
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/tasks/:id
+    - name: view
+      in: query
+      description: Filter timeslips by view - unbilled leaves out timeslips billed on an invoice, and FreeAgent answers an unknown view with a 400
+      schema:
+        type: string
+        enum:
+        - all
+        - unbilled
+        - running
+        example: running
+    - name: from_date
+      in: query
+      description: Show timeslips dated on or after this date (YYYY-MM-DD)
+      schema:
+        type: string
+        example: 2026-01-01
+    - name: to_date
+      in: query
+      description: Show timeslips dated on or before this date (YYYY-MM-DD)
+      schema:
+        type: string
+        example: 2026-12-31
+    - name: updated_since
+      in: query
+      description: Show timeslips updated since this timestamp
+      schema:
+        type: string
+        example: 2026-01-01T00:00:00Z
+    - name: sort
+      in: query
+      description: Sort timeslips by specified field, descending with a leading hyphen
+      schema:
+        type: string
+        enum:
+        - dated_on
+        - -dated_on
+        - created_at
+        - -created_at
+        - updated_at
+        - -updated_at
+        example: -dated_on
+    - $ref: '#/components/parameters/Page'
+    - $ref: '#/components/parameters/PerPage'
+    responses:
+      '200':
+        description: Success
+        headers:
+          Link:
+            $ref: '#/components/headers/Link'
+          X-Total-Count:
+            $ref: '#/components/headers/XTotalCount'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeslipListResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  post:
+    tags:
+    - Timeslips
+    summary: Create timeslip
+    description: Create timeslip
+    operationId: createTimeslip
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - timeslip
+            properties:
+              timeslip:
+                $ref: '#/components/schemas/TimeslipCreatePayload'
+          examples:
+            Create Timeslip:
+              value:
+                timeslip:
+                  user: https://api.freeagent.com/v2/users/:id
+                  project: https://api.freeagent.com/v2/projects/:id
+                  task: https://api.freeagent.com/v2/tasks/:id
+                  dated_on: 2026-10-02
+                  hours: 1.5
+                  comment: Wrote the timeslip commands
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeslipResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+show:
+  get:
+    tags:
+    - Timeslips
+    summary: Show timeslip
+    description: Show timeslip
+    operationId: showTimeslip
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeslipResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  put:
+    tags:
+    - Timeslips
+    summary: Update timeslip
+    description: Update timeslip - a timeslip billed on an invoice can still be changed, though the invoice line keeps its old hours
+    operationId: updateTimeslip
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - timeslip
+            properties:
+              timeslip:
+                $ref: '#/components/schemas/TimeslipUpdatePayload'
+          examples:
+            Update Timeslip:
+              value:
+                timeslip:
+                  hours: 2
+                  comment: Wrote and tested the timeslip commands
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeslipResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Timeslips
+    summary: Delete timeslip
+    description: Delete timeslip - a timeslip billed on an invoice is a 409 with no body, until its invoice line or the invoice is removed
+    operationId: deleteTimeslip
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+timer:
+  post:
+    tags:
+    - Timeslips
+    - Timeslip Timers
+    summary: Start timer
+    description: Start a timer on the timeslip - a timeslip billed on an invoice is a 422 (timeslip cannot be locked)
+    operationId: startTimeslipTimer
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeslipResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Timeslips
+    - Timeslip Timers
+    summary: Stop timer
+    description: Stop the timeslip's timer, adding the whole minutes it ran to the hours it started with - a timeslip with no running timer is returned unchanged
+    operationId: stopTimeslipTimer
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeslipResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

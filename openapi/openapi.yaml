@@ -101,6 +101,14 @@ paths:
     $ref: 'paths/credit_notes.yaml#/mark_as_sent'
   /v2/credit_notes/{id}/transitions/mark_as_draft:
     $ref: 'paths/credit_notes.yaml#/mark_as_draft'
+  /v2/projects/{id}:
+    $ref: 'paths/projects.yaml#/show'
+  /v2/timeslips:
+    $ref: 'paths/timeslips.yaml#/list'
+  /v2/timeslips/{id}:
+    $ref: 'paths/timeslips.yaml#/show'
+  /v2/timeslips/{id}/timer:
+    $ref: 'paths/timeslips.yaml#/timer'
   /v2/vat_returns:
     $ref: 'paths/vat_returns.yaml#/list'
   /v2/vat_returns/{period_ends_on}:
@@ -231,6 +239,22 @@ components:
       $ref: 'components/schemas/CreditNoteUpdatePayload.yaml'
     CreditNoteItemPayload:
       $ref: 'components/schemas/CreditNoteItemPayload.yaml'
+    Project:
+      $ref: 'components/schemas/Project.yaml'
+    ProjectResponse:
+      $ref: 'components/schemas/ProjectResponse.yaml'
+    Timeslip:
+      $ref: 'components/schemas/Timeslip.yaml'
+    TimeslipTimer:
+      $ref: 'components/schemas/TimeslipTimer.yaml'
+    TimeslipResponse:
+      $ref: 'components/schemas/TimeslipResponse.yaml'
+    TimeslipListResponse:
+      $ref: 'components/schemas/TimeslipListResponse.yaml'
+    TimeslipCreatePayload:
+      $ref: 'components/schemas/TimeslipCreatePayload.yaml'
+    TimeslipUpdatePayload:
+      $ref: 'components/schemas/TimeslipUpdatePayload.yaml'
     TaxReturnPayment:
       $ref: 'components/schemas/TaxReturnPayment.yaml'
     VatReturn:
@@ -392,6 +416,9 @@ tags:
 - name: Estimate Transitions
 - name: Credit Notes
 - name: Credit Note Transitions
+- name: Projects
+- name: Timeslips
+- name: Timeslip Timers
 - name: VAT Returns
 - name: Corporation Tax Returns
 - name: Self Assessment Returns
