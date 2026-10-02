@@ -9,7 +9,7 @@ struct APIErrorTests {
         "maps HTTP status onto a kind",
         arguments: [
             (401, APIError.Kind.unauthenticated),
-            (403, .forbidden),
+            (403, .rejected),
             (404, .notFound),
             (429, .rateLimited),
             (400, .rejected),

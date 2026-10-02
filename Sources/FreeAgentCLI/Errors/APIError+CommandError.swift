@@ -42,7 +42,6 @@ extension APIError.Kind {
         case .unauthenticated: ExitCode(2)
         case .notFound: ExitCode(3)
         case .rejected: ExitCode(4)
-        case .forbidden: ExitCode(5)
         case .rateLimited: ExitCode(6)
         case .serverError: ExitCode(7)
         case .unknownOutcome: ExitCode(8)
@@ -53,7 +52,6 @@ extension APIError.Kind {
     var summary: String {
         switch self {
         case .unauthenticated: "Not authenticated with FreeAgent"
-        case .forbidden: "Your FreeAgent user is not allowed to do that"
         case .notFound: "FreeAgent has no such record"
         case .rejected: "FreeAgent rejected the request"
         case .rateLimited: "FreeAgent rate limit reached"
