@@ -1,5 +1,5 @@
 type: object
-description: Needs an organisation name, or a first and last name
+description: An empty string removes a text field, but a contact with no organisation name must keep its first and last name
 properties:
   organisation_name:
     type: string
@@ -12,7 +12,7 @@ properties:
     example: Testington
   email:
     type: string
-    description: Several addresses can be separated by commas
+    description: Several addresses can be separated by commas - an empty string removes them
     example: fred@testingtonandsons.example.com
   billing_email:
     type: string

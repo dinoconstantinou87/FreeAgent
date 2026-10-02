@@ -1,0 +1,6 @@
+type: string
+enum:
+- Auto
+- Always
+- Never
+example: Auto
