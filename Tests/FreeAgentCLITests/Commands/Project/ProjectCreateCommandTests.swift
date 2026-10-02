@@ -42,10 +42,10 @@ struct ProjectCreateCommandTests {
             .willReturn((
                 HTTPResponse(status: .ok, headerFields: [.contentType: "application/json"]),
                 HTTPBody(Data(#"""
-                {"company":{"url":"https://api.freeagent.com/v2/company","name":"Acme Technologies Ltd",\#
-                "subdomain":"acmetechnologiesltd","type":"UkLimitedCompany","currency":"GBP","mileage_units":"miles",\#
-                "company_start_date":"2025-01-01","freeagent_start_date":"2025-01-01","first_accounting_year_end":"2026-01-31"}}
-                """#.utf8))
+                    {"company":{"url":"https://api.freeagent.com/v2/company","name":"Acme Technologies Ltd",\#
+                    "subdomain":"acmetechnologiesltd","type":"UkLimitedCompany","currency":"GBP","mileage_units":"miles",\#
+                    "company_start_date":"2025-01-01","freeagent_start_date":"2025-01-01","first_accounting_year_end":"2026-01-31"}}
+                    """#.utf8))
             ))
         given(transport)
             .send(.any, body: .any, baseURL: .any, operationID: .value("createProject"))
