@@ -55,14 +55,14 @@ struct ExpenseShowCommand: ShowCommand {
         }
     }
 
-    @Argument(help: "Expense ID")
-    var id: String
+    @Argument(help: "Expense ID or URL")
+    var id: ResourceID
 
     @Flag(name: .long, help: "Output JSON")
     var json = false
 
     func fetch(client: Client) async throws -> Components.Schemas.ExpenseResponse {
-        try await client.getASingleExpense(.init(path: .init(id: id))).ok.body.json
+        try await client.getASingleExpense(.init(path: .init(id: id.value))).ok.body.json
     }
 
     func record(in response: Components.Schemas.ExpenseResponse) -> Components.Schemas.Expense {

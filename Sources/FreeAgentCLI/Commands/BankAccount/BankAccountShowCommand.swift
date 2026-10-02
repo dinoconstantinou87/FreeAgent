@@ -49,14 +49,14 @@ struct BankAccountShowCommand: ShowCommand {
         }
     }
 
-    @Argument(help: "Bank account ID")
-    var id: String
+    @Argument(help: "Bank account ID or URL")
+    var id: ResourceID
 
     @Flag(name: .long, help: "Output JSON")
     var json = false
 
     func fetch(client: Client) async throws -> Components.Schemas.BankAccountResponse {
-        try await client.showBankAccount(.init(path: .init(id: id))).ok.body.json
+        try await client.showBankAccount(.init(path: .init(id: id.value))).ok.body.json
     }
 
     func record(in response: Components.Schemas.BankAccountResponse) -> Components.Schemas.BankAccount {

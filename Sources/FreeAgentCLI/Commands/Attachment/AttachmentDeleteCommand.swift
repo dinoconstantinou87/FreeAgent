@@ -8,8 +8,8 @@ struct AttachmentDeleteCommand: DestructiveCommand {
         abstract: "Delete an attachment"
     )
 
-    @Argument(help: "Attachment ID")
-    var id: String
+    @Argument(help: "Attachment ID or URL")
+    var id: ResourceID
 
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
@@ -23,7 +23,7 @@ struct AttachmentDeleteCommand: DestructiveCommand {
 
     func perform(client: Client) async throws -> EmptyResponse {
         let input = Operations.DeleteAttachment.Input(
-            path: .init(id: id)
+            path: .init(id: id.value)
         )
 
         _ = try await client.deleteAttachment(input).ok

@@ -8,8 +8,8 @@ struct InvoiceMarkScheduledCommand: MutatingCommand {
         abstract: "Mark invoice as scheduled"
     )
 
-    @Argument(help: "Invoice ID")
-    var id: String
+    @Argument(help: "Invoice ID or URL")
+    var id: ResourceID
 
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
@@ -19,7 +19,7 @@ struct InvoiceMarkScheduledCommand: MutatingCommand {
 
     func perform(client: Client) async throws -> Components.Schemas.InvoiceResponse {
         let input = Operations.MarkInvoiceAsScheduled.Input(
-            path: .init(id: id)
+            path: .init(id: id.value)
         )
 
         return try await client.markInvoiceAsScheduled(input)

@@ -8,8 +8,8 @@ struct ExpenseCreateCommand: MutatingCommand {
         abstract: "Create an expense"
     )
 
-    @Option(name: .long, help: "Category URL (e.g. https://api.freeagent.com/v2/categories/285)")
-    var category: String
+    @Option(name: .long, help: "Category ID or URL, e.g. 285")
+    var category: ResourceID
 
     @Option(name: .long, help: "Date of the expense (YYYY-MM-DD)")
     var datedOn: String
@@ -26,8 +26,8 @@ struct ExpenseCreateCommand: MutatingCommand {
     @Option(name: .long, help: "Manual sales tax amount (e.g. 0.12)")
     var manualSalesTaxAmount: String?
 
-    @Option(name: .long, help: "User URL (e.g. https://api.freeagent.com/v2/users/1)")
-    var user: String?
+    @Option(name: .long, help: "User ID or URL")
+    var user: ResourceID?
 
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
@@ -37,13 +37,13 @@ struct ExpenseCreateCommand: MutatingCommand {
 
     func perform(client: Client) async throws -> Components.Schemas.ExpenseResponse {
         let expensePayload = Components.Schemas.ExpensePayload(
-            category: category,
+            category: category.value,
             datedOn: datedOn,
             description: description,
             grossValue: grossValue,
             manualSalesTaxAmount: manualSalesTaxAmount,
             salesTaxRate: salesTaxRate,
-            user: user
+            user: user?.value
         )
 
         let input = Operations.CreateExpense.Input(

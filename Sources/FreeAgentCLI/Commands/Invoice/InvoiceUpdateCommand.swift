@@ -8,8 +8,8 @@ struct InvoiceUpdateCommand: MutatingCommand {
         abstract: "Update an existing invoice"
     )
 
-    @Argument(help: "Invoice ID")
-    var id: String
+    @Argument(help: "Invoice ID or URL")
+    var id: ResourceID
 
     @Option(name: .long, help: "Notes for the invoice")
     var notes: String?
@@ -26,7 +26,7 @@ struct InvoiceUpdateCommand: MutatingCommand {
         )
 
         let input = Operations.UpdateInvoice.Input(
-            path: .init(id: id),
+            path: .init(id: id.value),
             body: .json(.init(invoice: invoicePayload))
         )
 

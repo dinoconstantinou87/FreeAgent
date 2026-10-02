@@ -8,8 +8,8 @@ struct ExplanationDeleteCommand: DestructiveCommand {
         abstract: "Delete a bank transaction explanation"
     )
 
-    @Argument(help: "Explanation ID")
-    var id: String
+    @Argument(help: "Explanation ID or URL")
+    var id: ResourceID
 
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
@@ -23,7 +23,7 @@ struct ExplanationDeleteCommand: DestructiveCommand {
 
     func perform(client: Client) async throws -> EmptyResponse {
         let input = Operations.DeleteABankTransactionExplanation.Input(
-            path: .init(id: id)
+            path: .init(id: id.value)
         )
 
         _ = try await client.deleteABankTransactionExplanation(input).ok

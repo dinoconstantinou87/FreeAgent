@@ -8,8 +8,8 @@ struct BillCreateCommand: MutatingCommand {
         abstract: "Create a new bill"
     )
 
-    @Option(name: .long, help: "Contact URL (e.g. https://api.freeagent.com/v2/contacts/123)")
-    var contact: String
+    @Option(name: .long, help: "Contact ID or URL")
+    var contact: ResourceID
 
     @Option(name: .long, help: "Date of the bill (YYYY-MM-DD)")
     var datedOn: String
@@ -23,8 +23,8 @@ struct BillCreateCommand: MutatingCommand {
     @Option(name: .long, help: "Comments")
     var comments: String?
 
-    @Option(name: .long, help: "Category URL for the bill item")
-    var category: String
+    @Option(name: .long, help: "Category ID or URL for the bill item, e.g. 285")
+    var category: ResourceID
 
     @Option(name: .long, help: "Description of the bill item")
     var description: String
@@ -43,14 +43,14 @@ struct BillCreateCommand: MutatingCommand {
 
     func perform(client: Client) async throws -> Components.Schemas.BillResponse {
         let billItem = Components.Schemas.BillItemPayload(
-            category: category,
+            category: category.value,
             description: description,
             totalValue: totalValue,
             salesTaxRate: salesTaxRate
         )
 
         let billPayload = Components.Schemas.BillCreatePayload(
-            contact: contact,
+            contact: contact.value,
             reference: reference,
             datedOn: datedOn,
             dueOn: dueOn,

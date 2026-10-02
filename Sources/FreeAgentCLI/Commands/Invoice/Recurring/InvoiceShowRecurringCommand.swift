@@ -50,14 +50,14 @@ struct InvoiceShowRecurringCommand: ShowCommand {
         }
     }
 
-    @Argument(help: "Recurring invoice ID")
-    var id: String
+    @Argument(help: "Recurring invoice ID or URL")
+    var id: ResourceID
 
     @Flag(name: .long, help: "Output JSON")
     var json = false
 
     func fetch(client: Client) async throws -> Components.Schemas.RecurringInvoiceResponse {
-        try await client.showRecurringInvoice(.init(path: .init(id: id))).ok.body.json
+        try await client.showRecurringInvoice(.init(path: .init(id: id.value))).ok.body.json
     }
 
     func record(in response: Components.Schemas.RecurringInvoiceResponse) -> Components.Schemas.RecurringInvoice {

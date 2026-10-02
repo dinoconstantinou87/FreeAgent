@@ -23,8 +23,8 @@ struct InvoiceListRecurringCommand: AsyncPaginatedListCommand {
     @Option(name: .long, help: "Filter by view")
     var view: Operations.ListAllRecurringInvoices.Input.Query.ViewPayload?
 
-    @Option(name: .long, help: "Filter by contact ID")
-    var contact: String?
+    @Option(name: .long, help: "Filter by contact ID or URL")
+    var contact: ResourceID?
 
     @OptionGroup var pagination: PaginationOptions
 
@@ -36,7 +36,7 @@ struct InvoiceListRecurringCommand: AsyncPaginatedListCommand {
         page: Int
     ) async throws -> (response: Components.Schemas.RecurringInvoiceListResponse, totalCount: Int?) {
         let ok = try await client.listAllRecurringInvoices(
-            .init(query: .init(view: view, contact: contact, page: page, perPage: pagination.size))
+            .init(query: .init(view: view, contact: contact?.value, page: page, perPage: pagination.size))
         ).ok
 
         return (try ok.body.json, ok.headers.xTotalCount)

@@ -8,8 +8,8 @@ struct InvoiceSendEmailCommand: MutatingCommand {
         abstract: "Send invoice via email"
     )
 
-    @Argument(help: "Invoice ID")
-    var id: String
+    @Argument(help: "Invoice ID or URL")
+    var id: ResourceID
 
     @Option(name: .long, help: "Recipient email address")
     var to: String
@@ -39,7 +39,7 @@ struct InvoiceSendEmailCommand: MutatingCommand {
         )
 
         let input = Operations.SendInvoiceEmail.Input(
-            path: .init(id: id),
+            path: .init(id: id.value),
             body: .json(.init(invoice: invoicePayload))
         )
 

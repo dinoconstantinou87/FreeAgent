@@ -22,6 +22,17 @@ struct UserOptionsTests {
         verify(transport).send(.any, body: .any, baseURL: .any, operationID: .any).called(0)
     }
 
+    @Test("takes a user URL as its ID without asking FreeAgent")
+    func explicitUserURL() async throws {
+        let transport = MockClientTransportInterface()
+        let options = try UserOptions.parse(["--user", "https://api.freeagent.com/v2/users/119"])
+
+        let id = try await options.id(client: client(transport))
+
+        #expect(id == "119")
+        verify(transport).send(.any, body: .any, baseURL: .any, operationID: .any).called(0)
+    }
+
     @Test("falls back to the ID of the logged-in user")
     func currentUser() async throws {
         let transport = MockClientTransportInterface()

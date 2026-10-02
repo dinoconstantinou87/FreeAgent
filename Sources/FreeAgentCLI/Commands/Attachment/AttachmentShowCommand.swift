@@ -28,14 +28,14 @@ struct AttachmentShowCommand: ShowCommand {
         }
     }
 
-    @Argument(help: "Attachment ID")
-    var id: String
+    @Argument(help: "Attachment ID or URL")
+    var id: ResourceID
 
     @Flag(name: .long, help: "Output JSON")
     var json = false
 
     func fetch(client: Client) async throws -> Components.Schemas.AttachmentResponse {
-        try await client.showAttachment(.init(path: .init(id: id))).ok.body.json
+        try await client.showAttachment(.init(path: .init(id: id.value))).ok.body.json
     }
 
     func record(in response: Components.Schemas.AttachmentResponse) -> Components.Schemas.Attachment {
