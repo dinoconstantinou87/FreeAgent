@@ -1,0 +1,45 @@
+type: object
+required:
+- url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/users/32382
+  first_name:
+    type: string
+    example: Jane
+  last_name:
+    type: string
+    example: Smith
+  email:
+    type: string
+    example: jane@example.com
+  role:
+    type: string
+    description: One of Owner, Director, Partner, Company Secretary, Employee, Shareholder or Accountant
+    example: Director
+  permission_level:
+    type: integer
+    example: 8
+  ni_number:
+    type: string
+    example: QQ123456C
+  unique_tax_reference:
+    type: string
+    example: '1234567890'
+  opening_mileage:
+    type: string
+    example: '0.0'
+  hidden:
+    type: boolean
+    example: false
+  current_payroll_profile:
+    $ref: 'UserPayrollProfile.yaml'
+  created_at:
+    type: string
+    format: date-time
+    example: '2011-07-28T11:25:11Z'
+  updated_at:
+    type: string
+    format: date-time
+    example: '2011-08-24T08:10:23Z'

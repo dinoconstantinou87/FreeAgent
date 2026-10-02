@@ -89,6 +89,20 @@ paths:
     $ref: 'paths/corporation_tax_returns.yaml#/mark_as_paid'
   /v2/corporation_tax_returns/{period_ends_on}/mark_as_unpaid:
     $ref: 'paths/corporation_tax_returns.yaml#/mark_as_unpaid'
+  /v2/users/me:
+    $ref: 'paths/users.yaml#/me'
+  /v2/users/{user_id}/self_assessment_returns:
+    $ref: 'paths/self_assessment_returns.yaml#/list'
+  /v2/users/{user_id}/self_assessment_returns/{period_ends_on}:
+    $ref: 'paths/self_assessment_returns.yaml#/show'
+  /v2/users/{user_id}/self_assessment_returns/{period_ends_on}/mark_as_filed:
+    $ref: 'paths/self_assessment_returns.yaml#/mark_as_filed'
+  /v2/users/{user_id}/self_assessment_returns/{period_ends_on}/mark_as_unfiled:
+    $ref: 'paths/self_assessment_returns.yaml#/mark_as_unfiled'
+  /v2/users/{user_id}/self_assessment_returns/{period_ends_on}/payments/{payment_date}/mark_as_paid:
+    $ref: 'paths/self_assessment_returns.yaml#/mark_payment_as_paid'
+  /v2/users/{user_id}/self_assessment_returns/{period_ends_on}/payments/{payment_date}/mark_as_unpaid:
+    $ref: 'paths/self_assessment_returns.yaml#/mark_payment_as_unpaid'
 components:
   schemas:
     InvoiceView:
@@ -163,6 +177,18 @@ components:
       $ref: 'components/schemas/CorporationTaxReturnResponse.yaml'
     CorporationTaxReturnListResponse:
       $ref: 'components/schemas/CorporationTaxReturnListResponse.yaml'
+    SelfAssessmentReturn:
+      $ref: 'components/schemas/SelfAssessmentReturn.yaml'
+    SelfAssessmentReturnResponse:
+      $ref: 'components/schemas/SelfAssessmentReturnResponse.yaml'
+    SelfAssessmentReturnListResponse:
+      $ref: 'components/schemas/SelfAssessmentReturnListResponse.yaml'
+    User:
+      $ref: 'components/schemas/User.yaml'
+    UserPayrollProfile:
+      $ref: 'components/schemas/UserPayrollProfile.yaml'
+    UserResponse:
+      $ref: 'components/schemas/UserResponse.yaml'
     Errors:
       $ref: 'components/schemas/Errors.yaml'
     ErrorDetail:
@@ -244,6 +270,8 @@ components:
       $ref: 'components/parameters/PeriodEndsOn.yaml'
     PaymentDate:
       $ref: 'components/parameters/PaymentDate.yaml'
+    UserId:
+      $ref: 'components/parameters/UserId.yaml'
   headers:
     Link:
       $ref: 'components/headers/Link.yaml'
@@ -290,3 +318,5 @@ tags:
 - name: Recurring Invoices
 - name: VAT Returns
 - name: Corporation Tax Returns
+- name: Self Assessment Returns
+- name: Users

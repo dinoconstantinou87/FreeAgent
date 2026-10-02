@@ -1,0 +1,16 @@
+me:
+  get:
+    tags:
+    - Users
+    summary: Show the current user
+    description: Show the user the access token belongs to
+    operationId: showCurrentUser
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'

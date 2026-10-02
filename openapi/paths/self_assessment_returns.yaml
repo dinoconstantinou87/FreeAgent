@@ -1,0 +1,115 @@
+list:
+  get:
+    tags:
+    - Self Assessment Returns
+    summary: List self assessment returns
+    description: List self assessment returns
+    operationId: listSelfAssessmentReturns
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelfAssessmentReturnListResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/UserId'
+show:
+  get:
+    tags:
+    - Self Assessment Returns
+    summary: Show self assessment return
+    description: Show self assessment return
+    operationId: showSelfAssessmentReturn
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelfAssessmentReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/UserId'
+  - $ref: '#/components/parameters/PeriodEndsOn'
+mark_as_filed:
+  put:
+    tags:
+    - Self Assessment Returns
+    summary: Mark self assessment return as filed
+    description: Mark self assessment return as filed
+    operationId: markSelfAssessmentReturnAsFiled
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelfAssessmentReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/UserId'
+  - $ref: '#/components/parameters/PeriodEndsOn'
+mark_as_unfiled:
+  put:
+    tags:
+    - Self Assessment Returns
+    summary: Mark self assessment return as unfiled
+    description: Mark self assessment return as unfiled
+    operationId: markSelfAssessmentReturnAsUnfiled
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelfAssessmentReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/UserId'
+  - $ref: '#/components/parameters/PeriodEndsOn'
+mark_payment_as_paid:
+  put:
+    tags:
+    - Self Assessment Returns
+    summary: Mark self assessment return payment as paid
+    description: Mark self assessment return payment as paid
+    operationId: markSelfAssessmentReturnPaymentAsPaid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelfAssessmentReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/UserId'
+  - $ref: '#/components/parameters/PeriodEndsOn'
+  - $ref: '#/components/parameters/PaymentDate'
+mark_payment_as_unpaid:
+  put:
+    tags:
+    - Self Assessment Returns
+    summary: Mark self assessment return payment as unpaid
+    description: Mark self assessment return payment as unpaid
+    operationId: markSelfAssessmentReturnPaymentAsUnpaid
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SelfAssessmentReturnResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/UserId'
+  - $ref: '#/components/parameters/PeriodEndsOn'
+  - $ref: '#/components/parameters/PaymentDate'

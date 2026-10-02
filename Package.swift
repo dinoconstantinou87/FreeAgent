@@ -80,11 +80,13 @@ let package = Package(
                 .product(name: "Configuration", package: "swift-configuration"),
                 .product(name: "OAuthenticator", package: "OAuthenticator"),
                 .product(name: "FlyingSocks", package: "FlyingFox"),
+                .product(name: "Mockable", package: "Mockable"),
                 .product(name: "Noora", package: "Noora"),
             ],
             swiftSettings: [
                 .swiftLanguageMode(.v6),
                 .enableExperimentalFeature("StrictConcurrency"),
+                .define("MOCKING", .when(configuration: .debug)),
             ]
         ),
         .testTarget(
