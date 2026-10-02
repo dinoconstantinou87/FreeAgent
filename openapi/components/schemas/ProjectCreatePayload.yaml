@@ -1,0 +1,56 @@
+type: object
+required:
+- contact
+- name
+- status
+- currency
+- budget_units
+properties:
+  contact:
+    type: string
+    example: https://api.freeagent.com/v2/contacts/1
+  name:
+    type: string
+    example: Website Development
+  status:
+    $ref: '#/components/schemas/ProjectStatus'
+  contract_po_reference:
+    type: string
+    example: PO-001
+  uses_project_invoice_sequence:
+    type: boolean
+    example: false
+  currency:
+    type: string
+    description: An unknown or lowercase code is a 422
+    example: GBP
+  budget:
+    type: integer
+    description: Leave as zero if the project has no budget - FreeAgent drops any fraction
+    example: 0
+  budget_units:
+    $ref: '#/components/schemas/ProjectBudgetUnits'
+  hours_per_day:
+    type: number
+    description: More than 0 and at most 24, or the create is a 422 - defaults to 8
+    example: 7.5
+  normal_billing_rate:
+    type: number
+    description: Rounded to two decimal places - a negative rate is a 422
+    example: 95
+  billing_period:
+    $ref: '#/components/schemas/ProjectBillingPeriod'
+  is_ir35:
+    type: boolean
+    example: false
+  starts_on:
+    type: string
+    description: An invalid date is silently ignored
+    example: '2026-01-01'
+  ends_on:
+    type: string
+    description: Must be later than starts_on, or the create is a 422 - an invalid date is silently ignored
+    example: '2026-12-31'
+  include_unbilled_time_in_profitability:
+    type: boolean
+    example: true

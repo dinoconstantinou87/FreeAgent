@@ -1,0 +1,41 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/tasks/1
+  project:
+    type: string
+    example: https://api.freeagent.com/v2/projects/1
+  name:
+    type: string
+    example: Development
+  currency:
+    type: string
+    example: GBP
+  is_billable:
+    type: boolean
+    example: true
+  billing_rate:
+    type: string
+    example: '0.0'
+  billing_period:
+    type: string
+    description: One of hour or day, the unit of billing_rate
+    example: hour
+  status:
+    type: string
+    description: One of Active, Completed or Hidden
+    example: Active
+  is_deletable:
+    type: boolean
+    example: false
+  created_at:
+    type: string
+    format: date-time
+    example: '2025-09-10T09:35:43.000Z'
+  updated_at:
+    type: string
+    format: date-time
+    example: '2025-09-10T09:35:43.000Z'

@@ -111,6 +111,8 @@ paths:
     $ref: 'paths/projects.yaml#/list'
   /v2/projects/{id}:
     $ref: 'paths/projects.yaml#/show'
+  /v2/tasks:
+    $ref: 'paths/tasks.yaml#/list'
   /v2/timeslips:
     $ref: 'paths/timeslips.yaml#/list'
   /v2/timeslips/{id}:
@@ -277,6 +279,20 @@ components:
       $ref: 'components/schemas/ProjectResponse.yaml'
     ProjectListResponse:
       $ref: 'components/schemas/ProjectListResponse.yaml'
+    ProjectCreatePayload:
+      $ref: 'components/schemas/ProjectCreatePayload.yaml'
+    ProjectUpdatePayload:
+      $ref: 'components/schemas/ProjectUpdatePayload.yaml'
+    ProjectStatus:
+      $ref: 'components/schemas/ProjectStatus.yaml'
+    ProjectBudgetUnits:
+      $ref: 'components/schemas/ProjectBudgetUnits.yaml'
+    ProjectBillingPeriod:
+      $ref: 'components/schemas/ProjectBillingPeriod.yaml'
+    Task:
+      $ref: 'components/schemas/Task.yaml'
+    TaskListResponse:
+      $ref: 'components/schemas/TaskListResponse.yaml'
     Timeslip:
       $ref: 'components/schemas/Timeslip.yaml'
     TimeslipTimer:
@@ -465,6 +481,7 @@ tags:
 - name: Credit Notes
 - name: Credit Note Transitions
 - name: Projects
+- name: Tasks
 - name: Timeslips
 - name: Timeslip Timers
 - name: VAT Returns

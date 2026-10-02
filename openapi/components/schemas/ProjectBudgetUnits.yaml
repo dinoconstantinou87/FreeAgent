@@ -1,0 +1,7 @@
+type: string
+description: Monetary means ex-VAT - the documented literal 'Monetary (ex-VAT)' is a 422
+enum:
+- Hours
+- Days
+- Monetary
+example: Hours

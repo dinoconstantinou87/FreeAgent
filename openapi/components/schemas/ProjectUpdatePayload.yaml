@@ -1,0 +1,50 @@
+type: object
+description: Fields left out are kept - an empty contract_po_reference, starts_on or ends_on removes it
+properties:
+  contact:
+    type: string
+    example: https://api.freeagent.com/v2/contacts/1
+  name:
+    type: string
+    example: Website Development
+  status:
+    $ref: '#/components/schemas/ProjectStatus'
+  contract_po_reference:
+    type: string
+    example: PO-001
+  uses_project_invoice_sequence:
+    type: boolean
+    example: false
+  currency:
+    type: string
+    description: An unknown or lowercase code is a 422
+    example: GBP
+  budget:
+    type: integer
+    description: Zero removes the budget - FreeAgent drops any fraction
+    example: 0
+  budget_units:
+    $ref: '#/components/schemas/ProjectBudgetUnits'
+  hours_per_day:
+    type: number
+    description: More than 0 and at most 24, or the update is a 422
+    example: 7.5
+  normal_billing_rate:
+    type: number
+    description: Rounded to two decimal places - a negative rate is a 422
+    example: 95
+  billing_period:
+    $ref: '#/components/schemas/ProjectBillingPeriod'
+  is_ir35:
+    type: boolean
+    example: false
+  starts_on:
+    type: string
+    example: '2026-01-01'
+  ends_on:
+    type: string
+    description: Must be later than starts_on, or the update is a 422
+    example: '2026-12-31'
+  include_unbilled_time_in_profitability:
+    type: boolean
+    example: true

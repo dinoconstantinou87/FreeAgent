@@ -3,9 +3,38 @@ list:
     tags:
     - Projects
     summary: List projects
-    description: List projects - filtered by contact, every status is included
+    description: List projects - every status is included without a view
     operationId: listProjects
     parameters:
+    - name: view
+      in: query
+      description: Filter projects by status - the undocumented all lists every status, as no view does, and FreeAgent answers an unknown view with a 400
+      schema:
+        type: string
+        enum:
+        - all
+        - active
+        - completed
+        - cancelled
+        - hidden
+        example: active
+    - name: sort
+      in: query
+      description: Sort projects by specified field, descending with a leading hyphen - name is the default
+      schema:
+        type: string
+        enum:
+        - name
+        - -name
+        - contact_name
+        - -contact_name
+        - contact_display_name
+        - -contact_display_name
+        - created_at
+        - -created_at
+        - updated_at
+        - -updated_at
+        example: -updated_at
     - name: contact
       in: query
       description: Filter projects by contact URL - an unknown contact is a 404
@@ -28,6 +57,40 @@ list:
               $ref: '#/components/schemas/ProjectListResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
+  post:
+    tags:
+    - Projects
+    summary: Create project
+    description: Create project - it needs a contact, name, status, currency and budget units
+    operationId: createProject
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - project
+            properties:
+              project:
+                $ref: '#/components/schemas/ProjectCreatePayload'
+          examples:
+            Create Project:
+              value:
+                project:
+                  contact: https://api.freeagent.com/v2/contacts/1
+                  name: Website Development
+                  status: Active
+                  currency: GBP
+                  budget_units: Hours
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
 show:
   get:
     tags:
@@ -42,6 +105,47 @@ show:
           application/json:
             schema:
               $ref: '#/components/schemas/ProjectResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  put:
+    tags:
+    - Projects
+    summary: Update project
+    description: Update project
+    operationId: updateProject
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - project
+            properties:
+              project:
+                $ref: '#/components/schemas/ProjectUpdatePayload'
+          examples:
+            Update Project:
+              value:
+                project:
+                  status: Completed
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Projects
+    summary: Delete project
+    description: Delete project - one with tasks, timeslips, invoices, credit notes, estimates, expenses, bills or rebilled bank explanations is a 409 with no body
+    operationId: deleteProject
+    responses:
+      '200':
+        description: Success
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
