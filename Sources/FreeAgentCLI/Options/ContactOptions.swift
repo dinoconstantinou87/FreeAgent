@@ -56,8 +56,11 @@ struct ContactOptions: ParsableArguments {
     @Option(name: .long, help: "Sales tax registration number shown on invoices")
     var salesTaxRegistrationNumber: String?
 
-    @Option(name: .long, help: "Show the contact's name on invoices as well as the organisation name")
-    var contactNameOnInvoices: Bool?
+    @Option(
+        name: .customLong("contact-name-on-invoices"),
+        help: "Show the contact's name on invoices as well as the organisation name"
+    )
+    var nameOnInvoices: Bool?
 
     @Option(name: .long, help: "Number the contact's invoices in their own sequence")
     var usesContactInvoiceSequence: Bool?
@@ -81,7 +84,7 @@ struct ContactOptions: ParsableArguments {
             region: region,
             postcode: postcode,
             country: country,
-            contactNameOnInvoices: contactNameOnInvoices,
+            contactNameOnInvoices: nameOnInvoices,
             defaultPaymentTermsInDays: defaultPaymentTermsInDays,
             locale: locale,
             chargeSalesTax: chargeSalesTax,
@@ -107,7 +110,7 @@ struct ContactOptions: ParsableArguments {
             region: region,
             postcode: postcode,
             country: country,
-            contactNameOnInvoices: contactNameOnInvoices,
+            contactNameOnInvoices: nameOnInvoices,
             defaultPaymentTermsInDays: defaultPaymentTermsInDays,
             locale: locale,
             chargeSalesTax: chargeSalesTax,

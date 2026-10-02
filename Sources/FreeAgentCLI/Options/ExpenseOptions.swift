@@ -35,6 +35,8 @@ struct ExpenseOptions: ParsableArguments {
     @Option(name: .long, help: "How much to rebill for, needed with markup or price, e.g. 0.1")
     var rebillFactor: String?
 
+    @OptionGroup var recurring: ExpenseRecurringOptions
+
     @Option(name: .long, help: "Miles travelled, for a mileage claim")
     var mileage: String?
 
@@ -44,15 +46,12 @@ struct ExpenseOptions: ParsableArguments {
     @Option(name: .long, help: "Whether a mileage claim has a VAT receipt for its fuel")
     var haveVatReceipt: Bool?
 
-    @OptionGroup var recurring: ExpenseRecurringOptions
-
     func createPayload(
         user: String,
         category: String,
         datedOn: String,
         description: String,
-        engineType: Components.Schemas.ExpenseEngineType?,
-        engineSize: String?
+        engine: ExpenseEngineOptions
     ) -> Components.Schemas.ExpenseCreatePayload {
         .init(
             user: user,
@@ -68,12 +67,12 @@ struct ExpenseOptions: ParsableArguments {
             project: project?.value,
             rebillType: rebillType,
             rebillFactor: rebillFactor,
-            recurring: recurring.recurring,
-            recurringEndDate: recurring.recurringEndDate,
+            recurring: recurring.period,
+            recurringEndDate: recurring.endDate,
             mileage: mileage,
             vehicleType: vehicleType,
-            engineType: engineType,
-            engineSize: engineSize,
+            engineType: engine.type,
+            engineSize: engine.size,
             haveVatReceipt: haveVatReceipt
         )
     }
@@ -98,8 +97,8 @@ struct ExpenseOptions: ParsableArguments {
             project: project?.value,
             rebillType: rebillType,
             rebillFactor: rebillFactor,
-            recurring: recurring.recurring,
-            recurringEndDate: recurring.recurringEndDate,
+            recurring: recurring.period,
+            recurringEndDate: recurring.endDate,
             mileage: mileage,
             vehicleType: vehicleType,
             haveVatReceipt: haveVatReceipt

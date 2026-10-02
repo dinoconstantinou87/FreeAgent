@@ -18,19 +18,9 @@ struct ExpenseCreateCommand: MutatingCommand {
     @Option(name: .long, help: "Description of the expense")
     var description: String
 
-    @Option(
-        name: .long,
-        help: "Engine of a car or motorcycle mileage claim, as listed by 'expense mileage-settings' (default: Petrol)"
-    )
-    var engineType: Components.Schemas.ExpenseEngineType?
-
-    @Option(
-        name: .long,
-        help: "Engine size of a mileage claim, as listed by 'expense mileage-settings' - an unknown size becomes the first"
-    )
-    var engineSize: String?
-
     @OptionGroup var expense: ExpenseOptions
+
+    @OptionGroup var engine: ExpenseEngineOptions
 
     @OptionGroup var user: UserOptions
 
@@ -46,8 +36,7 @@ struct ExpenseCreateCommand: MutatingCommand {
             category: category.value,
             datedOn: datedOn,
             description: description,
-            engineType: engineType,
-            engineSize: engineSize
+            engine: engine
         )
 
         let input = Operations.CreateExpense.Input(

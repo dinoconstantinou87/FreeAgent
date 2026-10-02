@@ -15,8 +15,8 @@ struct ExpenseRecurringOptionsTests {
     func endDateWithRecurring() throws {
         let options = try ExpenseRecurringOptions.parse(["--recurring", "Monthly", "--recurring-end-date", "2027-03-15"])
 
-        #expect(options.recurring == .monthly)
-        #expect(options.recurringEndDate == "2027-03-15")
+        #expect(options.period == .monthly)
+        #expect(options.endDate == "2027-03-15")
     }
 
     @Test("refuses --recurring-end-date without --recurring on expense update")
