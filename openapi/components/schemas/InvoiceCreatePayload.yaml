@@ -19,6 +19,13 @@ properties:
     - billed_grouped_by_timeslip_task
     - billed_grouped_by_timeslip_date
     example: billed_grouped_by_timeslip
+  include_expenses:
+    type: string
+    description: Bills every unbilled expense, bill and bank account entry rebilled to the project onto the invoice, on one line or one per expense - without a project nothing is billed
+    enum:
+    - billed_grouped_by_single_expense
+    - billed_grouped_by_expense
+    example: billed_grouped_by_expense
   currency:
     type: string
     example: GBP

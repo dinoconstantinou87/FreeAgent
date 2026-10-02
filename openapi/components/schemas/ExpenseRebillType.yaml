@@ -1,0 +1,7 @@
+type: string
+description: How an expense is rebilled to its project
+enum:
+- cost
+- markup
+- price
+example: markup

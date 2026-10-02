@@ -195,6 +195,14 @@ list:
                   dated_on: 2026-10-02
                   payment_terms_in_days: 30
                   include_timeslips: billed_grouped_by_timeslip
+            Bill Project Expenses:
+              value:
+                invoice:
+                  contact: https://api.freeagent.com/v2/contacts/:id
+                  project: https://api.freeagent.com/v2/projects/:id
+                  dated_on: 2026-10-02
+                  payment_terms_in_days: 30
+                  include_expenses: billed_grouped_by_expense
     responses:
       '201':
         description: Created

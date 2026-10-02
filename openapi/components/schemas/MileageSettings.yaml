@@ -1,0 +1,13 @@
+type: object
+required:
+- engine_type_and_size_options
+- mileage_rates
+properties:
+  engine_type_and_size_options:
+    type: array
+    items:
+      $ref: '#/components/schemas/MileageEngineOptions'
+  mileage_rates:
+    type: array
+    items:
+      $ref: '#/components/schemas/MileageRates'

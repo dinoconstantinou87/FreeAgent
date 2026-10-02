@@ -1,0 +1,6 @@
+type: string
+enum:
+- TAXABLE
+- EXEMPT
+- OUT_OF_SCOPE
+example: TAXABLE

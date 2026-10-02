@@ -1,0 +1,56 @@
+type: object
+properties:
+  user:
+    type: string
+    example: https://api.freeagent.com/v2/users/1
+  category:
+    type: string
+    example: https://api.freeagent.com/v2/categories/285
+  dated_on:
+    type: string
+    example: 2026-09-15
+  description:
+    type: string
+    example: Team lunch
+  currency:
+    type: string
+    example: USD
+  gross_value:
+    type: string
+    example: '-12.0'
+  sales_tax_rate:
+    type: string
+    description: Ignored while a manual_sales_tax_amount is set
+    example: '20.0'
+  sales_tax_status:
+    $ref: '#/components/schemas/ExpenseSalesTaxStatus'
+  manual_sales_tax_amount:
+    type: string
+    description: Replaces the rate's sales tax, and can't be blanked once set - a sales_tax_status of EXEMPT removes it
+    example: '0.12'
+  receipt_reference:
+    type: string
+    description: An empty string removes the receipt reference
+    example: REC-001
+  project:
+    type: string
+    example: https://api.freeagent.com/v2/projects/1
+  rebill_type:
+    $ref: '#/components/schemas/ExpenseRebillType'
+  rebill_factor:
+    type: string
+    example: '0.1'
+  recurring:
+    $ref: '#/components/schemas/ExpenseRecurringPeriod'
+  recurring_end_date:
+    type: string
+    description: Only applied alongside recurring - alone it is a 400, and with other fields it is ignored
+    example: 2027-03-15
+  mileage:
+    type: string
+    example: '42'
+  vehicle_type:
+    $ref: '#/components/schemas/ExpenseVehicleType'
+  have_vat_receipt:
+    type: boolean
+    example: true

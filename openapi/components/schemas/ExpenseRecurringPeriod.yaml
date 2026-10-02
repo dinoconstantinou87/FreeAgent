@@ -1,0 +1,13 @@
+type: string
+description: How often an expense recurs - Monthly is accepted though not documented
+enum:
+- Weekly
+- Two Weekly
+- Four Weekly
+- Monthly
+- Two Monthly
+- Quarterly
+- Biannually
+- Annually
+- 2-Yearly
+example: Monthly

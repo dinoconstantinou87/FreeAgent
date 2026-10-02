@@ -16,10 +16,24 @@ struct ExpenseShowCommand: ShowCommand {
             Field("Receipt Reference") { .text($0.receiptReference) }
             Field("EC Status") { .text($0.ecStatus) }
             Field("Recurring") { .text($0.recurring) }
-            Field("Rebill Type") { .text($0.rebillType) }
-            Field("Rebill Factor") { .text($0.rebillFactor) }
             Field("Stock Item Description") { .text($0.stockItemDescription) }
             Field("Stock Quantity") { .text($0.stockAlteringQuantity) }
+            Field("Locked") { .text($0.lockedReason) }
+        }
+        FieldSection("Mileage") {
+            Field("Mileage") { .text($0.mileage) }
+            Field("Vehicle Type") { .text($0.vehicleType) }
+            Field("Engine Type") { .text($0.engineType) }
+            Field("Engine Size") { .text($0.engineSize) }
+            Field("Reclaim Rate") { .currency($0.reclaimMileageRate, code: $0.currency) }
+            Field("Rebill Rate") { .currency($0.rebillMileageRate, code: $0.currency) }
+            Field("VAT Receipt") { .flag($0.haveVatReceipt) }
+        }
+        FieldSection("Rebilling") {
+            Field("Project") { .text($0.projectName) }
+            Field("Contact") { .text($0.contactName) }
+            Field("Rebill Type") { .text($0.rebillType) }
+            Field("Rebill Factor") { .text($0.rebillFactor) }
         }
         FieldSection("Amounts") {
             Field("Gross Value") { .currency($0.grossValue, code: $0.currency) }
@@ -49,6 +63,7 @@ struct ExpenseShowCommand: ShowCommand {
             Field("Project") { .id(url: $0.project) }
             Field("Property") { .id(url: $0.property) }
             Field("Stock Item") { .id(url: $0.stockItem) }
+            Field("Capital Asset") { .id(url: $0.capitalAsset) }
             Field("Rebill Project") { .id(url: $0.rebillToProject) }
             Field("Rebilled Invoice") { .id(url: $0.rebilledOnInvoice) }
             Field("Attachment") { .id(url: $0.attachment?.url) }

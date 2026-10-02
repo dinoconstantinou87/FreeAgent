@@ -1,0 +1,10 @@
+type: string
+description: The engine types valid on a date are listed in mileage_settings
+enum:
+- Petrol
+- Diesel
+- LPG
+- Electric
+- Electric (Home charger)
+- Electric (Public charger)
+example: Petrol

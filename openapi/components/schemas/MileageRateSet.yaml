@@ -1,0 +1,16 @@
+type: object
+required:
+- Car
+- Motorcycle
+- Bicycle
+properties:
+  Car:
+    $ref: '#/components/schemas/MileageRate'
+  Motorcycle:
+    $ref: '#/components/schemas/MileageRate'
+  Bicycle:
+    $ref: '#/components/schemas/MileageRate'
+  basic_rate_limit:
+    type: integer
+    description: Miles a year paid at the basic rate before the additional rate applies
+    example: 10000
