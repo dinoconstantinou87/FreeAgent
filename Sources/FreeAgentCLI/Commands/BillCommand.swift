@@ -5,7 +5,14 @@ struct BillCommand: AsyncParsableCommand {
         commandName: "bill",
         abstract: "Manage bills",
         subcommands: [
-            BillCreateCommand.self
+            BillListCommand.self,
+            BillCreateCommand.self,
+            BillShowCommand.self,
+            BillUpdateCommand.self,
+            BillDeleteCommand.self,
+            BillCreateItemCommand.self,
+            BillUpdateItemCommand.self,
+            BillDeleteItemCommand.self,
         ]
     )
 }

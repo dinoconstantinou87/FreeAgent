@@ -28,7 +28,9 @@ paths:
   /v2/bank_transactions/{id}:
     $ref: 'paths/bank_transactions.yaml#/show'
   /v2/bills:
-    $ref: 'paths/bills.yaml#/create'
+    $ref: 'paths/bills.yaml#/list'
+  /v2/bills/{id}:
+    $ref: 'paths/bills.yaml#/show'
   /v2/categories:
     $ref: 'paths/categories.yaml#/list'
   /v2/company:
@@ -321,8 +323,14 @@ components:
       $ref: 'components/schemas/BillItem.yaml'
     BillResponse:
       $ref: 'components/schemas/BillResponse.yaml'
+    BillListResponse:
+      $ref: 'components/schemas/BillListResponse.yaml'
+    BillRecurringPeriod:
+      $ref: 'components/schemas/BillRecurringPeriod.yaml'
     BillCreatePayload:
       $ref: 'components/schemas/BillCreatePayload.yaml'
+    BillUpdatePayload:
+      $ref: 'components/schemas/BillUpdatePayload.yaml'
     BillItemPayload:
       $ref: 'components/schemas/BillItemPayload.yaml'
     Category:

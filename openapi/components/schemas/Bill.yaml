@@ -11,6 +11,9 @@ properties:
   contact_name:
     type: string
     example: Acme Ltd
+  project:
+    type: string
+    example: https://api.freeagent.com/v2/projects/1
   reference:
     type: string
     example: BILL-001
@@ -20,6 +23,16 @@ properties:
   due_on:
     type: string
     example: 2025-09-22
+  comments:
+    type: string
+    example: Annual hosting
+  recurring:
+    type: string
+    description: One of the BillRecurringPeriod values, absent when the bill does not recur
+    example: Annually
+  recurring_end_date:
+    type: string
+    example: 2028-10-02
   paid_on:
     type: string
     example: 2025-09-01
@@ -70,7 +83,8 @@ properties:
       - total_value
   locked_reason:
     type: string
-    example: This bill is locked
+    description: Why the locked_attributes cannot change, e.g. because the bill has payments
+    example: Some parts of this bill are locked and it can't be deleted, because it has payments associated.
   rebill_type:
     type: string
     example: markup

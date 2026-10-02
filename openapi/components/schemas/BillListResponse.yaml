@@ -1,0 +1,8 @@
+type: object
+required:
+- bills
+properties:
+  bills:
+    type: array
+    items:
+      $ref: 'Bill.yaml'
