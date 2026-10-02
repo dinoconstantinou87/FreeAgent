@@ -9,7 +9,6 @@ public protocol FileManagerInterface: Sendable {
     func fileExists(atPath path: String) -> Bool
     func createDirectory(at url: URL, withIntermediateDirectories createIntermediates: Bool) throws
     func write(_ data: Data, to url: URL) throws
-    func setPosixPermissions(_ permissions: Int, of url: URL) throws
     func removeItem(at url: URL) throws
 }
 
@@ -22,9 +21,5 @@ extension FileManager: FileManagerInterface {
 
     public func write(_ data: Data, to url: URL) throws {
         try data.write(to: url, options: .atomic)
-    }
-
-    public func setPosixPermissions(_ permissions: Int, of url: URL) throws {
-        try setAttributes([.posixPermissions: permissions], ofItemAtPath: url.path)
     }
 }

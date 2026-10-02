@@ -1,11 +1,10 @@
-import Configuration
 import Foundation
 
 public struct AuthStorage: AuthStorageInterface {
 
     // MARK: Lifecycle
 
-    #if os(macOS)
+    #if os(macOS) && !DEBUG
     public init(store: any CredentialStoreInterface = KeychainCredentialStore()) {
         self.store = store
     }
@@ -14,15 +13,6 @@ public struct AuthStorage: AuthStorageInterface {
         self.store = store
     }
     #endif
-
-    public init(config: ConfigReader) throws {
-        guard config.string(forKey: "credentialStore") != nil else {
-            self.init()
-            return
-        }
-
-        try self.init(store: config.requiredString(forKey: "credentialStore", as: CredentialStoreKind.self).store)
-    }
 
     // MARK: Public
 

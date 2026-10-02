@@ -67,16 +67,6 @@ final class ConfigTests {
         #expect(try reader.requiredString(forKey: "environment", as: Environment.self) == environment)
     }
 
-    @Test("reads the credential store from FREEAGENT_AUTH_CREDENTIAL_STORE without an environment")
-    func readsCredentialStore() async throws {
-        setenv("FREEAGENT_AUTH_CREDENTIAL_STORE", "file", 1)
-        defer { unsetenv("FREEAGENT_AUTH_CREDENTIAL_STORE") }
-
-        let reader = try await Config.reader(fileURL: fileURL).scoped(to: "auth")
-
-        #expect(reader.string(forKey: "credentialStore", as: CredentialStoreKind.self) == .file)
-    }
-
     @Test("names the missing key when nothing is configured")
     func namesMissingKey() async throws {
         let reader = try await reader()

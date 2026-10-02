@@ -23,7 +23,6 @@ public struct FileCredentialStore: CredentialStoreInterface {
     public func write(_ data: Data) throws {
         try fileManager.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
         try fileManager.write(data, to: url)
-        try fileManager.setPosixPermissions(0o600, of: url)
     }
 
     public func remove() throws {

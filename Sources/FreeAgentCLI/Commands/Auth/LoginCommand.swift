@@ -12,11 +12,9 @@ struct LoginCommand: CredentialCommand {
     var environment = Environment.production
 
     func perform() async throws -> AuthCredential {
-        let reader = try await Config.reader(environment: environment).scoped(to: "auth")
-        let config = try AuthConfig(config: reader)
-        let client = try AuthClient(
+        let config = try await AuthConfig(config: Config.reader(environment: environment).scoped(to: "auth"))
+        let client = AuthClient(
             config: config,
-            storage: AuthStorage(config: reader),
             userAuthenticator: LoopbackUserAuthenticator(callbackUrl: config.callbackUrl).userAuthenticator
         )
 

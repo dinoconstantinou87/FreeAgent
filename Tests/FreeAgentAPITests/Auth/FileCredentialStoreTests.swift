@@ -22,11 +22,10 @@ struct FileCredentialStoreTests {
         #expect(try store.read() == Data("credential".utf8))
     }
 
-    @Test("write creates the parent directory, writes the data and makes the file owner-only")
+    @Test("write creates the parent directory and writes the data to the file")
     func writeCreatesDirectoryAndWrites() throws {
         given(fileManager).createDirectory(at: .any, withIntermediateDirectories: .any).willReturn()
         given(fileManager).write(.any, to: .any).willReturn()
-        given(fileManager).setPosixPermissions(.any, of: .any).willReturn()
 
         try store.write(Data("credential".utf8))
 
@@ -34,19 +33,6 @@ struct FileCredentialStoreTests {
             .createDirectory(at: .value(url.deletingLastPathComponent()), withIntermediateDirectories: .value(true))
             .called(.once)
         verify(fileManager).write(.value(Data("credential".utf8)), to: .value(url)).called(.once)
-        verify(fileManager).setPosixPermissions(.value(0o600), of: .value(url)).called(.once)
-    }
-
-    @Test("write leaves a real file readable and writable by its owner only")
-    func writeRestrictsPermissions() throws {
-        let directory = FileManager.default.temporaryDirectory.appending(path: UUID().uuidString)
-        defer { try? FileManager.default.removeItem(at: directory) }
-        let url = directory.appending(path: "credentials.json")
-
-        try FileCredentialStore(url: url).write(Data("credential".utf8))
-
-        let permissions = try FileManager.default.attributesOfItem(atPath: url.path)[.posixPermissions] as? Int
-        #expect(permissions == 0o600)
     }
 
     @Test("write does not write when the directory cannot be created")

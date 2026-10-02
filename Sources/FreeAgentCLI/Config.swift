@@ -44,21 +44,10 @@ public struct Config: Codable, Sendable {
         try await ConfigReader(providers: [
             InMemoryProvider(name: "arguments", values: [
                 "auth.environment": ConfigValue(.string(environment.rawValue), isSecret: false)
-            ])
-        ] + providers(fileURL: fileURL))
-    }
-
-    static func reader(fileURL: URL = url) async throws -> ConfigReader {
-        try await ConfigReader(providers: providers(fileURL: fileURL))
-    }
-
-    // MARK: Private
-
-    private static func providers(fileURL: URL) async throws -> [any ConfigProvider] {
-        try await [
+            ]),
             EnvironmentVariablesProvider().prefixKeys(with: "freeagent"),
             FileProvider<JSONSnapshot>(filePath: .init(fileURL.path(percentEncoded: false)), allowMissing: true),
-        ]
+        ])
     }
 
 }

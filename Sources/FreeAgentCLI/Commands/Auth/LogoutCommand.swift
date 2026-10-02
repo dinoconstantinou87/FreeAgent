@@ -9,7 +9,7 @@ struct LogoutCommand: CredentialCommand {
     )
 
     func perform() async throws -> AuthCredential {
-        let storage = try await AuthStorage(config: Config.reader().scoped(to: "auth"))
+        let storage = AuthStorage()
 
         guard let credential = try storage.get() else {
             throw AuthError.unauthenticated
