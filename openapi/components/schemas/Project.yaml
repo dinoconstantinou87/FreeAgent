@@ -16,11 +16,10 @@ properties:
     type: string
     example: Acme Ltd
   status:
-    type: string
-    description: One of Active, Completed, Cancelled or Hidden
-    example: Active
+    $ref: '#/components/schemas/ProjectStatus'
   contract_po_reference:
     type: string
+    description: Omitted until set
     example: PO-001
   uses_project_invoice_sequence:
     type: boolean
@@ -29,38 +28,38 @@ properties:
     type: string
     example: GBP
   budget:
-    type: number
-    description: Zero when the project has no budget
+    type: integer
+    description: Zero when the project has no budget - FreeAgent drops any fraction sent
     example: 0
   budget_units:
-    type: string
-    description: One of Hours, Days or Monetary
-    example: Monetary
+    $ref: '#/components/schemas/ProjectBudgetUnits'
   hours_per_day:
     type: string
     example: '8.0'
   normal_billing_rate:
     type: string
+    description: Rounded to two decimal places
     example: '0.0'
   billing_period:
-    type: string
-    description: One of hour or day, the unit of normal_billing_rate
-    example: hour
+    $ref: '#/components/schemas/ProjectBillingPeriod'
   is_ir35:
     type: boolean
+    description: Omitted until set
     example: false
   starts_on:
     type: string
+    description: Omitted until set
     example: '2026-01-01'
   ends_on:
     type: string
+    description: Omitted until set
     example: '2026-12-31'
   include_unbilled_time_in_profitability:
     type: boolean
     example: true
   is_deletable:
     type: boolean
-    description: Only sent when showing a single project
+    description: Sent on show, create and update, never in a list - false once tasks, timeslips, invoices, credit notes, estimates, expenses, bills or rebilled bank explanations use the project
     example: false
   created_at:
     type: string

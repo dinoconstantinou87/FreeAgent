@@ -1,6 +1,6 @@
 [tools]
-swiftformat = { version = "latest", no_app = "true", rename_exe = "swiftformat" }
-swiftlint = "latest"
+swiftformat = { version = "0.63.1", no_app = "true", rename_exe = "swiftformat" }
+swiftlint = "0.65.1"
 
 [tasks.demo]
 description = "Record the README demo GIF against a FreeAgent sandbox account"
