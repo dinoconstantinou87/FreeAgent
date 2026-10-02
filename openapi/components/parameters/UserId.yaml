@@ -1,0 +1,7 @@
+name: user_id
+in: path
+required: true
+description: ID of the user
+schema:
+  type: string
+  example: '32382'

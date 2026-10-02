@@ -1,0 +1,8 @@
+type: object
+properties:
+  total_pay_in_previous_employment:
+    type: string
+    example: '12000.0'
+  total_tax_in_previous_employment:
+    type: string
+    example: '2400.0'

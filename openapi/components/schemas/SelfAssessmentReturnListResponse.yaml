@@ -1,0 +1,8 @@
+type: object
+required:
+- self_assessment_returns
+properties:
+  self_assessment_returns:
+    type: array
+    items:
+      $ref: 'SelfAssessmentReturn.yaml'

@@ -23,6 +23,7 @@ struct FreeAgentCLI: AsyncParsableCommand {
             AttachmentCommand.self,
             VatReturnCommand.self,
             CorporationTaxReturnCommand.self,
+            SelfAssessmentReturnCommand.self,
         ]
     )
 }

@@ -1,0 +1,32 @@
+type: object
+required:
+- url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/users/32382/self_assessment_returns/2025-04-05
+  period_ends_on:
+    type: string
+    example: '2025-04-05'
+  period_starts_on:
+    type: string
+    example: '2024-04-06'
+  payments:
+    type: array
+    items:
+      $ref: 'TaxReturnPayment.yaml'
+  filing_due_on:
+    type: string
+    example: '2026-01-31'
+  filing_status:
+    type: string
+    description: One of unfiled, pending, rejected, provisionally_filed, filed or marked_as_filed
+    example: unfiled
+  filed_at:
+    type: string
+    format: date-time
+    example: '2025-10-10T10:32:49.000+00:00'
+  filed_reference:
+    type: string
+    description: IRMark returned by an online submission
+    example: YFM7CAZY2AQXUCRCQJOVS45UZUS4JWQN
