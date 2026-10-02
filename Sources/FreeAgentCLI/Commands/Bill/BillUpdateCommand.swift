@@ -2,26 +2,29 @@ import ArgumentParser
 import Foundation
 import FreeAgentAPI
 
-struct BillCreateCommand: MutatingCommand {
+struct BillUpdateCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
-        commandName: "create",
-        abstract: "Create a new bill",
-        discussion: "The bill has no items until you add them with create-item."
+        commandName: "update",
+        abstract: "Update a bill",
+        discussion: "A bill with payments cannot change its locked attributes, such as its contact, reference or date."
     )
 
+    @Argument(help: "Bill ID or URL")
+    var id: ResourceID
+
     @Option(name: .long, help: "Contact ID or URL")
-    var contact: ResourceID
+    var contact: ResourceID?
 
     @Option(name: .long, help: "Bill reference")
-    var reference: String
+    var reference: String?
 
     @Option(name: .long, help: "Date of the bill (YYYY-MM-DD)")
-    var datedOn: String
+    var datedOn: String?
 
     @Option(name: .long, help: "Due date (YYYY-MM-DD)")
-    var dueOn: String
+    var dueOn: String?
 
-    @Option(name: .long, help: "Comments")
+    @Option(name: .long, help: "Comments, or an empty string to remove them")
     var comments: String?
 
     @Option(name: .long, help: "Project ID or URL")
@@ -40,8 +43,8 @@ struct BillCreateCommand: MutatingCommand {
     var json = false
 
     func perform(client: Client) async throws -> Components.Schemas.BillResponse {
-        let billPayload = Components.Schemas.BillCreatePayload(
-            contact: contact.value,
+        let billPayload = Components.Schemas.BillUpdatePayload(
+            contact: contact?.value,
             reference: reference,
             datedOn: datedOn,
             dueOn: dueOn,
@@ -51,15 +54,16 @@ struct BillCreateCommand: MutatingCommand {
             recurringEndDate: recurringEndDate
         )
 
-        let input = Operations.CreateBill.Input(
+        let input = Operations.UpdateBill.Input(
+            path: .init(id: id.value),
             body: .json(.init(bill: billPayload))
         )
 
-        return try await client.createBill(input)
-            .created.body.json
+        return try await client.updateBill(input)
+            .ok.body.json
     }
 
-    func success(for response: Components.Schemas.BillResponse) -> String {
-        "Created bill \(response.bill.url)"
+    func success(for _: Components.Schemas.BillResponse) -> String {
+        "Updated bill \(id)"
     }
 }

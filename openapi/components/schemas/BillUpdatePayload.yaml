@@ -1,9 +1,4 @@
 type: object
-required:
-- contact
-- reference
-- dated_on
-- due_on
 properties:
   contact:
     type: string
@@ -13,13 +8,14 @@ properties:
     example: REF100
   dated_on:
     type: string
-    example: 2020-09-14
+    example: '2026-10-02'
   due_on:
     type: string
-    example: 2020-10-14
+    example: '2026-10-30'
   comments:
     type: string
-    example: Vehicle purchase
+    description: An empty string removes the comments
+    example: Annual hosting
   project:
     type: string
     example: https://api.freeagent.com/v2/projects/1
@@ -28,12 +24,8 @@ properties:
   recurring_end_date:
     type: string
     example: 2028-10-02
-  ec_status:
-    type: string
-    example: UK
-  attachment:
-    $ref: '#/components/schemas/AttachmentPayload'
   bill_items:
     type: array
+    description: Every item needs a url - an existing item's to update it, or to remove it with _destroy, and an empty string to add one. Items left out are kept
     items:
       $ref: '#/components/schemas/BillItemPayload'

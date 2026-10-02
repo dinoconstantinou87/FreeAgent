@@ -1,18 +1,119 @@
-create:
+list:
+  get:
+    tags:
+    - Bills
+    summary: List bills
+    description: List bills
+    operationId: listBills
+    parameters:
+    - name: nested_bill_items
+      in: query
+      description: Include bill items in each bill
+      schema:
+        type: boolean
+        example: true
+    - name: contact
+      in: query
+      description: Filter bills by contact URL - an unknown contact matches nothing
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/contacts/:id
+    - name: project
+      in: query
+      description: Filter bills by project URL
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/projects/:id
+    - name: view
+      in: query
+      description: Filter bills by view - FreeAgent answers an unknown view with a 400
+      schema:
+        type: string
+        enum:
+        - all
+        - open
+        - overdue
+        - open_or_overdue
+        - open_or_overdue_payments
+        - open_or_overdue_refunds
+        - paid
+        - recurring
+        - hire_purchase
+        - cis
+        example: open_or_overdue
+    - name: from_date
+      in: query
+      description: Show bills dated on or after this date (YYYY-MM-DD)
+      schema:
+        type: string
+        example: 2026-01-01
+    - name: to_date
+      in: query
+      description: Show bills dated on or before this date (YYYY-MM-DD)
+      schema:
+        type: string
+        example: 2026-12-31
+    - name: updated_since
+      in: query
+      description: Show bills updated since this timestamp
+      schema:
+        type: string
+        example: 2026-01-01T00:00:00Z
+    - name: sort
+      in: query
+      description: Sort bills by specified field, descending with a leading hyphen
+      schema:
+        type: string
+        enum:
+        - dated_on
+        - -dated_on
+        - due_on
+        - -due_on
+        - created_at
+        - -created_at
+        - updated_at
+        - -updated_at
+        example: -dated_on
+    - $ref: '#/components/parameters/Page'
+    - $ref: '#/components/parameters/PerPage'
+    responses:
+      '200':
+        description: Success
+        headers:
+          Link:
+            $ref: '#/components/headers/Link'
+          X-Total-Count:
+            $ref: '#/components/headers/XTotalCount'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillListResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
   post:
     tags:
     - Bills
-    summary: Create Bill
-    description: Create Bill
+    summary: Create bill
+    description: Create bill - a bill with no items is created with the status Zero Value
     operationId: createBill
     requestBody:
       content:
         application/json:
           schema:
             type: object
+            required:
+            - bill
             properties:
               bill:
                 $ref: '#/components/schemas/BillCreatePayload'
+          examples:
+            Create Bill:
+              value:
+                bill:
+                  contact: https://api.freeagent.com/v2/contacts/:id
+                  reference: INV-1234
+                  dated_on: 2026-10-02
+                  due_on: 2026-10-30
     responses:
       '201':
         description: Created
@@ -22,3 +123,81 @@ create:
               $ref: '#/components/schemas/BillResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
+show:
+  get:
+    tags:
+    - Bills
+    summary: Show bill
+    description: Show bill
+    operationId: showBill
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  put:
+    tags:
+    - Bills
+    summary: Update bill
+    description: Update bill, including adding, updating and removing its items - a bill with payments keeps its locked_attributes, and changing one is a 422
+    operationId: updateBill
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - bill
+            properties:
+              bill:
+                $ref: '#/components/schemas/BillUpdatePayload'
+          examples:
+            Update Bill:
+              value:
+                bill:
+                  comments: Annual hosting
+            Add Bill Item:
+              value:
+                bill:
+                  bill_items:
+                  - url: ''
+                    category: https://api.freeagent.com/v2/categories/285
+                    description: Hosting
+                    total_value: '120.0'
+            Remove Bill Item:
+              value:
+                bill:
+                  bill_items:
+                  - url: https://api.freeagent.com/v2/bill_items/:id
+                    _destroy: 1
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Bills
+    summary: Delete bill
+    description: Delete bill - a bill with payments is a 409 with no body, and its locked_reason says why
+    operationId: deleteBill
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

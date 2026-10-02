@@ -1,5 +1,13 @@
 type: object
 properties:
+  url:
+    type: string
+    description: On update, the URL or ID of an existing item to update or remove, or an empty string to add one - FreeAgent rejects an item without it
+    example: https://api.freeagent.com/v2/bill_items/1
+  _destroy:
+    type: integer
+    description: Set to 1, with url, to remove the item
+    example: 1
   category:
     type: string
     example: https://api.freeagent.com/v2/categories/285
@@ -8,7 +16,9 @@ properties:
     example: Item description
   total_value:
     type: string
+    description: Value including sales tax
     example: '300.0'
   sales_tax_rate:
     type: string
+    description: Defaults to the standard rate
     example: '20.0'
