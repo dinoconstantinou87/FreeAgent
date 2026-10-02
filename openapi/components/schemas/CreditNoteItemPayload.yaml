@@ -1,0 +1,40 @@
+type: object
+properties:
+  id:
+    type: string
+    description: ID of an existing item to update or remove - the docs say integer, and a string is accepted too
+    example: '1'
+  _destroy:
+    type: integer
+    description: Set to 1, with id, to remove the item
+    example: 1
+  description:
+    type: string
+    example: Refund
+  item_type:
+    type: string
+    description: Updating an item by id without this clears it to No Unit, though its other fields are kept
+    enum:
+    - Hours
+    - Days
+    - Weeks
+    - Months
+    - Years
+    - Products
+    - Services
+    - Training
+    - Expenses
+    - Comment
+    - Bills
+    - Discount
+    - Credit
+    - VAT
+    - Stock
+    example: Hours
+  price:
+    type: number
+    description: Negative, since only a credit note with a negative total can be sent
+    example: -95
+  quantity:
+    type: number
+    example: 2

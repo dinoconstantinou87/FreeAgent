@@ -1,0 +1,135 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/credit_notes/1
+  contact:
+    type: string
+    example: https://api.freeagent.com/v2/contacts/1
+  contact_name:
+    type: string
+    example: Acme Ltd
+  client_contact_name:
+    type: string
+    description: Omitted until set
+    example: Alice Johnson
+  project:
+    type: string
+    example: https://api.freeagent.com/v2/projects/1
+  property:
+    type: string
+    example: https://api.freeagent.com/v2/properties/1
+  bank_account:
+    type: string
+    example: https://api.freeagent.com/v2/bank_accounts/1
+  reference:
+    type: string
+    description: Shares the invoice reference sequence
+    example: '041'
+  status:
+    type: string
+    description: One of Draft, Open, Overdue, Refunded or Written-off - marking a credit note as sent makes it Open
+    example: Draft
+  long_status:
+    type: string
+    example: Open - due in about 1 month
+  dated_on:
+    type: string
+    example: '2026-10-02'
+  due_on:
+    type: string
+    description: Always dated_on plus payment_terms_in_days - FreeAgent ignores a due_on sent on create or update
+    example: '2026-11-01'
+  refunded_on:
+    type: string
+    example: '2026-11-15'
+  written_off_date:
+    type: string
+    example: '2026-12-01'
+  payment_terms_in_days:
+    type: integer
+    example: 30
+  payment_terms:
+    type: string
+    example: Refund within 30 days
+  po_reference:
+    type: string
+    description: Omitted until set
+    example: PO-1234
+  comments:
+    type: string
+    description: Omitted until set
+    example: Refund for cancelled work
+  currency:
+    type: string
+    example: GBP
+  exchange_rate:
+    type: string
+    example: '1.0'
+  net_value:
+    type: string
+    example: '-100.0'
+  sales_tax_value:
+    type: string
+    example: '-20.0'
+  second_sales_tax_value:
+    type: string
+    example: '0.0'
+  total_value:
+    type: string
+    example: '-120.0'
+  refunded_value:
+    type: string
+    example: '0.0'
+  due_value:
+    type: string
+    example: '-120.0'
+  discount_percent:
+    type: string
+    description: Omitted until set
+    example: '10.0'
+  involves_sales_tax:
+    type: boolean
+    example: true
+  is_interim_uk_vat:
+    type: boolean
+    example: false
+  ec_status:
+    type: string
+    example: UK/Non-EC
+  place_of_supply:
+    type: string
+    example: United Kingdom
+  cis_rate:
+    type: string
+    example: cis_standard
+  cis_deduction_rate:
+    type: string
+    example: '20.0'
+  cis_deduction:
+    type: string
+    example: '0.0'
+  cis_deduction_suffered:
+    type: string
+    example: '0.0'
+  omit_header:
+    type: boolean
+    example: false
+  show_project_name:
+    type: boolean
+    example: false
+  credit_note_items:
+    type: array
+    description: Always present on a single credit note, and on a list only with nested_credit_note_items. FreeAgent serves these as invoice items
+    items:
+      $ref: 'InvoiceItem.yaml'
+  created_at:
+    type: string
+    format: date-time
+    example: '2026-10-02T09:15:32Z'
+  updated_at:
+    type: string
+    format: date-time
+    example: '2026-10-02T09:15:32Z'

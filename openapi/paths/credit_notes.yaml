@@ -1,0 +1,298 @@
+list:
+  get:
+    tags:
+    - Credit Notes
+    summary: List credit notes
+    description: List credit notes
+    operationId: listCreditNotes
+    parameters:
+    - name: nested_credit_note_items
+      in: query
+      description: Include credit note items in each credit note
+      schema:
+        type: boolean
+        example: true
+    - name: contact
+      in: query
+      description: Filter credit notes by contact URL
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/contacts/:id
+    - name: project
+      in: query
+      description: Filter credit notes by project URL
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/projects/:id
+    - name: view
+      in: query
+      description: Filter credit notes by view - FreeAgent answers an unknown view with a 400
+      schema:
+        $ref: '#/components/schemas/CreditNoteView'
+    - name: from_date
+      in: query
+      description: Show credit notes dated on or after this date (YYYY-MM-DD)
+      schema:
+        type: string
+        example: 2026-01-01
+    - name: to_date
+      in: query
+      description: Show credit notes dated on or before this date (YYYY-MM-DD)
+      schema:
+        type: string
+        example: 2026-12-31
+    - name: updated_since
+      in: query
+      description: Show credit notes updated since this timestamp
+      schema:
+        type: string
+        example: 2026-01-01T00:00:00Z
+    - name: sort
+      in: query
+      description: Sort credit notes by specified field, descending with a leading hyphen
+      schema:
+        type: string
+        enum:
+        - created_at
+        - -created_at
+        - updated_at
+        - -updated_at
+        example: -updated_at
+    - $ref: '#/components/parameters/Page'
+    - $ref: '#/components/parameters/PerPage'
+    responses:
+      '200':
+        description: Success
+        headers:
+          Link:
+            $ref: '#/components/headers/Link'
+          X-Total-Count:
+            $ref: '#/components/headers/XTotalCount'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteListResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  post:
+    tags:
+    - Credit Notes
+    summary: Create credit note
+    description: Create credit note - always a Draft
+    operationId: createCreditNote
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - credit_note
+            properties:
+              credit_note:
+                $ref: '#/components/schemas/CreditNoteCreatePayload'
+          examples:
+            Create Credit Note:
+              value:
+                credit_note:
+                  contact: https://api.freeagent.com/v2/contacts/:id
+                  dated_on: 2026-10-02
+                  payment_terms_in_days: 30
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+show:
+  get:
+    tags:
+    - Credit Notes
+    summary: Show credit note
+    description: Show credit note
+    operationId: showCreditNote
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  put:
+    tags:
+    - Credit Notes
+    summary: Update credit note
+    description: Update credit note, including adding, updating and removing its items - only a Draft can be changed, anything else is a 422
+    operationId: updateCreditNote
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - credit_note
+            properties:
+              credit_note:
+                $ref: '#/components/schemas/CreditNoteUpdatePayload'
+          examples:
+            Update Credit Note:
+              value:
+                credit_note:
+                  comments: Refund for cancelled work
+            Add Credit Note Item:
+              value:
+                credit_note:
+                  credit_note_items:
+                  - description: Refund
+                    item_type: Hours
+                    price: -95
+                    quantity: 2
+            Remove Credit Note Item:
+              value:
+                credit_note:
+                  credit_note_items:
+                  - id: '1'
+                    _destroy: 1
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Credit Notes
+    summary: Delete credit note
+    description: Delete credit note - only a Draft credit note can be deleted, anything else is a 409 with no body
+    operationId: deleteCreditNote
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+pdf:
+  get:
+    tags:
+    - Credit Notes
+    summary: Show credit note as PDF
+    description: Show credit note as PDF
+    operationId: showCreditNoteAsPdf
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PdfResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+send_email:
+  post:
+    tags:
+    - Credit Notes
+    summary: Send credit note email
+    description: Send credit note email
+    operationId: sendCreditNoteEmail
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - credit_note
+            properties:
+              credit_note:
+                type: object
+                properties:
+                  email:
+                    $ref: '#/components/schemas/EmailPayload'
+          examples:
+            Send Credit Note Email:
+              value:
+                credit_note:
+                  email:
+                    body: Please find our credit note attached
+                    from: Our Company <us@company.com>
+                    subject: Credit Note
+                    to: Test Contact <test_contact@example.com>
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+mark_as_sent:
+  put:
+    tags:
+    - Credit Notes
+    - Credit Note Transitions
+    summary: Mark credit note as sent
+    description: Mark credit note as sent, which makes it Open - only a credit note with a negative total can be sent, anything else is a 403
+    operationId: markCreditNoteAsSent
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+mark_as_draft:
+  put:
+    tags:
+    - Credit Notes
+    - Credit Note Transitions
+    summary: Mark credit note as draft
+    description: Mark credit note as draft - a credit note that is already a Draft is a 403
+    operationId: markCreditNoteAsDraft
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditNoteResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

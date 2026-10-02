@@ -1,0 +1,19 @@
+type: object
+properties:
+  dated_on:
+    type: string
+    example: '2026-10-02'
+  payment_terms_in_days:
+    type: integer
+    example: 30
+  reference:
+    type: string
+    example: CN-001
+  comments:
+    type: string
+    example: Refund for cancelled work
+  credit_note_items:
+    type: array
+    description: Items without an id are added; items with one are updated, or removed with _destroy
+    items:
+      $ref: 'CreditNoteItemPayload.yaml'

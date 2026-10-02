@@ -18,7 +18,7 @@ protocol PdfCommand: ClientCommand where Response == Components.Schemas.PdfRespo
 
 extension PdfCommand {
     var path: String {
-        output ?? "\(Self.noun)-\(id).pdf"
+        output ?? "\(Self.noun.replacingOccurrences(of: " ", with: "-"))-\(id).pdf"
     }
 
     func canRun() throws -> Bool {

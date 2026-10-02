@@ -5,4 +5,5 @@ accessModifier: public
 namingStrategy: idiomatic
 typeOverrides:
   schemas:
-    InvoiceView: CustomInvoiceView
+    InvoiceView: InvoiceViewFilter
+    CreditNoteView: CreditNoteViewFilter

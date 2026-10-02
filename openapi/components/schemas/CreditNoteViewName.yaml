@@ -1,0 +1,10 @@
+type: string
+enum:
+- all
+- recent_open_or_overdue
+- open
+- overdue
+- open_or_overdue
+- draft
+- refunded
+example: all

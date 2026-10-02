@@ -1,0 +1,6 @@
+description: A named view, or last_N_months for credit notes dated in the last N months
+anyOf:
+- $ref: 'CreditNoteViewName.yaml'
+- type: string
+  pattern: '^last_[1-9][0-9]*_months$'
+  example: last_3_months
