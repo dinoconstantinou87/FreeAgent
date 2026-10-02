@@ -1,0 +1,473 @@
+list:
+  get:
+    tags:
+    - Estimates
+    summary: List estimates
+    description: List estimates
+    operationId: listEstimates
+    parameters:
+    - name: nested_estimate_items
+      in: query
+      description: Include estimate items in each estimate
+      schema:
+        type: boolean
+        example: true
+    - name: contact
+      in: query
+      description: Filter estimates by contact URL
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/contacts/:id
+    - name: project
+      in: query
+      description: Filter estimates by project URL
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/projects/:id
+    - name: invoice
+      in: query
+      description: Filter estimates by the URL of the invoice they were converted to
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/invoices/:id
+    - name: view
+      in: query
+      description: Filter estimates by view - FreeAgent returns no estimates for an unknown view rather than an error
+      schema:
+        type: string
+        enum:
+        - all
+        - recent
+        - draft
+        - non_draft
+        - sent
+        - approved
+        - rejected
+        - invoiced
+        example: all
+    - name: from_date
+      in: query
+      description: Show estimates dated on or after this date (YYYY-MM-DD)
+      schema:
+        type: string
+        example: 2026-01-01
+    - name: to_date
+      in: query
+      description: Show estimates dated on or before this date (YYYY-MM-DD)
+      schema:
+        type: string
+        example: 2026-12-31
+    - name: updated_since
+      in: query
+      description: Show estimates updated since this timestamp
+      schema:
+        type: string
+        example: 2026-01-01T00:00:00Z
+    - $ref: '#/components/parameters/Page'
+    - $ref: '#/components/parameters/PerPage'
+    responses:
+      '200':
+        description: Success
+        headers:
+          Link:
+            $ref: '#/components/headers/Link'
+          X-Total-Count:
+            $ref: '#/components/headers/XTotalCount'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateListResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  post:
+    tags:
+    - Estimates
+    summary: Create estimate
+    description: Create estimate
+    operationId: createEstimate
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - estimate
+            properties:
+              estimate:
+                $ref: '#/components/schemas/EstimateCreatePayload'
+          examples:
+            Create Estimate:
+              value:
+                estimate:
+                  contact: https://api.freeagent.com/v2/contacts/:id
+                  dated_on: 2026-10-02
+                  estimate_type: Estimate
+                  status: Draft
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+show:
+  get:
+    tags:
+    - Estimates
+    summary: Show estimate
+    description: Show estimate
+    operationId: showEstimate
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  put:
+    tags:
+    - Estimates
+    summary: Update estimate
+    description: Update estimate
+    operationId: updateEstimate
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - estimate
+            properties:
+              estimate:
+                $ref: '#/components/schemas/EstimateUpdatePayload'
+          examples:
+            Update Estimate:
+              value:
+                estimate:
+                  notes: Valid for 30 days
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Estimates
+    summary: Delete estimate
+    description: Delete estimate - only a Draft estimate can be deleted, anything else is a 409 with no body
+    operationId: deleteEstimate
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+pdf:
+  get:
+    tags:
+    - Estimates
+    summary: Show estimate as PDF
+    description: Show estimate as PDF
+    operationId: showEstimateAsPdf
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PdfResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+send_email:
+  post:
+    tags:
+    - Estimates
+    summary: Send estimate email
+    description: Send estimate email
+    operationId: sendEstimateEmail
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - estimate
+            properties:
+              estimate:
+                type: object
+                properties:
+                  email:
+                    $ref: '#/components/schemas/EmailPayload'
+          examples:
+            Send Estimate Email:
+              value:
+                estimate:
+                  email:
+                    body: Please find our estimate attached
+                    from: Our Company <us@company.com>
+                    subject: Estimate
+                    to: Test Contact <test_contact@example.com>
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+duplicate:
+  post:
+    tags:
+    - Estimates
+    summary: Duplicate estimate
+    description: Duplicate estimate as a Draft with the next reference, today's date and the same items
+    operationId: duplicateEstimate
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+mark_as_sent:
+  put:
+    tags:
+    - Estimates
+    - Estimate Transitions
+    summary: Mark estimate as sent
+    description: Mark estimate as sent, which makes it Open
+    operationId: markEstimateAsSent
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+mark_as_draft:
+  put:
+    tags:
+    - Estimates
+    - Estimate Transitions
+    summary: Mark estimate as draft
+    description: Mark estimate as draft
+    operationId: markEstimateAsDraft
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+mark_as_approved:
+  put:
+    tags:
+    - Estimates
+    - Estimate Transitions
+    summary: Mark estimate as approved
+    description: Mark estimate as approved
+    operationId: markEstimateAsApproved
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+mark_as_rejected:
+  put:
+    tags:
+    - Estimates
+    - Estimate Transitions
+    summary: Mark estimate as rejected
+    description: Mark estimate as rejected
+    operationId: markEstimateAsRejected
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+convert_to_invoice:
+  put:
+    tags:
+    - Estimates
+    - Estimate Transitions
+    summary: Convert estimate to invoice
+    description: Convert estimate to an invoice, which makes it Invoiced and sets its invoice URL. Deleting that invoice makes the estimate Approved again
+    operationId: convertEstimateToInvoice
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
+create_item:
+  post:
+    tags:
+    - Estimates
+    summary: Create estimate item
+    description: Create estimate item
+    operationId: createEstimateItem
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - estimate
+            - estimate_item
+            properties:
+              estimate:
+                type: string
+                example: https://api.freeagent.com/v2/estimates/1
+              estimate_item:
+                $ref: '#/components/schemas/EstimateItemPayload'
+          examples:
+            Create Estimate Item:
+              value:
+                estimate: https://api.freeagent.com/v2/estimates/1
+                estimate_item:
+                  description: Consultancy
+                  item_type: Hours
+                  price: 95
+                  quantity: 2
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateItemResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+update_item:
+  put:
+    tags:
+    - Estimates
+    summary: Update estimate item
+    description: Update estimate item
+    operationId: updateEstimateItem
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - estimate_item
+            properties:
+              estimate_item:
+                $ref: '#/components/schemas/EstimateItemPayload'
+          examples:
+            Update Estimate Item:
+              value:
+                estimate_item:
+                  quantity: 3
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstimateItemResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Estimates
+    summary: Delete estimate item
+    description: Delete estimate item
+    operationId: deleteEstimateItem
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

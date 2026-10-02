@@ -1,0 +1,84 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/estimates/217677
+  contact:
+    type: string
+    example: https://api.freeagent.com/v2/contacts/1
+  contact_name:
+    type: string
+    example: Acme Ltd
+  client_contact_name:
+    type: string
+    example: Alice Johnson
+  project:
+    type: string
+    example: https://api.freeagent.com/v2/projects/1
+  invoice:
+    type: string
+    description: The invoice the estimate was converted to, present once it is Invoiced
+    example: https://api.freeagent.com/v2/invoices/1
+  reference:
+    type: string
+    example: EST-001
+  estimate_type:
+    type: string
+    description: One of Estimate, Quote or Proposal
+    example: Estimate
+  status:
+    type: string
+    description: One of Draft, Open, Approved, Rejected or Invoiced - marking an estimate as sent makes it Open
+    example: Draft
+  dated_on:
+    type: string
+    example: '2026-10-02'
+  currency:
+    type: string
+    example: GBP
+  notes:
+    type: string
+    description: Additional text, omitted until set
+    example: Valid for 30 days
+  ec_status:
+    type: string
+    example: UK/Non-EC
+  place_of_supply:
+    type: string
+    example: United Kingdom
+  discount_percent:
+    type: string
+    example: '10.0'
+  net_value:
+    type: string
+    example: '190.0'
+  sales_tax_value:
+    type: string
+    example: '38.0'
+  total_value:
+    type: string
+    example: '228.0'
+  involves_sales_tax:
+    type: boolean
+    example: true
+  is_interim_uk_vat:
+    type: boolean
+    example: false
+  include_sales_tax_on_total_value:
+    type: boolean
+    example: true
+  estimate_items:
+    type: array
+    description: Always present on a single estimate, and on a list only with nested_estimate_items
+    items:
+      $ref: 'EstimateItem.yaml'
+  created_at:
+    type: string
+    format: date-time
+    example: '2026-10-02T09:53:02Z'
+  updated_at:
+    type: string
+    format: date-time
+    example: '2026-10-02T09:53:02Z'

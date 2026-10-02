@@ -1,0 +1,31 @@
+type: object
+required:
+- dated_on
+- estimate_type
+- status
+properties:
+  contact:
+    type: string
+    example: https://api.freeagent.com/v2/contacts/1
+  project:
+    type: string
+    example: https://api.freeagent.com/v2/projects/1
+  dated_on:
+    type: string
+    example: '2026-10-02'
+  estimate_type:
+    $ref: 'EstimateType.yaml'
+  status:
+    type: string
+    description: Required - FreeAgent answers a create without it with "status is not valid". Draft is the only value verified
+    example: Draft
+  reference:
+    type: string
+    description: Defaults to the next reference after the latest estimate's
+    example: EST-002
+  currency:
+    type: string
+    example: GBP
+  notes:
+    type: string
+    example: Valid for 30 days

@@ -1,0 +1,6 @@
+type: object
+required:
+- estimate_item
+properties:
+  estimate_item:
+    $ref: 'EstimateItem.yaml'
