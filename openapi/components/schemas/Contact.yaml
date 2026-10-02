@@ -19,6 +19,7 @@ properties:
     example: Testington & Sons Ltd
   email:
     type: string
+    description: Omitted until set, and may hold several addresses separated by commas
     example: fred@testingtonandsons.example.com
   billing_email:
     type: string
@@ -58,6 +59,7 @@ properties:
     example: 30
   locale:
     type: string
+    description: One of the ContactLocale values
     example: en
   account_balance:
     type: string
@@ -65,8 +67,25 @@ properties:
   uses_contact_invoice_sequence:
     type: boolean
     example: false
+  uses_contact_level_email_settings:
+    type: boolean
+    description: Not documented by FreeAgent
+    example: false
+  emails_invoices_automatically:
+    type: boolean
+    description: Not documented by FreeAgent
+    example: false
+  emails_payment_reminders:
+    type: boolean
+    description: Not documented by FreeAgent
+    example: false
+  emails_thank_you_notes:
+    type: boolean
+    description: Not documented by FreeAgent
+    example: false
   charge_sales_tax:
     type: string
+    description: One of the ContactChargeSalesTax values
     example: Auto
   sales_tax_registration_number:
     type: string
@@ -76,23 +95,24 @@ properties:
     example: 1
   direct_debit_mandate_state:
     type: string
+    description: Present only while the contact has a GoCardless Direct Debit mandate
     example: active
   status:
-    type: string
-    enum:
-      - Active
-      - Hidden
-    example: Active
+    $ref: '#/components/schemas/ContactStatus'
   is_cis_subcontractor:
+    description: Present only when CIS for contractors is enabled for the company
     type: boolean
     example: true
   cis_deduction_rate:
+    description: Present only when CIS for contractors is enabled for the company
     type: string
     example: cis_standard
   unique_tax_reference:
+    description: Present only when CIS for contractors is enabled for the company
     type: string
     example: '1234567890'
   subcontractor_verification_number:
+    description: Present only when CIS for contractors is enabled for the company
     type: string
     example: V1234567890
   created_at:

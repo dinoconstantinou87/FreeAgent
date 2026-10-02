@@ -7,6 +7,9 @@ struct ContactCommand: AsyncParsableCommand {
         subcommands: [
             ContactListCommand.self,
             ContactCreateCommand.self,
+            ContactShowCommand.self,
+            ContactUpdateCommand.self,
+            ContactDeleteCommand.self,
         ]
     )
 }

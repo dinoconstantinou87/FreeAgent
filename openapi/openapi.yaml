@@ -37,6 +37,8 @@ paths:
     $ref: 'paths/company.yaml#/show'
   /v2/contacts:
     $ref: 'paths/contacts.yaml#/list'
+  /v2/contacts/{id}:
+    $ref: 'paths/contacts.yaml#/show'
   /v2/expenses:
     $ref: 'paths/expenses.yaml#/list'
   /v2/expenses/{id}:
@@ -103,6 +105,8 @@ paths:
     $ref: 'paths/credit_notes.yaml#/mark_as_sent'
   /v2/credit_notes/{id}/transitions/mark_as_draft:
     $ref: 'paths/credit_notes.yaml#/mark_as_draft'
+  /v2/projects:
+    $ref: 'paths/projects.yaml#/list'
   /v2/projects/{id}:
     $ref: 'paths/projects.yaml#/show'
   /v2/timeslips:
@@ -245,6 +249,8 @@ components:
       $ref: 'components/schemas/Project.yaml'
     ProjectResponse:
       $ref: 'components/schemas/ProjectResponse.yaml'
+    ProjectListResponse:
+      $ref: 'components/schemas/ProjectListResponse.yaml'
     Timeslip:
       $ref: 'components/schemas/Timeslip.yaml'
     TimeslipTimer:
@@ -345,6 +351,14 @@ components:
       $ref: 'components/schemas/ContactListResponse.yaml'
     ContactCreatePayload:
       $ref: 'components/schemas/ContactCreatePayload.yaml'
+    ContactUpdatePayload:
+      $ref: 'components/schemas/ContactUpdatePayload.yaml'
+    ContactStatus:
+      $ref: 'components/schemas/ContactStatus.yaml'
+    ContactChargeSalesTax:
+      $ref: 'components/schemas/ContactChargeSalesTax.yaml'
+    ContactLocale:
+      $ref: 'components/schemas/ContactLocale.yaml'
     InvoiceCreatePayload:
       $ref: 'components/schemas/InvoiceCreatePayload.yaml'
     InvoiceUpdatePayload:

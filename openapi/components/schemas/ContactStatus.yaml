@@ -1,0 +1,6 @@
+type: string
+description: A hidden contact is left out of the default active view - any other value is ignored
+enum:
+- Active
+- Hidden
+example: Hidden

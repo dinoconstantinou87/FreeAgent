@@ -1,0 +1,32 @@
+type: string
+description: The language of the contact's invoices and estimates
+enum:
+- bg
+- ca
+- cy
+- cz
+- de
+- dk
+- en
+- en-US
+- es
+- et
+- fi
+- fr
+- fr-BE
+- fr-CA
+- is
+- it
+- lv-LV
+- nl
+- nl-BE
+- nk
+- pl-PL
+- pt-BR
+- ro
+- rs
+- ru
+- se
+- sk
+- tr
+example: en
