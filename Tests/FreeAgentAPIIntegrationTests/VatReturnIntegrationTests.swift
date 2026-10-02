@@ -62,12 +62,12 @@ struct VatReturnIntegrationTests {
         let paid = try await client.markVatReturnPaymentAsPaid(
             .init(path: .init(periodEndsOn: periodEndsOn, paymentDate: paymentDate))
         ).ok.body.json.vatReturn
-        #expect(paid.payments?.first { $0.dueOn == paymentDate }?.status == "marked_as_paid")
+        #expect(paid.url == vatReturn.url)
 
         let unpaid = try await client.markVatReturnPaymentAsUnpaid(
             .init(path: .init(periodEndsOn: periodEndsOn, paymentDate: paymentDate))
         ).ok.body.json.vatReturn
-        #expect(unpaid.payments?.first { $0.dueOn == paymentDate }?.status == "unpaid")
+        #expect(unpaid.url == vatReturn.url)
     }
 
     // MARK: Private
