@@ -4,7 +4,7 @@ public struct AuthStorage: AuthStorageInterface {
 
     // MARK: Lifecycle
 
-    #if os(macOS)
+    #if os(macOS) && !DEBUG
     public init(store: any CredentialStoreInterface = KeychainCredentialStore()) {
         self.store = store
     }
