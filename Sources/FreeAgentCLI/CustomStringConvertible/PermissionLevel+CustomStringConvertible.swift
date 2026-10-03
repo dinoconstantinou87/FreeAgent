@@ -1,17 +1,7 @@
-enum PermissionLevel: Int, CaseIterable {
-    case noAccess
-    case time
-    case myMoney
-    case contactsAndProjects
-    case invoicesEstimatesAndFiles
-    case bills
-    case banking
-    case taxAccountingAndUsers
-    case full
+import FreeAgentAPI
 
-    // MARK: Internal
-
-    var name: String {
+extension PermissionLevel: CustomStringConvertible {
+    public var description: String {
         switch self {
         case .noAccess: "No Access"
         case .time: "Time"
@@ -23,9 +13,5 @@ enum PermissionLevel: Int, CaseIterable {
         case .taxAccountingAndUsers: "Tax, Accounting & Users"
         case .full: "Full"
         }
-    }
-
-    static func name(for level: Int) -> String {
-        PermissionLevel(rawValue: level)?.name ?? String(level)
     }
 }

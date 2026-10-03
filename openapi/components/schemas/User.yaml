@@ -19,9 +19,7 @@ properties:
     description: One of Owner, Director, Partner, Company Secretary, Employee, Shareholder or Accountant
     example: Director
   permission_level:
-    type: integer
-    description: 0 No Access to 8 Full
-    example: 8
+    $ref: '#/components/schemas/UserPermissionLevel'
   ni_number:
     type: string
     description: Omitted until set

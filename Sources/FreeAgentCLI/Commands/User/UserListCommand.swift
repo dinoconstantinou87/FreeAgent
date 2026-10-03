@@ -16,7 +16,7 @@ struct UserListCommand: AsyncPaginatedListCommand {
         Field("Last Name") { .text($0.lastName) }
         Field("Email") { .text($0.email) }
         Field("Role") { .text($0.role) }
-        Field("Permission") { .text($0.permissionLevel.map(PermissionLevel.name(for:))) }
+        Field("Permission") { .text($0.permissionLevel?.description) }
         Field("Hidden") { .flag($0.hidden) }
     }
 

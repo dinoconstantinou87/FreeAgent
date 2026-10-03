@@ -61,7 +61,7 @@ struct UserIntegrationTests {
                 firstName: "Integration",
                 lastName: "Test",
                 role: .employee,
-                permissionLevel: 1,
+                permissionLevel: .time,
                 niNumber: "AB123456C",
                 uniqueTaxReference: "1234567890",
                 openingMileage: 120.5,
@@ -75,7 +75,7 @@ struct UserIntegrationTests {
         #expect(created.firstName == "Integration")
         #expect(created.lastName == "Test")
         #expect(created.role == "Employee")
-        #expect(created.permissionLevel == 1)
+        #expect(created.permissionLevel == .time)
         #expect(created.niNumber == "AB123456C")
         #expect(created.uniqueTaxReference == "1234567890")
         #expect(created.openingMileage == "120.5")
@@ -87,7 +87,7 @@ struct UserIntegrationTests {
             .init(path: .init(id: id), body: .json(.init(user: .init(
                 lastName: "Updated",
                 role: .accountant,
-                permissionLevel: 7,
+                permissionLevel: .taxAccountingAndUsers,
                 hidden: true
             ))))
         ).ok.body.json.user
@@ -95,7 +95,7 @@ struct UserIntegrationTests {
         #expect(updated.url == created.url)
         #expect(updated.lastName == "Updated")
         #expect(updated.role == "Accountant")
-        #expect(updated.permissionLevel == 7)
+        #expect(updated.permissionLevel == .taxAccountingAndUsers)
         #expect(updated.hidden == true)
 
         _ = try await client.listUsers(.init(query: .init(view: .advisors))).ok.body.json.users

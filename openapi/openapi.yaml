@@ -359,6 +359,8 @@ components:
       $ref: 'components/schemas/UserUpdatePayload.yaml'
     UserRole:
       $ref: 'components/schemas/UserRole.yaml'
+    UserPermissionLevel:
+      $ref: 'components/schemas/UserPermissionLevel.yaml'
     Errors:
       $ref: 'components/schemas/Errors.yaml'
     ErrorDetail:

@@ -1,7 +1,8 @@
 import ArgumentParser
+import FreeAgentAPI
 
 extension PermissionLevel: ExpressibleByArgument {
-    var defaultValueDescription: String {
-        name
+    public var defaultValueDescription: String {
+        description
     }
 }

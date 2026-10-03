@@ -14,11 +14,7 @@ properties:
   role:
     $ref: '#/components/schemas/UserRole'
   permission_level:
-    type: integer
-    description: 0 No Access, 1 Time, 2 My Money, 3 Contacts & Projects, 4 Invoices, Estimates & Files, 5 Bills, 6 Banking, 7 Tax, Accounting & Users, 8 Full - FreeAgent turns anything above 8 into 8
-    minimum: 0
-    maximum: 8
-    example: 1
+    $ref: '#/components/schemas/UserPermissionLevel'
   ni_number:
     type: string
     description: A UK National Insurance number, validated by FreeAgent
