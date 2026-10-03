@@ -27,8 +27,8 @@ struct JournalSetUpdateCommand: MutatingCommand {
     @Option(name: .long, help: "Tag identifying sets your tool creates - an empty string removes it")
     var tag: String?
 
-    @Option(name: .long, help: ArgumentHelp(JournalEntryArgument.help), transform: JournalEntryArgument.init)
-    var entry = [JournalEntryArgument]()
+    @Option(name: .long, help: "An entry as a JSON object of the API's entry fields, repeated for each entry")
+    var entry = [Components.Schemas.JournalEntryPayload]()
 
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
@@ -67,6 +67,6 @@ struct JournalSetUpdateCommand: MutatingCommand {
         let current = try await client.showJournalSet(.init(path: .init(id: id.value)))
             .ok.body.json.journalSet.journalEntries ?? []
 
-        return current.map { .init(url: ResourceID($0.url).value, _destroy: true) } + entry.map(\.payload)
+        return current.map { .init(url: ResourceID($0.url).value, _destroy: true) } + entry
     }
 }

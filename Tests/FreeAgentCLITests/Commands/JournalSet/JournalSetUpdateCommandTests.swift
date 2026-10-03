@@ -30,9 +30,9 @@ struct JournalSetUpdateCommandTests {
         let command = try JournalSetUpdateCommand.parse([
             "89633",
             "--entry",
-            "category=250,debit-value=7",
+            #"{"category": "250", "debit_value": 7}"#,
             "--entry",
-            "category=999,debit-value=-7",
+            #"{"category": "999", "debit_value": -7}"#,
         ])
 
         _ = try await command.perform(client: client(transport))

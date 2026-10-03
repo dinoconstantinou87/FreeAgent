@@ -8,11 +8,16 @@ struct JournalSetCreateCommand: MutatingCommand {
         abstract: "Create a journal set",
         discussion: """
             The entries must balance: their debit values, negative for credits, add up to zero. User categories \
-            such as 901 and 907 need a user, and capital asset categories 601 to 607 a capital asset type.
+            such as 901 and 907 need a user, and capital asset categories 601 to 607 a capital asset type. \
+            Categories, users and other records take a URL or an ID.
 
             Example:
-              --entry category=907,user=1,debit-value=250
-              --entry category=999,debit-value=-250,description="Suspense, to clear"
+              --entry '{"category": "907", "user": "1", "debit_value": 250}'
+              --entry '{
+                "category": "999",
+                "debit_value": -250,
+                "description": "Suspense, to clear"
+              }'
             """
     )
 
@@ -25,8 +30,8 @@ struct JournalSetCreateCommand: MutatingCommand {
     @Option(name: .long, help: "Tag identifying sets your tool creates - tagged sets are read-only in FreeAgent")
     var tag: String?
 
-    @Option(name: .long, help: ArgumentHelp(JournalEntryArgument.help), transform: JournalEntryArgument.init)
-    var entry: [JournalEntryArgument]
+    @Option(name: .long, help: "An entry as a JSON object of the API's entry fields, repeated for each entry")
+    var entry: [Components.Schemas.JournalEntryPayload]
 
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
@@ -39,7 +44,7 @@ struct JournalSetCreateCommand: MutatingCommand {
             datedOn: datedOn,
             description: description,
             tag: tag,
-            journalEntries: entry.map(\.payload)
+            journalEntries: entry
         )
 
         let input = Operations.CreateJournalSet.Input(

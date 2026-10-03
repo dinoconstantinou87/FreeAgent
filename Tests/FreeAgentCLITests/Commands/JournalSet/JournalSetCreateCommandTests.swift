@@ -19,11 +19,11 @@ struct JournalSetCreateCommandTests {
             "--description",
             "Correction",
             "--entry",
-            "category=280,debit-value=10",
+            #"{"category": "280", "debit_value": 10}"#,
             "--entry",
-            "category=999,debit-value=-10",
+            #"{"category": "999", "debit_value": -10}"#,
         ])
 
-        #expect(command.entry.map(\.payload.category) == ["280", "999"])
+        #expect(command.entry.map(\.category) == ["280", "999"])
     }
 }
