@@ -145,8 +145,12 @@ paths:
     $ref: 'paths/corporation_tax_returns.yaml#/mark_as_paid'
   /v2/corporation_tax_returns/{period_ends_on}/mark_as_unpaid:
     $ref: 'paths/corporation_tax_returns.yaml#/mark_as_unpaid'
+  /v2/users:
+    $ref: 'paths/users.yaml#/list'
   /v2/users/me:
     $ref: 'paths/users.yaml#/me'
+  /v2/users/{id}:
+    $ref: 'paths/users.yaml#/show'
   /v2/users/{user_id}/self_assessment_returns:
     $ref: 'paths/self_assessment_returns.yaml#/list'
   /v2/users/{user_id}/self_assessment_returns/{period_ends_on}:
@@ -347,6 +351,14 @@ components:
       $ref: 'components/schemas/UserPayrollProfile.yaml'
     UserResponse:
       $ref: 'components/schemas/UserResponse.yaml'
+    UserListResponse:
+      $ref: 'components/schemas/UserListResponse.yaml'
+    UserCreatePayload:
+      $ref: 'components/schemas/UserCreatePayload.yaml'
+    UserUpdatePayload:
+      $ref: 'components/schemas/UserUpdatePayload.yaml'
+    UserRole:
+      $ref: 'components/schemas/UserRole.yaml'
     Errors:
       $ref: 'components/schemas/Errors.yaml'
     ErrorDetail:
