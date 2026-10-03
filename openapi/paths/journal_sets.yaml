@@ -1,0 +1,172 @@
+list:
+  get:
+    tags:
+    - Journal Sets
+    summary: List journal sets
+    description: List journal sets by date, the opening balances set first - sort is ignored
+    operationId: listJournalSets
+    parameters:
+    - name: from_date
+      in: query
+      description: Show journal sets dated on or after this date - FreeAgent answers an invalid one with a 400, and leaves out the undated opening balances set
+      schema:
+        type: string
+        example: '2026-01-01'
+    - name: to_date
+      in: query
+      description: Show journal sets dated on or before this date - FreeAgent answers an invalid one with a 400, and leaves out the undated opening balances set
+      schema:
+        type: string
+        example: '2026-03-31'
+    - name: updated_since
+      in: query
+      description: Show journal sets updated since this date or timestamp - FreeAgent answers an invalid one with a 400
+      schema:
+        type: string
+        example: 2026-01-01T00:00:00Z
+    - name: tag
+      in: query
+      description: Show journal sets with this tag, ignoring case
+      schema:
+        type: string
+        example: MYAPPTAG
+    - $ref: '#/components/parameters/Page'
+    - $ref: '#/components/parameters/PerPage'
+    responses:
+      '200':
+        description: Success
+        headers:
+          Link:
+            $ref: '#/components/headers/Link'
+          X-Total-Count:
+            $ref: '#/components/headers/XTotalCount'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JournalSetListResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  post:
+    tags:
+    - Journal Sets
+    summary: Create journal set
+    description: Create journal set - its entries must balance, or the create is a 422
+    operationId: createJournalSet
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - journal_set
+            properties:
+              journal_set:
+                $ref: '#/components/schemas/JournalSetCreatePayload'
+          examples:
+            Create Journal Set:
+              value:
+                journal_set:
+                  dated_on: '2026-09-30'
+                  description: Director's capital introduced
+                  journal_entries:
+                  - category: https://api.freeagent.com/v2/categories/901
+                    user: https://api.freeagent.com/v2/users/1
+                    debit_value: -123.45
+                  - category: https://api.freeagent.com/v2/categories/999
+                    debit_value: 123.45
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JournalSetResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+opening_balances:
+  get:
+    tags:
+    - Journal Sets
+    summary: Show opening balances
+    description: Show the opening balances journal set - the same record as showing it by ID
+    operationId: showOpeningBalances
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JournalSetResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+show:
+  get:
+    tags:
+    - Journal Sets
+    summary: Show journal set
+    description: Show journal set
+    operationId: showJournalSet
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JournalSetResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  put:
+    tags:
+    - Journal Sets
+    summary: Update journal set
+    description: Update journal set - the entries must still balance afterwards, or the update is a 422 that changes nothing
+    operationId: updateJournalSet
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - journal_set
+            properties:
+              journal_set:
+                $ref: '#/components/schemas/JournalSetUpdatePayload'
+          examples:
+            Update Journal Set:
+              value:
+                journal_set:
+                  description: Journal Set for 2014-01-18
+                  journal_entries:
+                  - url: https://api.freeagent.com/v2/journal_sets/37/journal_entries/17
+                    _destroy: true
+                  - url: https://api.freeagent.com/v2/journal_sets/37/journal_entries/18
+                    debit_value: -20
+                  - category: https://api.freeagent.com/v2/categories/001
+                    debit_value: 40
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JournalSetResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Journal Sets
+    summary: Delete journal set
+    description: Delete journal set
+    operationId: deleteJournalSet
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''

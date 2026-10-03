@@ -1,0 +1,19 @@
+type: object
+description: Fields left out are kept - the opening balances set's date and description are locked, a 400
+properties:
+  dated_on:
+    type: string
+    description: A blank or invalid date is a 422
+    example: '2026-09-30'
+  description:
+    type: string
+    example: Director's capital introduced
+  tag:
+    type: string
+    description: An empty string removes the tag
+    example: MYAPPTAG
+  journal_entries:
+    type: array
+    description: An entry with a url is updated, or removed with _destroy, and one without is added - entries left out are kept
+    items:
+      $ref: '#/components/schemas/JournalEntryPayload'

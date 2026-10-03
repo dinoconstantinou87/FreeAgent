@@ -1,0 +1,22 @@
+type: object
+required:
+- dated_on
+- description
+- journal_entries
+properties:
+  dated_on:
+    type: string
+    description: Any date works - an invalid one is a 422 saying it can't be blank
+    example: '2026-09-30'
+  description:
+    type: string
+    example: Director's capital introduced
+  tag:
+    type: string
+    description: An empty string sets no tag
+    example: MYAPPTAG
+  journal_entries:
+    type: array
+    description: At least one entry, balancing to zero once each value is rounded to two places
+    items:
+      $ref: '#/components/schemas/JournalEntryPayload'
