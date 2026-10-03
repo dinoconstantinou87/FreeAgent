@@ -21,9 +21,7 @@ properties:
     type: boolean
     example: false
   currency:
-    type: string
-    description: An unknown or lowercase code is a 422
-    example: GBP
+    $ref: '#/components/schemas/Currency'
   budget:
     type: integer
     description: Leave as zero if the project has no budget - FreeAgent drops any fraction

@@ -283,6 +283,8 @@ components:
       $ref: 'components/schemas/ProjectCreatePayload.yaml'
     ProjectUpdatePayload:
       $ref: 'components/schemas/ProjectUpdatePayload.yaml'
+    Currency:
+      $ref: 'components/schemas/Currency.yaml'
     ProjectStatus:
       $ref: 'components/schemas/ProjectStatus.yaml'
     ProjectBudgetUnits:

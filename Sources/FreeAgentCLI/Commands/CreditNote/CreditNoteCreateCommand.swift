@@ -24,7 +24,7 @@ struct CreditNoteCreateCommand: MutatingCommand {
     var project: ResourceID?
 
     @Option(name: .long, help: "Currency (e.g., GBP, USD)")
-    var currency: String?
+    var currency: Components.Schemas.Currency?
 
     @Option(name: .long, help: "Comments for the credit note")
     var comments: String?

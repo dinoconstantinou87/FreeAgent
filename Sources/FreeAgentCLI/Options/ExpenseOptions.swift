@@ -6,7 +6,7 @@ struct ExpenseOptions: ParsableArguments {
     var grossValue: String?
 
     @Option(name: .long, help: "Currency, e.g. USD")
-    var currency: String?
+    var currency: Components.Schemas.Currency?
 
     @Option(name: .long, help: "Sales tax rate, e.g. 20.0 - ignored while a manual sales tax amount is set")
     var salesTaxRate: String?

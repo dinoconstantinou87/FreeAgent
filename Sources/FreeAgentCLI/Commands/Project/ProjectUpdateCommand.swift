@@ -22,7 +22,7 @@ struct ProjectUpdateCommand: MutatingCommand {
     var status: Components.Schemas.ProjectStatus?
 
     @Option(name: .long, help: "Currency, e.g. USD")
-    var currency: String?
+    var currency: Components.Schemas.Currency?
 
     @Option(name: .long, help: "Units of the budget")
     var budgetUnits: Components.Schemas.ProjectBudgetUnits?

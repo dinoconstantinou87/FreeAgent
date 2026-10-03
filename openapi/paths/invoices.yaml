@@ -124,8 +124,7 @@ list:
       in: query
       description: Filter invoices by currency code
       schema:
-        type: string
-        example: USD
+        $ref: '#/components/schemas/Currency'
     - name: view
       in: query
       description: Filter invoices by view type

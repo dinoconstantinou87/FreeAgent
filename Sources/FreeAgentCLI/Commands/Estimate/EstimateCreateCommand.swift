@@ -24,7 +24,7 @@ struct EstimateCreateCommand: MutatingCommand {
     var project: ResourceID?
 
     @Option(name: .long, help: "Currency (e.g., GBP, USD)")
-    var currency: String?
+    var currency: Components.Schemas.Currency?
 
     @Option(name: .long, help: "Notes for the estimate")
     var notes: String?

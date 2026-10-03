@@ -36,7 +36,7 @@ struct ProjectOptions: ParsableArguments {
         contact: String,
         name: String,
         status: Components.Schemas.ProjectStatus,
-        currency: String,
+        currency: Components.Schemas.Currency,
         budgetUnits: Components.Schemas.ProjectBudgetUnits
     ) -> Components.Schemas.ProjectCreatePayload {
         .init(
@@ -62,7 +62,7 @@ struct ProjectOptions: ParsableArguments {
         contact: String?,
         name: String?,
         status: Components.Schemas.ProjectStatus?,
-        currency: String?,
+        currency: Components.Schemas.Currency?,
         budgetUnits: Components.Schemas.ProjectBudgetUnits?
     ) -> Components.Schemas.ProjectUpdatePayload {
         .init(

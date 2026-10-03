@@ -33,7 +33,7 @@ struct InvoiceListCommand: AsyncPaginatedListCommand {
     var nestedInvoiceItems: Bool?
 
     @Option(name: .long, help: "Filter invoices by currency code")
-    var currency: String?
+    var currency: Components.Schemas.Currency?
 
     @Option(name: .long, help: "Show invoices updated after this timestamp")
     var updatedSince: String?

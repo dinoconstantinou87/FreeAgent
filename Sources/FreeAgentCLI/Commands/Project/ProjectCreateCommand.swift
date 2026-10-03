@@ -1,6 +1,9 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
+import Noora
+
+// MARK: - ProjectCreateCommand
 
 struct ProjectCreateCommand: MutatingCommand {
 
@@ -21,7 +24,7 @@ struct ProjectCreateCommand: MutatingCommand {
     var status = Components.Schemas.ProjectStatus.active
 
     @Option(name: .long, help: "Currency, e.g. USD - defaults to the company's currency")
-    var currency: String?
+    var currency: Components.Schemas.Currency?
 
     @Option(name: .long, help: "Units of the budget")
     var budgetUnits = Components.Schemas.ProjectBudgetUnits.hours
@@ -57,11 +60,40 @@ struct ProjectCreateCommand: MutatingCommand {
 
     // MARK: Private
 
-    private func currency(client: Client) async throws -> String {
+    private func currency(client: Client) async throws -> Components.Schemas.Currency {
         if let currency {
             return currency
         }
 
-        return try await client.companyDetails().ok.body.json.company.currency
+        let code = try await client.companyDetails().ok.body.json.company.currency
+
+        guard let currency = Components.Schemas.Currency(rawValue: code) else {
+            throw ProjectCreateCommandError.unsupportedCompanyCurrency(code)
+        }
+
+        return currency
+    }
+}
+
+// MARK: - ProjectCreateCommandError
+
+enum ProjectCreateCommandError: CommandError {
+    case unsupportedCompanyCurrency(String)
+
+    // MARK: Internal
+
+    var errorDescription: String? {
+        switch self {
+        case .unsupportedCompanyCurrency(let code):
+            "The company's currency, \(code), is not one a project can use"
+        }
+    }
+
+    var exitCode: ExitCode {
+        .validationFailure
+    }
+
+    var takeaways: [TerminalText] {
+        ["Pass \(.command("--currency"))"]
     }
 }

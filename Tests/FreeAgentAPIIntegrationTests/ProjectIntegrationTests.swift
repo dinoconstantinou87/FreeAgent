@@ -43,7 +43,7 @@ struct ProjectIntegrationTests {
                 status: .active,
                 contractPoReference: "PO-IT",
                 usesProjectInvoiceSequence: false,
-                currency: "GBP",
+                currency: .gbp,
                 budget: 40,
                 budgetUnits: .days,
                 hoursPerDay: 7.5,
