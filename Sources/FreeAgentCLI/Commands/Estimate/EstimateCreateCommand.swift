@@ -23,7 +23,7 @@ struct EstimateCreateCommand: MutatingCommand {
     @Option(name: .long, help: "Project ID or URL")
     var project: ResourceID?
 
-    @Option(name: .long, help: "Currency (e.g., GBP, USD)")
+    @Option(name: .long, help: "Currency")
     var currency: Components.Schemas.Currency?
 
     @Option(name: .long, help: "Notes for the estimate")

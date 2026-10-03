@@ -23,7 +23,7 @@ struct ProjectCreateCommand: MutatingCommand {
     @Option(name: .long, help: "Status")
     var status = Components.Schemas.ProjectStatus.active
 
-    @Option(name: .long, help: "Currency, e.g. USD - defaults to the company's currency")
+    @Option(name: .long, help: "Currency - defaults to the company's currency")
     var currency: Components.Schemas.Currency?
 
     @Option(name: .long, help: "Units of the budget")

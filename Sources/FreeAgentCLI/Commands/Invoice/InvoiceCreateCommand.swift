@@ -17,7 +17,7 @@ struct InvoiceCreateCommand: MutatingCommand {
     @Option(name: .long, help: "Due date (YYYY-MM-DD)")
     var dueOn: String?
 
-    @Option(name: .long, help: "Currency (e.g., GBP, USD)")
+    @Option(name: .long, help: "Currency")
     var currency: Components.Schemas.Currency?
 
     @Option(name: .long, help: "Payment terms in days")
