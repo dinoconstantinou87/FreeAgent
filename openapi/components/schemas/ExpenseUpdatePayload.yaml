@@ -1,11 +1,9 @@
 type: object
 properties:
   user:
-    type: string
-    example: https://api.freeagent.com/v2/users/1
+    $ref: '#/components/schemas/ResourceID'
   category:
-    type: string
-    example: https://api.freeagent.com/v2/categories/285
+    $ref: '#/components/schemas/ResourceID'
   dated_on:
     type: string
     example: 2026-09-15
@@ -32,8 +30,7 @@ properties:
     description: An empty string removes the receipt reference
     example: REC-001
   project:
-    type: string
-    example: https://api.freeagent.com/v2/projects/1
+    $ref: '#/components/schemas/ResourceID'
   rebill_type:
     $ref: '#/components/schemas/ExpenseRebillType'
   rebill_factor:

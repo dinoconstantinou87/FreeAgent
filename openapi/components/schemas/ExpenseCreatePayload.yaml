@@ -6,12 +6,10 @@ required:
 - description
 properties:
   user:
-    type: string
-    example: https://api.freeagent.com/v2/users/1
+    $ref: '#/components/schemas/ResourceID'
   category:
-    type: string
+    $ref: '#/components/schemas/ResourceID'
     description: The Mileage category (249) makes a mileage claim, which takes mileage and vehicle_type in place of gross_value
-    example: https://api.freeagent.com/v2/categories/285
   dated_on:
     type: string
     example: 2026-09-15
@@ -38,8 +36,7 @@ properties:
     type: string
     example: REC-001
   project:
-    type: string
-    example: https://api.freeagent.com/v2/projects/1
+    $ref: '#/components/schemas/ResourceID'
   rebill_type:
     $ref: '#/components/schemas/ExpenseRebillType'
   rebill_factor:

@@ -127,12 +127,7 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/ID'
 me:
   get:
     tags:

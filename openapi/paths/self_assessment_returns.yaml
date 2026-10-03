@@ -15,7 +15,7 @@ list:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/UserId'
+  - $ref: '#/components/parameters/UserID'
 show:
   get:
     tags:
@@ -33,7 +33,7 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/UserId'
+  - $ref: '#/components/parameters/UserID'
   - $ref: '#/components/parameters/PeriodEndsOn'
 mark_as_filed:
   put:
@@ -52,7 +52,7 @@ mark_as_filed:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/UserId'
+  - $ref: '#/components/parameters/UserID'
   - $ref: '#/components/parameters/PeriodEndsOn'
 mark_as_unfiled:
   put:
@@ -71,7 +71,7 @@ mark_as_unfiled:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/UserId'
+  - $ref: '#/components/parameters/UserID'
   - $ref: '#/components/parameters/PeriodEndsOn'
 mark_payment_as_paid:
   put:
@@ -90,7 +90,7 @@ mark_payment_as_paid:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/UserId'
+  - $ref: '#/components/parameters/UserID'
   - $ref: '#/components/parameters/PeriodEndsOn'
   - $ref: '#/components/parameters/PaymentDate'
 mark_payment_as_unpaid:
@@ -110,6 +110,6 @@ mark_payment_as_unpaid:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/UserId'
+  - $ref: '#/components/parameters/UserID'
   - $ref: '#/components/parameters/PeriodEndsOn'
   - $ref: '#/components/parameters/PaymentDate'

@@ -25,8 +25,7 @@ list:
       in: query
       required: true
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/bank_accounts/:id
+        $ref: '#/components/schemas/ResourceID'
     - $ref: '#/components/parameters/Page'
     - $ref: '#/components/parameters/PerPage'
     responses:
@@ -134,9 +133,4 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/ID'

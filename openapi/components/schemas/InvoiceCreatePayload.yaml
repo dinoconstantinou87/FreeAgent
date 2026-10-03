@@ -4,12 +4,10 @@ properties:
     type: boolean
     example: false
   contact:
-    type: string
-    example: https://api.freeagent.com/v2/contacts/:id
+    $ref: '#/components/schemas/ResourceID'
   project:
-    type: string
+    $ref: '#/components/schemas/ResourceID'
     description: Must belong to the contact, or the create is a 422
-    example: https://api.freeagent.com/v2/projects/:id
   include_timeslips:
     type: string
     description: Bills every unbilled timeslip on the project onto the invoice, grouped as named - without a project nothing is billed

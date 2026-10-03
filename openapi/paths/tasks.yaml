@@ -36,10 +36,9 @@ list:
         example: -updated_at
     - name: project
       in: query
-      description: Filter tasks by project URL - an unknown project is a 404
+      description: Filter tasks by project - an unknown project is a 404
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/projects/:id
+        $ref: '#/components/schemas/ResourceID'
     - name: updated_since
       in: query
       description: Show tasks updated since this date or timestamp - FreeAgent answers an invalid one with a 400
@@ -72,10 +71,9 @@ list:
     - name: project
       in: query
       required: true
-      description: The project URL or ID - an unknown project is a 404
+      description: The project - an unknown project is a 404
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/projects/:id
+        $ref: '#/components/schemas/ResourceID'
     requestBody:
       content:
         application/json:
@@ -160,9 +158,4 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/ID'

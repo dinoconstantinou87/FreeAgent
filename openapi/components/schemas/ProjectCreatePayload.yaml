@@ -7,8 +7,7 @@ required:
 - budget_units
 properties:
   contact:
-    type: string
-    example: https://api.freeagent.com/v2/contacts/1
+    $ref: '#/components/schemas/ResourceID'
   name:
     type: string
     example: Website Development

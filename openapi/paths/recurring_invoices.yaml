@@ -18,10 +18,9 @@ list:
         example: draft
     - name: contact
       in: query
-      description: Filter by contact URL
+      description: Filter by contact
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/contacts/:id
+        $ref: '#/components/schemas/ResourceID'
     - $ref: '#/components/parameters/Page'
     - $ref: '#/components/parameters/PerPage'
     responses:
@@ -55,9 +54,4 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/ID'

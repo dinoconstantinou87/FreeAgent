@@ -2,8 +2,7 @@ type: object
 description: Fields left out are kept - an empty contract_po_reference, starts_on or ends_on removes it
 properties:
   contact:
-    type: string
-    example: https://api.freeagent.com/v2/contacts/1
+    $ref: '#/components/schemas/ResourceID'
   name:
     type: string
     example: Website Development
