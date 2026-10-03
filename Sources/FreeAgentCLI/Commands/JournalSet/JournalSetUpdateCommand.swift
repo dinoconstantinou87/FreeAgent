@@ -67,6 +67,6 @@ struct JournalSetUpdateCommand: MutatingCommand {
         let current = try await client.showJournalSet(.init(path: .init(id: id.value)))
             .ok.body.json.journalSet.journalEntries ?? []
 
-        return current.map { .init(url: $0.url, _destroy: true) } + entry.map(\.payload)
+        return current.map { .init(url: ResourceID($0.url).value, _destroy: true) } + entry.map(\.payload)
     }
 }
