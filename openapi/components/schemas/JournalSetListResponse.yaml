@@ -1,0 +1,8 @@
+type: object
+required:
+- journal_sets
+properties:
+  journal_sets:
+    type: array
+    items:
+      $ref: 'JournalSet.yaml'

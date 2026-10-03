@@ -1,0 +1,41 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/journal_sets/1/journal_entries/1
+  category:
+    type: string
+    description: A capital asset entry comes back as a sub-account, such as 601-1
+    example: https://api.freeagent.com/v2/categories/901
+  debit_value:
+    type: string
+    description: Negative for a credit
+    example: '-123.45'
+  description:
+    type: string
+    example: Director's capital introduced
+  user:
+    type: string
+    example: https://api.freeagent.com/v2/users/1
+  capital_asset_type:
+    type: string
+    example: https://api.freeagent.com/v2/capital_asset_types/1
+  stock_item:
+    type: string
+    example: https://api.freeagent.com/v2/stock_items/1
+  stock_altering_quantity:
+    type: integer
+    example: 10
+  property:
+    type: string
+    example: https://api.freeagent.com/v2/properties/1
+  contact:
+    type: string
+    description: Opening balances set only
+    example: https://api.freeagent.com/v2/contacts/1
+  bank_account:
+    type: string
+    description: Historical entries only - journals to and from bank accounts are no longer possible
+    example: https://api.freeagent.com/v2/bank_accounts/1

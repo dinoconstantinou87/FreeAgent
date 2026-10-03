@@ -1,0 +1,6 @@
+type: object
+required:
+- journal_set
+properties:
+  journal_set:
+    $ref: 'JournalSet.yaml'

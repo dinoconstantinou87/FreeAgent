@@ -163,6 +163,12 @@ paths:
     $ref: 'paths/self_assessment_returns.yaml#/mark_payment_as_paid'
   /v2/users/{user_id}/self_assessment_returns/{period_ends_on}/payments/{payment_date}/mark_as_unpaid:
     $ref: 'paths/self_assessment_returns.yaml#/mark_payment_as_unpaid'
+  /v2/journal_sets:
+    $ref: 'paths/journal_sets.yaml#/list'
+  /v2/journal_sets/opening_balances:
+    $ref: 'paths/journal_sets.yaml#/opening_balances'
+  /v2/journal_sets/{id}:
+    $ref: 'paths/journal_sets.yaml#/show'
 components:
   schemas:
     InvoiceView:
@@ -361,6 +367,22 @@ components:
       $ref: 'components/schemas/UserRole.yaml'
     UserPermissionLevel:
       $ref: 'components/schemas/UserPermissionLevel.yaml'
+    JournalSet:
+      $ref: 'components/schemas/JournalSet.yaml'
+    JournalEntry:
+      $ref: 'components/schemas/JournalEntry.yaml'
+    OpeningBalance:
+      $ref: 'components/schemas/OpeningBalance.yaml'
+    JournalSetResponse:
+      $ref: 'components/schemas/JournalSetResponse.yaml'
+    JournalSetListResponse:
+      $ref: 'components/schemas/JournalSetListResponse.yaml'
+    JournalSetCreatePayload:
+      $ref: 'components/schemas/JournalSetCreatePayload.yaml'
+    JournalSetUpdatePayload:
+      $ref: 'components/schemas/JournalSetUpdatePayload.yaml'
+    JournalEntryPayload:
+      $ref: 'components/schemas/JournalEntryPayload.yaml'
     Errors:
       $ref: 'components/schemas/Errors.yaml'
     ErrorDetail:
@@ -514,3 +536,4 @@ tags:
 - name: Corporation Tax Returns
 - name: Self Assessment Returns
 - name: Users
+- name: Journal Sets
