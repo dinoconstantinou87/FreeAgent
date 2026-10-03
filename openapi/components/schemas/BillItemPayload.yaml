@@ -1,16 +1,14 @@
 type: object
 properties:
   url:
-    type: string
-    description: On update, the URL or ID of an existing item to update or remove, or an empty string to add one - FreeAgent rejects an item without it
-    example: https://api.freeagent.com/v2/bill_items/1
+    $ref: '#/components/schemas/ResourceID'
+    description: On update, the existing item to update or remove, or an empty string to add one - FreeAgent rejects an item without it
   _destroy:
     type: integer
     description: Set to 1, with url, to remove the item
     example: 1
   category:
-    type: string
-    example: https://api.freeagent.com/v2/categories/285
+    $ref: '#/components/schemas/ResourceID'
   description:
     type: string
     example: Item description

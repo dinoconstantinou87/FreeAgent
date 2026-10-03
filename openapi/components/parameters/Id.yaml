@@ -1,6 +1,6 @@
-name: user_id
+name: id
 in: path
 required: true
-description: ID of the user - a path refuses its URL
+description: ID of the record - a path refuses its URL
 schema:
   $ref: '#/components/schemas/ResourceID'

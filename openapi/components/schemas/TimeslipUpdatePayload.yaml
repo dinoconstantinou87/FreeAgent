@@ -1,11 +1,9 @@
 type: object
 properties:
   user:
-    type: string
-    example: https://api.freeagent.com/v2/users/1
+    $ref: '#/components/schemas/ResourceID'
   task:
-    type: string
-    example: https://api.freeagent.com/v2/tasks/1
+    $ref: '#/components/schemas/ResourceID'
   dated_on:
     type: string
     example: '2026-10-02'

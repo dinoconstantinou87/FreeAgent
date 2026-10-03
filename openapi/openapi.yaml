@@ -295,6 +295,8 @@ components:
       $ref: 'components/schemas/ProjectCreatePayload.yaml'
     ProjectUpdatePayload:
       $ref: 'components/schemas/ProjectUpdatePayload.yaml'
+    ResourceID:
+      $ref: 'components/schemas/ResourceID.yaml'
     Currency:
       $ref: 'components/schemas/Currency.yaml'
     ProjectStatus:
@@ -478,6 +480,8 @@ components:
       $ref: 'components/parameters/PeriodEndsOn.yaml'
     PaymentDate:
       $ref: 'components/parameters/PaymentDate.yaml'
+    Id:
+      $ref: 'components/parameters/Id.yaml'
     UserId:
       $ref: 'components/parameters/UserId.yaml'
   headers:

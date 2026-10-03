@@ -14,16 +14,14 @@ list:
         example: true
     - name: contact
       in: query
-      description: Filter bills by contact URL - an unknown contact matches nothing
+      description: Filter bills by contact - an unknown contact matches nothing
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/contacts/:id
+        $ref: '#/components/schemas/ResourceID'
     - name: project
       in: query
-      description: Filter bills by project URL
+      description: Filter bills by project
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/projects/:id
+        $ref: '#/components/schemas/ResourceID'
     - name: view
       in: query
       description: Filter bills by view - FreeAgent answers an unknown view with a 400
@@ -195,9 +193,4 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'

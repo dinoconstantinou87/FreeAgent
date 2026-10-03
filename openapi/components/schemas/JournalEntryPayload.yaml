@@ -2,17 +2,15 @@ type: object
 additionalProperties: false
 properties:
   url:
-    type: string
-    description: On update, the URL or ID of an existing entry to update or remove - left out, the entry is added
-    example: https://api.freeagent.com/v2/journal_sets/1/journal_entries/1
+    $ref: '#/components/schemas/ResourceID'
+    description: On update, the existing entry to update or remove - left out, the entry is added
   _destroy:
     type: boolean
     description: Set to true, with url, to remove the entry
     example: true
   category:
-    type: string
-    description: The category URL or nominal code - an unknown code is a 400
-    example: https://api.freeagent.com/v2/categories/901
+    $ref: '#/components/schemas/ResourceID'
+    description: The category, whose ID is its nominal code - an unknown code is a 400
   debit_value:
     type: number
     description: Negative for a credit - rounded to two places, and 0 when left out
@@ -21,13 +19,11 @@ properties:
     type: string
     example: Director's capital introduced
   user:
-    type: string
+    $ref: '#/components/schemas/ResourceID'
     description: Needed for user categories such as 901 and 907, or the request is a 404 - ignored on other categories
-    example: https://api.freeagent.com/v2/users/1
   capital_asset_type:
-    type: string
+    $ref: '#/components/schemas/ResourceID'
     description: Needed for capital asset categories 601 to 607, or the request is a 404
-    example: https://api.freeagent.com/v2/capital_asset_types/1
   stock_item:
     type: string
     description: For stock categories
@@ -41,6 +37,5 @@ properties:
     description: For unincorporated landlords, on profit and loss categories
     example: https://api.freeagent.com/v2/properties/1
   contact:
-    type: string
+    $ref: '#/components/schemas/ResourceID'
     description: Opening balances only, for Trade Debtors (681) and Trade Creditors (796) - a 422 on any other set
-    example: https://api.freeagent.com/v2/contacts/1

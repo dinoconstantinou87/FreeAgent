@@ -35,16 +35,14 @@ list:
         example: 2026-01-01T00:00:00Z
     - name: project
       in: query
-      description: Filter expenses by project URL - an unknown project is a 404
+      description: Filter expenses by project - an unknown project is a 404
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/projects/:id
+        $ref: '#/components/schemas/ResourceID'
     - name: user
       in: query
-      description: Filter expenses by claimant URL - not documented, and an unknown user matches nothing
+      description: Filter expenses by claimant - not documented, and an unknown user matches nothing
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/users/:id
+        $ref: '#/components/schemas/ResourceID'
     - name: sort
       in: query
       description: Sort expenses by specified field, descending with a leading hyphen - not documented
@@ -201,12 +199,7 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
 mileage_settings:
   get:
     tags:

@@ -2,7 +2,7 @@ type: object
 properties:
   id:
     type: string
-    description: ID of an existing item to update or remove - the docs say integer, and a string is accepted too
+    description: ID of an existing item to update or remove, not its URL, which is a 404 - the docs say integer, and a string is accepted too
     example: '1'
   _destroy:
     type: integer

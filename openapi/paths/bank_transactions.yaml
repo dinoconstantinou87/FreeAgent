@@ -10,8 +10,7 @@ list:
       in: query
       required: true
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/bank_accounts/1
+        $ref: '#/components/schemas/ResourceID'
     - name: from_date
       in: query
       schema:
@@ -70,9 +69,4 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'

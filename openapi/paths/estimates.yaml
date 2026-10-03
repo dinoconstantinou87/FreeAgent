@@ -14,22 +14,19 @@ list:
         example: true
     - name: contact
       in: query
-      description: Filter estimates by contact URL
+      description: Filter estimates by contact
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/contacts/:id
+        $ref: '#/components/schemas/ResourceID'
     - name: project
       in: query
-      description: Filter estimates by project URL
+      description: Filter estimates by project
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/projects/:id
+        $ref: '#/components/schemas/ResourceID'
     - name: invoice
       in: query
-      description: Filter estimates by the URL of the invoice they were converted to
+      description: Filter estimates by the invoice they were converted to
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/invoices/:id
+        $ref: '#/components/schemas/ResourceID'
     - name: view
       in: query
       description: Filter estimates by view - FreeAgent returns no estimates for an unknown view rather than an error
@@ -170,12 +167,7 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
 pdf:
   get:
     tags:
@@ -193,12 +185,7 @@ pdf:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
 send_email:
   post:
     tags:
@@ -234,12 +221,7 @@ send_email:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
 duplicate:
   post:
     tags:
@@ -257,12 +239,7 @@ duplicate:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
 mark_as_sent:
   put:
     tags:
@@ -281,12 +258,7 @@ mark_as_sent:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
 mark_as_draft:
   put:
     tags:
@@ -305,12 +277,7 @@ mark_as_draft:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
 mark_as_approved:
   put:
     tags:
@@ -329,12 +296,7 @@ mark_as_approved:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
 mark_as_rejected:
   put:
     tags:
@@ -353,12 +315,7 @@ mark_as_rejected:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
 convert_to_invoice:
   put:
     tags:
@@ -377,12 +334,7 @@ convert_to_invoice:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
 create_item:
   post:
     tags:
@@ -400,8 +352,7 @@ create_item:
             - estimate_item
             properties:
               estimate:
-                type: string
-                example: https://api.freeagent.com/v2/estimates/1
+                $ref: '#/components/schemas/ResourceID'
               estimate_item:
                 $ref: '#/components/schemas/EstimateItemPayload'
           examples:
@@ -465,9 +416,4 @@ update_item:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'

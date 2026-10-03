@@ -8,22 +8,19 @@ list:
     parameters:
     - name: user
       in: query
-      description: Filter timeslips by user URL
+      description: Filter timeslips by user
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/users/:id
+        $ref: '#/components/schemas/ResourceID'
     - name: project
       in: query
-      description: Filter timeslips by project URL - an unknown project is a 404
+      description: Filter timeslips by project - an unknown project is a 404
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/projects/:id
+        $ref: '#/components/schemas/ResourceID'
     - name: task
       in: query
-      description: Filter timeslips by task URL - an unknown task is a 404
+      description: Filter timeslips by task - an unknown task is a 404
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/tasks/:id
+        $ref: '#/components/schemas/ResourceID'
     - name: view
       in: query
       description: Filter timeslips by view - unbilled leaves out timeslips billed on an invoice, and FreeAgent answers an unknown view with a 400
@@ -175,12 +172,7 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
 timer:
   post:
     tags:
@@ -215,9 +207,4 @@ timer:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'

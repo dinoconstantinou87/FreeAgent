@@ -6,8 +6,7 @@ required:
 - due_on
 properties:
   contact:
-    type: string
-    example: https://api.freeagent.com/v2/contacts/1
+    $ref: '#/components/schemas/ResourceID'
   reference:
     type: string
     example: REF100
@@ -21,8 +20,7 @@ properties:
     type: string
     example: Vehicle purchase
   project:
-    type: string
-    example: https://api.freeagent.com/v2/projects/1
+    $ref: '#/components/schemas/ResourceID'
   recurring:
     $ref: '#/components/schemas/BillRecurringPeriod'
   recurring_end_date:

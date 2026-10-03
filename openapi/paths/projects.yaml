@@ -37,10 +37,9 @@ list:
         example: -updated_at
     - name: contact
       in: query
-      description: Filter projects by contact URL - an unknown contact is a 404
+      description: Filter projects by contact - an unknown contact is a 404
       schema:
-        type: string
-        example: https://api.freeagent.com/v2/contacts/:id
+        $ref: '#/components/schemas/ResourceID'
     - $ref: '#/components/parameters/Page'
     - $ref: '#/components/parameters/PerPage'
     responses:
@@ -149,9 +148,4 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - name: id
-    in: path
-    required: true
-    schema:
-      type: string
-      example: ''
+  - $ref: '#/components/parameters/Id'
