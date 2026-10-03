@@ -199,7 +199,7 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 mileage_settings:
   get:
     tags:

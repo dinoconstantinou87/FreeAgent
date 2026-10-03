@@ -16,7 +16,7 @@ mark_as_sent:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 mark_as_cancelled:
   put:
     tags:
@@ -35,7 +35,7 @@ mark_as_cancelled:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 mark_as_scheduled:
   put:
     tags:
@@ -54,7 +54,7 @@ mark_as_scheduled:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 mark_as_draft:
   put:
     tags:
@@ -73,7 +73,7 @@ mark_as_draft:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 list:
   get:
     tags:
@@ -245,7 +245,7 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 timeline:
   get:
     tags:
@@ -279,7 +279,7 @@ pdf:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 send_email:
   post:
     tags:
@@ -313,7 +313,7 @@ send_email:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 create_item:
   post:
     tags:
@@ -390,4 +390,4 @@ update_item:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'

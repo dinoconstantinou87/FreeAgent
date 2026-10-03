@@ -167,7 +167,7 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 pdf:
   get:
     tags:
@@ -185,7 +185,7 @@ pdf:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 send_email:
   post:
     tags:
@@ -221,7 +221,7 @@ send_email:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 duplicate:
   post:
     tags:
@@ -239,7 +239,7 @@ duplicate:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 mark_as_sent:
   put:
     tags:
@@ -258,7 +258,7 @@ mark_as_sent:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 mark_as_draft:
   put:
     tags:
@@ -277,7 +277,7 @@ mark_as_draft:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 mark_as_approved:
   put:
     tags:
@@ -296,7 +296,7 @@ mark_as_approved:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 mark_as_rejected:
   put:
     tags:
@@ -315,7 +315,7 @@ mark_as_rejected:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 convert_to_invoice:
   put:
     tags:
@@ -334,7 +334,7 @@ convert_to_invoice:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 create_item:
   post:
     tags:
@@ -416,4 +416,4 @@ update_item:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'

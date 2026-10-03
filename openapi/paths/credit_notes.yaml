@@ -176,7 +176,7 @@ show:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 pdf:
   get:
     tags:
@@ -194,7 +194,7 @@ pdf:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 send_email:
   post:
     tags:
@@ -230,7 +230,7 @@ send_email:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 mark_as_sent:
   put:
     tags:
@@ -249,7 +249,7 @@ mark_as_sent:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
 mark_as_draft:
   put:
     tags:
@@ -268,4 +268,4 @@ mark_as_draft:
       default:
         $ref: '#/components/responses/ErrorResponse'
   parameters:
-  - $ref: '#/components/parameters/Id'
+  - $ref: '#/components/parameters/ID'
