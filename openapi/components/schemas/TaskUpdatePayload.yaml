@@ -1,0 +1,18 @@
+type: object
+description: Fields left out are kept - the project and currency cannot be changed
+properties:
+  name:
+    type: string
+    description: Unique within the project, or the update is a 422
+    example: Development
+  is_billable:
+    type: boolean
+    example: true
+  billing_rate:
+    type: number
+    description: Kept at the precision sent - a negative rate is a 422
+    example: 95
+  billing_period:
+    $ref: '#/components/schemas/BillingPeriod'
+  status:
+    $ref: '#/components/schemas/TaskStatus'

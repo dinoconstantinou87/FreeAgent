@@ -1,0 +1,20 @@
+type: object
+required:
+- name
+properties:
+  name:
+    type: string
+    description: Unique within the project, or the create is a 422
+    example: Development
+  is_billable:
+    type: boolean
+    description: Defaults to true
+    example: true
+  billing_rate:
+    type: number
+    description: Kept at the precision sent - defaults to the project's normal billing rate, and a negative rate is a 422
+    example: 95
+  billing_period:
+    $ref: '#/components/schemas/BillingPeriod'
+  status:
+    $ref: '#/components/schemas/TaskStatus'

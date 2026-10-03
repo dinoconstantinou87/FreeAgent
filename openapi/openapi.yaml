@@ -113,6 +113,8 @@ paths:
     $ref: 'paths/projects.yaml#/show'
   /v2/tasks:
     $ref: 'paths/tasks.yaml#/list'
+  /v2/tasks/{id}:
+    $ref: 'paths/tasks.yaml#/show'
   /v2/timeslips:
     $ref: 'paths/timeslips.yaml#/list'
   /v2/timeslips/{id}:
@@ -289,12 +291,20 @@ components:
       $ref: 'components/schemas/ProjectStatus.yaml'
     ProjectBudgetUnits:
       $ref: 'components/schemas/ProjectBudgetUnits.yaml'
-    ProjectBillingPeriod:
-      $ref: 'components/schemas/ProjectBillingPeriod.yaml'
+    BillingPeriod:
+      $ref: 'components/schemas/BillingPeriod.yaml'
     Task:
       $ref: 'components/schemas/Task.yaml'
     TaskListResponse:
       $ref: 'components/schemas/TaskListResponse.yaml'
+    TaskResponse:
+      $ref: 'components/schemas/TaskResponse.yaml'
+    TaskCreatePayload:
+      $ref: 'components/schemas/TaskCreatePayload.yaml'
+    TaskUpdatePayload:
+      $ref: 'components/schemas/TaskUpdatePayload.yaml'
+    TaskStatus:
+      $ref: 'components/schemas/TaskStatus.yaml'
     Timeslip:
       $ref: 'components/schemas/Timeslip.yaml'
     TimeslipTimer:

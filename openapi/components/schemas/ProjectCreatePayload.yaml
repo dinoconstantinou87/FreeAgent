@@ -37,7 +37,7 @@ properties:
     description: Rounded to two decimal places - a negative rate is a 422
     example: 95
   billing_period:
-    $ref: '#/components/schemas/ProjectBillingPeriod'
+    $ref: '#/components/schemas/BillingPeriod'
   is_ir35:
     type: boolean
     example: false

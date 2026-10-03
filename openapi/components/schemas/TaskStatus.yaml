@@ -1,0 +1,7 @@
+type: string
+description: Any other value, lowercase included, is a 422
+enum:
+- Active
+- Completed
+- Hidden
+example: Active

@@ -1,6 +1,0 @@
-type: string
-description: The unit of normal_billing_rate
-enum:
-- hour
-- day
-example: hour

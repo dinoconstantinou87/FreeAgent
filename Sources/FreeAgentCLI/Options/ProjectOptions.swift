@@ -18,7 +18,7 @@ struct ProjectOptions: ParsableArguments {
     var normalBillingRate: Double?
 
     @Option(name: .long, help: "Unit of the normal billing rate")
-    var billingPeriod: Components.Schemas.ProjectBillingPeriod?
+    var billingPeriod: Components.Schemas.BillingPeriod?
 
     @Option(name: .long, help: "Whether the project comes under IR35 as de facto employment")
     var isIr35: Bool?

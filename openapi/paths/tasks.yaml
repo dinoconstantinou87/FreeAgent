@@ -3,15 +3,49 @@ list:
     tags:
     - Tasks
     summary: List tasks
-    description: List tasks
+    description: List tasks - every status is included without a view
     operationId: listTasks
     parameters:
+    - name: view
+      in: query
+      description: Filter tasks by status - FreeAgent answers an unknown view with a 400
+      schema:
+        type: string
+        enum:
+        - all
+        - active
+        - completed
+        - hidden
+        example: active
+    - name: sort
+      in: query
+      description: Sort tasks by specified field, descending with a leading hyphen - name is the default
+      schema:
+        type: string
+        enum:
+        - name
+        - -name
+        - project
+        - -project
+        - billing_rate
+        - -billing_rate
+        - created_at
+        - -created_at
+        - updated_at
+        - -updated_at
+        example: -updated_at
     - name: project
       in: query
       description: Filter tasks by project URL - an unknown project is a 404
       schema:
         type: string
         example: https://api.freeagent.com/v2/projects/:id
+    - name: updated_since
+      in: query
+      description: Show tasks updated since this date or timestamp - FreeAgent answers an invalid one with a 400
+      schema:
+        type: string
+        example: 2026-01-01T00:00:00Z
     - $ref: '#/components/parameters/Page'
     - $ref: '#/components/parameters/PerPage'
     responses:
@@ -28,3 +62,107 @@ list:
               $ref: '#/components/schemas/TaskListResponse'
       default:
         $ref: '#/components/responses/ErrorResponse'
+  post:
+    tags:
+    - Tasks
+    summary: Create task
+    description: Create task under a project - it needs only a name, unique within the project
+    operationId: createTask
+    parameters:
+    - name: project
+      in: query
+      required: true
+      description: The project URL or ID - an unknown project is a 404
+      schema:
+        type: string
+        example: https://api.freeagent.com/v2/projects/:id
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - task
+            properties:
+              task:
+                $ref: '#/components/schemas/TaskCreatePayload'
+          examples:
+            Create Task:
+              value:
+                task:
+                  name: Development
+                  billing_rate: 95
+                  billing_period: hour
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+show:
+  get:
+    tags:
+    - Tasks
+    summary: Show task
+    description: Show task
+    operationId: showTask
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  put:
+    tags:
+    - Tasks
+    summary: Update task
+    description: Update task
+    operationId: updateTask
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - task
+            properties:
+              task:
+                $ref: '#/components/schemas/TaskUpdatePayload'
+          examples:
+            Update Task:
+              value:
+                task:
+                  status: Completed
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Tasks
+    summary: Delete task
+    description: Delete task - the docs give /v2/users/:id, a typo; a task with timeslips is a 422 saying so
+    operationId: deleteTask
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
