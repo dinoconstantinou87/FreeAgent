@@ -1,0 +1,11 @@
+type: string
+description: Any other value, lowercase included, is a 422 - an Accountant needs permission level 7 or more
+enum:
+- Owner
+- Director
+- Partner
+- Company Secretary
+- Employee
+- Shareholder
+- Accountant
+example: Employee

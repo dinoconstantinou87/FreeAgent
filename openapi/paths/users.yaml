@@ -1,3 +1,138 @@
+list:
+  get:
+    tags:
+    - Users
+    summary: List users
+    description: List users - sort and updated_since are ignored
+    operationId: listUsers
+    parameters:
+    - name: view
+      in: query
+      description: Filter users by role and visibility - FreeAgent answers an unknown view with a 400
+      schema:
+        type: string
+        enum:
+        - all
+        - staff
+        - active_staff
+        - advisors
+        - active_advisors
+        example: active_staff
+    - $ref: '#/components/parameters/Page'
+    - $ref: '#/components/parameters/PerPage'
+    responses:
+      '200':
+        description: Success
+        headers:
+          Link:
+            $ref: '#/components/headers/Link'
+          X-Total-Count:
+            $ref: '#/components/headers/XTotalCount'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserListResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  post:
+    tags:
+    - Users
+    summary: Create user
+    description: Create user - it needs an email, first name, last name and role
+    operationId: createUser
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - user
+            properties:
+              user:
+                $ref: '#/components/schemas/UserCreatePayload'
+          examples:
+            Create User:
+              value:
+                user:
+                  email: jane@example.com
+                  first_name: Jane
+                  last_name: Smith
+                  role: Employee
+                  permission_level: 1
+                  send_invitation: false
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+show:
+  get:
+    tags:
+    - Users
+    summary: Show user
+    description: Show user
+    operationId: showUser
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  put:
+    tags:
+    - Users
+    summary: Update user
+    description: Update user - an empty user is a 422 whose body is the unchanged user
+    operationId: updateUser
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - user
+            properties:
+              user:
+                $ref: '#/components/schemas/UserUpdatePayload'
+          examples:
+            Update User:
+              value:
+                user:
+                  permission_level: 3
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Users
+    summary: Delete user
+    description: Delete user - one with timeslips, expenses or other records is a 422 saying it has dependencies
+    operationId: deleteUser
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: string
+      example: ''
 me:
   get:
     tags:
@@ -5,6 +140,36 @@ me:
     summary: Show the current user
     description: Show the user the access token belongs to
     operationId: showCurrentUser
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  put:
+    tags:
+    - Users
+    summary: Update the current user
+    description: Update the user the access token belongs to - needs only Time access, and an empty user is a 400
+    operationId: updateCurrentUser
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - user
+            properties:
+              user:
+                $ref: '#/components/schemas/UserUpdatePayload'
+          examples:
+            Update Current User:
+              value:
+                user:
+                  first_name: Jane
     responses:
       '200':
         description: Success
