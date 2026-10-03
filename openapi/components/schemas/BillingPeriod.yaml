@@ -1,0 +1,6 @@
+type: string
+description: The unit of a billing rate - any other value, a capitalised one included, is a 422
+enum:
+- hour
+- day
+example: hour

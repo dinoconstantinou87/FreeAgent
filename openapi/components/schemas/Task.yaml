@@ -13,23 +13,22 @@ properties:
     example: Development
   currency:
     type: string
+    description: Always the project's currency
     example: GBP
   is_billable:
     type: boolean
     example: true
   billing_rate:
     type: string
+    description: Defaults to the project's normal billing rate - needs the Contacts & Projects permission
     example: '0.0'
   billing_period:
-    type: string
-    description: One of hour or day, the unit of billing_rate
-    example: hour
+    $ref: '#/components/schemas/BillingPeriod'
   status:
-    type: string
-    description: One of Active, Completed or Hidden
-    example: Active
+    $ref: '#/components/schemas/TaskStatus'
   is_deletable:
     type: boolean
+    description: False once a timeslip uses the task
     example: false
   created_at:
     type: string
