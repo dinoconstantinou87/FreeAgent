@@ -19,8 +19,7 @@ properties:
     type: string
     example: Team lunch
   currency:
-    type: string
-    example: USD
+    $ref: '#/components/schemas/Currency'
   gross_value:
     type: string
     description: Negative for a payment to the claimant, positive for a refund from them - ignored on a mileage claim

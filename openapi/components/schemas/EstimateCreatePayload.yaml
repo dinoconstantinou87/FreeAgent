@@ -24,8 +24,7 @@ properties:
     description: Defaults to the next reference after the latest estimate's
     example: EST-002
   currency:
-    type: string
-    example: GBP
+    $ref: '#/components/schemas/Currency'
   notes:
     type: string
     example: Valid for 30 days

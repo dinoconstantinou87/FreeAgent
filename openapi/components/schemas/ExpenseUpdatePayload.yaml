@@ -13,8 +13,7 @@ properties:
     type: string
     example: Team lunch
   currency:
-    type: string
-    example: USD
+    $ref: '#/components/schemas/Currency'
   gross_value:
     type: string
     example: '-12.0'

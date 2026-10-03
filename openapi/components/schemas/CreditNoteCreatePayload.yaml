@@ -21,8 +21,7 @@ properties:
     description: Defaults to the next invoice reference
     example: CN-001
   currency:
-    type: string
-    example: GBP
+    $ref: '#/components/schemas/Currency'
   comments:
     type: string
     example: Refund for cancelled work

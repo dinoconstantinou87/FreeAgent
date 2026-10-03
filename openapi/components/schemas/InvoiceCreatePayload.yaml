@@ -27,8 +27,7 @@ properties:
     - billed_grouped_by_expense
     example: billed_grouped_by_expense
   currency:
-    type: string
-    example: GBP
+    $ref: '#/components/schemas/Currency'
   dated_on:
     type: string
     example: 2019-08-18
