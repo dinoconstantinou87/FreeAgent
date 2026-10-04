@@ -1,0 +1,16 @@
+type: string
+description: The documented Comment, Discount, Credit and VAT are a 422, as is any other value, lowercase included - -no unit- is undocumented
+enum:
+- Hours
+- Days
+- Weeks
+- Months
+- Years
+- Products
+- Services
+- Training
+- Expenses
+- Bills
+- Stock
+- -no unit-
+example: Products

@@ -1,0 +1,132 @@
+list:
+  get:
+    tags:
+    - Price List Items
+    summary: List price list items
+    description: List price list items, oldest first by default
+    operationId: listPriceListItems
+    parameters:
+    - name: sort
+      in: query
+      description: Sort price list items by specified field, descending with a leading hyphen - created_at is the default, code ignores case, and any other field is a 400
+      schema:
+        type: string
+        enum:
+        - code
+        - -code
+        - created_at
+        - -created_at
+        - updated_at
+        - -updated_at
+        example: code
+    - $ref: '#/components/parameters/Page'
+    - $ref: '#/components/parameters/PerPage'
+    responses:
+      '200':
+        description: Success
+        headers:
+          Link:
+            $ref: '#/components/headers/Link'
+          X-Total-Count:
+            $ref: '#/components/headers/XTotalCount'
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceListItemListResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  post:
+    tags:
+    - Price List Items
+    summary: Create price list item
+    description: Create price list item - it needs a code, a description and an item type
+    operationId: createPriceListItem
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - price_list_item
+            properties:
+              price_list_item:
+                $ref: '#/components/schemas/PriceListItemCreatePayload'
+          examples:
+            Create Price List Item:
+              value:
+                price_list_item:
+                  code: A001
+                  description: Apple
+                  item_type: Products
+                  quantity: 1
+                  price: 1.99
+                  vat_status: standard
+    responses:
+      '201':
+        description: Created
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceListItemResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+show:
+  get:
+    tags:
+    - Price List Items
+    summary: Show price list item
+    description: Show price list item
+    operationId: showPriceListItem
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceListItemResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  put:
+    tags:
+    - Price List Items
+    summary: Update price list item
+    description: Update price list item
+    operationId: updatePriceListItem
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+            - price_list_item
+            properties:
+              price_list_item:
+                $ref: '#/components/schemas/PriceListItemUpdatePayload'
+          examples:
+            Update Price List Item:
+              value:
+                price_list_item:
+                  description: Pear
+                  price: 3.99
+    responses:
+      '200':
+        description: Success
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PriceListItemResponse'
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  delete:
+    tags:
+    - Price List Items
+    summary: Delete price list item
+    description: Delete price list item - the docs give /v2/price_list_item/:id, which is a 404
+    operationId: deletePriceListItem
+    responses:
+      '200':
+        description: Success
+      default:
+        $ref: '#/components/responses/ErrorResponse'
+  parameters:
+  - $ref: '#/components/parameters/ID'

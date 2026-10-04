@@ -1,0 +1,6 @@
+type: object
+required:
+- price_list_item
+properties:
+  price_list_item:
+    $ref: 'PriceListItem.yaml'
