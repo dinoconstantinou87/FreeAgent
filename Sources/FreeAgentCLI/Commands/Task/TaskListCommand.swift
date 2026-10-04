@@ -14,10 +14,10 @@ struct TaskListCommand: AsyncPaginatedListCommand {
         Field("ID") { .id(url: $0.url) }
         Field("Name") { .text($0.name) }
         Field("Project") { .id(url: $0.project) }
-        Field("Status") { .status($0.status?.rawValue) }
+        Field("Status") { .status($0.status) }
         Field("Billable") { .flag($0.isBillable) }
         Field("Billing Rate") { .currency($0.billingRate, code: $0.currency) }
-        Field("Billing Period") { .text($0.billingPeriod?.rawValue) }
+        Field("Billing Period") { .text($0.billingPeriod) }
     }
 
     @Option(name: .long, help: "Filter by status - every status is listed by default")

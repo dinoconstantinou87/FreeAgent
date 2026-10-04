@@ -14,12 +14,12 @@ struct PriceListItemShowCommand: ShowCommand {
         FieldSection("Details") {
             Field("Code") { .text($0.code) }
             Field("Description") { .text($0.description) }
-            Field("Item Type") { .text($0.itemType?.rawValue) }
+            Field("Item Type") { .text($0.itemType) }
             Field("Quantity") { .text($0.quantity) }
             Field("Price") { .currency($0.price, code: nil) }
         }
         FieldSection("Tax") {
-            Field("VAT Status") { .text($0.vatStatus?.rawValue) }
+            Field("VAT Status") { .text($0.vatStatus) }
             Field("Sales Tax Rate") { .percent($0.salesTaxRate) }
             Field("Second Sales Tax Rate") { .percent($0.secondSalesTaxRate) }
         }

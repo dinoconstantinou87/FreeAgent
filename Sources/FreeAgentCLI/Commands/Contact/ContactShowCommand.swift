@@ -14,7 +14,7 @@ struct ContactShowCommand: ShowCommand {
         FieldSection("Details") {
             Field("Organisation") { .text($0.organisationName) }
             Field("Name") { .text([$0.firstName, $0.lastName].compactMap(\.self).joined(separator: " ")) }
-            Field("Status") { .status($0.status.rawValue) }
+            Field("Status") { .status($0.status) }
             Field("Email") { .text($0.email) }
             Field("Billing Email") { .text($0.billingEmail) }
             Field("Phone") { .text($0.phoneNumber) }

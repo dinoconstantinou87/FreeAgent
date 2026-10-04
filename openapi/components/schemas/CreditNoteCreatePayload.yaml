@@ -20,6 +20,7 @@ properties:
     example: CN-001
   currency:
     $ref: '#/components/schemas/Currency'
+    description: The retired codes are refused, and SSP and VES are a 500 that creates nothing
   comments:
     type: string
     example: Refund for cancelled work

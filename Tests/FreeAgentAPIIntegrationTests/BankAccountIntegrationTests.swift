@@ -24,7 +24,7 @@ struct BankAccountIntegrationTests {
         let account = try #require(accounts.first)
         #expect(account.url.contains("/v2/bank_accounts/"))
         #expect(account._type == "StandardBankAccount")
-        #expect(account.currency == "GBP")
+        #expect(account.currency == .gbp)
         #expect(try #require(account.createdAt) <= Date())
     }
 

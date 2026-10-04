@@ -26,6 +26,7 @@ properties:
     example: billed_grouped_by_expense
   currency:
     $ref: '#/components/schemas/Currency'
+    description: The retired codes are refused, and SSP and VES are a 500 that creates nothing
   dated_on:
     type: string
     example: 2019-08-18

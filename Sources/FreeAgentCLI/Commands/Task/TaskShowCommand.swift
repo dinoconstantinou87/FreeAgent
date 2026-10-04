@@ -13,14 +13,14 @@ struct TaskShowCommand: ShowCommand {
     static var sections: [FieldSection<Components.Schemas.Task>] {
         FieldSection("Details") {
             Field("Name") { .text($0.name) }
-            Field("Status") { .status($0.status?.rawValue) }
+            Field("Status") { .status($0.status) }
             Field("Deletable") { .flag($0.isDeletable) }
         }
         FieldSection("Billing") {
             Field("Billable") { .flag($0.isBillable) }
             Field("Currency") { .text($0.currency) }
             Field("Billing Rate") { .currency($0.billingRate, code: $0.currency) }
-            Field("Billing Period") { .text($0.billingPeriod?.rawValue) }
+            Field("Billing Period") { .text($0.billingPeriod) }
         }
         FieldSection("Dates") {
             Field("Created") { .timestamp($0.createdAt) }

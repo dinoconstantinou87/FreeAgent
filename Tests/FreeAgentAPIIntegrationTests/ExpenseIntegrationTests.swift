@@ -148,7 +148,10 @@ struct ExpenseIntegrationTests {
 
     @Test("An expense rebilled through invoice create decodes its lock fields")
     func rebilledExpense() async throws {
-        let project = try #require(try await client.listProjects(.init()).ok.body.json.projects.last)
+        let project = try #require(
+            try await client.listProjects(.init()).ok.body.json.projects
+                .last { !($0.name?.hasPrefix("ZZ Integration Test") ?? false) }
+        )
         let contact = try #require(project.contact)
         let user = try await client.showCurrentUser(.init()).ok.body.json.user
 

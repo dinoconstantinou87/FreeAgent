@@ -15,9 +15,7 @@ properties:
     type: string
     example: jane@example.com
   role:
-    type: string
-    description: One of Owner, Director, Partner, Company Secretary, Employee, Shareholder or Accountant
-    example: Director
+    $ref: '#/components/schemas/UserRole'
   permission_level:
     $ref: '#/components/schemas/UserPermissionLevel'
   ni_number:

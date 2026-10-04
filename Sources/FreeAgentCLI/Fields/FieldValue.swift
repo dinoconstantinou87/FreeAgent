@@ -15,6 +15,22 @@ enum FieldValue: Sendable {
 
     // MARK: Internal
 
+    static func text(_ value: (some RawRepresentable<String>)?) -> FieldValue {
+        .text(value?.rawValue)
+    }
+
+    static func text(_ value: (some RawRepresentable & CustomStringConvertible)?) -> FieldValue {
+        .text(value?.description)
+    }
+
+    static func status(_ value: (some RawRepresentable<String>)?) -> FieldValue {
+        .status(value?.rawValue)
+    }
+
+    static func currency(_ amount: String?, code: (some RawRepresentable<String>)?) -> FieldValue {
+        .currency(amount, code: code?.rawValue)
+    }
+
     func formatted(locale: Locale = .current, timeZone: TimeZone = .current) -> String? {
         let text =
             switch self {

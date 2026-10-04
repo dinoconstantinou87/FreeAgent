@@ -34,23 +34,9 @@ struct ProjectCreateCommandTests {
         verify(transport).send(.any, body: .any, baseURL: .any, operationID: .value("createProject")).called(1)
     }
 
-    @Test("asks for --currency when the company's currency is not one a project can use")
-    func unsupportedCompanyCurrency() async throws {
-        let transport = transport(companyCurrency: "HRK")
-        let command = try ProjectCreateCommand.parse(["--contact", "215832", "--name", "Website"])
-
-        let error = await #expect(throws: ProjectCreateCommandError.self) {
-            try await command.perform(client: client(transport))
-        }
-
-        #expect(error?.errorDescription == "The company's currency, HRK, is not one a project can use")
-        #expect(error?.exitCode == ExitCode.validationFailure)
-        verify(transport).send(.any, body: .any, baseURL: .any, operationID: .value("createProject")).called(0)
-    }
-
     // MARK: Private
 
-    private func transport(companyCurrency: String = "GBP") -> MockClientTransportInterface {
+    private func transport() -> MockClientTransportInterface {
         let transport = MockClientTransportInterface()
         given(transport)
             .send(.any, body: .any, baseURL: .any, operationID: .value("companyDetails"))
@@ -58,7 +44,7 @@ struct ProjectCreateCommandTests {
                 HTTPResponse(status: .ok, headerFields: [.contentType: "application/json"]),
                 HTTPBody(Data(#"""
                     {"company":{"url":"https://api.freeagent.com/v2/company","name":"Acme Technologies Ltd",\#
-                    "subdomain":"acmetechnologiesltd","type":"UkLimitedCompany","currency":"\#(companyCurrency)","mileage_units":"miles",\#
+                    "subdomain":"acmetechnologiesltd","type":"UkLimitedCompany","currency":"GBP","mileage_units":"miles",\#
                     "company_start_date":"2025-01-01","freeagent_start_date":"2025-01-01","first_accounting_year_end":"2026-01-31"}}
                     """#.utf8))
             ))

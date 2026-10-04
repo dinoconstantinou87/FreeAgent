@@ -23,8 +23,7 @@ properties:
     type: string
     example: UkLimitedCompany
   currency:
-    type: string
-    example: GBP
+    $ref: '#/components/schemas/Currency'
   mileage_units:
     type: string
     example: miles

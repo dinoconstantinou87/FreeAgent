@@ -74,7 +74,7 @@ struct UserIntegrationTests {
         #expect(created.email == email)
         #expect(created.firstName == "Integration")
         #expect(created.lastName == "Test")
-        #expect(created.role == "Employee")
+        #expect(created.role == .employee)
         #expect(created.permissionLevel == .time)
         #expect(created.niNumber == "AB123456C")
         #expect(created.uniqueTaxReference == "1234567890")
@@ -94,7 +94,7 @@ struct UserIntegrationTests {
 
         #expect(updated.url == created.url)
         #expect(updated.lastName == "Updated")
-        #expect(updated.role == "Accountant")
+        #expect(updated.role == .accountant)
         #expect(updated.permissionLevel == .taxAccountingAndUsers)
         #expect(updated.hidden == true)
 

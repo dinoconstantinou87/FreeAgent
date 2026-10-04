@@ -12,9 +12,8 @@ properties:
     type: string
     example: Development
   currency:
-    type: string
+    $ref: '#/components/schemas/Currency'
     description: Always the project's currency
-    example: GBP
   is_billable:
     type: boolean
     example: true

@@ -18,8 +18,7 @@ properties:
     type: string
     example: generic
   currency:
-    type: string
-    example: GBP
+    $ref: '#/components/schemas/Currency'
   status:
     type: string
     example: active

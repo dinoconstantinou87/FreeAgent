@@ -14,7 +14,7 @@ struct ProjectListCommand: AsyncPaginatedListCommand {
         Field("ID") { .id(url: $0.url) }
         Field("Name") { .text($0.name) }
         Field("Contact") { .text($0.contactName) }
-        Field("Status") { .status($0.status?.rawValue) }
+        Field("Status") { .status($0.status) }
         Field("Starts On") { .date($0.startsOn) }
         Field("Ends On") { .date($0.endsOn) }
     }

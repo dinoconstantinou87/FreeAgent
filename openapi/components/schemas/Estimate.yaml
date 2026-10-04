@@ -36,8 +36,7 @@ properties:
     type: string
     example: '2026-10-02'
   currency:
-    type: string
-    example: GBP
+    $ref: '#/components/schemas/Currency'
   notes:
     type: string
     description: Additional text, omitted until set

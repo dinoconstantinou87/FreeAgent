@@ -3,7 +3,7 @@ import Foundation
 import FreeAgentAPI
 
 struct BillShowCommand: ShowCommand {
-    typealias PricedItem = (item: Components.Schemas.BillItem, currency: String?)
+    typealias PricedItem = (item: Components.Schemas.BillItem, currency: Components.Schemas.Currency?)
 
     static let configuration = CommandConfiguration(
         commandName: "show",
