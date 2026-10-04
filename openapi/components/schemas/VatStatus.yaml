@@ -1,0 +1,8 @@
+type: string
+description: UK accounts only - FreeAgent stores any value without checking it, and an empty one removes it
+enum:
+- out_of_scope
+- reduced
+- standard
+- zero
+example: standard

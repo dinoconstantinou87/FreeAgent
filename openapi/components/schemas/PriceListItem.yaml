@@ -1,0 +1,45 @@
+type: object
+required:
+  - url
+properties:
+  url:
+    type: string
+    example: https://api.freeagent.com/v2/price_list_items/1
+  code:
+    type: string
+    example: A001
+  description:
+    type: string
+    example: Apple
+  item_type:
+    $ref: '#/components/schemas/PriceListItemType'
+  quantity:
+    type: string
+    example: '1.0'
+  price:
+    type: string
+    example: '10.99'
+  vat_status:
+    $ref: '#/components/schemas/VatStatus'
+  sales_tax_rate:
+    type: string
+    example: '0.0'
+  second_sales_tax_rate:
+    type: string
+    example: '0.0'
+  category:
+    type: string
+    description: Defaults to Sales (001)
+    example: https://api.freeagent.com/v2/categories/001
+  stock_item:
+    type: string
+    description: For the Stock item type
+    example: https://api.freeagent.com/v2/stock_items/1
+  created_at:
+    type: string
+    format: date-time
+    example: '2023-05-22T09:22:45.000Z'
+  updated_at:
+    type: string
+    format: date-time
+    example: '2023-05-25T12:43:36.000Z'

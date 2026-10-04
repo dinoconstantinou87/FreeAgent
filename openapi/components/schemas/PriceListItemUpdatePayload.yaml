@@ -1,0 +1,38 @@
+type: object
+description: Fields left out are kept
+properties:
+  code:
+    type: string
+    description: Unique, case-sensitively, and at most 100 characters, or the update is a 422
+    example: A001
+  description:
+    type: string
+    example: Pear
+  item_type:
+    $ref: '#/components/schemas/PriceListItemType'
+  quantity:
+    type: number
+    description: Negative only for Hours
+    example: 1
+  price:
+    type: number
+    description: Kept at the precision sent
+    example: 3.99
+  vat_status:
+    $ref: '#/components/schemas/VatStatus'
+    description: UK accounts only
+  sales_tax_rate:
+    type: number
+    description: Universal and US accounts only
+    example: 20
+  second_sales_tax_rate:
+    type: number
+    description: Universal accounts only
+    example: 5
+  category:
+    $ref: '#/components/schemas/ResourceID'
+    description: The category, whose ID is its nominal code - an unknown code is a 400
+  stock_item:
+    type: string
+    description: For the Stock item type - an unknown stock item is a 500
+    example: https://api.freeagent.com/v2/stock_items/1

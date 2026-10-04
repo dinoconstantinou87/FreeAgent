@@ -169,6 +169,10 @@ paths:
     $ref: 'paths/journal_sets.yaml#/opening_balances'
   /v2/journal_sets/{id}:
     $ref: 'paths/journal_sets.yaml#/show'
+  /v2/price_list_items:
+    $ref: 'paths/price_list_items.yaml#/list'
+  /v2/price_list_items/{id}:
+    $ref: 'paths/price_list_items.yaml#/show'
 components:
   schemas:
     InvoiceView:
@@ -385,6 +389,20 @@ components:
       $ref: 'components/schemas/JournalSetUpdatePayload.yaml'
     JournalEntryPayload:
       $ref: 'components/schemas/JournalEntryPayload.yaml'
+    PriceListItem:
+      $ref: 'components/schemas/PriceListItem.yaml'
+    PriceListItemResponse:
+      $ref: 'components/schemas/PriceListItemResponse.yaml'
+    PriceListItemListResponse:
+      $ref: 'components/schemas/PriceListItemListResponse.yaml'
+    PriceListItemCreatePayload:
+      $ref: 'components/schemas/PriceListItemCreatePayload.yaml'
+    PriceListItemUpdatePayload:
+      $ref: 'components/schemas/PriceListItemUpdatePayload.yaml'
+    PriceListItemType:
+      $ref: 'components/schemas/PriceListItemType.yaml'
+    VatStatus:
+      $ref: 'components/schemas/VatStatus.yaml'
     Errors:
       $ref: 'components/schemas/Errors.yaml'
     ErrorDetail:
@@ -541,3 +559,4 @@ tags:
 - name: Self Assessment Returns
 - name: Users
 - name: Journal Sets
+- name: Price List Items
