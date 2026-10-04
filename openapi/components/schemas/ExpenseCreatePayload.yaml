@@ -18,6 +18,7 @@ properties:
     example: Team lunch
   currency:
     $ref: '#/components/schemas/Currency'
+    description: The retired codes are refused
   gross_value:
     type: string
     description: Negative for a payment to the claimant, positive for a refund from them - ignored on a mileage claim

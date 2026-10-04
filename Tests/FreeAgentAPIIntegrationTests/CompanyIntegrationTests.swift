@@ -24,7 +24,7 @@ struct CompanyIntegrationTests {
             name: "Acme Technologies Ltd",
             subdomain: "acmetechnologiesltd",
             _type: "UkLimitedCompany",
-            currency: "GBP",
+            currency: .gbp,
             mileageUnits: "miles",
             companyStartDate: "2025-01-01",
             freeagentStartDate: "2025-01-01",

@@ -17,7 +17,7 @@ struct ProjectShowCommand: ShowCommand {
         FieldSection("Details") {
             Field("Name") { .text($0.name) }
             Field("Contact") { .text($0.contactName) }
-            Field("Status") { .status($0.status?.rawValue) }
+            Field("Status") { .status($0.status) }
             Field("PO Reference") { .text($0.contractPoReference) }
             Field("IR35") { .flag($0.isIr35) }
             Field("Deletable") { .flag($0.isDeletable) }
@@ -25,13 +25,13 @@ struct ProjectShowCommand: ShowCommand {
         FieldSection("Billing") {
             Field("Currency") { .text($0.currency) }
             Field("Normal Billing Rate") { .currency($0.normalBillingRate, code: $0.currency) }
-            Field("Billing Period") { .text($0.billingPeriod?.rawValue) }
+            Field("Billing Period") { .text($0.billingPeriod) }
             Field("Hours Per Day") { .hours($0.hoursPerDay) }
             Field("Own Invoice Sequence") { .flag($0.usesProjectInvoiceSequence) }
         }
         FieldSection("Budget") {
             Field("Budget") { budget(of: $0) }
-            Field("Budget Units") { .text($0.budgetUnits?.rawValue) }
+            Field("Budget Units") { .text($0.budgetUnits) }
             Field("Unbilled Time In Profitability") { .flag($0.includeUnbilledTimeInProfitability) }
         }
         FieldSection("Dates") {

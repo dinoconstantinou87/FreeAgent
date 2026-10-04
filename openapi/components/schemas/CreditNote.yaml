@@ -63,8 +63,7 @@ properties:
     description: Omitted until set
     example: Refund for cancelled work
   currency:
-    type: string
-    example: GBP
+    $ref: '#/components/schemas/Currency'
   exchange_rate:
     type: string
     example: '1.0'

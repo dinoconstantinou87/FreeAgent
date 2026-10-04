@@ -48,8 +48,7 @@ properties:
     type: string
     example: Thanks for your business
   currency:
-    type: string
-    example: GBP
+    $ref: '#/components/schemas/Currency'
   exchange_rate:
     type: string
     example: '1.0'

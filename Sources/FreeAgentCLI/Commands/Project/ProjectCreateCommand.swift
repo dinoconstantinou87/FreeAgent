@@ -1,9 +1,6 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import Noora
-
-// MARK: - ProjectCreateCommand
 
 struct ProjectCreateCommand: MutatingCommand {
 
@@ -65,35 +62,6 @@ struct ProjectCreateCommand: MutatingCommand {
             return currency
         }
 
-        let code = try await client.companyDetails().ok.body.json.company.currency
-
-        guard let currency = Components.Schemas.Currency(rawValue: code) else {
-            throw ProjectCreateCommandError.unsupportedCompanyCurrency(code)
-        }
-
-        return currency
-    }
-}
-
-// MARK: - ProjectCreateCommandError
-
-enum ProjectCreateCommandError: CommandError {
-    case unsupportedCompanyCurrency(String)
-
-    // MARK: Internal
-
-    var errorDescription: String? {
-        switch self {
-        case .unsupportedCompanyCurrency(let code):
-            "The company's currency, \(code), is not one a project can use"
-        }
-    }
-
-    var exitCode: ExitCode {
-        .validationFailure
-    }
-
-    var takeaways: [TerminalText] {
-        ["Pass \(.command("--currency"))"]
+        return try await client.companyDetails().ok.body.json.company.currency
     }
 }

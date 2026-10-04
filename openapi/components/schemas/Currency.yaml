@@ -1,8 +1,9 @@
 type: string
-description: ISO 4217 codes every FreeAgent resource accepts - its documented list is out of date, and an unknown or lowercase code is refused
+description: ISO 4217 codes FreeAgent accepts on some resource - projects take all of them, other resources refuse the retired ANG, BGN, HRK, LTL, LVL, MRO, STD, VEF and ZMK; its documented list is out of date, and an unknown or lowercase code is refused
 enum:
 - AED
 - AMD
+- ANG
 - AOA
 - ARS
 - AUD
@@ -11,6 +12,7 @@ enum:
 - BAM
 - BBD
 - BDT
+- BGN
 - BHD
 - BND
 - BOB
@@ -43,6 +45,7 @@ enum:
 - GYD
 - HKD
 - HNL
+- HRK
 - HUF
 - IDR
 - ILS
@@ -61,6 +64,8 @@ enum:
 - LAK
 - LBP
 - LKR
+- LTL
+- LVL
 - LYD
 - MAD
 - MDL
@@ -68,6 +73,7 @@ enum:
 - MKD
 - MMK
 - MNT
+- MRO
 - MRU
 - MUR
 - MVR
@@ -95,6 +101,8 @@ enum:
 - SCR
 - SEK
 - SGD
+- SSP
+- STD
 - STN
 - THB
 - TND
@@ -106,6 +114,8 @@ enum:
 - UGX
 - USD
 - UYU
+- VEF
+- VES
 - VND
 - VUV
 - XAF
@@ -113,5 +123,6 @@ enum:
 - XOF
 - XPF
 - ZAR
+- ZMK
 - ZMW
 example: GBP

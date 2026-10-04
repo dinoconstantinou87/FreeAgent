@@ -23,6 +23,7 @@ properties:
     example: EST-002
   currency:
     $ref: '#/components/schemas/Currency'
+    description: The retired codes are refused
   notes:
     type: string
     example: Valid for 30 days

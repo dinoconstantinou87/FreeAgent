@@ -12,6 +12,7 @@ properties:
     example: Team lunch
   currency:
     $ref: '#/components/schemas/Currency'
+    description: The retired codes are refused
   gross_value:
     type: string
     example: '-12.0'

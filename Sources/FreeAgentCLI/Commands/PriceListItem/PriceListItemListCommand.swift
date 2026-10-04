@@ -14,10 +14,10 @@ struct PriceListItemListCommand: AsyncPaginatedListCommand {
         Field("ID") { .id(url: $0.url) }
         Field("Code") { .text($0.code) }
         Field("Description") { .text($0.description) }
-        Field("Item Type") { .text($0.itemType?.rawValue) }
+        Field("Item Type") { .text($0.itemType) }
         Field("Quantity") { .text($0.quantity) }
         Field("Price") { .currency($0.price, code: nil) }
-        Field("VAT Status") { .text($0.vatStatus?.rawValue) }
+        Field("VAT Status") { .text($0.vatStatus) }
     }
 
     @Option(name: .long, parsing: .unconditional, help: "Sort order")

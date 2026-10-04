@@ -15,7 +15,7 @@ struct ContactListCommand: AsyncPaginatedListCommand {
         Field("Organisation") { .text($0.organisationName) }
         Field("Name") { .text([$0.firstName, $0.lastName].compactMap(\.self).joined(separator: " ")) }
         Field("Email") { .text($0.email) }
-        Field("Status") { .status($0.status.rawValue) }
+        Field("Status") { .status($0.status) }
     }
 
     @Option(name: .long, help: "Filter by view - active by default, which leaves out hidden contacts")

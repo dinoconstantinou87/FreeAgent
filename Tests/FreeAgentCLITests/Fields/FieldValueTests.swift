@@ -1,4 +1,5 @@
 import Foundation
+import FreeAgentAPI
 import Testing
 
 @testable import FreeAgentCLI
@@ -42,6 +43,24 @@ struct FieldValueTests {
         #expect(format(.text("INV-001")) == "INV-001")
         #expect(format(.date("2026-09-20")) == "2026-09-20")
         #expect(format(.status("Overdue")) == "Overdue")
+    }
+
+    @Test("shows an enum as the value FreeAgent sends")
+    func formatsEnum() {
+        #expect(format(.text(Components.Schemas.PriceListItemType._hyphen_noUnit)) == "-no unit-")
+        #expect(format(.status(Components.Schemas.TaskStatus.completed)) == "Completed")
+        #expect(format(.text(Components.Schemas.VatStatus?.none)) == nil)
+    }
+
+    @Test("shows a described value by its description")
+    func formatsDescribed() {
+        #expect(format(.text(PermissionLevel.full)) == PermissionLevel.full.description)
+    }
+
+    @Test("formats an amount in its currency enum")
+    func formatsCurrencyEnum() {
+        #expect(format(.currency("120.5", code: Components.Schemas.Currency.eur)) == "€120.50")
+        #expect(format(.currency("-840.0", code: Components.Schemas.Currency?.none)) == "-840.00")
     }
 
     @Test(
