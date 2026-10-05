@@ -44,6 +44,19 @@ struct SpecGraph {
         return node
     }
 
+    static func node(at pointer: String, in root: Node) throws -> Node {
+        var node = root
+        for key in pointer.dropFirst(2).split(separator: "/") {
+            guard let next = node[String(key)] else {
+                throw SpecGraphError.missingPointer(pointer)
+            }
+
+            node = next
+        }
+
+        return node
+    }
+
     func selection(changedFiles: [URL], baseRoot: Node?) -> SuiteSelection {
         var changed = Set<SpecLocation>()
         for location in changedFiles.map({ SpecLocation(file: $0) }) {
@@ -167,19 +180,6 @@ struct SpecGraph {
         let file = String(ref.prefix { $0 != "#" })
 
         return SpecLocation(file: URL(fileURLWithPath: file, relativeTo: location.file.deletingLastPathComponent()))
-    }
-
-    private static func node(at pointer: String, in root: Node) throws -> Node {
-        var node = root
-        for key in pointer.dropFirst(2).split(separator: "/") {
-            guard let next = node[String(key)] else {
-                throw SpecGraphError.missingPointer(pointer)
-            }
-
-            node = next
-        }
-
-        return node
     }
 
     private func closure(of location: SpecLocation) -> Set<SpecLocation> {
