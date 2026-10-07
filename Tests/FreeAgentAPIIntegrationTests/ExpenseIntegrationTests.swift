@@ -136,6 +136,53 @@ struct ExpenseIntegrationTests {
         _ = try await client.deleteExpense(.init(path: .init(id: id))).ok
     }
 
+    @Test("An expense attachment is sent on create, removed with _destroy and added on update")
+    func attachment() async throws {
+        let user = try await client.showCurrentUser(.init()).ok.body.json.user
+
+        let created = try await client.createExpense(
+            .init(body: .json(.init(expense: .init(
+                user: Self.id(of: user.url),
+                category: "285",
+                datedOn: Self.today,
+                description: "ZZ Integration Test Attachment",
+                grossValue: "-12.0",
+                attachment: .init(
+                    data: Self.onePixelPNG,
+                    fileName: "receipt.png",
+                    contentType: .imagePng,
+                    description: "Integration test receipt"
+                )
+            ))))
+        ).created.body.json.expense
+
+        let attached = try #require(created.attachment)
+        #expect(attached.url.contains("/v2/attachments/"))
+        #expect(attached.fileName == "receipt.png")
+        #expect(attached.contentType == "image/png")
+        #expect(attached.description == "Integration test receipt")
+
+        let id = Self.id(of: created.url)
+
+        let removed = try await client.updateExpense(
+            .init(path: .init(id: id), body: .json(.init(expense: .init(attachment: .init(_destroy: 1)))))
+        ).ok.body.json.expense
+
+        #expect(removed.attachment == nil)
+
+        let added = try await client.updateExpense(
+            .init(path: .init(id: id), body: .json(.init(expense: .init(attachment: .init(
+                data: Self.onePixelPNG,
+                fileName: "replacement.png",
+                contentType: "image/png"
+            )))))
+        ).ok.body.json.expense
+
+        #expect(added.attachment?.fileName == "replacement.png")
+
+        _ = try await client.deleteExpense(.init(path: .init(id: id))).ok
+    }
+
     @Test("GET /v2/expenses/mileage_settings returns typed engine options and rates")
     func mileageSettings() async throws {
         let settings = try await client.showMileageSettings(.init()).ok.body.json.mileageSettings
@@ -199,6 +246,9 @@ struct ExpenseIntegrationTests {
     }
 
     // MARK: Private
+
+    private static let onePixelPNG =
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
 
     private static var today: String {
         date(monthsFromNow: 0)

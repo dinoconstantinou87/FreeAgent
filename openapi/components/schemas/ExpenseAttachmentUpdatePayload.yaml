@@ -1,0 +1,20 @@
+type: object
+properties:
+  data:
+    type: string
+    description: Binary data of the file encoded as base64
+    example: iVBORw0KGgo...
+  file_name:
+    type: string
+    example: receipt.pdf
+  content_type:
+    type: string
+    description: Ignored - FreeAgent detects the type from the data
+    example: application/pdf
+  description:
+    type: string
+    example: Invoice receipt
+  _destroy:
+    type: integer
+    description: Set to 1 to remove the attachment - any value removes it, 0 included
+    example: 1

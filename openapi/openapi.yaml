@@ -183,6 +183,8 @@ components:
       $ref: 'components/schemas/ExpenseCreatePayload.yaml'
     ExpenseUpdatePayload:
       $ref: 'components/schemas/ExpenseUpdatePayload.yaml'
+    ExpenseAttachmentUpdatePayload:
+      $ref: 'components/schemas/ExpenseAttachmentUpdatePayload.yaml'
     ExpenseRecurringPeriod:
       $ref: 'components/schemas/ExpenseRecurringPeriod.yaml'
     ExpenseRebillType:

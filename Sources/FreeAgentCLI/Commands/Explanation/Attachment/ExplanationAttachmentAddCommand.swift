@@ -1,14 +1,8 @@
 import ArgumentParser
 import Foundation
 import FreeAgentAPI
-import Noora
-
-// MARK: - ExplanationAttachmentAddCommand
 
 struct ExplanationAttachmentAddCommand: MutatingCommand {
-
-    // MARK: Internal
-
     static let configuration = CommandConfiguration(
         commandName: "add",
         abstract: "Add attachments to a bank transaction explanation",
@@ -32,17 +26,12 @@ struct ExplanationAttachmentAddCommand: MutatingCommand {
 
     func perform(client: Client) async throws -> Components.Schemas.AttachmentListResponse {
         let attachments = try file.map { path in
-            let url = URL(fileURLWithPath: path)
-            let ext = url.pathExtension.lowercased()
+            let attachment = try AttachmentFile(path: path)
 
-            guard let contentType = Self.contentTypes[ext] else {
-                throw ExplanationAttachmentAddCommandError.unsupportedFileType(ext)
-            }
-
-            return try Components.Schemas.AttachmentCreatePayload(
-                data: Data(contentsOf: url).base64EncodedString(),
-                fileName: url.lastPathComponent,
-                contentType: contentType,
+            return Components.Schemas.AttachmentCreatePayload(
+                data: attachment.data,
+                fileName: attachment.fileName,
+                contentType: attachment.contentType,
                 description: description
             )
         }
@@ -60,40 +49,5 @@ struct ExplanationAttachmentAddCommand: MutatingCommand {
         file.count == 1
             ? "Added the attachment to explanation \(id)"
             : "Added \(file.count) attachments to explanation \(id)"
-    }
-
-    // MARK: Private
-
-    private static let contentTypes = [
-        "pdf": "application/pdf",
-        "png": "image/png",
-        "jpg": "image/jpeg",
-        "jpeg": "image/jpeg",
-        "gif": "image/gif",
-    ]
-
-}
-
-// MARK: - ExplanationAttachmentAddCommandError
-
-enum ExplanationAttachmentAddCommandError: CommandError {
-    case unsupportedFileType(String)
-
-    var errorDescription: String? {
-        switch self {
-        case .unsupportedFileType(let ext):
-            "Unsupported attachment type '\(ext)'"
-        }
-    }
-
-    var exitCode: ExitCode {
-        .validationFailure
-    }
-
-    var takeaways: [TerminalText] {
-        switch self {
-        case .unsupportedFileType:
-            ["Attach a pdf, png, jpg, jpeg or gif file"]
-        }
     }
 }

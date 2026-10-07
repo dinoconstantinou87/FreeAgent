@@ -6,7 +6,10 @@ struct ExpenseUpdateCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
         commandName: "update",
         abstract: "Update an expense",
-        discussion: "Fields left out are kept, and an empty --receipt-reference removes it. A mileage claim's engine can't be changed."
+        discussion: """
+            Fields left out are kept, and an empty --receipt-reference removes it. A mileage claim's engine can't be \
+            changed. The attachment is managed with 'freeagent expense attachment'.
+            """
     )
 
     @Argument(help: "Expense ID or URL")
