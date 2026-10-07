@@ -46,14 +46,16 @@ struct ExpenseOptions: ParsableArguments {
     @Option(name: .long, help: "Whether a mileage claim has a VAT receipt for its fuel")
     var haveVatReceipt: Bool?
 
+    @OptionGroup var attachment: ExpenseAttachmentOptions
+
     func createPayload(
         user: String,
         category: String,
         datedOn: String,
         description: String,
         engine: ExpenseEngineOptions
-    ) -> Components.Schemas.ExpenseCreatePayload {
-        .init(
+    ) throws -> Components.Schemas.ExpenseCreatePayload {
+        try .init(
             user: user,
             category: category,
             datedOn: datedOn,
@@ -73,7 +75,8 @@ struct ExpenseOptions: ParsableArguments {
             vehicleType: vehicleType,
             engineType: engine.type,
             engineSize: engine.size,
-            haveVatReceipt: haveVatReceipt
+            haveVatReceipt: haveVatReceipt,
+            attachment: attachment.createPayload
         )
     }
 
@@ -81,9 +84,10 @@ struct ExpenseOptions: ParsableArguments {
         user: String?,
         category: String?,
         datedOn: String?,
-        description: String?
-    ) -> Components.Schemas.ExpenseUpdatePayload {
-        .init(
+        description: String?,
+        removeAttachment: Bool
+    ) throws -> Components.Schemas.ExpenseUpdatePayload {
+        try .init(
             user: user,
             category: category,
             datedOn: datedOn,
@@ -101,7 +105,8 @@ struct ExpenseOptions: ParsableArguments {
             recurringEndDate: recurring.endDate,
             mileage: mileage,
             vehicleType: vehicleType,
-            haveVatReceipt: haveVatReceipt
+            haveVatReceipt: haveVatReceipt,
+            attachment: removeAttachment ? .init(_destroy: 1) : attachment.updatePayload
         )
     }
 }

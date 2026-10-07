@@ -51,3 +51,6 @@ properties:
   have_vat_receipt:
     type: boolean
     example: true
+  attachment:
+    $ref: '#/components/schemas/ExpenseAttachmentUpdatePayload'
+    description: A receipt of up to 5MB, replacing any the expense has and deleting it, or _destroy to remove it

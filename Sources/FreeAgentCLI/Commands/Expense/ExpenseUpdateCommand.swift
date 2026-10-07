@@ -6,7 +6,10 @@ struct ExpenseUpdateCommand: MutatingCommand {
     static let configuration = CommandConfiguration(
         commandName: "update",
         abstract: "Update an expense",
-        discussion: "Fields left out are kept, and an empty --receipt-reference removes it. A mileage claim's engine can't be changed."
+        discussion: """
+            Fields left out are kept, and an empty --receipt-reference removes it. A mileage claim's engine can't be \
+            changed. --attachment replaces any attachment the expense has, and FreeAgent deletes the old file.
+            """
     )
 
     @Argument(help: "Expense ID or URL")
@@ -26,6 +29,9 @@ struct ExpenseUpdateCommand: MutatingCommand {
 
     @OptionGroup var expense: ExpenseOptions
 
+    @Flag(name: .long, help: "Remove the expense's attachment, which FreeAgent deletes")
+    var removeAttachment = false
+
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
 
@@ -33,11 +39,12 @@ struct ExpenseUpdateCommand: MutatingCommand {
     var json = false
 
     func perform(client: Client) async throws -> Components.Schemas.ExpenseResponse {
-        let expensePayload = expense.updatePayload(
+        let expensePayload = try expense.updatePayload(
             user: user?.value,
             category: category?.value,
             datedOn: datedOn,
-            description: description
+            description: description,
+            removeAttachment: removeAttachment
         )
 
         let input = Operations.UpdateExpense.Input(
@@ -47,6 +54,12 @@ struct ExpenseUpdateCommand: MutatingCommand {
 
         return try await client.updateExpense(input)
             .ok.body.json
+    }
+
+    func validate() throws {
+        if removeAttachment, expense.attachment.path != nil {
+            throw ValidationError("Pass --attachment or --remove-attachment, not both")
+        }
     }
 
     func success(for _: Components.Schemas.ExpenseResponse) -> String {
