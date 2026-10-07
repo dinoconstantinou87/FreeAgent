@@ -16,7 +16,12 @@ struct AttachmentFile {
             throw AttachmentFileError.unsupportedFileType(ext)
         }
 
-        data = try Data(contentsOf: url).base64EncodedString()
+        do {
+            data = try Data(contentsOf: url).base64EncodedString()
+        } catch {
+            throw AttachmentFileError.unreadable(path: path)
+        }
+
         fileName = url.lastPathComponent
         self.contentType = contentType
     }
@@ -43,11 +48,16 @@ struct AttachmentFile {
 
 enum AttachmentFileError: CommandError {
     case unsupportedFileType(String)
+    case unreadable(path: String)
+
+    // MARK: Internal
 
     var errorDescription: String? {
         switch self {
         case .unsupportedFileType(let ext):
             "Unsupported attachment type '\(ext)'"
+        case .unreadable(let path):
+            "Couldn't read \(path)"
         }
     }
 
@@ -59,6 +69,8 @@ enum AttachmentFileError: CommandError {
         switch self {
         case .unsupportedFileType:
             ["Attach a pdf, png, jpg, jpeg or gif file"]
+        case .unreadable:
+            ["Check the file exists and is readable"]
         }
     }
 }

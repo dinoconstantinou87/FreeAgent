@@ -41,6 +41,19 @@ struct AttachmentFileTests {
         #expect(error?.takeaways.map { $0.plain() } == ["Attach a pdf, png, jpg, jpeg or gif file"])
     }
 
+    @Test("reports a file it can't read as a usage error, naming the path")
+    func rejectsUnreadableFile() {
+        let path = FileManager.default.temporaryDirectory.appendingPathComponent("\(UUID().uuidString).pdf").path
+
+        let error = #expect(throws: AttachmentFileError.self) {
+            try AttachmentFile(path: path)
+        }
+
+        #expect(error?.exitCode == .validationFailure)
+        #expect(error?.errorDescription == "Couldn't read \(path)")
+        #expect(error?.takeaways.map { $0.plain() } == ["Check the file exists and is readable"])
+    }
+
     // MARK: Private
 
     private static func file(ext: String, contents: String) throws -> String {
