@@ -150,7 +150,7 @@ struct ExpenseIntegrationTests {
                 attachment: .init(
                     data: Self.onePixelPNG,
                     fileName: "receipt.png",
-                    contentType: .imagePng,
+                    contentType: "image/png",
                     description: "Integration test receipt"
                 )
             ))))

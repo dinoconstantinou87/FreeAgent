@@ -65,5 +65,5 @@ properties:
     type: boolean
     example: true
   attachment:
-    $ref: '#/components/schemas/AttachmentPayload'
+    $ref: '#/components/schemas/ExpenseAttachmentPayload'
     description: A receipt of up to 5MB
