@@ -23,15 +23,31 @@ struct InvoiceSendEmailCommand: MutatingCommand {
     @Option(name: .long, help: "Email subject")
     var subject: String?
 
+    @Option(
+        name: .customLong("attachment"),
+        help: "Path to a file to attach (pdf, png, jpg, jpeg or gif), up to 5MB. Repeat for multiple files."
+    )
+    var attachments = [String]()
+
     @Flag(help: "Print the request instead of sending it")
     var dryRun = false
 
     func perform(client: Client) async throws -> EmptyResponse {
+        let attachmentPayloads = try attachments.map { path in
+            let file = try AttachmentFile(path: path)
+            return Components.Schemas.EmailAttachmentPayload(
+                data: file.data,
+                fileName: file.fileName,
+                contentType: file.contentType
+            )
+        }
+
         let emailPayload = Components.Schemas.EmailPayload(
             body: body,
             from: from,
             subject: subject,
-            to: to
+            to: to,
+            attachments: attachmentPayloads.isEmpty ? nil : attachmentPayloads
         )
 
         let invoicePayload = Operations.SendInvoiceEmail.Input.Body.JsonPayload.InvoicePayload(

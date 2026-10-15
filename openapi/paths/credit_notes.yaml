@@ -223,7 +223,7 @@ send_email:
                     body: Please find our credit note attached
                     from: Our Company <us@company.com>
                     subject: Credit Note
-                    to: Test Contact <test_contact@example.com>
+                    to: test_contact@example.com
     responses:
       '200':
         description: Success
