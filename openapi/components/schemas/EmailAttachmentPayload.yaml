@@ -1,0 +1,17 @@
+type: object
+required:
+- data
+- file_name
+- content_type
+properties:
+  data:
+    type: string
+    description: Binary data of the file encoded as base64
+    example: iVBORw0KGgo...
+  file_name:
+    type: string
+    example: timesheet.pdf
+  content_type:
+    type: string
+    description: Required, but ignored - FreeAgent detects the type from the data
+    example: application/pdf

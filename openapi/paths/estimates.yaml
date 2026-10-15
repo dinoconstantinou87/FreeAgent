@@ -214,7 +214,7 @@ send_email:
                     body: Please find our estimate attached
                     from: Our Company <us@company.com>
                     subject: Estimate
-                    to: Test Contact <test_contact@example.com>
+                    to: test_contact@example.com
     responses:
       '200':
         description: Success

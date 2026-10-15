@@ -11,4 +11,9 @@ properties:
     example: Testing
   to:
     type: string
-    example: Test Contact <test_contact@example.com>
+    example: test_contact@example.com
+  attachments:
+    type: array
+    description: Files of up to 5MB each
+    items:
+      $ref: '#/components/schemas/EmailAttachmentPayload'

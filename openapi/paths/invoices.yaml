@@ -306,7 +306,7 @@ send_email:
                     body: Bison bison bison bison bison Bison bison
                     from: Our Company <us@company.com>
                     subject: Testing
-                    to: Test Contact <test_contact@example.com>
+                    to: test_contact@example.com
     responses:
       '200':
         description: Success
